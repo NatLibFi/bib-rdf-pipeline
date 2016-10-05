@@ -23,7 +23,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ results=CSV >$@
 
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
-	uniq $< | sed -e 's/http:\\\\/http:\/\//' | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | grep -v -P ' CAT|LOW|SID ' | grep -v -P '\d{9} 65[01](?!.*\$\$9FENNI<KEEP>)' | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
+	uniq $< | sed -e 's/http:\\\\/http:\/\//' | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | grep -v -P ' CAT|LOW|SID ' | grep -v -F 'FENNI<DROP>' | grep -v -P '\d{9} 65[01](?!.*\$\$9FENNI<KEEP>)' | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
 
 # Targets to be run externally
 
@@ -33,4 +33,6 @@ clean:
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
-.PHONY: clean slice
+mrcx: $(patsubst %.alephseq,%.mrcx,$(wildcard slices/*.alephseq))
+
+.PHONY: clean slice mrcx
