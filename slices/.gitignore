@@ -1,3 +1,5 @@
 *.alephseq
 *.md5
 *.mrcx
+*.xml
+*.rdf
