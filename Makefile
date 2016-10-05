@@ -3,6 +3,7 @@
 CATMANDU=catmandu
 MARC2BIBFRAME=../marc2bibframe
 MARC2BIBFRAMEWRAPPER=../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
+RAPPER=rapper
 RSPARQL=rsparql
 UCONV=uconv
 
@@ -30,6 +31,9 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
+	
+%.nt: %.rdf
+	sed -e 's/rdf:nodeID/rdf:resource/' <$^ | rapper - -I $^ -q >$@
 
 # Targets to be run externally
 
@@ -38,6 +42,7 @@ clean:
 	rm -f slices/*.alephseq slices/*.md5
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
+	rm -f slices/*.nt
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
@@ -45,4 +50,6 @@ mrcx: $(patsubst %.alephseq,%.mrcx,$(wildcard slices/*.alephseq))
 
 rdf: $(patsubst %.alephseq,%-bf.rdf,$(wildcard slices/*.alephseq))
 
-.PHONY: clean slice mrcx rdf
+nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
+
+.PHONY: clean slice mrcx rdf nt
