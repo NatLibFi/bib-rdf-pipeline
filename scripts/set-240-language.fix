@@ -1,0 +1,14 @@
+marc_map('240a',origtitle)
+marc_map('240l',origtitlelang)
+marc_map('041h',origlang)
+marc_map('008_/35-37',recordlang)
+lookup(recordlang,"refdata/iso639-2-fi.csv")
+if exists(origtitle)
+    if exists(origlang)
+        unless exists(origtitlelang)
+            marc_set('240l', $.recordlang)
+        end
+    end
+end
+#remove_field(record)
+

@@ -1,0 +1,12 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX lvont: <http://lexvo.org/ontology#>
+
+SELECT ?code ?name {
+  GRAPH <http://lexvo.org/id/iso639-3/> {
+    ?c lvont:iso6392BCode ?code .
+    ?c skos:prefLabel|skos:altLabel ?name .
+    FILTER(LANG(?name)='fi')
+    FILTER(LCASE(SUBSTR(?name,1,1))=SUBSTR(?name,1,1))
+  }
+}
+ORDER BY ?code
