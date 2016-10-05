@@ -33,7 +33,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
 	
 %.nt: %.rdf
-	sed -e 's/rdf:nodeID/rdf:resource/' <$^ | rapper - -I $^ -q >$@
+	rapper $^ -q >$@
 
 # Targets to be run externally
 
