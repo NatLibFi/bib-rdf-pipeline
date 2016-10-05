@@ -5,6 +5,7 @@ MARC2BIBFRAME=../marc2bibframe
 MARC2BIBFRAMEWRAPPER=../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
 RAPPER=rapper
 RSPARQL=rsparql
+SPARQL=sparql
 UCONV=uconv
 
 # Other configuration settings
@@ -35,6 +36,9 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 %.nt: %.rdf
 	rapper $^ -q >$@
 
+%-work-keys.nt: %-bf.nt
+	$(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
+
 # Targets to be run externally
 
 clean:
@@ -52,4 +56,6 @@ rdf: $(patsubst %.alephseq,%-bf.rdf,$(wildcard slices/*.alephseq))
 
 nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
 
-.PHONY: clean slice mrcx rdf nt
+work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
+
+.PHONY: clean slice mrcx rdf nt work-keys

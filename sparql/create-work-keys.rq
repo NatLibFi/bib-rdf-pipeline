@@ -1,0 +1,68 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bf: <http://bibframe.org/vocab/>
+PREFIX madsrdf: <http://www.loc.gov/mads/rdf/v1#>
+
+CONSTRUCT {
+  ?w bf:key ?key .
+  ?w bf:key ?extrakey .
+} WHERE {
+  # main case, where we have both author and title
+  {
+    ?w a bf:Work .
+    # use authoritativeLabel if available (expressions)
+    OPTIONAL {
+      ?w madsrdf:authoritativeLabel ?title .
+      BIND(?title AS ?fulltitle)
+      
+      # also try to add the translated title as an extra key, for the benefit of other
+      # expression records which lack 240 information about the original work
+      OPTIONAL {
+        ?inst bf:instanceOf ?w .
+        ?inst bf:titleStatement ?translatedTitle .
+      }
+    }
+    # otherwise fall back on workTitle
+    OPTIONAL {
+      ?w bf:workTitle ?title .
+      ?title bf:titleValue ?titleValue .
+    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
+      OPTIONAL { ?title bf:subtitle ?subtitle }
+      OPTIONAL { ?title bf:partNumber ?partNumber }
+      OPTIONAL { ?title bf:partTitle ?partTitle }
+      BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
+    }
+    ?w bf:creator/bf:label ?creator
+    BIND(REPLACE(LCASE(?creator), '\\.|,? \\d+-\\d*', '') AS ?creatorkey)
+    BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?key)
+    BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?extrakey)
+  }
+  UNION
+  # uniform title case (130)
+  {
+    ?w a bf:Work .
+    ?w madsrdf:authoritativeLabel ?title .
+    FILTER NOT EXISTS { ?w bf:creator [] }
+    BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
+  }
+  UNION
+  # has title (245) but no uniform title or primary authors (1xx)
+  {
+    ?w a bf:Work .
+    FILTER NOT EXISTS { ?w bf:creator [] }
+    FILTER NOT EXISTS { ?w madsrdf:authoritativeLabel [] }
+    ?w bf:workTitle ?title .
+    ?title bf:titleValue ?titleValue .
+    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
+    OPTIONAL { ?title bf:subtitle ?subtitle }
+    OPTIONAL { ?title bf:partNumber ?partNumber }
+    OPTIONAL { ?title bf:partTitle ?partTitle }
+    BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
+    ?w ?role ?contributor .
+    { ?contributor a bf:Person } UNION { ?contributor a bf:Organization }
+    FILTER (?role != bf:subject)
+    ?contributor bf:label ?name .
+    BIND(REPLACE(LCASE(?name), '\\.|,? \\d+-\\d*', '') AS ?namekey)
+    BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?namekey) AS ?key)
+  }
+  # has only title (245) but no author (1xx or 7xx) - not relevant since records with no key are simply retained
+}
