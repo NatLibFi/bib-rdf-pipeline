@@ -37,7 +37,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 %.nt: %.rdf
 	rapper $^ -q >$@
 
-%-work-keys.nt: %-bf.nt
+%-work-keys.nt: %-bf.rdf
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
 # Targets to be run externally
