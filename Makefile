@@ -11,6 +11,7 @@ UCONV=uconv
 # Other configuration settings
 FINTOSPARQL=http://api.dev.finto.fi/sparql
 URIBASEFENNICA=http://urn.fi/URN:NBN:fi:bib:fennica:
+JVMARGS="-Xmx2G"
 
 # Pattern rules used internally
 
@@ -37,7 +38,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	rapper $^ -q >$@
 
 %-work-keys.nt: %-bf.nt
-	$(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
 # Targets to be run externally
 
