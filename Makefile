@@ -16,7 +16,7 @@ JVMARGS="-Xmx2G"
 # Pattern rules used internally
 
 split-input/%.md5: input/%.alephseq
-	awk '{ print $0 > "$(patsubst %.md5,%,$@)-"substr($$1,0,5)".alephseq" }' <$^
+	scripts/split-input.sh $(patsubst %.md5,%,$@) <$^
 	cd split-input; md5sum $(patsubst split-input/%.md5,%,$@)-*.alephseq >`basename $@`
 
 %.md5: %
