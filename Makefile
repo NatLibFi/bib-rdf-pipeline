@@ -33,6 +33,9 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
+
+%-schema.ttl: %-bf.rdf
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/bf-to-schema.rq --out=TTL >$@
 	
 %.nt: %.rdf
 	rapper $^ -q >$@
@@ -48,6 +51,7 @@ clean:
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
 	rm -f slices/*.nt
+	rm -f slices/*.ttl
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
@@ -59,4 +63,6 @@ nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
 
 work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
 
-.PHONY: clean slice mrcx rdf nt work-keys
+schema: $(patsubst %.alephseq,%-schema.ttl,$(wildcard slices/*.alephseq))
+
+.PHONY: clean slice mrcx rdf nt work-keys schema

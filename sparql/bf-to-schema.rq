@@ -1,0 +1,92 @@
+PREFIX bf: <http://bibframe.org/vocab/>
+PREFIX schema: <http://schema.org/>
+
+# TODO:
+# - language codes should be BCP47 (prefer two letter)
+# - numberOfPages values should be integer
+# - datePublished sometimes has garbage e.g. copyright symbols
+# - not everything should be typed schema:Book
+# - classification codes should be added
+# - probably some more things need to be in OPTIONAL blocks
+# - publication events could be added
+# - need to decide how to handle authority linking (people, organizations, topics, places)
+
+CONSTRUCT {
+  ?inst a schema:Book, schema:CreativeWork ;
+    schema:exampleOfWork ?work ;
+    schema:name ?instTitleValue ;
+    schema:creator ?creator ;
+    schema:exampleOfWork ?work ;
+    schema:isbn ?isbn10val, ?isbn13val ;
+    schema:datePublished ?providerDate ;
+    schema:numberOfPages ?extent ;
+    schema:publisher ?providerOrganization .
+  ?providerOrganization a schema:Organization ;
+    schema:name ?providerOrganizationLabel .
+  ?creator a schema:Person ;
+    schema:name ?creatorLabel .
+  ?contributor a schema:Person ;
+    schema:name ?contributorLabel .
+  ?work a schema:CreativeWork ;
+    schema:workExample ?inst ;
+    schema:translationOfWork ?origwork ;
+    schema:creator ?creator ;
+    schema:contributor ?contributor ;
+    schema:inLanguage ?languageVal ;
+    schema:about ?topicLabel ;
+    schema:name ?workTitleValue .
+  ?origwork a schema:CreativeWork ;
+    schema:name ?origworkTitle ;
+    schema:inLanguage ?origLanguageVal ;
+    schema:author ?origworkCreator .
+  ?origworkCreator a schema:Person ;
+    schema:name ?origworkCreatorLabel .
+}
+WHERE {
+  ?inst bf:instanceOf ?work .
+  ?inst bf:instanceTitle ?instTitle .
+  ?instTitle bf:titleValue ?instTitleValue .
+  OPTIONAL {
+    ?inst bf:isbn10 ?isbn10 .
+    BIND(STRAFTER(STR(?isbn10), 'http://isbn.example.org/') AS ?isbn10val) 
+  }
+  OPTIONAL {
+    ?inst bf:isbn13 ?isbn13 
+      BIND(STRAFTER(STR(?isbn13), 'http://isbn.example.org/') AS ?isbn13val) 
+  }
+  ?inst bf:publication ?provider .
+  ?provider bf:providerDate ?providerDate .
+  ?provider bf:providerName ?providerOrganization .
+  ?providerOrganization bf:label ?providerOrganizationLabel .
+  ?inst bf:extent ?extent .
+  OPTIONAL {
+    ?work bf:creator ?creator .
+    ?creator bf:label ?creatorLabel .
+  }
+  OPTIONAL {
+    ?work bf:contributor ?contributor .
+    ?contributor bf:label ?contributorLabel .
+  }
+  OPTIONAL {
+    ?work bf:translationOf ?origwork .
+    ?origwork bf:title ?origworkTitle .
+    ?origwork bf:creator ?origworkCreator .
+    ?origworkCreator bf:label ?origworkCreatorLabel .
+  }
+  ?work bf:workTitle ?workTitle .
+  ?workTitle bf:titleValue ?workTitleValue .
+  ?work bf:language ?language .
+  FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
+  BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
+  OPTIONAL {
+    ?work bf:language ?origLanguage .
+    ?origLanguage bf:resourcePart "original" .
+    ?origLanguage bf:languageOfPartUri ?origLanguageUri .
+    BIND(STRAFTER(STR(?origLanguageUri), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
+  }
+  OPTIONAL {
+    ?work bf:subject ?topic .
+    ?topic bf:authorizedAccessPoint ?topicLabel .
+  }
+}
+
