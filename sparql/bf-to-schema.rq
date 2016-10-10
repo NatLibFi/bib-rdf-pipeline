@@ -4,10 +4,10 @@ PREFIX schema: <http://schema.org/>
 # TODO:
 # - language codes should be BCP47 (prefer two letter)
 # - numberOfPages values should be integer
-# - datePublished sometimes has garbage e.g. copyright symbols
+# - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
 # - not everything should be typed schema:Book
 # - classification codes should be added
-# - probably some more things need to be in OPTIONAL blocks
+# - more things need to be in OPTIONAL blocks
 # - publication events could be added
 # - need to decide how to handle authority linking (people, organizations, topics, places)
 
@@ -58,7 +58,9 @@ WHERE {
   ?provider bf:providerDate ?providerDate .
   ?provider bf:providerName ?providerOrganization .
   ?providerOrganization bf:label ?providerOrganizationLabel .
-  ?inst bf:extent ?extent .
+  OPTIONAL {
+    ?inst bf:extent ?extent .
+  }
   OPTIONAL {
     ?work bf:creator ?creator .
     ?creator bf:label ?creatorLabel .
