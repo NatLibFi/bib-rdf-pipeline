@@ -7,7 +7,6 @@ PREFIX schema: <http://schema.org/>
 # - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
 # - not everything should be typed schema:Book
 # - classification codes should be added
-# - more things need to be in OPTIONAL blocks
 # - publication events could be added
 # - need to decide how to handle authority linking (people, organizations, topics, places)
 
@@ -54,10 +53,16 @@ WHERE {
     ?inst bf:isbn13 ?isbn13 
       BIND(STRAFTER(STR(?isbn13), 'http://isbn.example.org/') AS ?isbn13val) 
   }
-  ?inst bf:publication ?provider .
-  ?provider bf:providerDate ?providerDate .
-  ?provider bf:providerName ?providerOrganization .
-  ?providerOrganization bf:label ?providerOrganizationLabel .
+  OPTIONAL {
+    ?inst bf:publication ?provider .
+    OPTIONAL {
+      ?provider bf:providerDate ?providerDate .
+    }
+    OPTIONAL {
+      ?provider bf:providerName ?providerOrganization .
+      ?providerOrganization bf:label ?providerOrganizationLabel .
+    }
+  }
   OPTIONAL {
     ?inst bf:extent ?extent .
   }
