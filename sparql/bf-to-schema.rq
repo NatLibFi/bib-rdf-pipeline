@@ -26,6 +26,12 @@ CONSTRUCT {
     schema:name ?creatorLabel .
   ?contributor a schema:Person ;
     schema:name ?contributorLabel .
+  ?elec a schema:Book, schema:CreativeWork ;
+    schema:exampleOfWork ?work ;
+    schema:creator ?creator ;
+    schema:url ?elecUri ;
+    schema:name ?instTitleValue ;
+    schema:bookFormat schema:EBook .
   ?work a schema:CreativeWork ;
     schema:workExample ?inst ;
     schema:translationOfWork ?origwork ;
@@ -65,6 +71,11 @@ WHERE {
   }
   OPTIONAL {
     ?inst bf:extent ?extent .
+  }
+  OPTIONAL {
+    ?elec bf:instanceOf ?work .
+    ?elec a bf:Electronic .
+    ?elec bf:uri ?elecUri .
   }
   OPTIONAL {
     ?work bf:creator ?creator .
