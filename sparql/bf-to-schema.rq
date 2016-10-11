@@ -93,6 +93,7 @@ WHERE {
   }
   ?work bf:workTitle ?workTitle .
   ?workTitle bf:titleValue ?workTitleValue .
+  FILTER(LANG(?workTitleValue != 'x-bf-sort'))
   ?work bf:language ?language .
   FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
   BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
