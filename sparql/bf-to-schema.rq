@@ -6,6 +6,7 @@ PREFIX schema: <http://schema.org/>
 # - numberOfPages values should be integer
 # - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
 # - not everything should be typed schema:Book
+# - add more detailed series types (e.g. BookSeries) when possible
 # - classification codes should be added
 # - publication events could be added
 # - need to decide how to handle authority linking (people, organizations, topics, places)
@@ -46,6 +47,9 @@ CONSTRUCT {
     schema:author ?origworkCreator .
   ?origworkCreator a schema:Person ;
     schema:name ?origworkCreatorLabel .
+  ?series a schema:CreativeWorkSeries, ?seriesType ;
+    schema:name ?seriesTitleValue ;
+    schema:issn ?seriesIssnValue .
 }
 WHERE {
   ?inst bf:instanceOf ?work .
@@ -90,6 +94,16 @@ WHERE {
     ?origwork bf:title ?origworkTitle .
     ?origwork bf:creator ?origworkCreator .
     ?origworkCreator bf:label ?origworkCreatorLabel .
+  }
+  OPTIONAL {
+    ?work bf:series ?series .
+    ?series bf:title ?seriesTitle .
+    BIND(REPLACE(?seriesTitle, ',[^,]+$', '') AS ?seriesTitleValue)
+    OPTIONAL {
+      ?series bf:issn ?seriesIssn .
+      BIND(STRBEFORE(STRAFTER(STR(?seriesIssn), 'urn:issn:'),';') AS ?seriesIssnValue)
+      BIND(schema:Periodical as ?seriesType)
+    }
   }
   ?work bf:workTitle ?workTitle .
   ?workTitle bf:titleValue ?workTitleValue .
