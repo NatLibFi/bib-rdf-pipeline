@@ -36,6 +36,7 @@ CONSTRUCT {
   ?work a schema:CreativeWork ;
     schema:workExample ?inst ;
     schema:translationOfWork ?origwork ;
+    schema:isPartOf ?series ;
     schema:creator ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
@@ -48,6 +49,7 @@ CONSTRUCT {
   ?origworkCreator a schema:Person ;
     schema:name ?origworkCreatorLabel .
   ?series a schema:CreativeWorkSeries, ?seriesType ;
+    schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
 }
