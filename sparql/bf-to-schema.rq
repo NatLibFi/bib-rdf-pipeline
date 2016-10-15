@@ -43,6 +43,7 @@ CONSTRUCT {
     schema:about ?topicLabel ;
     schema:name ?workTitleValue .
   ?origwork a schema:CreativeWork ;
+    schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageVal ;
     schema:author ?origworkCreator .
