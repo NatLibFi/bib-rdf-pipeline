@@ -15,6 +15,7 @@ CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
     schema:name ?instTitleValue ;
+    schema:description ?note ;
     schema:creator ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbn10val, ?isbn13val ;
@@ -78,6 +79,9 @@ WHERE {
   }
   OPTIONAL {
     ?inst bf:extent ?extent .
+  }
+  OPTIONAL {
+    ?inst bf:note ?note .
   }
   OPTIONAL {
     ?elec bf:instanceOf ?work .
