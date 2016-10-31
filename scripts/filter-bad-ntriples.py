@@ -11,7 +11,7 @@ import sys
 # - detailed checking of language tags and datatypes
 # - checking of valid/invalid characters in blank node identifiers
 
-IRIREF = r'<[^ <>"{}|^`\\]*>'
+IRIREF = r'<[^\x00-\x20<>"{}|^`\\]*>'
 BNODE = r'_:\S+'
 LITERAL = r'".*"\S*'
 TRIPLE = '(%s|%s) %s (%s|%s|%s) .' % (IRIREF, BNODE, IRIREF, IRIREF, LITERAL, BNODE)
