@@ -10,11 +10,12 @@ import sys
 # Currently unchecked cases (TODO):
 # - detailed checking of language tags and datatypes
 # - checking of valid/invalid characters in blank node identifiers
+# - lines with comments will be rejected even though they may be valid
 
 IRIREF = r'<[^\x00-\x20<>"{}|^`\\]*>'
 BNODE = r'_:\S+'
 LITERAL = r'".*"\S*'
-TRIPLE = '(%s|%s) %s (%s|%s|%s) .' % (IRIREF, BNODE, IRIREF, IRIREF, LITERAL, BNODE)
+TRIPLE = '(%s|%s)\s+%s\s+(%s|%s|%s)\s.' % (IRIREF, BNODE, IRIREF, IRIREF, LITERAL, BNODE)
 TRIPLE_RE = re.compile(TRIPLE)
 
 for line in sys.stdin:
