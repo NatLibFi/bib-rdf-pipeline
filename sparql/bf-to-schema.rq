@@ -6,6 +6,7 @@ PREFIX schema: <http://schema.org/>
 # - numberOfPages values should be integer
 # - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
 # - not everything should be typed schema:Book
+# - add more detailed series types (e.g. BookSeries) when possible
 # - classification codes should be added
 # - publication events could be added
 # - need to decide how to handle authority linking (people, organizations, topics, places)
@@ -14,6 +15,7 @@ CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
     schema:name ?instTitleValue ;
+    schema:description ?note ;
     schema:creator ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbn10val, ?isbn13val ;
@@ -35,17 +37,23 @@ CONSTRUCT {
   ?work a schema:CreativeWork ;
     schema:workExample ?inst ;
     schema:translationOfWork ?origwork ;
+    schema:isPartOf ?series ;
     schema:creator ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
     schema:about ?topicLabel ;
     schema:name ?workTitleValue .
   ?origwork a schema:CreativeWork ;
+    schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageVal ;
     schema:author ?origworkCreator .
   ?origworkCreator a schema:Person ;
     schema:name ?origworkCreatorLabel .
+  ?series a schema:CreativeWorkSeries, ?seriesType ;
+    schema:hasPart ?work ;
+    schema:name ?seriesTitleValue ;
+    schema:issn ?seriesIssnValue .
 }
 WHERE {
   ?inst bf:instanceOf ?work .
@@ -73,6 +81,9 @@ WHERE {
     ?inst bf:extent ?extent .
   }
   OPTIONAL {
+    ?inst bf:note ?note .
+  }
+  OPTIONAL {
     ?elec bf:instanceOf ?work .
     ?elec a bf:Electronic .
     ?elec bf:uri ?elecUri .
@@ -90,6 +101,16 @@ WHERE {
     ?origwork bf:title ?origworkTitle .
     ?origwork bf:creator ?origworkCreator .
     ?origworkCreator bf:label ?origworkCreatorLabel .
+  }
+  OPTIONAL {
+    ?work bf:series ?series .
+    ?series bf:title ?seriesTitle .
+    BIND(REPLACE(?seriesTitle, ',[^,]+$', '') AS ?seriesTitleValue)
+    OPTIONAL {
+      ?series bf:issn ?seriesIssn .
+      BIND(STRBEFORE(STRAFTER(STR(?seriesIssn), 'urn:issn:'),';') AS ?seriesIssnValue)
+      BIND(schema:Periodical as ?seriesType)
+    }
   }
   ?work bf:workTitle ?workTitle .
   ?workTitle bf:titleValue ?workTitleValue .
