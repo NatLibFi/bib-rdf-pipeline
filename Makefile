@@ -35,7 +35,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
 
 %-schema.nt: %-bf.rdf
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/bf-to-schema.rq --out=NT >$@
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 	
 %.nt: %.rdf
 	rapper $^ -q >$@
