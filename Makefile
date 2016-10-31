@@ -50,8 +50,7 @@ clean:
 	rm -f slices/*.alephseq slices/*.md5
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
-	rm -f slices/*.nt
-	rm -f slices/*.ttl
+	rm -f slices/*.nt slices/*.log
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
