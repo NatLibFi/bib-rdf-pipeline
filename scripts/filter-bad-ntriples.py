@@ -15,7 +15,6 @@ IRIREF = r'<[^ <>"{}|^`\\]*>'
 BNODE = r'_:\S+'
 LITERAL = r'".*"\S*'
 TRIPLE = '(%s|%s) %s (%s|%s|%s) .' % (IRIREF, BNODE, IRIREF, IRIREF, LITERAL, BNODE)
-print repr(TRIPLE)
 TRIPLE_RE = re.compile(TRIPLE)
 
 for line in sys.stdin:
