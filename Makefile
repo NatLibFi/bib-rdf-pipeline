@@ -5,6 +5,7 @@ MARC2BIBFRAME=../marc2bibframe
 MARC2BIBFRAMEWRAPPER=../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
 RAPPER=rapper
 RSPARQL=rsparql
+RIOT=riot
 SPARQL=sparql
 UCONV=uconv
 
@@ -42,6 +43,12 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 
 %-work-keys.nt: %-bf.rdf
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
+
+refdata/%-work-keys.nt: slices/%-*-work-keys.nt
+	$(RIOT) $^ >$@
+
+%-work-transformations.nt: %-work-keys.nt
+	$(SPARQL) --data $< --query sparql/create-work-transformations.rq --out=NT >$@
 
 # Targets to be run externally
 

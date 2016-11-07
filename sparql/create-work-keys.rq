@@ -1,10 +1,11 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX madsrdf: <http://www.loc.gov/mads/rdf/v1#>
+PREFIX dct: <http://purl.org/dc/terms/>
 
 CONSTRUCT {
-  ?w bf:key ?key .
-  ?w bf:key ?extrakey .
+  ?w dct:identifier ?key .
+  ?w dct:identifier ?extrakey .
 } WHERE {
   # main case, where we have both author and title
   {

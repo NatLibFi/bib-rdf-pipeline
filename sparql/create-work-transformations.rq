@@ -1,0 +1,16 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+
+CONSTRUCT {
+  ?s schema:sameAs ?replacement .
+} WHERE {
+  {
+    SELECT ?s (MIN(STR(?repl)) AS ?minrepl)
+    WHERE {
+      ?s (dct:identifier/^dct:identifier) ?repl .
+    }
+    GROUP BY ?s
+  }
+  BIND(IRI(?minrepl) AS ?replacement)
+  FILTER (?s != ?replacement)
+}
