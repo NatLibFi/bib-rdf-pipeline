@@ -29,7 +29,7 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ results=CSV >$@
 
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
-	uniq $< | sed -e 's/http:\\\\/http:\/\//' | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | grep -v -P ' CAT|LOW|SID ' | grep -v -F 'FENNI<DROP>' | grep -v -P '\d{9} 65[01](?!.*\$\$9FENNI<KEEP>)' | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
+	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
