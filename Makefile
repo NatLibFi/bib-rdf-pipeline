@@ -50,6 +50,10 @@ refdata/%-work-keys.nt: slices/%-*-work-keys.nt
 %-work-transformations.nt: %-work-keys.nt
 	$(SPARQL) --data $< --query sparql/create-work-transformations.rq --out=NT >$@
 
+.SECONDEXPANSION:
+slices/%-consolidated.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
+	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/consolidate-works.rq --out=NT >$@
+
 # Targets to be run externally
 
 clean:
@@ -70,5 +74,7 @@ nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
 work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
 
 schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
+
+consolidated: $(patsubst %.alephseq,%-consolidated.nt,$(wildcard slices/*.alephseq))
 
 .PHONY: clean slice mrcx rdf nt work-keys schema

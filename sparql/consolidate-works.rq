@@ -1,0 +1,12 @@
+PREFIX schema: <http://schema.org/>
+
+CONSTRUCT {
+  ?news ?p ?newo .
+} WHERE {
+  ?s ?p ?o .
+  FILTER(?p != schema:sameAs)
+  OPTIONAL { ?s schema:sameAs ?s2 }
+  OPTIONAL { ?o schema:sameAs ?o2 }
+  BIND(IF(BOUND(?s2),?s2,?s) AS ?news)
+  BIND(IF(BOUND(?o2),?o2,?o) AS ?newo)
+}
