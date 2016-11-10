@@ -27,7 +27,7 @@ slices/%.md5: split-input/%.md5
 	scripts/update-slices.sh $^ $@
 
 refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
-	$(RSPARQL) --service $(FINTOSPARQL) --query $^ results=CSV >$@
+	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=CSV >$@
 
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
