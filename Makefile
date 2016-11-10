@@ -50,22 +50,27 @@ refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 %-work-keys.nt: %-bf.rdf
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
-refdata/%-work-keys.nt: slices/%-*-work-keys.nt
+.SECONDEXPANSION:
+refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-work-keys.nt/')
 	$(RIOT) $^ >$@
 
 %-work-transformations.nt: %-work-keys.nt
 	$(SPARQL) --data $< --query sparql/create-work-transformations.rq --out=NT >$@
 
-.SECONDEXPANSION:
 slices/%-consolidated.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/consolidate-works.rq --out=NT >$@
 
 # Targets to be run externally
 
-clean:
-	rm -f refdata/*.csv refdata/*.nt
+all: consolidated
+
+realclean: clean
 	rm -f split-input/*.alephseq split-input/*.md5
 	rm -f slices/*.alephseq slices/*.md5
+	rm -f refdata/*.csv refdata/*.nt
+
+clean:
+	rm -f refdata/*-work-keys.nt refdata/*-work-transformations.nt
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
 	rm -f slices/*.nt slices/*.log
@@ -84,4 +89,8 @@ schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
 
 consolidated: $(patsubst %.alephseq,%-consolidated.nt,$(wildcard slices/*.alephseq))
 
-.PHONY: clean slice mrcx rdf nt work-keys schema
+.PHONY: all realclean clean slice mrcx rdf nt work-keys schema consolidated
+.DEFAULT_GOAL := all
+
+# retain all intermediate files
+.SECONDARY:
