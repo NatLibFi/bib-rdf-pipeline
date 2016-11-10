@@ -63,6 +63,7 @@ slices/%-consolidated.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 
 # Targets to be run externally
 
 clean:
+	rm -f refdata/*.csv refdata/*.nt
 	rm -f split-input/*.alephseq split-input/*.md5
 	rm -f slices/*.alephseq slices/*.md5
 	rm -f slices/*.mrcx
