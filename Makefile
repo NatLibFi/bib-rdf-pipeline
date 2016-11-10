@@ -29,14 +29,17 @@ slices/%.md5: split-input/%.md5
 refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=CSV >$@
 
+refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
+	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
+
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
 
-%-schema.nt: %-bf.rdf
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%-schema.nt: %-bf.rdf refdata/ysa-skos-labels.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --namedGraph $(word 2,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 	
 %.nt: %.rdf
 	rapper $^ -q >$@

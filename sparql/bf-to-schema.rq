@@ -1,5 +1,6 @@
 PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 # TODO:
 # - language codes should be BCP47 (prefer two letter)
@@ -41,7 +42,7 @@ CONSTRUCT {
     schema:creator ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
-    schema:about ?topicLabel ;
+    schema:about ?subject, ?ysoSubject ;
     schema:name ?workTitleValue .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
@@ -127,6 +128,13 @@ WHERE {
   OPTIONAL {
     ?work bf:subject ?topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
+    BIND(STRLANG(?topicLabel, 'fi') AS ?topicLabelFi)
+    GRAPH ?ysaGraph {
+      OPTIONAL { ?ysac skos:prefLabel ?topicLabelFi }
+      OPTIONAL { ?ysac skos:altLabel ?topicLabelFi }
+      BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
+      OPTIONAL { ?subject skos:closeMatch ?ysoSubject }
+    }
   }
 }
 
