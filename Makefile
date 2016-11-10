@@ -29,6 +29,9 @@ slices/%.md5: split-input/%.md5
 refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=CSV >$@
 
+refdata/iso639-1-2-mapping.nt: sparql/extract-iso639-1-2-mapping.rq
+	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
+
 refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
@@ -38,8 +41,8 @@ refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) >$@ 2>$(patsubst %.rdf,%-log.xml,$@)
 
-%-schema.nt: %-bf.rdf refdata/ysa-skos-labels.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --namedGraph $(word 2,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 	
 %.nt: %.rdf
 	rapper $^ -q >$@

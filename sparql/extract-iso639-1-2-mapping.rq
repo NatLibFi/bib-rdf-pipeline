@@ -1,0 +1,12 @@
+PREFIX lvont: <http://lexvo.org/ontology#>
+
+CONSTRUCT {
+  ?c lvont:iso6392BCode ?iso6392bcode .
+  ?c lvont:iso639P1Code ?iso6391code .
+}
+WHERE {
+  GRAPH <http://lexvo.org/id/iso639-3/> {
+    ?c lvont:iso6392BCode ?iso6392bcode .
+    ?c lvont:iso639P1Code ?iso6391code .
+  }
+}

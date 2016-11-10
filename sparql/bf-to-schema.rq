@@ -1,16 +1,17 @@
 PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX lvont: <http://lexvo.org/ontology#>
+
 
 # TODO:
-# - language codes should be BCP47 (prefer two letter)
 # - numberOfPages values should be integer
 # - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
 # - not everything should be typed schema:Book
 # - add more detailed series types (e.g. BookSeries) when possible
 # - classification codes should be added
 # - publication events could be added
-# - need to decide how to handle authority linking (people, organizations, topics, places)
+# - need to decide how to handle authority linking (people, organizations, places)
 
 CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
@@ -41,13 +42,13 @@ CONSTRUCT {
     schema:isPartOf ?series ;
     schema:creator ?creator ;
     schema:contributor ?contributor ;
-    schema:inLanguage ?languageVal ;
+    schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
     schema:name ?workTitleValue .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
-    schema:inLanguage ?origLanguageVal ;
+    schema:inLanguage ?origLanguageCode ;
     schema:author ?origworkCreator .
   ?origworkCreator a schema:Person ;
     schema:name ?origworkCreatorLabel .
@@ -116,15 +117,32 @@ WHERE {
   ?work bf:workTitle ?workTitle .
   ?workTitle bf:titleValue ?workTitleValue .
   FILTER(LANG(?workTitleValue) != 'x-bf-sort')
+
   ?work bf:language ?language .
   FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
   BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
+  OPTIONAL {
+    GRAPH ?lexvoGraph {
+      ?langent lvont:iso6392BCode ?languageVal .
+      ?langent lvont:iso639P1Code ?iso6391code .
+    }
+  }
+  BIND(IF(BOUND(?iso6391code), ?iso6391code, ?languageVal) AS ?languageCode)
+
   OPTIONAL {
     ?work bf:language ?origLanguage .
     ?origLanguage bf:resourcePart "original" .
     ?origLanguage bf:languageOfPartUri ?origLanguageUri .
     BIND(STRAFTER(STR(?origLanguageUri), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
+    OPTIONAL {
+      GRAPH ?lexvoGraph {
+        ?origlangent lvont:iso6392BCode ?origLanguageVal .
+        ?origlangent lvont:iso639P1Code ?origIso6391code .
+      }
+    }
+    BIND(IF(BOUND(?origIso6391code), ?origIso6391code, ?origLanguageVal) AS ?origLanguageCode)
   }
+
   OPTIONAL {
     ?work bf:subject ?topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
