@@ -44,7 +44,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
-    schema:name ?workTitleValue .
+    schema:name ?instTitleValue .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
@@ -103,6 +103,7 @@ WHERE {
     ?origwork bf:title ?origworkTitle .
     ?origwork bf:creator ?origworkCreator .
     ?origworkCreator bf:label ?origworkCreatorLabel .
+    FILTER(LANG(?origworkTitle) != 'x-bf-sort')
   }
   OPTIONAL {
     ?work bf:series ?series .
@@ -114,9 +115,6 @@ WHERE {
       BIND(schema:Periodical as ?seriesType)
     }
   }
-  ?work bf:workTitle ?workTitle .
-  ?workTitle bf:titleValue ?workTitleValue .
-  FILTER(LANG(?workTitleValue) != 'x-bf-sort')
 
   ?work bf:language ?language .
   FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
