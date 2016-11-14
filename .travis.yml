@@ -6,12 +6,10 @@ cache:
   directories:
     - $HOME/perl5
 before_install:
-  - ls -lR ~/perl5
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
   - eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
   - echo 'eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`' >> ~/.profile
   - cpanm Catmandu Catmandu::MARC
-  - ls -lR ~/perl5
   - wget https://repository.apache.org/content/repositories/releases/org/apache/jena/apache-jena/3.1.1/apache-jena-3.1.1.tar.gz -O /tmp/apache-jena-3.1.1.tar.gz
   - tar -xzf /tmp/apache-jena-3.1.1.tar.gz
   - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
