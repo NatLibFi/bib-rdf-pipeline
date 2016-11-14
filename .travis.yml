@@ -4,7 +4,7 @@ group: beta
 language: bash
 before_install:
   - wget https://repository.apache.org/content/repositories/releases/org/apache/jena/apache-jena/3.1.1/apache-jena-3.1.1.tar.gz -O /tmp/apache-jena-3.1.1.tar.gz
-  - tar -xzvf /tmp/apache-jena-3.1.1.tar.gz
+  - tar -xzf /tmp/apache-jena-3.1.1.tar.gz
   - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
 script:
   - bats test
