@@ -1,0 +1,50 @@
+000971472 FMT   L BK
+000971472 LDR   L ^^^^^cam^a2200601^i^4500
+000971472 001   L 000971472
+000971472 005   L 20151225213131.0
+000971472 008   L 070221s2006^^^^gw^|||||||||||||||||ger|^
+000971472 020   L $$a3-9809050-5-5$$qnidottu
+000971472 020   L $$a978-3-9809050-5-3$$qnidottu
+000971472 035   L $$a(FI-MELINDA)000971472
+000971472 040   L $$aFI-NL
+000971472 0411  L $$ager$$hfin
+000971472 042   L $$afinb
+000971472 080   L $$a52$$9FENNI<KEEP>
+000971472 084   L $$a52$$2ykl
+000971472 084   L $$a52.2$$2ykl
+000971472 1001  L $$aValtaoja, Esko.
+000971472 24010 L $$aKotona maailmankaikkeudessa
+000971472 24510 L $$aIm Universum zu Hause :$$beine Entdeckungsreise /$$cEsko Valtaoja ; aus dem Finnischen von Peter Uhlmann.
+000971472 260   L $$aFrankfurt am Main :$$bDornbusch,$$c2006.
+000971472 300   L $$a336 s. ;$$c21 cm
+000971472 336   L $$ateksti$$btxt$$2rdacontent
+000971472 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000971472 338   L $$anide$$bnc$$2rdacarrier
+000971472 650 7 L $$amaailmankaikkeuden synty$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$amaailmankaikkeus$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$akosmologia$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$aavaruus$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$atähtitiede$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$atähtitieteilijät$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$aavaruustutkimus$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$aastrobiologia$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$aelämän synty$$2ysa$$9FENNI<KEEP>
+000971472 650 7 L $$avieraat sivilisaatiot$$2ysa$$9FENNI<KEEP>
+000971472 7001  L $$aUhlmann, Peter.
+000971472 SID   L $$c848382$$bfenni
+000971472 SID   L $$c950659$$boula
+000971472 SID   L $$c1199192$$bvolte
+000971472 CAT   L $$akvp4001$$b$$c20110729$$lFIN01$$h1409
+000971472 CAT   L $$aCONV-ISBD$$b$$c20120402$$lFIN01$$h0808
+000971472 CAT   L $$aLOAD-FIX$$b$$c20140117$$lFIN01$$h0626
+000971472 CAT   L $$aLOAD-FIX$$b$$c20140131$$lFIN01$$h0157
+000971472 CAT   L $$aLOAD-FIX$$b30$$c20150103$$lFIN01$$h1615
+000971472 CAT   L $$aLOAD-FIX$$b30$$c20150103$$lFIN01$$h1615
+000971472 CAT   L $$aLOAD-FIX$$b30$$c20151225$$lFIN01$$h2131
+000971472 CAT   L $$aLOAD-FIX$$b30$$c20151225$$lFIN01$$h2131
+000971472 CAT   L $$aCONV-RDA$$b$$c20160319$$lFIN01$$h0853
+000971472 901   L $$aMU20080311$$5FENNI
+000971472 903   L $$ac$$5FENNI
+000971472 LOW   L $$aFENNI
+000971472 LOW   L $$aOULA
+000971472 LOW   L $$aVOLTE
