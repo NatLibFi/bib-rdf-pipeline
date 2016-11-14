@@ -22,3 +22,4 @@ The steps of the conversion are:
 * `uconv` utility from Ubuntu package `icu-devtools`
 * `raptor` utility from Ubuntu package `raptor2-utils`
 * [marc2bibframe-wrapper](https://github.com/NatLibFi/marc2bibframe-wrapper) and [marc2bibframe](https://github.com/lcnetdev/marc2bibframe)
+* [bats](https://github.com/sstephenson/bats) for unit tests
