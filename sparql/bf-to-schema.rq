@@ -144,7 +144,7 @@ WHERE {
   OPTIONAL {
     ?work bf:subject ?topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
-    BIND(STRLANG(?topicLabel, 'fi') AS ?topicLabelFi)
+    BIND(STRLANG(REPLACE(?topicLabel, '--', ' -- '), 'fi') AS ?topicLabelFi)
     OPTIONAL {
       GRAPH ?ysaGraph { 
         ?ysac skos:prefLabel ?topicLabelFi .
