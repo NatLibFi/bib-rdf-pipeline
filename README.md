@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/NatLibFi/bib-rdf-pipeline.svg?branch=master)](https://travis-ci.org/NatLibFi/bib-rdf-pipeline)
+
 # bib-rdf-pipeline
 
 This repository contains various scripts and configuration for converting MARC bibliographic records into RDF, for use at the National Library of Finland.
