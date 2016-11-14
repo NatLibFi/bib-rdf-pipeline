@@ -4,7 +4,7 @@ group: beta
 language: bash
 cache:
   directories:
-    - perl_nidykes
+    - perl_modules
 before_install:
   - cpanm local::lib
   - eval "$(perl -Mlocal::lib=${PWD}/perl_modules)"
