@@ -3,5 +3,8 @@ before_install:
   - sudo add-apt-repository ppa:duggan/bats --yes
   - sudo apt-get update -qq
   - sudo apt-get install -qq bats
+  - wget https://repository.apache.org/content/repositories/releases/org/apache/jena/apache-jena/3.1.1/apache-jena-3.1.1.tar.gz -O /tmp/apache-jena-3.1.1.tar.gz
+  - tar -xzvf /tmp/apache-jena-3.1.1.tar.gz
+  - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
 script:
   - bats test
