@@ -145,12 +145,19 @@ WHERE {
     ?work bf:subject ?topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
     BIND(STRLANG(?topicLabel, 'fi') AS ?topicLabelFi)
-    GRAPH ?ysaGraph {
-      OPTIONAL { ?ysac skos:prefLabel ?topicLabelFi }
-      OPTIONAL { ?ysac skos:altLabel ?topicLabelFi }
-      BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
-      OPTIONAL { ?subject skos:closeMatch ?ysoSubject }
+    OPTIONAL {
+      GRAPH ?ysaGraph { 
+        ?ysac skos:prefLabel ?topicLabelFi .
+        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+      }
     }
+    OPTIONAL {
+      GRAPH ?ysaGraph { 
+        ?ysac skos:altLabel ?topicLabelFi .
+        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+      }
+    }
+    BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
   }
 }
 
