@@ -36,12 +36,15 @@ setup () {
   make slices/ajattelemisenalku-00098-schema.nt
   # "myytit" -> ysa:Y97600
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y97600>' slices/ajattelemisenalku-00098-schema.nt
+  ! grep -q -F '<http://schema.org/about> "myytit"' slices/ajattelemisenalku-00098-schema.nt
 }
 
 @test "Schema.org RDF: converting to YSA URIs, coordinated case" {
   make slices/ajattelemisenalku-00098-schema.nt
   # "filosofia -- antiikki" -> ysa:Y95164
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y95164>' slices/ajattelemisenalku-00098-schema.nt
+  ! grep -q -F '<http://schema.org/about> "filosofia--antiikki"' slices/ajattelemisenalku-00098-schema.nt
+  ! grep -q -F '<http://schema.org/about> "filosofia -- antiikki"' slices/ajattelemisenalku-00098-schema.nt
 }
 
 @test "Schema.org RDF: converting to YSA URIs, not found in YSA case" {
