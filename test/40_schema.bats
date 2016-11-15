@@ -26,6 +26,12 @@ setup () {
   ! grep -q 'http://ethesis.helsinki.fi/julkaisut/kay/fonet/vk/rautakoski/' slices/bad-url-00733-schema.nt 
 }
 
+@test "Schema.org RDF: converting language codes to ISO 639-1" {
+  make slices/ajattelemisenalku-00098-schema.nt
+  grep -q -F '<http://schema.org/inLanguage> "fi"' slices/ajattelemisenalku-00098-schema.nt
+  ! grep -q -F '<http://schema.org/inLanguage> "fin"' slices/ajattelemisenalku-00098-schema.nt
+}
+
 @test "Schema.org RDF: converting to YSA URIs, basic case" {
   make slices/ajattelemisenalku-00098-schema.nt
   # "myytit" -> ysa:Y97600
