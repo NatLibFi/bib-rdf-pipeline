@@ -29,3 +29,4 @@ The steps of the conversion are:
 * `uconv` utility from Ubuntu package `icu-devtools`
 * [marc2bibframe-wrapper](https://github.com/NatLibFi/marc2bibframe-wrapper) and [marc2bibframe](https://github.com/lcnetdev/marc2bibframe)
 * [bats](https://github.com/sstephenson/bats) for unit tests
+* `xmllint` utility from Ubuntu package `libxml2-utils` for unit tests

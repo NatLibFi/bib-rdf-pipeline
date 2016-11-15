@@ -5,6 +5,10 @@ language: bash
 cache:
   directories:
     - $HOME/perl5
+addons:
+  apt:
+    packages:
+    - libxml2-utils
 before_install:
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
   - eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
