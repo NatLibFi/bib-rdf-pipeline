@@ -2,5 +2,4 @@
 
 global_setup() {
 	make realclean
-	cp test/input/* input/
 }

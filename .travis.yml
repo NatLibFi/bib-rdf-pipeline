@@ -25,4 +25,5 @@ before_install:
   - mkdir -p ../marc2bibframe-wrapper/target/
   - wget https://github.com/NatLibFi/marc2bibframe-wrapper/releases/download/v0.0.1/marc2bibframe-wrapper-0.0.1.jar -O ../marc2bibframe-wrapper/target/marc2bibframe-wrapper-0.0.1.jar
 script:
-  - bats test
+  - cd test
+  - bats .
