@@ -1,8 +1,8 @@
 # Paths to non-unix-standard tools that we depend on; can be overridden on the command line
 
 CATMANDU=catmandu
-MARC2BIBFRAME=../marc2bibframe
-MARC2BIBFRAMEWRAPPER=../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
+MARC2BIBFRAME=$(PATH_PREFIX)../marc2bibframe
+MARC2BIBFRAMEWRAPPER=$(PATH_PREFIX)../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
 RAPPER=rapper
 RSPARQL=rsparql
 RIOT=riot
