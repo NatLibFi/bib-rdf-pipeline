@@ -58,3 +58,10 @@ setup () {
   # "myytit" -> ysa:Y97600 -> yso:p1248
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p1248>' slices/ajattelemisenalku-00098-schema.nt
 }
+
+@test "Schema.org RDF: modelling author as schema:author, not schema:creator" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
+  run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
+  [ "$output" -eq "3" ]
+}

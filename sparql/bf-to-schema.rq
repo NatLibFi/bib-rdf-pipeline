@@ -18,7 +18,7 @@ CONSTRUCT {
     schema:exampleOfWork ?work ;
     schema:name ?instTitleValue ;
     schema:description ?note ;
-    schema:creator ?creator ;
+    schema:author ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbn10val, ?isbn13val ;
     schema:datePublished ?providerDate ;
@@ -32,7 +32,7 @@ CONSTRUCT {
     schema:name ?contributorLabel .
   ?elec a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
-    schema:creator ?creator ;
+    schema:author ?creator ;
     schema:url ?elecUri ;
     schema:name ?instTitleValue ;
     schema:bookFormat schema:EBook .
@@ -40,7 +40,7 @@ CONSTRUCT {
     schema:workExample ?inst ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;
-    schema:creator ?creator ;
+    schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
