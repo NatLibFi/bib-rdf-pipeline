@@ -4,6 +4,7 @@ load test_helper
 
 setup () {
   global_setup
+  make realclean
 }
 
 @test "split into parts" {

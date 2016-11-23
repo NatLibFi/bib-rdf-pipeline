@@ -4,6 +4,7 @@ load test_helper
 
 setup () {
   global_setup
+  make realclean
 }
 
 @test "ISO639-2 to Finnish language name mapping" {
