@@ -60,6 +60,9 @@ refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.ale
 slices/%-merged.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge-works.rq --out=NT >$@
 
+merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-merged.nt/')
+	$(RIOT) $^ >$@
+
 # Targets to be run externally
 
 all: merge
@@ -74,6 +77,7 @@ clean:
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
 	rm -f slices/*.nt slices/*.log
+	rm -f merged/*.nt
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
@@ -87,7 +91,7 @@ work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
 
 schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
 
-merge: $(patsubst %.alephseq,%-merged.nt,$(wildcard slices/*.alephseq))
+merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
 
 .PHONY: all realclean clean slice mrcx rdf nt work-keys schema merge
 .DEFAULT_GOAL := all

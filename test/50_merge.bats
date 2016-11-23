@@ -10,4 +10,5 @@ setup () {
 @test "Merge works: basic merging" {
   make merge
   [ -s slices/kotona-00097-merged.nt ]
+  [ -s merged/hawking-merged.nt ]
 }
