@@ -8,6 +8,7 @@ RSPARQL=rsparql
 RIOT=riot
 SPARQL=sparql
 UCONV=uconv
+RDF2HDT=rdf2hdt
 
 # Other configuration settings
 FINTOSPARQL=http://api.dev.finto.fi/sparql
@@ -63,6 +64,9 @@ slices/%-merged.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0
 merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-merged.nt/')
 	$(RIOT) $^ >$@
 
+%.hdt: %.nt
+	$(RDF2HDT) $< $@
+
 # Targets to be run externally
 
 all: merge
@@ -91,7 +95,7 @@ work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
 
 schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
 
-merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
+merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
 
 .PHONY: all realclean clean slice mrcx rdf nt work-keys schema merge
 .DEFAULT_GOAL := all

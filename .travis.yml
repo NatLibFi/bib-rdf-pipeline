@@ -24,6 +24,10 @@ before_install:
   # marc2bibframe-wrapper dependency
   - mkdir -p ../marc2bibframe-wrapper/target/
   - wget https://github.com/NatLibFi/marc2bibframe-wrapper/releases/download/v0.0.1/marc2bibframe-wrapper-0.0.1.jar -O ../marc2bibframe-wrapper/target/marc2bibframe-wrapper-0.0.1.jar
+  # hdt-cpp dependency
+  - git clone https://github.com/rdfhdt/hdt-cpp.git
+  - make -C hdt-cpp/hdt-lib
+  - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
 script:
   - cd test
   - bats .
