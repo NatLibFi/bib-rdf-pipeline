@@ -8,6 +8,7 @@ setup () {
 }
 
 @test "MARCXML: basic conversion" {
+  rm -f slices/kotona-00097.mrcx
   make mrcx
   [ -s slices/kotona-00097.mrcx ]
 }

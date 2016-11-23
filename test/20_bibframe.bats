@@ -8,6 +8,7 @@ setup () {
 }
 
 @test "BIBFRAME RDF: basic conversion" {
+  rm -f slices/kotona-00097-bf.rdf
   make rdf
   [ -s slices/kotona-00097-bf.rdf ]
 }
