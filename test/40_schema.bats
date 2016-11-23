@@ -66,3 +66,8 @@ setup () {
   run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "3" ]
 }
+
+@test "Schema.org RDF: including instance subtitle as part of name" {
+  make slices/kotona-00097-schema.nt
+  grep -q '<http://schema.org/name> "Im Universum zu Hause : eine Entdeckungsreise"' slices/kotona-00097-schema.nt
+}
