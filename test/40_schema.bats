@@ -8,7 +8,7 @@ setup () {
 }
 
 @test "Schema.org RDF: basic conversion" {
-  rm -f slices/kotona-00097-schema.nt
+  rm -f slices/*-schema.nt
   make schema
   [ -s slices/kotona-00097-schema.nt ]
 }
@@ -70,4 +70,14 @@ setup () {
 @test "Schema.org RDF: including instance subtitle as part of name" {
   make slices/kotona-00097-schema.nt
   grep -q '<http://schema.org/name> "Im Universum zu Hause : eine Entdeckungsreise"' slices/kotona-00097-schema.nt
+}
+
+@test "Schema.org RDF: name does not end in full stop" {
+  make slices/ekumeeninen-00585-schema.nt
+  grep -q '<http://schema.org/name> "Suomen ekumeeninen neuvosto : toimintakertomus 2009 = Ekumeniska rådet i Finland : verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
+}
+
+@test "Schema.org RDF: including parallel titles as names" {
+  make slices/ekumeeninen-00585-schema.nt
+  grep -q '<http://schema.org/name> "Ekumeniska rådet i Finland verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
 }

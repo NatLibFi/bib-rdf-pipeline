@@ -16,7 +16,7 @@ PREFIX lvont: <http://lexvo.org/ontology#>
 CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
-    schema:name ?instName ;
+    schema:name ?instName, ?instParallelName ;
     schema:description ?note ;
     schema:author ?creator ;
     schema:exampleOfWork ?work ;
@@ -34,7 +34,7 @@ CONSTRUCT {
     schema:exampleOfWork ?work ;
     schema:author ?creator ;
     schema:url ?elecUri ;
-    schema:name ?instName ;
+    schema:name ?instName, ?instParallelName ;
     schema:bookFormat schema:EBook .
   ?work a schema:CreativeWork ;
     schema:workExample ?inst ;
@@ -44,7 +44,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
-    schema:name ?instName .
+    schema:name ?instName, ?instParallelName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
@@ -59,15 +59,14 @@ CONSTRUCT {
 }
 WHERE {
   ?inst bf:instanceOf ?work .
-  ?inst bf:instanceTitle ?instTitle .
-  ?instTitle bf:titleValue ?instTitleValue .
-  OPTIONAL {
-    ?instTitle bf:subtitle ?instSubtitle .
+  ?inst bf:titleStatement ?instNameRaw .
+  BIND(REPLACE(?instNameRaw, '\\.$', '') AS ?instName)
+  OPTIONAL  {
+    ?inst bf:instanceTitle ?instTitle .
+    ?instTitle bf:titleValue ?instParallelNameRaw .
+    ?instTitle bf:titleType "parallel"
+    BIND(REPLACE(?instParallelNameRaw, '\\.$', '') AS ?instParallelName)
   }
-  BIND(IF(BOUND(?instSubtitle),
-          CONCAT(?instTitleValue, ' ', ?instSubtitle),
-          ?instTitleValue) AS ?instNameRaw)
-  BIND(REPLACE(?instNameRaw, " +$", "") AS ?instName)
   OPTIONAL {
     ?inst bf:isbn10 ?isbn10 .
     BIND(STRAFTER(STR(?isbn10), 'http://isbn.example.org/') AS ?isbn10val) 
