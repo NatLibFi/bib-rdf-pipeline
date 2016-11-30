@@ -9,6 +9,7 @@ RIOT=riot
 SPARQL=sparql
 UCONV=uconv
 RDF2HDT=rdf2hdt
+HDTSPARQL=hdtsparql.sh
 
 # Other configuration settings
 FINTOSPARQL=http://api.dev.finto.fi/sparql
@@ -67,9 +68,12 @@ merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephse
 %.hdt: %.nt
 	$(RDF2HDT) $< $@
 
+output/%.nt: merged/%-merged.hdt
+	$(HDTSPARQL) $^ `cat sparql/consolidate-works.rq` >$@
+
 # Targets to be run externally
 
-all: merge
+all: slice consolidate
 
 realclean: clean
 	rm -f split-input/*.alephseq split-input/*.md5
@@ -97,7 +101,9 @@ schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
 
 merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
 
-.PHONY: all realclean clean slice mrcx rdf nt work-keys schema merge
+consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
+
+.PHONY: all realclean clean slice mrcx rdf nt work-keys schema merge consolidate
 .DEFAULT_GOAL := all
 
 # retain all intermediate files

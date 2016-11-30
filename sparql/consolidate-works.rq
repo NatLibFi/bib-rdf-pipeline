@@ -1,0 +1,12 @@
+PREFIX schema: <http://schema.org/>
+
+# TODO: actually perform consolidation
+# - copy schema:about between original works and translations
+
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s ?p ?o .
+}
+
