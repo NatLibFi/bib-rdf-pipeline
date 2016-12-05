@@ -26,6 +26,11 @@ before_install:
   - wget https://github.com/NatLibFi/marc2bibframe-wrapper/releases/download/v0.0.1/marc2bibframe-wrapper-0.0.1.jar -O ../marc2bibframe-wrapper/target/marc2bibframe-wrapper-0.0.1.jar
   # hdt-cpp dependency
   - git clone https://github.com/rdfhdt/hdt-cpp.git
+  # use the version which still contains the internal N-Triples parser, for now
+  # since it's difficult to install Serd on Travis
+  - cd hdt-cpp
+  - git checkout 6edc61b63079319ca5b220ef8e98e0bc34eff47d
+  - cd ..
   - make -C hdt-cpp/hdt-lib RAPTOR_SUPPORT=false SERD_SUPPORT=false LIBZ_SUPPORT=false
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
