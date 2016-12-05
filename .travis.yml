@@ -30,7 +30,9 @@ before_install:
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
   - git clone https://github.com/rdfhdt/hdt-java.git
-  - cd hdt-java/hdt-java-package
+  - cd hdt-java
+  - mvn install
+  - cd hdt-java-package
   - mvn assembly:single
   - cd ../..
   - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
