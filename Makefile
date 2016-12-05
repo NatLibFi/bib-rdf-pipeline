@@ -9,6 +9,7 @@ RIOT=riot
 SPARQL=sparql
 UCONV=uconv
 RDF2HDT=rdf2hdt
+HDTSEARCH=hdtSearch
 HDTSPARQL=hdtsparql.sh
 
 # Other configuration settings
@@ -67,6 +68,8 @@ merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephse
 
 %.hdt: %.nt
 	$(RDF2HDT) $< $@
+	# also generate index, for later querying
+	$(HDTSEARCH) -q 0 $@
 
 output/%.nt: merged/%-merged.hdt
 	$(HDTSPARQL) $^ "`cat sparql/consolidate-works.rq`" >$@
