@@ -24,10 +24,20 @@ The steps of the conversion are:
 
 # Dependencies
 
-* [Apache Jena](http://jena.apache.org/) command line utilities `sparql` and `rsparql` in $PATH
-* [Catmandu](http://librecat.org/Catmandu/) utility `catmandu` in $PATH
+Command line tools are assumed to be available in `$PATH`, but the paths can be overridden on the make command line, e.g. `make CATMANDU=/opt/catmandu`
+
+## For running the main suite
+
+* [Apache Jena](http://jena.apache.org/) command line utilities `sparql` and `rsparql`
+* [Catmandu](http://librecat.org/Catmandu/) utility `catmandu`
 * `uconv` utility from Ubuntu package `icu-devtools`
 * [marc2bibframe-wrapper](https://github.com/NatLibFi/marc2bibframe-wrapper) and [marc2bibframe](https://github.com/lcnetdev/marc2bibframe)
-* [bats](https://github.com/sstephenson/bats) for unit tests
-* `xmllint` utility from Ubuntu package `libxml2-utils` for unit tests
-* [hdt-cpp](https://github.com/rdfhdt/hdt-cpp) command line utility `rdf2hdt` in $PATH
+* [hdt-cpp](https://github.com/rdfhdt/hdt-cpp) command line utilities `rdf2hdt` and `hdtSearch`
+* [hdt-java](https://github.com/rdfhdt/hdt-java) command line utility `hdtsparql.sh`
+
+## For running the unit tests
+
+In addition to above:
+
+* [bats](https://github.com/sstephenson/bats) in $PATH
+* `xmllint` utility from Ubuntu package `libxml2-utils` in $PATH
