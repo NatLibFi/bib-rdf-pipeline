@@ -131,7 +131,7 @@ WHERE {
       ?langent lvont:iso639P1Code ?iso6391code .
     }
   }
-  BIND(IF(BOUND(?iso6391code), ?iso6391code, ?languageVal) AS ?languageCode)
+  BIND(COALESCE(?iso6391code, ?languageVal) AS ?languageCode)
 
   OPTIONAL {
     ?work bf:language ?origLanguage .
