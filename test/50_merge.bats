@@ -8,9 +8,12 @@ setup () {
 }
 
 @test "Merge works: basic merging" {
-  rm -f slices/kotona-00097-merged.nt
   rm -f merged/hawking-merged.hdt
   make merge
-  [ -s slices/kotona-00097-merged.nt ]
   [ -s merged/hawking-merged.hdt ]
+}
+
+@test "Merge works: translations are linked to same original work" {
+  count="$(grep translationOf merged/kotona-merged.nt | cut -d ' ' -f 3 | sort | uniq -c | awk '{ print $1 }')"
+  [ "$count" -eq 2 ]
 }
