@@ -12,3 +12,13 @@ setup () {
   make work-keys
   [ -s slices/kotona-00097-work-keys.nt ]
 }
+
+@test "Work keys: no recurring spaces" {
+  make refdata/fanrik-manninen-work-keys.nt
+  ! grep '  ' refdata/fanrik-manninen-work-keys.nt
+}
+
+@test "Work keys: no trailing spaces in titles" {
+  make refdata/fanrik-manninen-work-keys.nt
+  ! grep ' /' refdata/fanrik-manninen-work-keys.nt
+}
