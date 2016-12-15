@@ -7,7 +7,7 @@ CONSTRUCT {
   {
     SELECT ?s (MIN(STR(?repl)) AS ?minrepl)
     WHERE {
-      ?s (dct:identifier/^dct:identifier) ?repl .
+      ?s (dct:identifier/^dct:identifier)+ ?repl .
     }
     GROUP BY ?s
   }
