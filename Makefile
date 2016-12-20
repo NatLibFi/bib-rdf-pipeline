@@ -72,7 +72,7 @@ merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephse
 	$(HDTSEARCH) -q 0 $@
 
 output/%.nt: merged/%-merged.hdt
-	$(HDTSPARQL) $^ "`cat sparql/consolidate-works.rq`" >$@
+	JAVA_OPTIONS=$(JVMARGS) $(HDTSPARQL) $^ "`cat sparql/consolidate-works.rq`" >$@
 
 # Targets to be run externally
 
