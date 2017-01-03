@@ -81,3 +81,10 @@ setup () {
   make slices/ekumeeninen-00585-schema.nt
   grep -q '<http://schema.org/name> "Ekumeniska rådet i Finland verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
 }
+
+@test "Schema.org RDF: including part information in names" {
+  make slices/titlepart-00077-schema.nt
+  grep -q '<http://schema.org/name> "Kootut teokset : 3, Näytelmiä: Olviretki Schleusingenissä ; Leo ja Liisa ; Canzino ; Selman juonet ; Alma"' slices/titlepart-00077-schema.nt
+  grep -q '<http://schema.org/name> "Kootut lastut : 1"' slices/titlepart-00077-schema.nt
+  grep -q '<http://schema.org/name> "Dekamerone : Neljäs päivä ja siihen kuuluvat 10 kertomusta"' slices/titlepart-00077-schema.nt
+}

@@ -16,7 +16,7 @@ PREFIX lvont: <http://lexvo.org/ontology#>
 CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
-    schema:name ?instName, ?instParallelName ;
+    schema:name ?instName ;
     schema:description ?note ;
     schema:author ?creator ;
     schema:exampleOfWork ?work ;
@@ -34,7 +34,7 @@ CONSTRUCT {
     schema:exampleOfWork ?work ;
     schema:author ?creator ;
     schema:url ?elecUri ;
-    schema:name ?instName, ?instParallelName ;
+    schema:name ?instName ;
     schema:bookFormat schema:EBook .
   ?work a schema:CreativeWork ;
     schema:workExample ?inst ;
@@ -44,7 +44,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
-    schema:name ?instName, ?instParallelName .
+    schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
@@ -59,14 +59,26 @@ CONSTRUCT {
 }
 WHERE {
   ?inst bf:instanceOf ?work .
-  ?inst bf:titleStatement ?instNameRaw .
-  BIND(REPLACE(?instNameRaw, '\\.$', '') AS ?instName)
-  OPTIONAL  {
+
+  # title from the literal title statement
+  { ?inst bf:titleStatement ?instNameRaw }
+  UNION
+  # title from the title resources
+  {
     ?inst bf:instanceTitle ?instTitle .
-    ?instTitle bf:titleValue ?instParallelNameRaw .
-    ?instTitle bf:titleType "parallel"
-    BIND(REPLACE(?instParallelNameRaw, '\\.$', '') AS ?instParallelName)
+    ?instTitle bf:titleValue ?instTitleValue .
+    OPTIONAL { ?instTitle bf:subtitle ?instSubtitle }
+    BIND(COALESCE(CONCAT(?instTitleValue, ' ', REPLACE(?instSubtitle,'^ +', '')), ?instTitleValue) AS ?instTitleCombined)
+    OPTIONAL { ?instTitle bf:partNumber ?instPartNumber }
+    OPTIONAL { ?instTitle bf:partTitle ?instPartTitle }
+    BIND(COALESCE(
+      CONCAT(?instTitleCombined, ' : ', ?instPartNumber, ', ', ?instPartTitle),
+      CONCAT(?instTitleCombined, ' : ', ?instPartNumber),
+      CONCAT(?instTitleCombined, ' : ', ?instPartTitle),
+      ?instTitleCombined
+    ) AS ?instNameRaw)
   }
+  BIND(REPLACE(?instNameRaw, '[ \\.]+$', '') AS ?instName)
   OPTIONAL {
     ?inst bf:isbn10 ?isbn10 .
     BIND(STRAFTER(STR(?isbn10), 'http://isbn.example.org/') AS ?isbn10val) 
