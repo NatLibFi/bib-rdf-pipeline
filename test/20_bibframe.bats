@@ -12,3 +12,8 @@ setup () {
   make rdf
   [ -s slices/kotona-00097-bf.rdf ]
 }
+
+@test "BIBFRAME RDF: don't use rdf:resource as property" {
+  make slices/part-uri-00683-bf.rdf
+  ! grep -q -F '<rdf:resource' slices/part-uri-00683-bf.rdf
+}

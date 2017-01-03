@@ -1,0 +1,48 @@
+006835912 FMT   L BK
+006835912 LDR   L ^^^^^cam^a2200865^i^4500
+006835912 001   L 006835912
+006835912 005   L 20160617182958.0
+006835912 008   L 140828s2014^^^^fi^||||^^u^^^||0|^0|fin|^
+006835912 020   L $$a978-952-242-280-4$$qnidottu
+006835912 035   L $$a(FI-MELINDA)006835912
+006835912 040   L $$aFI-NL
+006835912 0410  L $$afin$$aeng
+006835912 042   L $$afinb
+006835912 072 7 L $$a37$$2kkaa
+006835912 080   L $$a006$$9FENNI<KEEP>
+006835912 080   L $$a621$$9FENNI<KEEP>
+006835912 080   L $$a628$$9FENNI<KEEP>
+006835912 080   L $$a696/697$$9FENNI<KEEP>
+006835912 080   L $$a628.2
+006835912 084   L $$a66.34081$$2ykl$$9FENNI<KEEP>
+006835912 084   L $$a66.93081$$2ykl$$9FENNI<KEEP>
+006835912 24500 L $$aViemäreiden sisäpuoliset saneerausmenetelmät =$$bRenovation of drains and sewers with no-dig methods.
+006835912 24631 L $$aRenovation of drains and sewers with no-dig methods
+006835912 250   L $$a1. p.
+006835912 260   L $$aHelsinki :$$bSuomen standardisoimisliitto,$$c2014.
+006835912 300   L $$a363, 129 s. :$$bkuvitettu ;$$c30 cm
+006835912 336   L $$ateksti$$btxt$$2rdacontent
+006835912 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+006835912 338   L $$anide$$bnc$$2rdacarrier
+006835912 4901  L $$aSFS-käsikirja,$$x0780-7961 ;$$v101
+006835912 500   L $$aLaadittu yhteistyössä Muoviteollisuus ry:n kanssa.$$9FENNI<KEEP>
+006835912 50580 L $$tViemäreiden sisäpuoliset saneerausmenetelmät : raportti /$$rKaunisto, Tuija ja$$rPelto-Huikko, Aino$$gs. 1-129.$$uhttp://urn.fi/URN:ISBN:978-951-633-128-0$$9FENNI<KEEP>
+006835912 546   L $$aTekstiä suomeksi ja englanniksi.$$9FENNI<KEEP>
+006835912 579   L $$aXLUETTELOITU$$bsavon
+006835912 650 7 L $$astandardit$$2ysa
+006835912 650 7 L $$aviemärit$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$aviemäriverkot$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$asaneeraus$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$akunnostus$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$aputket$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$amuoviputket$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$ametalliputket$$2ysa$$9FENNI<KEEP>
+006835912 650 7 L $$astandarder$$2allars
+006835912 650 7 L $$aavloppsledningar$$2allars
+006835912 650 7 L $$asanering$$2allars
+006835912 655 7 L $$astandardit$$2ysa$$9FENNI<KEEP>
+006835912 7001  L $$aKaunisto, Tuija,$$d1955-$$ekirjoittaja.
+006835912 7001  L $$aPelto-Huikko, Aino,$$ekirjoittaja.
+006835912 7102  L $$aSuomen standardisoimisliitto.
+006835912 7102  L $$aMuoviteollisuus (yhdistys)
+006835912 830 0 L $$aSFS-käsikirja,$$x0780-7961 ;$$v101.
