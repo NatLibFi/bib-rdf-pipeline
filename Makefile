@@ -68,7 +68,8 @@ merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephse
 
 %.hdt: %.nt
 	$(RDF2HDT) $< $@
-	# also generate index, for later querying
+	# also (re)generate index, for later querying
+	rm -f $@.index*
 	$(HDTSEARCH) -q 0 $@
 
 output/%.nt: merged/%-merged.hdt
