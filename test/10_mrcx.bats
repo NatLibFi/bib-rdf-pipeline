@@ -13,6 +13,12 @@ setup () {
   [ -s slices/kotona-00097.mrcx ]
 }
 
+@test "MARCXML: skips prepublication records" {
+  make slices/prepub-00566.mrcx
+  run bash -c "xmllint --format slices/prepub-00566.mrcx | grep '001' | grep 005663958"
+  [ "$status" -eq 1 ]
+}
+
 @test "MARCXML: contains YSA subject" {
   make slices/ajanlyhythistoria-00009.mrcx
   grep -q maailmankaikkeus slices/ajanlyhythistoria-00009.mrcx

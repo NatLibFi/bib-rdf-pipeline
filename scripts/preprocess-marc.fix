@@ -1,3 +1,9 @@
+# Rules for preprocessing MARC records before conversion to RDF
+
+# Skip records that have encoding level 8 (prepublication level)
+reject marc_match('LDR/17', '8')
+
+# Set 240$l to language name, if a 240 exists without language information
 marc_map('240a',origtitle)
 marc_map('240l',origtitlelang)
 marc_map('041h',origlang)
@@ -10,5 +16,5 @@ if exists(origtitle)
         end
     end
 end
-#remove_field(record)
+
 

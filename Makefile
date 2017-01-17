@@ -39,7 +39,7 @@ refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
-	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/set-240-language.fix >$@
+	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/preprocess-marc.fix >$@
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
