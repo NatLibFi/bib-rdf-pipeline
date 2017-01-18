@@ -31,7 +31,7 @@ before_install:
   - pushd serd-* && ./waf configure --prefix=$HOME/local && ./waf && ./waf install && popd 
   # we need to use osma's fork until hdt-cpp PR#49 gets merged
   - git clone https://github.com/osma/hdt-cpp.git
-  - make -C hdt-cpp/hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L$HOME/local/lib -I$HOME/local/include'
+  - make -C hdt-cpp/hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
   - export LD_LIBRARY_PATH=$HOME/local/lib
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
