@@ -20,7 +20,7 @@ before_install:
   - tar -xzf /tmp/apache-jena-3.1.1.tar.gz
   - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
   # marc2bibframe dependency
-  - git clone https://github.com/lcnetdev/marc2bibframe.git ../marc2bibframe
+  - git clone --depth 1 https://github.com/lcnetdev/marc2bibframe.git ../marc2bibframe
   # marc2bibframe-wrapper dependency
   - mkdir -p ../marc2bibframe-wrapper/target/
   - wget https://github.com/NatLibFi/marc2bibframe-wrapper/releases/download/v0.0.1/marc2bibframe-wrapper-0.0.1.jar -O ../marc2bibframe-wrapper/target/marc2bibframe-wrapper-0.0.1.jar
@@ -32,7 +32,7 @@ before_install:
   # ...then actual hdt-cpp
   - mkdir -p git
   - pushd git
-  - if [ ! -d hdt-cpp ]; then git clone https://github.com/rdfhdt/hdt-cpp.git; fi
+  - if [ ! -d hdt-cpp ]; then git clone --depth 1 https://github.com/rdfhdt/hdt-cpp.git; fi
   - cd hdt-cpp
   - git pull
   - make -C hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
@@ -41,11 +41,11 @@ before_install:
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
   - pushd git
-  - if [ ! -d hdt-java ]; then git clone https://github.com/rdfhdt/hdt-java.git; fi
+  - if [ ! -d hdt-java ]; then git clone --depth 1 https://github.com/rdfhdt/hdt-java.git; fi
   - pushd hdt-java && git pull && mvn install && cd hdt-java-package && mvn assembly:single && popd
   - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
   - export PATH=$PATH:$PWD/hdt-java-package/bin
-  - popd git
+  - popd
 script:
   - cd test
   - bats .
