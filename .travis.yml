@@ -30,6 +30,7 @@ before_install:
   - mkdir -p $HOME/local
   - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
   - pushd serd-* && ./waf configure --prefix=$HOME/local && ./waf && ./waf install && popd 
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
   # ...then actual hdt-cpp
   - mkdir -p git
   - pushd git
@@ -37,9 +38,8 @@ before_install:
   - cd hdt-cpp
   - git pull
   - make -C hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
+  - ln -s $PWD/hdt-lib/tools/* $HOME/local/bin
   - popd
-  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
-  - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
   - pushd git
   - if [ ! -d hdt-java ]; then git clone --depth 1 https://github.com/rdfhdt/hdt-java.git; fi
