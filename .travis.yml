@@ -44,8 +44,7 @@ before_install:
   - pushd git
   - if [ ! -d hdt-java ]; then git clone --depth 1 https://github.com/rdfhdt/hdt-java.git; fi
   - pushd hdt-java && git pull && mvn install && cd hdt-java-package && mvn assembly:single && popd
-  - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
-  - export PATH=$PATH:$PWD/hdt-java-package/bin
+  - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-*/bin/* $HOME/local/bin
   - popd
 script:
   - cd test
