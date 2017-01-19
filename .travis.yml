@@ -29,18 +29,14 @@ before_install:
   - mkdir -p $HOME/local
   - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
   - pushd serd-* && ./waf configure --prefix=$HOME/local && ./waf && ./waf install && popd 
-  # we need to use osma's fork until hdt-cpp PR#49 gets merged
-  - git clone https://github.com/osma/hdt-cpp.git
+  # ...then actual hdt-cpp
+  - git clone https://github.com/rdfhdt/hdt-cpp.git
   - make -C hdt-cpp/hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
-  - export LD_LIBRARY_PATH=$HOME/local/lib
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
   - git clone https://github.com/rdfhdt/hdt-java.git
-  - cd hdt-java
-  - mvn install
-  - cd hdt-java-package
-  - mvn assembly:single
-  - cd ../..
+  - pushd hdt-java && mvn install && cd hdt-java-package && mvn assembly:single && popd
   - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
   - export PATH=$PATH:$PWD/hdt-java-package/bin
 script:
