@@ -5,6 +5,7 @@ language: bash
 cache:
   directories:
     - $HOME/perl5
+    - $HOME/git
 addons:
   apt:
     packages:
