@@ -32,7 +32,7 @@ before_install:
   # ...then actual hdt-cpp
   - mkdir -p git
   - pushd git
-  - if [ ! -d hdt-cpp ]; then git clone https://github.com/rdfhdt/hdt-cpp.git; done
+  - if [ ! -d hdt-cpp ]; then git clone https://github.com/rdfhdt/hdt-cpp.git; fi
   - cd hdt-cpp
   - git pull
   - make -C hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
@@ -41,7 +41,7 @@ before_install:
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
   - pushd git
-  - if [ ! -d hdt-java ]; then git clone https://github.com/rdfhdt/hdt-java.git; done
+  - if [ ! -d hdt-java ]; then git clone https://github.com/rdfhdt/hdt-java.git; fi
   - pushd hdt-java && git pull && mvn install && cd hdt-java-package && mvn assembly:single && popd
   - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
   - export PATH=$PATH:$PWD/hdt-java-package/bin
