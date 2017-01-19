@@ -28,9 +28,10 @@ before_install:
   # hdt-cpp dependency
   # first we need serd...
   - mkdir -p $HOME/local
+  - export PATH=$PATH:$HOME/local/bin
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
   - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
   - pushd serd-* && ./waf configure --prefix=$HOME/local && ./waf && ./waf install && popd 
-  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
   # ...then actual hdt-cpp
   - mkdir -p git
   - pushd git
