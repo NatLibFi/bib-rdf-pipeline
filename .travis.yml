@@ -30,15 +30,22 @@ before_install:
   - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
   - pushd serd-* && ./waf configure --prefix=$HOME/local && ./waf && ./waf install && popd 
   # ...then actual hdt-cpp
-  - git clone https://github.com/rdfhdt/hdt-cpp.git
-  - make -C hdt-cpp/hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
+  - mkdir -p git
+  - pushd git
+  - if [ ! -d hdt-cpp ]; then git clone https://github.com/rdfhdt/hdt-cpp.git; done
+  - cd hdt-cpp
+  - git pull
+  - make -C hdt-lib RAPTOR_SUPPORT=false LIBZ_SUPPORT=false LDFLAGS='-L${HOME}/local/lib -I${HOME}/local/include'
+  - popd
   - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local/lib
   - export PATH=$PATH:$PWD/hdt-cpp/hdt-lib/tools
   # hdt-java dependency
-  - git clone https://github.com/rdfhdt/hdt-java.git
-  - pushd hdt-java && mvn install && cd hdt-java-package && mvn assembly:single && popd
+  - pushd git
+  - if [ ! -d hdt-java ]; then git clone https://github.com/rdfhdt/hdt-java.git; done
+  - pushd hdt-java && git pull && mvn install && cd hdt-java-package && mvn assembly:single && popd
   - ln -s $PWD/hdt-java/hdt-java-package/target/hdt-java-package-*-distribution/hdt-java-package-* hdt-java-package
   - export PATH=$PATH:$PWD/hdt-java-package/bin
+  - popd git
 script:
   - cd test
   - bats .
