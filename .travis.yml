@@ -6,6 +6,7 @@ cache:
   directories:
     - $HOME/perl5
     - $HOME/git
+    - $HOME/.m2
 addons:
   apt:
     packages:
