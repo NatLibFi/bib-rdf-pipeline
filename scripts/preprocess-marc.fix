@@ -3,10 +3,20 @@
 # Skip records that have encoding level 8 (prepublication level)
 reject marc_match('LDR/17', '8')
 
-# Set 240$l to language name, if a 240 exists without language information
-marc_map('240a',origtitle)
-marc_map('240l',origtitlelang)
+# Check if this is a translated record without 240
 marc_map('041h',origlang)
+marc_map('240a',origtitle)
+unless exists(origtitle)
+    # Missing 240, trying to add it from 130
+    marc_map('130a', uniformtitle)
+    if exists(uniformtitle)
+        marc_add('240', a, $.uniformtitle)
+	set_field(origtitle, uniformtitle)
+    end
+end
+
+# Set 240$l to language name, if a 240 exists without language information
+marc_map('240l',origtitlelang)
 marc_map('008_/35-37',recordlang)
 lookup(recordlang,"refdata/iso639-2-fi.csv")
 if exists(origtitle)

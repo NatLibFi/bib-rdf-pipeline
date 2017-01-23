@@ -30,6 +30,11 @@ setup () {
   [ "$status" -eq 1 ]
 }
 
+@test "MARCXML: adds missing 240\$a from 130\$a" {
+  make slices/origwork-00040.mrcx
+  xmllint --format slices/origwork-00040.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a"'
+}
+
 @test "MARCXML: adds missing 240\$l subfield" {
   make slices/ajanlyhythistoria-00009.mrcx
   xmllint --format slices/ajanlyhythistoria-00009.mrcx | grep -A 3 'tag="240"' | grep 'marc:subfield code="l"'
