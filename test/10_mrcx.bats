@@ -30,9 +30,21 @@ setup () {
   [ "$status" -eq 1 ]
 }
 
+@test "MARCXML: adds missing 240\$a from 500 note" {
+  make slices/origwork-00004.mrcx
+  xmllint --format slices/origwork-00004.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a">DAYLIGHT MUST COME'
+  ! xmllint --format slices/origwork-00004.mrcx | grep -A 1 'tag="500"' | grep 'marc:subfield code="a">ENGL. ALKUTEOS: DAYLIGHT MUST COME'
+}
+
+@test "MARCXML: adds missing 240\$a from 500 note (with extra space)" {
+  make slices/origwork-00271.mrcx
+  xmllint --format slices/origwork-00271.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a">Nationalökonimien i hovedtraek'
+  ! xmllint --format slices/origwork-00271.mrcx | grep -A 1 'tag="500"' | grep 'marc:subfield code="a">Alkuteos : Nationalökonimien i hovedtraek.'
+}
+
 @test "MARCXML: adds missing 240\$a from 130\$a" {
-  make slices/origwork-00040.mrcx
-  xmllint --format slices/origwork-00040.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a"'
+  make slices/origwork-00041.mrcx
+  xmllint --format slices/origwork-00041.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a">New international manual of Braille music notation'
 }
 
 @test "MARCXML: adds missing 240\$l subfield" {

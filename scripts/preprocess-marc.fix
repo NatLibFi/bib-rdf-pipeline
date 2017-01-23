@@ -7,11 +7,27 @@ reject marc_match('LDR/17', '8')
 marc_map('041h',origlang)
 marc_map('240a',origtitle)
 unless exists(origtitle)
-    # Missing 240, trying to add it from 130
-    marc_map('130a', uniformtitle)
-    if exists(uniformtitle)
-        marc_add('240', a, $.uniformtitle)
-	set_field(origtitle, uniformtitle)
+    # Missing 240 field
+    # Try to add 240 from a 500 note
+    do marc_each()
+        if marc_match('500a', '(?i)alkuteos\s*:')
+            marc_map('500a', origtitlenote)
+            split_field(origtitlenote, '(?i)alkuteos\s*:')
+            copy_field(origtitlenote.1, origtitle)
+            trim(origtitle)
+            marc_add('240', a, $.origtitle)
+            # remove the 500 note since it's now redundant
+            marc_remove('500')
+        end
+    end
+
+    # If the above was not successful, try to add 240 from 130
+    unless exists(origtitle)
+        marc_map('130a', uniformtitle)
+        if exists(uniformtitle)
+            marc_add('240', a, $.uniformtitle)
+            copy_field(uniformtitle, origtitle)
+        end
     end
 end
 
