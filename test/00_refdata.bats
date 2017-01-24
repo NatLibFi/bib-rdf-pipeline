@@ -26,3 +26,13 @@ setup () {
   make refdata/RDACarrierType.nt
   [ -s refdata/RDACarrierType.nt ]
 }
+
+@test "Reference data: RDA Content types" {
+  make refdata/RDAContentType.nt
+  [ -s refdata/RDAContentType.nt ]
+}
+
+@test "Reference data: RDA Content types shouldn't have double slashes" {
+  make refdata/RDAContentType.nt
+  ! grep 'RDAContentType//' refdata/RDAContentType.nt
+}

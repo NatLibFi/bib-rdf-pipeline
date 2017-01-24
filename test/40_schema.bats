@@ -99,3 +99,8 @@ setup () {
   grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/kotona-00720-schema.nt
   ! grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://www.yso.fi/onto/ysa/Y175712>' slices/kotona-00720-schema.nt
 }
+
+@test "Schema.org RDF: expressing RDA content type" {
+  make slices/kotona-00720-schema.nt
+  grep -q '<http://rdaregistry.info/Elements/u/P60049> <http://rdaregistry.info/termList/RDAContentType/1020>' slices/kotona-00720-schema.nt
+}

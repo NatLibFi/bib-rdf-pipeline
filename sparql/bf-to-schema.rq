@@ -45,6 +45,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
     schema:about ?subject, ?ysoSubject ;
+    rdau:P60049 ?rdaContentType ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
@@ -192,6 +193,19 @@ WHERE {
         ?rdaCarrierType skos:prefLabel ?carrierCategoryValueFi .
         # make sure it's a genuine RDA Carrier concept, not e.g. YSA concept
         ?rdaCarrierType skos:inScheme <http://rdaregistry.info/termList/RDACarrierType> .
+      }
+    }
+  }
+
+  OPTIONAL {
+    ?work bf:contentCategory ?contentCategory .
+    ?contentCategory bf:categoryValue ?contentCategoryValue .
+    BIND(STRLANG(?contentCategoryValue, 'fi') AS ?contentCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaContentGraph {
+        ?rdaContentType skos:prefLabel ?contentCategoryValueFi .
+        # make sure it's a genuine RDA Content concept, not e.g. YSA concept
+        ?rdaContentType skos:inScheme <http://rdaregistry.info/termList/RDAContentType> .
       }
     }
   }
