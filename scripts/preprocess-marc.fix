@@ -43,4 +43,5 @@ if exists(origtitle)
     end
 end
 
-
+# Remove 336$2 subfield (it confuses the marc2bibframe conversion)
+marc_remove('3362')
