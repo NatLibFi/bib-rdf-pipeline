@@ -54,6 +54,11 @@ setup () {
   grep -q -F '<http://schema.org/about> "kirjallisuus -- antiikki"@fi' slices/ajattelemisenalku-00098-schema.nt
 }
 
+@test "Schema.org RDF: converting to YSA URIs, same term as RDA Carrier case" {
+  make slices/verkkoaineisto-00608-schema.nt
+  ! grep -q '<http://schema.org/about> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/verkkoaineisto-00608-schema.nt
+}
+
 @test "Schema.org RDF: converting to YSO URIs" {
   make slices/ajattelemisenalku-00098-schema.nt
   # "myytit" -> ysa:Y97600 -> yso:p1248
@@ -87,4 +92,10 @@ setup () {
   grep -q '<http://schema.org/name> "Kootut teokset : 3, Näytelmiä: Olviretki Schleusingenissä ; Leo ja Liisa ; Canzino ; Selman juonet ; Alma"' slices/titlepart-00077-schema.nt
   grep -q '<http://schema.org/name> "Kootut lastut : 1"' slices/titlepart-00077-schema.nt
   grep -q '<http://schema.org/name> "Dekamerone : Neljäs päivä ja siihen kuuluvat 10 kertomusta"' slices/titlepart-00077-schema.nt
+}
+
+@test "Schema.org RDF: expressing RDA carrier type" {
+  make slices/kotona-00720-schema.nt
+  grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/kotona-00720-schema.nt
+  ! grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://www.yso.fi/onto/ysa/Y175712>' slices/kotona-00720-schema.nt
 }

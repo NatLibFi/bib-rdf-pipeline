@@ -38,14 +38,17 @@ refdata/iso639-1-2-mapping.nt: sparql/extract-iso639-1-2-mapping.rq
 refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
+refdata/RDACarrierType.nt:
+	curl -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
+
 %.mrcx: %.alephseq refdata/iso639-2-fi.csv
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/preprocess-marc.fix >$@
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
 
-%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/RDACarrierType.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 	
 %.nt: %.rdf
 	rapper $^ -q >$@

@@ -2,7 +2,7 @@ PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX lvont: <http://lexvo.org/ontology#>
-
+PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 # TODO:
 # - numberOfPages values should be integer
@@ -23,6 +23,7 @@ CONSTRUCT {
     schema:isbn ?isbn10val, ?isbn13val ;
     schema:datePublished ?providerDate ;
     schema:numberOfPages ?extent ;
+    rdau:P60048 ?rdaCarrierType ;
     schema:publisher ?providerOrganization .
   ?providerOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
@@ -167,15 +168,31 @@ WHERE {
       GRAPH ?ysaGraph { 
         ?ysac skos:prefLabel ?topicLabelFi .
         OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
+        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
       }
     }
     OPTIONAL {
       GRAPH ?ysaGraph { 
         ?ysac skos:altLabel ?topicLabelFi .
         OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
+        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
       }
     }
     BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
   }
-}
 
+  OPTIONAL {
+    ?inst bf:carrierCategory ?carrierCategory .
+    ?carrierCategory bf:categoryValue ?carrierCategoryValue .
+    BIND(STRLANG(?carrierCategoryValue, 'fi') AS ?carrierCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaCarrierGraph {
+        ?rdaCarrierType skos:prefLabel ?carrierCategoryValueFi .
+        # make sure it's a genuine RDA Carrier concept, not e.g. YSA concept
+        ?rdaCarrierType skos:inScheme <http://rdaregistry.info/termList/RDACarrierType> .
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+006089019 FMT   L BK
+006089019 LDR   L ^^^^^cam^a2201117^i^4500
+006089019 001   L 006089019
+006089019 005   L 20161007165450.0
+006089019 008   L 130204s2012^^^^fi^||||^^m^^^|00|^0|eng|^
+006089019 015   L $$afx1013570$$2skl
+006089019 020   L $$a978-951-39-4907-5$$qnidottu
+006089019 035   L $$a(FI-MELINDA)006089019
+006089019 040   L $$aFI-NL
+006089019 0410  L $$aeng$$bfin
+006089019 042   L $$afinb
+006089019 072 7 L $$a43$$2kkaa
+006089019 080   L $$a069$$9FENNI<KEEP>
+006089019 080   L $$a004$$9FENNI<KEEP>
+006089019 080   L $$a008$$9FENNI<KEEP>
+006089019 084   L $$a06.2$$2ykl
+006089019 1001  L $$aHäyrinen, Ari.
+006089019 24510 L $$aOpen sourcing digital heritage :$$bdigital surrogates, museums and knowledge management in the age of open networks /$$cAri Häyrinen.
+006089019 260   L $$aJyväskylä :$$bUniversity of Jyväskylä,$$c2012$$e(Jyväskylä :$$fJyväskylä University Printing House)
+006089019 300   L $$a132, [42] s. :$$bkuvitettu ;$$c25 cm
+006089019 336   L $$ateksti$$btxt$$2rdacontent
+006089019 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+006089019 338   L $$anide$$bnc$$2rdacarrier
+006089019 4901  L $$aJyväskylä studies in humanities,$$x1459-4323 ;$$v187
+006089019 500   L $$aArtikkeliväitöskirjan yhteenveto-osa ja 4 eripainosta.$$9FENNI<KEEP>
+006089019 502   L $$aVäitöskirja :$$cJyväskylän yliopisto, humanistinen tiedekunta, digitaalinen kulttuuri.
+006089019 502   L $$aVäitöskirja :$$cJyväskylän yliopisto.$$9FENNI<KEEP>
+006089019 5052  L $$aOriginal papers: PI Memories in the warehouse : developing a multiperspective information system for culture historical use -- PII A template based, event-centric documentation framework -- PIII Towards semantic modelling of cultural historical data -- P IV Google, world's largest museum?
+006089019 520   L $$aYhteenveto (Finnish summary)$$9FENNI<KEEP>
+006089019 5208  L $$aYhteenveto.
+006089019 530   L $$aJulkaistu myös verkkoaineistona ISBN 978-951-39-4908-2 (PDF)$$9FENNI<KEEP>
+006089019 579   L $$aXLUETTELOITU$$bjykdo
+006089019 650 7 L $$akulttuuriperintö$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$adigitaalinen tallennus$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$adigitointi$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$averkkoaineisto$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$aaineistot$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$akokoelmat$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$aavoin tieto$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$aopen access$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$amuseot$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$amuistiorganisaatiot$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$atietojärjestelmät$$2ysa$$9FENNI<KEEP>
+006089019 650 7 L $$averkkojulkaiseminen$$2ysa
+006089019 650 7 L $$averkkoaineistot$$2ysa
+006089019 650 7 L $$aavoin lähdekoodi$$2ysa
+006089019 650 7 L $$ayhdistetty avoin tieto$$2ysa
+006089019 650 7 L $$adigital lagring$$2allars
+006089019 650 7 L $$awebbpublicering$$2allars
+006089019 650 7 L $$amuseer$$2allars
+006089019 650 7 L $$akulturarv$$2allars
+006089019 653 0 L $$adigital heritage
+006089019 653 0 L $$aopen source
+006089019 653 0 L $$aopen data
+006089019 653   L $$adigitaalinen kulttuuriperintö
+006089019 655 7 L $$aväitöskirjat$$2ysa
+006089019 7400  L $$aMemories in the warehouse : developing a multiperspective information system for culture historical use
+006089019 7402  L $$aA template based, event-centric documentation framework
+006089019 7400  L $$aTowards semantic modelling of cultural historical data
+006089019 7400  L $$aGoogle, world's largest museum?
+006089019 77608 L $$iVerkkoaineisto:$$aHäyrinen, Ari.$$tOpen sourcing digital heritage : digital surrogates, museums and knowledge management in the age of open networks$$z978-951-39-4908-2
+006089019 77608 L $$iVerkkoaineisto:$$aHäyrinen, Ari.$$tOpen sourcing digital heritage : digital surrogates, museums and knowledge management in the age of open networks$$z9789513949082
+006089019 830 0 L $$aJyväskylä studies in humanities,$$x1459-4323 ;$$v187.
+006089019 85641 L $$uhttp://urn.fi/URN:ISBN:978-951-39-4908-2$$yLinkki verkkoaineistoon
+006089019 901   L $$aMU20130322$$5FENNI
