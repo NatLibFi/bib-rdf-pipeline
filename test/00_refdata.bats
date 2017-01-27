@@ -36,3 +36,9 @@ setup () {
   make refdata/RDAContentType.nt
   ! grep 'RDAContentType//' refdata/RDAContentType.nt
 }
+
+@test "Reference data: RDA Media types" {
+  make refdata/RDAMediaType.nt
+  [ -s refdata/RDAMediaType.nt ]
+}
+

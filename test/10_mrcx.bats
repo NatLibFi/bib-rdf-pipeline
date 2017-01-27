@@ -56,3 +56,8 @@ setup () {
   make slices/kotona-00720.mrcx
   ! xmllint --format slices/kotona-00720.mrcx | grep -A 4 'tag="336"' | grep 'marc:subfield code="2"'
 }
+
+@test "MARCXML: removes \$2=rdamedia subfield from 337" {
+  make slices/kotona-00720.mrcx
+  ! xmllint --format slices/kotona-00720.mrcx | grep -A 4 'tag="337"' | grep 'marc:subfield code="2"'
+}

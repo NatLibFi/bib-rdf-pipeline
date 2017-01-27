@@ -24,6 +24,7 @@ CONSTRUCT {
     schema:datePublished ?providerDate ;
     schema:numberOfPages ?extent ;
     rdau:P60048 ?rdaCarrierType ;
+    rdau:P60050 ?rdaMediaType ;
     schema:publisher ?providerOrganization .
   ?providerOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
@@ -193,6 +194,19 @@ WHERE {
         ?rdaCarrierType skos:prefLabel ?carrierCategoryValueFi .
         # make sure it's a genuine RDA Carrier concept, not e.g. YSA concept
         ?rdaCarrierType skos:inScheme <http://rdaregistry.info/termList/RDACarrierType> .
+      }
+    }
+  }
+
+  OPTIONAL {
+    ?inst bf:mediaCategory ?mediaCategory .
+    ?mediaCategory bf:categoryValue ?mediaCategoryValue .
+    BIND(STRLANG(?mediaCategoryValue, 'fi') AS ?mediaCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaMediaGraph {
+        ?rdaMediaType skos:prefLabel ?mediaCategoryValueFi .
+        # make sure it's a genuine RDA Media concept, not e.g. YSA concept
+        ?rdaMediaType skos:inScheme <http://rdaregistry.info/termList/RDAMediaType> .
       }
     }
   }

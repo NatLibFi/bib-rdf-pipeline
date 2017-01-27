@@ -104,3 +104,8 @@ setup () {
   make slices/kotona-00720-schema.nt
   grep -q '<http://rdaregistry.info/Elements/u/P60049> <http://rdaregistry.info/termList/RDAContentType/1020>' slices/kotona-00720-schema.nt
 }
+
+@test "Schema.org RDF: expressing RDA media type" {
+  make slices/kotona-00720-schema.nt
+  grep -q '<http://rdaregistry.info/Elements/u/P60050> <http://rdaregistry.info/termList/RDAMediaType/1003>' slices/kotona-00720-schema.nt
+}
