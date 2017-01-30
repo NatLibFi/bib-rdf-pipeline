@@ -45,6 +45,13 @@ setup () {
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p1248>' slices/ajattelemisenalku-00098-schema.nt
 }
 
+@test "Reconcile: express organizations using CN" {
+  make slices/ekumeeninen-00585-schema.nt
+  # "Suomen ekumeeninen neuvosto" -> cn:26756A
+  grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:26756A>' slices/ekumeeninen-00585-schema.nt
+}
+
+
 @test "Reconcile: expressing RDA carrier type" {
   make slices/kotona-00720-schema.nt
   grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/kotona-00720-schema.nt

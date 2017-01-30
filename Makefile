@@ -38,6 +38,9 @@ refdata/iso639-1-2-mapping.nt: sparql/extract-iso639-1-2-mapping.rq
 refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
+refdata/cn-labels.nt: sparql/extract-cn-labels.rq
+	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
+
 refdata/RDACarrierType.nt:
 	curl -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
 
@@ -53,8 +56,8 @@ refdata/RDAMediaType.nt:
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
 
-%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/cn-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --namedGraph $(word 7,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 	
 %.nt: %.rdf
 	rapper $^ -q >$@

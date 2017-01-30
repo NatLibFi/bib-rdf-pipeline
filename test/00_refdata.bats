@@ -22,6 +22,13 @@ setup () {
   [ -s refdata/ysa-skos-labels.nt ]
 }
 
+@test "Reference data: Corporate names (normalized)" {
+  make refdata/cn-labels.nt
+  [ -s refdata/cn-labels.nt ]
+  # make sure language tags have been stripped
+  ! grep -q '"@' refdata/cn-labels.nt
+}
+
 @test "Reference data: RDA Carrier types" {
   make refdata/RDACarrierType.nt
   [ -s refdata/RDACarrierType.nt ]

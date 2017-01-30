@@ -25,8 +25,8 @@ CONSTRUCT {
     schema:numberOfPages ?extent ;
     rdau:P60048 ?rdaCarrierType ;
     rdau:P60050 ?rdaMediaType ;
-    schema:publisher ?providerOrganization .
-  ?providerOrganization a schema:Organization ;
+    schema:publisher ?publisherOrganization .
+  ?publisherOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
   ?creator a schema:Person ;
     schema:name ?creatorLabel .
@@ -98,6 +98,12 @@ WHERE {
     OPTIONAL {
       ?provider bf:providerName ?providerOrganization .
       ?providerOrganization bf:label ?providerOrganizationLabel .
+      OPTIONAL {
+        GRAPH ?cnGraph {
+          ?cnOrganization skos:prefLabel ?providerOrganizationLabel .
+        }
+      }
+      BIND(COALESCE(?cnOrganization,?providerOrganization) AS ?publisherOrganization)
     }
   }
   OPTIONAL {
