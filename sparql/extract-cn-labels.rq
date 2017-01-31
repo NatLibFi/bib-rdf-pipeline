@@ -1,0 +1,15 @@
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+  ?c skos:prefLabel ?label_str .
+  ?c skos:altLabel ?alabel_str .
+} WHERE {
+  GRAPH <http://urn.fi/URN:NBN:fi:au:cn:> {
+    ?c skos:prefLabel ?label .
+    BIND(STR(?label) AS ?label_str)
+    OPTIONAL {
+      ?c skos:altLabel ?alabel
+      BIND(STR(?alabel) AS ?alabel_str)
+    }
+  }
+}
