@@ -1,14 +1,15 @@
 PREFIX schema: <http://schema.org/>
 PREFIX lvont: <http://lexvo.org/ontology#>
-
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 CONSTRUCT {
   ?s ?p ?o .
   ?s schema:inLanguage ?languageCode .
+  ?s schema:about ?subject, ?ysoSubject .
 } WHERE {
   {
     ?s ?p ?o .
-    FILTER(?p != schema:inLanguage)
+    FILTER(?p NOT IN (schema:inLanguage, schema:about))
   }
   UNION
   {
@@ -21,5 +22,26 @@ CONSTRUCT {
     }
     BIND(COALESCE(?iso6391code, ?languageVal) AS ?languageCode)
   }
-
+  UNION
+  {
+    ?s schema:about ?topicLabel .
+    BIND(STRLANG(REPLACE(?topicLabel, '--', ' -- '), 'fi') AS ?topicLabelFi)
+    OPTIONAL {
+      GRAPH ?ysaGraph { 
+        ?ysac skos:prefLabel ?topicLabelFi .
+        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
+        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
+      }
+    }
+    OPTIONAL {
+      GRAPH ?ysaGraph { 
+        ?ysac skos:altLabel ?topicLabelFi .
+        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
+        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
+      }
+    }
+    BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
+  }
 }

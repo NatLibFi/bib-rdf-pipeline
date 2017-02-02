@@ -44,7 +44,7 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
-    schema:about ?subject, ?ysoSubject ;
+    schema:about ?topicLabel ;
     rdau:P60049 ?rdaContentType ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
@@ -156,24 +156,6 @@ WHERE {
   OPTIONAL {
     ?work bf:subject ?topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
-    BIND(STRLANG(REPLACE(?topicLabel, '--', ' -- '), 'fi') AS ?topicLabelFi)
-    OPTIONAL {
-      GRAPH ?ysaGraph { 
-        ?ysac skos:prefLabel ?topicLabelFi .
-        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
-        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
-        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
-      }
-    }
-    OPTIONAL {
-      GRAPH ?ysaGraph { 
-        ?ysac skos:altLabel ?topicLabelFi .
-        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
-        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
-        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
-      }
-    }
-    BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
   }
 
   OPTIONAL {
