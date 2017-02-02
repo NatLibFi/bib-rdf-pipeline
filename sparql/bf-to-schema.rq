@@ -1,7 +1,6 @@
 PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX schema: <http://schema.org/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX lvont: <http://lexvo.org/ontology#>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 # TODO:
@@ -44,14 +43,14 @@ CONSTRUCT {
     schema:isPartOf ?series ;
     schema:author ?creator ;
     schema:contributor ?contributor ;
-    schema:inLanguage ?languageCode ;
+    schema:inLanguage ?languageVal ;
     schema:about ?subject, ?ysoSubject ;
     rdau:P60049 ?rdaContentType ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
-    schema:inLanguage ?origLanguageCode ;
+    schema:inLanguage ?origLanguageVal ;
     schema:author ?origworkCreator .
   ?origworkCreator a schema:Person ;
     schema:name ?origworkCreatorLabel .
@@ -146,26 +145,12 @@ WHERE {
   ?work bf:language ?language .
   FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
   BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
-  OPTIONAL {
-    GRAPH ?lexvoGraph {
-      ?langent lvont:iso6392BCode ?languageVal .
-      ?langent lvont:iso639P1Code ?iso6391code .
-    }
-  }
-  BIND(COALESCE(?iso6391code, ?languageVal) AS ?languageCode)
 
   OPTIONAL {
     ?work bf:language ?origLanguage .
     ?origLanguage bf:resourcePart "original" .
     ?origLanguage bf:languageOfPartUri ?origLanguageUri .
     BIND(STRAFTER(STR(?origLanguageUri), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
-    OPTIONAL {
-      GRAPH ?lexvoGraph {
-        ?origlangent lvont:iso6392BCode ?origLanguageVal .
-        ?origlangent lvont:iso639P1Code ?origIso6391code .
-      }
-    }
-    BIND(IF(BOUND(?origIso6391code), ?origIso6391code, ?origLanguageVal) AS ?origLanguageCode)
   }
 
   OPTIONAL {

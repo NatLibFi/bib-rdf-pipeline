@@ -1,0 +1,25 @@
+PREFIX schema: <http://schema.org/>
+PREFIX lvont: <http://lexvo.org/ontology#>
+
+
+CONSTRUCT {
+  ?s ?p ?o .
+  ?s schema:inLanguage ?languageCode .
+} WHERE {
+  {
+    ?s ?p ?o .
+    FILTER(?p != schema:inLanguage)
+  }
+  UNION
+  {
+    ?s schema:inLanguage ?languageVal .
+    OPTIONAL {
+      GRAPH ?lexvoGraph {
+        ?langent lvont:iso6392BCode ?languageVal .
+        ?langent lvont:iso639P1Code ?iso6391code .
+      }
+    }
+    BIND(COALESCE(?iso6391code, ?languageVal) AS ?languageCode)
+  }
+
+}

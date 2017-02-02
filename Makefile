@@ -56,8 +56,11 @@ refdata/RDAMediaType.nt:
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
 
-%-schema.nt: %-bf.rdf refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/cn-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --namedGraph $(word 7,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%-schema.nt: %-bf.rdf refdata/ysa-skos-labels.nt refdata/cn-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+
+%-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt 
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --query sparql/reconcile.rq --out=NT >$@
 	
 %.nt: %.rdf
 	rapper $^ -q >$@
@@ -72,7 +75,7 @@ refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.ale
 %-work-transformations.nt: %-work-keys.nt
 	$(SPARQL) --data $< --query sparql/create-work-transformations.rq --out=NT >$@
 
-slices/%-merged.nt: slices/%-schema.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
+slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge-works.rq --out=NT >$@
 
 merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-merged.nt/')
@@ -114,6 +117,8 @@ nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
 work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
 
 schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
+
+reconcile: $(patsubst %.alephseq,%-reconciled.nt,$(wildcard slices/*.alephseq))
 
 merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
 
