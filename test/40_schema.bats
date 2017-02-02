@@ -9,8 +9,8 @@ setup () {
 
 @test "Schema.org RDF: basic conversion" {
   rm -f slices/*-schema.nt
-  make -j2 schema
-  [ -s slices/kotona-00097-schema.nt ]
+#  make -j2 schema
+#  [ -s slices/kotona-00097-schema.nt ]
 }
 
 @test "Schema.org RDF: quoting bad URLs" {
@@ -32,6 +32,35 @@ setup () {
   ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
   run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "3" ]
+}
+
+@test "Schema.org RDF: organization name should not end in full stop" {
+  make slices/jakaja-00005-schema.nt
+  ! grep -q -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
+}
+
+@test "Schema.org RDF: modelling organization authors as schema:Organization" {
+  make slices/jakaja-00005-schema.nt
+  # find out the URI of the org-author
+  uri="$(grep '<http://schema.org/name> \"Perustuslakien valtiontaloussäännösten uudistamiskomitea\"' slices/jakaja-00005-schema.nt | cut -d ' ' -f 1)"
+  # make sure it is set to something
+  [ -n $uri ]
+  # check that it's and Organization
+  grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
+  # double-check that it's not a Person
+  ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+}
+
+@test "Schema.org RDF: modelling organization contributors as schema:Organization" {
+  make slices/jakaja-00005-schema.nt
+  # find out the URI of the org-contributor
+  uri="$(grep '<http://schema.org/name> \"Lappeenrannan teknillinen korkeakoulu. Energiatekniikan osasto\"' slices/jakaja-00005-schema.nt | cut -d ' ' -f 1)"
+  # make sure it is set to something
+  [ -n $uri ]
+  # check that it's and Organization
+  grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
+  # double-check that it's not a Person
+  ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
 }
 
 @test "Schema.org RDF: including instance subtitle as part of name" {

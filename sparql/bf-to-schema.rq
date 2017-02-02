@@ -17,9 +17,9 @@ CONSTRUCT {
     schema:publisher ?providerOrganization .
   ?providerOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
-  ?creator a schema:Person ;
+  ?creator a ?schemaCreatorType ;
     schema:name ?creatorLabel .
-  ?contributor a schema:Person ;
+  ?contributor a ?schemaContributorType ;
     schema:name ?contributorLabel .
   ?elec a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
@@ -86,7 +86,8 @@ WHERE {
     }
     OPTIONAL {
       ?provider bf:providerName ?providerOrganization .
-      ?providerOrganization bf:label ?providerOrganizationLabel .
+      ?providerOrganization bf:label ?providerOrganizationLabelRaw .
+      BIND(REPLACE(?providerOrganizationLabelRaw, '[ \\.]+$', '') AS ?providerOrganizationLabel)
     }
   }
   OPTIONAL {
@@ -101,12 +102,18 @@ WHERE {
     ?elec bf:uri ?elecUri .
   }
   OPTIONAL {
+    VALUES (?bfCreatorType ?schemaCreatorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
     ?work bf:creator ?creator .
-    ?creator bf:label ?creatorLabel .
+    ?creator a ?bfCreatorType .
+    ?creator bf:label ?creatorLabelRaw .
+    BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
   }
   OPTIONAL {
+    VALUES (?bfContributorType ?schemaContributorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
     ?work bf:contributor ?contributor .
-    ?contributor bf:label ?contributorLabel .
+    ?contributor a ?bfContributorType .
+    ?contributor bf:label ?contributorLabelRaw .
+    BIND(REPLACE(?contributorLabelRaw, '[ \\.]+$', '') AS ?contributorLabel)
   }
   OPTIONAL {
     ?work bf:translationOf ?origwork .
