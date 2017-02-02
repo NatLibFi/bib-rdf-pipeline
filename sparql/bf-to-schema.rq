@@ -22,8 +22,8 @@ CONSTRUCT {
     schema:isbn ?isbn10val, ?isbn13val ;
     schema:datePublished ?providerDate ;
     schema:numberOfPages ?extent ;
-    rdau:P60048 ?rdaCarrierType ;
-    rdau:P60050 ?rdaMediaType ;
+    rdau:P60048 ?carrierCategoryValue ;
+    rdau:P60050 ?mediaCategoryValue ;
     schema:publisher ?publisherOrganization .
   ?publisherOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
@@ -45,7 +45,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
     schema:about ?topicLabel ;
-    rdau:P60049 ?rdaContentType ;
+    rdau:P60049 ?contentCategoryValue ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
@@ -161,39 +161,15 @@ WHERE {
   OPTIONAL {
     ?inst bf:carrierCategory ?carrierCategory .
     ?carrierCategory bf:categoryValue ?carrierCategoryValue .
-    BIND(STRLANG(?carrierCategoryValue, 'fi') AS ?carrierCategoryValueFi)
-    OPTIONAL {
-      GRAPH ?rdaCarrierGraph {
-        ?rdaCarrierType skos:prefLabel ?carrierCategoryValueFi .
-        # make sure it's a genuine RDA Carrier concept, not e.g. YSA concept
-        ?rdaCarrierType skos:inScheme <http://rdaregistry.info/termList/RDACarrierType> .
-      }
-    }
   }
 
   OPTIONAL {
     ?inst bf:mediaCategory ?mediaCategory .
     ?mediaCategory bf:categoryValue ?mediaCategoryValue .
-    BIND(STRLANG(?mediaCategoryValue, 'fi') AS ?mediaCategoryValueFi)
-    OPTIONAL {
-      GRAPH ?rdaMediaGraph {
-        ?rdaMediaType skos:prefLabel ?mediaCategoryValueFi .
-        # make sure it's a genuine RDA Media concept, not e.g. YSA concept
-        ?rdaMediaType skos:inScheme <http://rdaregistry.info/termList/RDAMediaType> .
-      }
-    }
   }
 
   OPTIONAL {
     ?work bf:contentCategory ?contentCategory .
     ?contentCategory bf:categoryValue ?contentCategoryValue .
-    BIND(STRLANG(?contentCategoryValue, 'fi') AS ?contentCategoryValueFi)
-    OPTIONAL {
-      GRAPH ?rdaContentGraph {
-        ?rdaContentType skos:prefLabel ?contentCategoryValueFi .
-        # make sure it's a genuine RDA Content concept, not e.g. YSA concept
-        ?rdaContentType skos:inScheme <http://rdaregistry.info/termList/RDAContentType> .
-      }
-    }
   }
 }

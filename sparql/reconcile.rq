@@ -1,15 +1,19 @@
 PREFIX schema: <http://schema.org/>
 PREFIX lvont: <http://lexvo.org/ontology#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 CONSTRUCT {
   ?s ?p ?o .
   ?s schema:inLanguage ?languageCode .
   ?s schema:about ?subject, ?ysoSubject .
+  ?s rdau:P60048 ?rdaCarrierType .
+  ?s rdau:P60049 ?rdaContentType .
+  ?s rdau:P60050 ?rdaMediaType .
 } WHERE {
   {
     ?s ?p ?o .
-    FILTER(?p NOT IN (schema:inLanguage, schema:about))
+    FILTER(?p NOT IN (schema:inLanguage, schema:about, rdau:P60048, rdau:P60049, rdau:P60050))
   }
   UNION
   {
@@ -43,5 +47,42 @@ CONSTRUCT {
       }
     }
     BIND(IF(BOUND(?ysac), ?ysac, ?topicLabelFi) AS ?subject)
+  }
+  UNION
+  {
+    ?s rdau:P60048 ?carrierCategoryValue .
+    BIND(STRLANG(?carrierCategoryValue, 'fi') AS ?carrierCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaCarrierGraph {
+        ?rdaCarrierType skos:prefLabel ?carrierCategoryValueFi .
+        # make sure it's a genuine RDA Carrier concept, not e.g. YSA concept
+        ?rdaCarrierType skos:inScheme <http://rdaregistry.info/termList/RDACarrierType> .
+      }
+    }
+  }
+  UNION
+  {
+    ?s rdau:P60049 ?contentCategoryValue .
+    BIND(STRLANG(?contentCategoryValue, 'fi') AS ?contentCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaContentGraph {
+        ?rdaContentType skos:prefLabel ?contentCategoryValueFi .
+        # make sure it's a genuine RDA Content concept, not e.g. YSA concept
+        ?rdaContentType skos:inScheme <http://rdaregistry.info/termList/RDAContentType> .
+      }
+    }
+  }
+  UNION
+  {
+    ?s rdau:P60050 ?mediaCategoryValue .
+    BIND(STRLANG(?mediaCategoryValue, 'fi') AS ?mediaCategoryValueFi)
+    OPTIONAL {
+      GRAPH ?rdaMediaGraph {
+        ?rdaMediaType skos:prefLabel ?mediaCategoryValueFi .
+        # make sure it's a genuine RDA Media concept, not e.g. YSA concept
+        ?rdaMediaType skos:inScheme <http://rdaregistry.info/termList/RDAMediaType> .
+      }
+    }
+
   }
 }
