@@ -9,7 +9,7 @@ setup () {
 
 @test "Schema.org RDF: basic conversion" {
   rm -f slices/*-schema.nt
-  make schema
+  make -j2 schema
   [ -s slices/kotona-00097-schema.nt ]
 }
 

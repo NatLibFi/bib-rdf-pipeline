@@ -9,7 +9,7 @@ setup () {
 
 @test "Work keys: basic generation" {
   rm -f slices/kotona-00097-work-keys.nt
-  make work-keys
+  make -j2 work-keys
   [ -s slices/kotona-00097-work-keys.nt ]
 }
 
