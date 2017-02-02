@@ -1,16 +1,6 @@
 PREFIX bf: <http://bibframe.org/vocab/>
 PREFIX schema: <http://schema.org/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
-
-# TODO:
-# - numberOfPages values should be integer
-# - datePublished sometimes has garbage e.g. copyright symbols and brackets e.g. "[1984]"
-# - not everything should be typed schema:Book
-# - add more detailed series types (e.g. BookSeries) when possible
-# - classification codes should be added
-# - publication events could be added
-# - need to decide how to handle authority linking (people, organizations, places)
 
 CONSTRUCT {
   ?inst a schema:Book, schema:CreativeWork ;
@@ -24,8 +14,8 @@ CONSTRUCT {
     schema:numberOfPages ?extent ;
     rdau:P60048 ?carrierCategoryValue ;
     rdau:P60050 ?mediaCategoryValue ;
-    schema:publisher ?publisherOrganization .
-  ?publisherOrganization a schema:Organization ;
+    schema:publisher ?providerOrganization .
+  ?providerOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
   ?creator a schema:Person ;
     schema:name ?creatorLabel .
@@ -97,12 +87,6 @@ WHERE {
     OPTIONAL {
       ?provider bf:providerName ?providerOrganization .
       ?providerOrganization bf:label ?providerOrganizationLabel .
-      OPTIONAL {
-        GRAPH ?cnGraph {
-          ?cnOrganization skos:prefLabel ?providerOrganizationLabel .
-        }
-      }
-      BIND(COALESCE(?cnOrganization,?providerOrganization) AS ?publisherOrganization)
     }
   }
   OPTIONAL {

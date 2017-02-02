@@ -10,10 +10,14 @@ CONSTRUCT {
   ?s rdau:P60048 ?rdaCarrierType .
   ?s rdau:P60049 ?rdaContentType .
   ?s rdau:P60050 ?rdaMediaType .
+  ?s ?p ?organization .
+  ?organization schema:name ?orgName .
 } WHERE {
   {
     ?s ?p ?o .
     FILTER(?p NOT IN (schema:inLanguage, schema:about, rdau:P60048, rdau:P60049, rdau:P60050))
+    FILTER NOT EXISTS { ?o a schema:Organization }
+    FILTER NOT EXISTS { ?s a schema:Organization }
   }
   UNION
   {
@@ -84,5 +88,17 @@ CONSTRUCT {
       }
     }
 
+  }
+  UNION
+  {
+    ?s ?p ?org .
+    ?org a schema:Organization .
+    ?org schema:name ?orgName .
+    OPTIONAL {
+      GRAPH ?cnGraph {
+        ?cnOrganization skos:prefLabel ?orgName .
+      }
+    }
+    BIND(COALESCE(?cnOrganization,?org) AS ?organization)
   }
 }

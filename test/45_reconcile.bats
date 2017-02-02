@@ -55,8 +55,10 @@ setup () {
   make slices/ekumeeninen-00585-reconciled.nt
   # "Suomen ekumeeninen neuvosto" -> cn:26756A
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:26756A>' slices/ekumeeninen-00585-reconciled.nt
+  # check that no blank nodes remain
+  ! grep -q -F '<http://schema.org/publisher> _:' slices/ekumeeninen-00585-reconciled.nt
+  ! grep -q '^_:' slices/ekumeeninen-00585-reconciled.nt
 }
-
 
 @test "Reconcile: expressing RDA carrier type" {
   make slices/kotona-00720-reconciled.nt
