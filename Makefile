@@ -51,7 +51,7 @@ refdata/RDAMediaType.nt:
 	curl -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
 
 %-preprocessed.alephseq: %-in.alephseq
-	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py >$@
+	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py >$@
 
 %.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv
 	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix <$< >$@
@@ -126,9 +126,9 @@ schema: $(patsubst %-in.alephseq,%-schema.nt,$(wildcard slices/*-in.alephseq))
 
 reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.alephseq))
 
-merge: $(patsubst input/%-in.alephseq,merged/%-merged.hdt,$(wildcard input/*-in.alephseq))
+merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
 
-consolidate: $(patsubst input/%-in.alephseq,output/%.hdt,$(wildcard input/*-in.alephseq))
+consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
 
 .PHONY: all realclean clean slice preprocess mrcx rdf nt work-keys schema merge consolidate
 .DEFAULT_GOAL := all
