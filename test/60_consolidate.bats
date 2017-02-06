@@ -10,7 +10,7 @@ setup () {
 @test "Consolidate works: basic consolidation" {
   rm -f output/hawking.nt
   rm -f output/hawking.hdt
-  make consolidate
+  make -j2 consolidate
   [ -s output/hawking.nt ]
   [ -s output/hawking.hdt ]
 }

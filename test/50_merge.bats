@@ -9,7 +9,7 @@ setup () {
 
 @test "Merge works: basic merging" {
   rm -f merged/hawking-merged.hdt
-  make merge
+  make -j2 merge
   [ -s merged/hawking-merged.hdt ]
 }
 
