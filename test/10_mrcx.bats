@@ -19,17 +19,6 @@ setup () {
   [ "$status" -eq 1 ]
 }
 
-@test "MARCXML: contains YSA subject" {
-  make slices/ajanlyhythistoria-00009.mrcx
-  grep -q maailmankaikkeus slices/ajanlyhythistoria-00009.mrcx
-}
-
-@test "MARCXML: drops subject without KEEP tag" {
-  make slices/ajanlyhythistoria-00009.mrcx
-  run grep -q kosmologia slices/ajanlyhythistoria-00009.mrcx
-  [ "$status" -eq 1 ]
-}
-
 @test "MARCXML: adds missing 240\$a from 500 note" {
   make slices/origwork-00004.mrcx
   xmllint --format slices/origwork-00004.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a">DAYLIGHT MUST COME'

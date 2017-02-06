@@ -21,7 +21,7 @@ JVMARGS="-Xmx2G"
 
 split-input/%.md5: input/%.alephseq
 	scripts/split-input.sh $(patsubst %.md5,%,$@) <$^
-	cd split-input; md5sum $(patsubst split-input/%.md5,%,$@)-*.alephseq >`basename $@`
+	cd split-input; md5sum $(patsubst split-input/%.md5,%,$@)-*-in.alephseq >`basename $@`
 
 %.md5: %
 	md5sum $^ >$@
@@ -50,8 +50,11 @@ refdata/RDAContentType.nt:
 refdata/RDAMediaType.nt:
 	curl -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
 
-%.mrcx: %.alephseq refdata/iso639-2-fi.csv
-	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix >$@
+%-preprocessed.alephseq: %-in.alephseq
+	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC | scripts/filter-fennica-repl.py >$@
+
+%.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv
+	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix <$< >$@
 
 %-bf.rdf: %.mrcx
 	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
@@ -69,7 +72,7 @@ refdata/RDAMediaType.nt:
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
 .SECONDEXPANSION:
-refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-work-keys.nt/')
+refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-work-keys.nt/')
 	$(RIOT) $^ >$@
 
 %-work-transformations.nt: %-work-keys.nt
@@ -78,7 +81,7 @@ refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.ale
 slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge-works.rq --out=NT >$@
 
-merged/%-merged.nt: $$(shell ls slices/$$(*)-?????.alephseq | sed -e 's/.alephseq/-merged.nt/')
+merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged.nt/')
 	$(RIOT) $^ >$@
 
 %.hdt: %.nt
@@ -101,6 +104,7 @@ realclean: clean
 
 clean:
 	rm -f refdata/*-work-keys.nt refdata/*-work-transformations.nt
+	rm -f slices/*-preprocessed.alephseq
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf slices/*.xml
 	rm -f slices/*.nt slices/*.log
@@ -108,23 +112,25 @@ clean:
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
-mrcx: $(patsubst %.alephseq,%.mrcx,$(wildcard slices/*.alephseq))
+preprocess: $(patsubst %-in.alephseq,%-preprocessed.alephseq,$(wildcard slices/*-in.alephseq))
 
-rdf: $(patsubst %.alephseq,%-bf.rdf,$(wildcard slices/*.alephseq))
+mrcx: $(patsubst %-in.alephseq,%.mrcx,$(wildcard slices/*-in.alephseq))
 
-nt: $(patsubst %.alephseq,%-bf.nt,$(wildcard slices/*.alephseq))
+rdf: $(patsubst %-in.alephseq,%-bf.rdf,$(wildcard slices/*-in.alephseq))
 
-work-keys: $(patsubst %.alephseq,%-work-keys.nt,$(wildcard slices/*.alephseq))
+nt: $(patsubst %-in.alephseq,%-bf.nt,$(wildcard slices/*-in.alephseq))
 
-schema: $(patsubst %.alephseq,%-schema.nt,$(wildcard slices/*.alephseq))
+work-keys: $(patsubst %-in.alephseq,%-work-keys.nt,$(wildcard slices/*-in.alephseq))
 
-reconcile: $(patsubst %.alephseq,%-reconciled.nt,$(wildcard slices/*.alephseq))
+schema: $(patsubst %-in.alephseq,%-schema.nt,$(wildcard slices/*-in.alephseq))
 
-merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
+reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.alephseq))
 
-consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
+merge: $(patsubst input/%-in.alephseq,merged/%-merged.hdt,$(wildcard input/*-in.alephseq))
 
-.PHONY: all realclean clean slice mrcx rdf nt work-keys schema merge consolidate
+consolidate: $(patsubst input/%-in.alephseq,output/%.hdt,$(wildcard input/*-in.alephseq))
+
+.PHONY: all realclean clean slice preprocess mrcx rdf nt work-keys schema merge consolidate
 .DEFAULT_GOAL := all
 
 # retain all intermediate files
