@@ -1,0 +1,27 @@
+000347423 FMT   L BK
+000347423 LDR   L 00000cam^a2200481^i^4500
+000347423 001   L 000347423
+000347423 005   L 20170119120043.0
+000347423 008   L 030506s1877^^^^sw^||||^^^^^^^|0|^ddswe|^
+000347423 015   L $$af20030884$$2skl
+000347423 035   L $$a(FI-MELINDA)000347423
+000347423 040   L $$aFI-NL$$bfin$$erda
+000347423 0410  L $$aswe
+000347423 042   L $$afinb
+000347423 080   L $$a839.7$$x-2$$9FENNI<KEEP>
+000347423 1001  L $$aChronander, Jacob Pettersson,$$dsyntynyt ehkä 1620-luvulla, kuollut 1694,$$ekirjoittaja.
+000347423 24510 L $$aTvenne komedier /$$caf Jacobus Petri Chronander ; ånyo utgifna af P. Hanselli.
+000347423 264 1 L $$a[Upsala] :$$b[P. Hanselli],$$c[1877]
+000347423 264 3 L $$aUpsala :$$bP. Hanselli,$$c1877.
+000347423 300   L $$aIV, 200 sivua ;$$c8:o
+000347423 336   L $$ateksti$$btxt$$2rdacontent
+000347423 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000347423 338   L $$anide$$bnc$$2rdacarrier
+000347423 500   L $$aEripainos: Samlade vitterhetsarbeten af svenska författare från Stjernhjelm till Dalin. Del 21. 1876.$$9FENNI<KEEP>
+000347423 50500 L $$tSurge eller Flijt- och oflijlighetz skode-spegel$$gsivut 1-91.$$tBele-snack eller Een ny comœdia$$gsivut 93-200.$$9FENNI<KEEP>
+000347423 650 7 L $$aruotsinkielinen kirjallisuus$$xnäytelmät$$y1870-luku$$2ysa
+000347423 655 7 L $$anäytelmät$$2ysa$$9FENNI<KEEP>
+000347423 70012 L $$iSisältää (teos):$$aChronander, Jacob Pettersson,$$dsyntynyt ehkä 1620-luvulla, kuollut 1694,$$ekirjoittaja.$$tSurge.
+000347423 70012 L $$iSisältää (teos):$$aChronander, Jacob Pettersson,$$dsyntynyt ehkä 1620-luvulla, kuollut 1694,$$ekirjoittaja.$$tBele-snack.
+000347423 7001  L $$aHanselli, Per,$$eesipuheen kirjoittaja.
+000347423 960   L $$aKirjahistoria$$9FENNI<KEEP>

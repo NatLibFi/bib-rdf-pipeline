@@ -1,0 +1,28 @@
+# Rules for stripping personal information (birth and death years) from MARC
+# bibliographic records
+
+do marc_each()
+    marc_map('100d', years)
+    parse_text(years, '(\d+)-(\d*)')
+    if greater_than(years.0, 1870)
+	if all_match(years.1, '\d+')
+            if greater_than(years.1, 1990)
+                marc_remove('100d')
+            end
+        else
+            marc_remove('100d')
+        end
+    end
+
+    marc_map('700d', years)
+    parse_text(years, '(\d+)-(\d*)')
+    if greater_than(years.0, 1870)
+	if all_match(years.1, '\d+')
+            if greater_than(years.1, 1990)
+                marc_remove('700d')
+            end
+        else
+            marc_remove('700d')
+        end
+    end
+end

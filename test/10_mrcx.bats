@@ -61,3 +61,37 @@ setup () {
   make slices/kotona-00720.mrcx
   ! xmllint --format slices/kotona-00720.mrcx | grep -A 4 'tag="337"' | grep 'marc:subfield code="2"'
 }
+
+@test "MARCXML: removes birth/death years from living people" {
+  make slices/kotona-00508.mrcx
+  ! xmllint --format slices/kotona-00508.mrcx | grep -A 1 'Valtaoja, Esko' | grep 'marc:subfield code="d"'
+  make slices/origwork-00041.mrcx
+  ! xmllint --format slices/origwork-00041.mrcx | grep -A 1 'Tanskanen, Raimo' | grep 'marc:subfield code="d"'
+}
+
+@test "MARCXML: removes birth/death years from recently dead people" {
+  make slices/kollaakestaa-00003.mrcx
+  ! xmllint --format slices/kollaakestaa-00003.mrcx | grep -A 1 'Palolampi, Erkki' | grep 'marc:subfield code="d"'
+}
+
+@test "MARCXML: removes birth/death years from people who still could be living or recently dead" {
+  make slices/kotkankasvisto-00641.mrcx
+  ! xmllint --format slices/kotkankasvisto-00641.mrcx | grep -A 1 'Laitinen, Johannes' | grep 'marc:subfield code="d"'
+}
+
+@test "MARCXML: keeps birth/death years for long dead people" {
+  make slices/fanrik-manninen-00094.mrcx
+  xmllint --format slices/fanrik-manninen-00094.mrcx | grep -A 1 'Runeberg, Johan Ludvig' | grep -q 'marc:subfield code="d"'
+  xmllint --format slices/fanrik-manninen-00094.mrcx | grep -A 1 'Edelfelt, Albert' | grep -q 'marc:subfield code="d"'
+  xmllint --format slices/fanrik-manninen-00094.mrcx | grep -A 1 'Manninen, Otto' | grep -q 'marc:subfield code="d"'
+}
+
+@test "MARCXML: keeps birth/death years for long dead people, even if death year is unknown" {
+  make slices/punataudista-00084.mrcx
+  xmllint --format slices/punataudista-00084.mrcx | grep -A 1 'Laitinen, Johannes' | grep -q 'marc:subfield code="d"'
+}
+
+@test "MARCXML: keeps birth/death years for long dead people, even if information is uncertain" {
+  make slices/tvennekomedier-00034.mrcx
+  xmllint --format slices/tvennekomedier-00034.mrcx | grep -A 1 'Chronander, Jacob Pettersson' | grep -q 'marc:subfield code="d"'
+}

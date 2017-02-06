@@ -1,0 +1,32 @@
+000035090 FMT   L BK
+000035090 LDR   L ^^^^^cam^a2200697zi^4500
+000035090 001   L 000035090
+000035090 005   L 20170119054059.0
+000035090 008   L 810317s1980^^^^fi^|||||||||||||||||fin||
+000035090 015   L $$afx37323$$2skl
+000035090 020   L $$a951-0-10088-9$$qsidottu
+000035090 035   L $$a(FI-MELINDA)000035090
+000035090 040   L $$aFI-NL
+000035090 0410  L $$afin
+000035090 042   L $$afinb
+000035090 080   L $$a92
+000035090 080   L $$a355/359$$9FENNI<KEEP>
+000035090 080   L $$a929$$9FENNI<KEEP>
+000035090 080   L $$a948.0.08$$9FENNI<KEEP>
+000035090 084   L $$a92.73$$2ykl
+000035090 1001  L $$aPalolampi, Erkki,$$d1908-1991.
+000035090 24510 L $$aKollaa kestää /$$cErkki Palolampi.
+000035090 250   L $$a10. p., [101. tuhat].
+000035090 260   L $$aPorvoo ;$$aHki ;$$aJuva :$$bWSOY,$$c1980$$e(Porvoo)
+000035090 300   L $$a285, [2] s. :$$bkuvitettu, karttoja ;$$c22 cm
+000035090 336   L $$ateksti$$btxt$$2rdacontent
+000035090 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000035090 338   L $$anide$$bnc$$2rdacarrier
+000035090 500   L $$a9. p. 1962.$$9FENNI<KEEP>
+000035090 5050  L $$aLiitteenä sotahistoriallinen katsaus: Kollaan rintama - talvisodan pienoiskuva / kirj. K. J. Mikola$$9FENNI<KEEP>
+000035090 500   L $$aKielletyt kirjat
+000035090 650 7 L $$atalvisota$$xtaistelut$$zKollaanjoki$$2ysa
+000035090 650 7 L $$asotahistoria$$xtalvisota$$zSuomi$$y1939-1940$$2ysa
+000035090 650 7 L $$ataistelut$$xKollaa$$2ysa
+000035090 7001  L $$aMikola, Keijo Johannes.
+000035090 7001  L $$aMikola, Keijo,$$d1909-2001.$$tKollaan rintama - talvisodan pienoiskuva.
