@@ -45,6 +45,13 @@ setup () {
   ! grep -q -F '<http://schema.org/name> "jakelija: BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
 }
 
+@test "Schema.org RDF: strip 'jakaja' suffix from organization name" {
+  make slices/jakaja-00005-schema.nt
+  grep -q -F '<http://schema.org/name> "Valtion painatuskeskus"' slices/jakaja-00005-schema.nt
+  ! grep -q -F '<http://schema.org/name> "Valtion painatuskeskus, jakaja"' slices/jakaja-00005-schema.nt
+  ! grep -q -F '<http://schema.org/name> "Valtion painatuskeskus jakaja"' slices/jakaja-00005-schema.nt
+}
+
 @test "Schema.org RDF: modelling organization authors as schema:Organization" {
   make slices/jakaja-00005-schema.nt
   # find out the URI of the org-author
