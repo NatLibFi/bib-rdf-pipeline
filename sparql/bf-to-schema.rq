@@ -89,7 +89,7 @@ WHERE {
     OPTIONAL {
       ?provider bf:providerName ?providerOrganization .
       ?providerOrganization bf:label ?providerOrganizationLabelRaw .
-      BIND(REPLACE(?providerOrganizationLabelRaw, '[ \\.]+$', '') AS ?providerOrganizationLabel)
+      BIND(REPLACE(?providerOrganizationLabelRaw, '^(jakelija:)? *(.*?)[ \\.]*$', '$2') AS ?providerOrganizationLabel)
     }
   }
   OPTIONAL {

@@ -39,6 +39,12 @@ setup () {
   ! grep -q -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
 }
 
+@test "Schema.org RDF: strip 'jakelija:' prefix from organization name" {
+  make slices/superkumikana-cd-00611-schema.nt
+  grep -q -F '<http://schema.org/name> "BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
+  ! grep -q -F '<http://schema.org/name> "jakelija: BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
+}
+
 @test "Schema.org RDF: modelling organization authors as schema:Organization" {
   make slices/jakaja-00005-schema.nt
   # find out the URI of the org-author

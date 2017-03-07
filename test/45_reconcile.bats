@@ -8,9 +8,9 @@ setup () {
 }
 
 @test "Reconcile: basic reconciliation" {
-#  rm -f slices/*-reconciled.nt
-#  make -j2 reconcile
-#  [ -s slices/kotona-00097-reconciled.nt ]
+  rm -f slices/*-reconciled.nt
+  make -j2 reconcile
+  [ -s slices/kotona-00097-reconciled.nt ]
 }
 
 @test "Reconcile: converting language codes to ISO 639-1" {
