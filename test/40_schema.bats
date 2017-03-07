@@ -9,8 +9,8 @@ setup () {
 
 @test "Schema.org RDF: basic conversion" {
   rm -f slices/*-schema.nt
-#  make -j2 schema
-#  [ -s slices/kotona-00097-schema.nt ]
+  make -j2 schema
+  [ -s slices/kotona-00097-schema.nt ]
 }
 
 @test "Schema.org RDF: quoting bad URLs" {
@@ -44,8 +44,8 @@ setup () {
   # find out the URI of the org-author
   uri="$(grep '<http://schema.org/name> \"Perustuslakien valtiontaloussäännösten uudistamiskomitea\"' slices/jakaja-00005-schema.nt | cut -d ' ' -f 1)"
   # make sure it is set to something
-  [ -n $uri ]
-  # check that it's and Organization
+  [ -n "$uri" ]
+  # check that it's an Organization
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
   # double-check that it's not a Person
   ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
@@ -56,11 +56,31 @@ setup () {
   # find out the URI of the org-contributor
   uri="$(grep '<http://schema.org/name> \"Lappeenrannan teknillinen korkeakoulu. Energiatekniikan osasto\"' slices/jakaja-00005-schema.nt | cut -d ' ' -f 1)"
   # make sure it is set to something
-  [ -n $uri ]
-  # check that it's and Organization
+  [ -n "$uri" ]
+  # check that it's an Organization
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
   # double-check that it's not a Person
   ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+}
+
+@test "Schema.org RDF: modelling organization subjects as schema:Organization" {
+  make slices/etyk-00012-schema.nt
+  # find out the URI of the org-subject
+  uri="$(grep '<http://schema.org/name> \"Euroopan turvallisuus- ja yhteistyöjärjestö\"' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  # make sure it is set to something
+  [ -n "$uri" ]
+  # check that it's an Organization
+  grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/etyk-00012-schema.nt
+}
+
+@test "Schema.org RDF: modelling meeting subjects as schema:Organization" {
+  make slices/etyk-00012-schema.nt
+  # find out the URI of the org-subject
+  uri="$(grep '<http://schema.org/name> \"Euroopan turvallisuus- ja yhteistyökonferenssi\"' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  # make sure it is set to something
+  [ -n "$uri" ]
+  # check that it's an Organization
+  grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/etyk-00012-schema.nt
 }
 
 @test "Schema.org RDF: including instance subtitle as part of name" {

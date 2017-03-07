@@ -34,7 +34,7 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
-    schema:about ?topicLabel ;
+    schema:about ?topicLabel, ?subjectOrg ;
     rdau:P60049 ?contentCategoryValue ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
@@ -48,6 +48,8 @@ CONSTRUCT {
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
+  ?subjectOrg a schema:Organization ;
+    schema:name ?subjectOrgName .
 }
 WHERE {
   ?inst bf:instanceOf ?work .
@@ -145,8 +147,20 @@ WHERE {
   }
 
   OPTIONAL {
+    # Topic as subject
     ?work bf:subject ?topic .
+    ?topic a bf:Topic .
     ?topic bf:authorizedAccessPoint ?topicLabel .
+  }
+
+  OPTIONAL {
+    # Organization or Meeting as subject
+    ?work bf:subject ?subjectOrg .
+    ?subjectOrg bf:authorizedAccessPoint ?subjectOrgNameRaw .
+    BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
+    {
+      { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
+    }
   }
 
   OPTIONAL {
