@@ -18,9 +18,9 @@ before_install:
   - echo 'eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`' >> ~/.profile
   - cpanm Catmandu Catmandu::MARC
   # Apache Jena dependency
-  - wget https://repository.apache.org/content/repositories/releases/org/apache/jena/apache-jena/3.2.0/apache-jena-3.2.0.tar.gz -O /tmp/apache-jena-3.2.0.tar.gz
-  - tar -xzf /tmp/apache-jena-3.2.0.tar.gz
-  - export PATH=$PATH:$PWD/apache-jena-3.2.0/bin/
+  - wget https://repository.apache.org/content/repositories/releases/org/apache/jena/apache-jena/3.1.1/apache-jena-3.1.1.tar.gz -O /tmp/apache-jena-3.1.1.tar.gz
+  - tar -xzf /tmp/apache-jena-3.1.1.tar.gz
+  - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
   # marc2bibframe dependency
   - git clone --depth 1 https://github.com/lcnetdev/marc2bibframe.git ../marc2bibframe
   # marc2bibframe-wrapper dependency
