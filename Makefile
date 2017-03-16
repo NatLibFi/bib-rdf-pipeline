@@ -1,8 +1,8 @@
 # Paths to non-unix-standard tools that we depend on; can be overridden on the command line
 
 CATMANDU=catmandu
-MARC2BIBFRAME=$(PATH_PREFIX)../marc2bibframe
-MARC2BIBFRAMEWRAPPER=$(PATH_PREFIX)../marc2bibframe-wrapper/target/marc2bibframe-wrapper-*.jar
+MARC2BIBFRAME2=$(PATH_PREFIX)../marc2bibframe2
+XSLTPROC=xsltproc
 RAPPER=rapper
 RSPARQL=rsparql
 RIOT=riot
@@ -56,10 +56,10 @@ refdata/RDAMediaType.nt:
 %.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv
 	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix <$< >$@
 
-%-bf.rdf: %.mrcx
-	java -jar $(MARC2BIBFRAMEWRAPPER) $(MARC2BIBFRAME) $^ $(URIBASEFENNICA) 2>$(patsubst %.rdf,%-log.xml,$@) | sed -e 's/<rdf:resource rdf:resource=/<bf:uri rdf:resource=/' >$@
+%-bf2.rdf: %.mrcx
+	$(XSLTPROC) --stringparam baseuri $(URIBASEFENNICA) $(MARC2BIBFRAME2)/xsl/marc2bibframe2.xsl $^ >$@
 
-%-schema.nt: %-bf.rdf 
+%-schema.nt: %-bf2.rdf
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 
 %-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt refdata/cn-labels.nt
@@ -68,7 +68,7 @@ refdata/RDAMediaType.nt:
 %.nt: %.rdf
 	rapper $^ -q >$@
 
-%-work-keys.nt: %-bf.rdf
+%-work-keys.nt: %-bf2.rdf
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
 .SECONDEXPANSION:
@@ -106,7 +106,7 @@ clean:
 	rm -f refdata/*-work-keys.nt refdata/*-work-transformations.nt
 	rm -f slices/*-preprocessed.alephseq
 	rm -f slices/*.mrcx
-	rm -f slices/*.rdf slices/*.xml
+	rm -f slices/*.rdf
 	rm -f slices/*.nt slices/*.log
 	rm -f merged/*.nt
 
@@ -116,9 +116,9 @@ preprocess: $(patsubst %-in.alephseq,%-preprocessed.alephseq,$(wildcard slices/*
 
 mrcx: $(patsubst %-in.alephseq,%.mrcx,$(wildcard slices/*-in.alephseq))
 
-rdf: $(patsubst %-in.alephseq,%-bf.rdf,$(wildcard slices/*-in.alephseq))
+rdf: $(patsubst %-in.alephseq,%-bf2.rdf,$(wildcard slices/*-in.alephseq))
 
-nt: $(patsubst %-in.alephseq,%-bf.nt,$(wildcard slices/*-in.alephseq))
+nt: $(patsubst %-in.alephseq,%-bf2.nt,$(wildcard slices/*-in.alephseq))
 
 work-keys: $(patsubst %-in.alephseq,%-work-keys.nt,$(wildcard slices/*-in.alephseq))
 

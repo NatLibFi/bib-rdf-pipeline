@@ -8,12 +8,7 @@ setup () {
 }
 
 @test "BIBFRAME RDF: basic conversion" {
-  rm -f slices/kotona-00097-bf.rdf
+  rm -f slices/kotona-00097-bf2.rdf
   make -j2 rdf
-  [ -s slices/kotona-00097-bf.rdf ]
-}
-
-@test "BIBFRAME RDF: don't use rdf:resource as property" {
-  make slices/part-uri-00683-bf.rdf
-  ! grep -q -F '<rdf:resource' slices/part-uri-00683-bf.rdf
+  [ -s slices/kotona-00097-bf2.rdf ]
 }
