@@ -1,5 +1,6 @@
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bf: <http://bibframe.org/vocab/>
+PREFIX bf: <http://id.loc.gov/ontologies/bibframe/>
+PREFIX bflc: <http://id.loc.gov/ontologies/bflc/>
 PREFIX madsrdf: <http://www.loc.gov/mads/rdf/v1#>
 PREFIX dct: <http://purl.org/dc/terms/>
 
@@ -10,9 +11,9 @@ CONSTRUCT {
   # main case, where we have both author and title
   {
     ?w a bf:Work .
-    # use authoritativeLabel if available (expressions)
+
     OPTIONAL {
-      ?w madsrdf:authoritativeLabel ?title .
+      ?w bf:title/bf:mainTitle ?title .
       BIND(?title AS ?fulltitle)
       
       # also try to add the translated title as an extra key, for the benefit of other
@@ -32,7 +33,10 @@ CONSTRUCT {
       OPTIONAL { ?title bf:partTitle ?partTitle }
       BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
     }
-    ?w bf:creator/bf:label ?creator
+    
+    ?w bf:contribution ?contribution .
+    ?contribution a bflc:PrimaryContribution .
+    ?contribution bf:agent/rdfs:label ?creator .
     BIND(REPLACE(LCASE(?creator), '\\.|,? \\d+-\\d*', '') AS ?creatorkey)
     BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?key)
     BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?extrakey)
@@ -41,8 +45,13 @@ CONSTRUCT {
   # uniform title case (130)
   {
     ?w a bf:Work .
-    ?w madsrdf:authoritativeLabel ?title .
-    FILTER NOT EXISTS { ?w bf:creator [] }
+    ?w bf:hasInstance [] . # not a series
+    ?w bf:title/bf:mainTitle ?title .
+    FILTER NOT EXISTS {
+       # has no primary contributor
+       ?w bf:contribution ?contribution . 
+       ?contribution a bflc:PrimaryContribution .
+    }
     BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
   }
   UNION
