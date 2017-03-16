@@ -16,6 +16,8 @@ setup () {
 @test "Work keys: not a translation case" {
   make slices/etyk-00012-work-keys.nt
   grep -q -F '<http://purl.org/dc/terms/identifier> "etykin konfliktinesto ja kriisinhallinta/soininen, mika"' slices/etyk-00012-work-keys.nt
+  ! grep -q -F '<http://purl.org/dc/terms/identifier> "etykin konfliktinesto ja kriisinhallinta"' slices/etyk-00012-work-keys.nt
+  ! grep -q -F '<http://purl.org/dc/terms/identifier> "julkaisusarja maanpuolustuskorkeakoulu strategian laitos"' slices/etyk-00012-work-keys.nt
 }
 
 @test "Work keys: translation case" {
