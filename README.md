@@ -12,7 +12,7 @@ The steps of the conversion are:
 2. Split the file into smaller batches
 3. Preprocess using unix tools such as grep and sed, to remove some local peculiarities
 4. Convert to MARCXML and enrich the MARC records, using Catmandu
-5. Run the Library of Congress marc2bibframe XQuery conversion from MARC to BIBFRAME RDF, using marc2bibframe-wrapper
+5. Run the Library of Congress marc2bibframe2 XQuery conversion from MARC to BIBFRAME RDF
 6. Calculate work keys (e.g. author+title combination) used later for merging data about the same creative work
 7. Convert the BIBFRAME data into Schema.org RDF in N-Triples format
 8. Merge the Schema.org data about the same works
@@ -31,7 +31,7 @@ Command line tools are assumed to be available in `$PATH`, but the paths can be 
 * [Apache Jena](http://jena.apache.org/) command line utilities `sparql` and `rsparql`
 * [Catmandu](http://librecat.org/Catmandu/) utility `catmandu`
 * `uconv` utility from Ubuntu package `icu-devtools`
-* [marc2bibframe-wrapper](https://github.com/NatLibFi/marc2bibframe-wrapper) and [marc2bibframe](https://github.com/lcnetdev/marc2bibframe)
+* `xsltproc` utility from Ubuntu package `xsltproc`
 * [hdt-cpp](https://github.com/rdfhdt/hdt-cpp) command line utilities `rdf2hdt` and `hdtSearch`
 * [hdt-java](https://github.com/rdfhdt/hdt-java) command line utility `hdtsparql.sh`
 
