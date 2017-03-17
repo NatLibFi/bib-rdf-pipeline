@@ -63,6 +63,13 @@ setup () {
   ! xmllint --format slices/origwork-00041.mrcx | grep -A 1 'Tanskanen, Raimo' | grep 'marc:subfield code="d"'
 }
 
+@test "MARCXML: removes trailing punctuation from names of people with removed birth/death years" {
+  make slices/kotona-00508.mrcx
+  ! xmllint --format slices/kotona-00508.mrcx | grep 'Valtaoja, Esko,'
+  make slices/origwork-00041.mrcx
+  ! xmllint --format slices/origwork-00041.mrcx | grep 'Tanskanen, Raimo,'
+}
+
 @test "MARCXML: removes birth/death years from recently dead people" {
   make slices/kollaakestaa-00003.mrcx
   ! xmllint --format slices/kollaakestaa-00003.mrcx | grep -A 1 'Palolampi, Erkki' | grep 'marc:subfield code="d"'
