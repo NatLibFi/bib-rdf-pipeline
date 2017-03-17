@@ -30,7 +30,7 @@ CONSTRUCT {
 #      OPTIONAL { ?title bf:subtitle ?subtitle }
 #      OPTIONAL { ?title bf:partNumber ?partNumber }
 #      OPTIONAL { ?title bf:partTitle ?partTitle }
-#      BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
+#      BIND(CONCAT(?titleValue, ' ', COALESCE(?subtitle, ''), ' ', COALESCE(?partNumber, ''), ' ', COALESCE(?partTitle, '')) AS ?fulltitle)
 #    }
     
     ?w ^bf:translationOf?/bf:contribution ?contribution .
@@ -65,7 +65,7 @@ CONSTRUCT {
     OPTIONAL { ?title bf:subtitle ?subtitle }
     OPTIONAL { ?title bf:partNumber ?partNumber }
     OPTIONAL { ?title bf:partTitle ?partTitle }
-    BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
+    BIND(CONCAT(?titleValue, ' ', COALESCE(?subtitle, ''), ' ', COALESCE(?partNumber, ''), ' ', COALESCE(?partTitle, '')) AS ?fulltitle)
     ?w ?role ?contributor .
     { ?contributor a bf:Person } UNION { ?contributor a bf:Organization }
     FILTER (?role != bf:subject)
