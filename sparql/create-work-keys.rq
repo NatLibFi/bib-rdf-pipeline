@@ -12,29 +12,28 @@ CONSTRUCT {
   {
     ?w a bf:Work .
 
-    OPTIONAL {
-      ?w bf:title/bf:mainTitle ?title .
-      BIND(?title AS ?fulltitle)
-      
-      # also try to add the translated title as an extra key, for the benefit of other
-      # expression records which lack 240 information about the original work
-      OPTIONAL {
-        ?inst bf:instanceOf ?w .
-        ?inst bf:titleStatement ?translatedTitle .
-      }
-    }
-    # otherwise fall back on workTitle
-    OPTIONAL {
-      ?w bf:workTitle ?title .
-      ?title bf:titleValue ?titleValue .
-    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
-      OPTIONAL { ?title bf:subtitle ?subtitle }
-      OPTIONAL { ?title bf:partNumber ?partNumber }
-      OPTIONAL { ?title bf:partTitle ?partTitle }
-      BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
-    }
+    ?w bf:title/rdfs:label ?title .
+    BIND(?title AS ?fulltitle)
     
-    ?w bf:contribution ?contribution .
+    # also try to add the translated title as an extra key, for the benefit of other
+    # expression records which lack 240 information about the original work
+    OPTIONAL {
+      ?inst bf:instanceOf ?w .
+      ?inst rdfs:label ?translatedTitle .
+    }
+
+#    # otherwise fall back on workTitle
+#    OPTIONAL {
+#      ?w bf:workTitle ?title .
+#      ?title bf:titleValue ?titleValue .
+#    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
+#      OPTIONAL { ?title bf:subtitle ?subtitle }
+#      OPTIONAL { ?title bf:partNumber ?partNumber }
+#      OPTIONAL { ?title bf:partTitle ?partTitle }
+#      BIND(CONCAT(?titleValue, COALESCE(?subtitle, ''), COALESCE(?partNumber, ''), COALESCE(?partTitle, '')) AS ?fulltitle)
+#    }
+    
+    ?w ^bf:translationOf?/bf:contribution ?contribution .
     ?contribution a bflc:PrimaryContribution .
     ?contribution bf:agent/rdfs:label ?creator .
     BIND(REPLACE(LCASE(?creator), '\\.|,? \\d+-\\d*', '') AS ?creatorkey)
