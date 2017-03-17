@@ -45,7 +45,7 @@ setup () {
   [ "$count" -eq 1 ]
 }
 
-@test "Work keys: multiple authors case" {
+@test "Work keys: no main author case" {
   make slices/part-uri-00683-work-keys.nt
   grep -q -F '<http://purl.org/dc/terms/identifier> "viemäreiden sisäpuoliset saneerausmenetelmät renovation of drains and sewers with nodig methods/muoviteollisuus (yhdistys)"' slices/part-uri-00683-work-keys.nt
   grep -q -F '<http://purl.org/dc/terms/identifier> "viemäreiden sisäpuoliset saneerausmenetelmät renovation of drains and sewers with nodig methods/suomen standardisoimisliitto"' slices/part-uri-00683-work-keys.nt
@@ -64,6 +64,38 @@ setup () {
   count="$(wc -l <slices/origwork-00041-work-keys.nt)"
   echo $count
   [ "$count" -eq 1 ]
+}
+
+@test "Work keys: parallel title case" {
+  make slices/jakaja-00005-work-keys.nt
+  # parallel titles should not be used as work keys
+  ! grep -q -F '<http://purl.org/dc/terms/identifier> "grundlagarna och statshushållningen kommittén för revision av grundlagarnas stadganden om statshushållning' slices/jakaja-00005-work-keys.nt
+}
+
+@test "Work keys: subtitle case" {
+  make slices/ajanlyhythistoria-00009-work-keys.nt
+  # subtitle should be part of work key
+  grep -q -F '<http://purl.org/dc/terms/identifier> "ajan lyhyt historia alkuräjähdyksestä mustiin aukkoihin/hawking, stephen"' slices/ajanlyhythistoria-00009-work-keys.nt
+  # title without subtitle should not be used for work keys
+  ! grep -q -F '<http://purl.org/dc/terms/identifier> "ajan lyhyt historia/hawking, stephen"' slices/ajanlyhythistoria-00009-work-keys.nt
+}
+
+@test "Work keys: part number case" {
+  make slices/titlepart-00077-work-keys.nt
+  # part number should be part of work key
+  grep -q -F '<http://purl.org/dc/terms/identifier> "kootut lastut 1/aho, juhani"' slices/titlepart-00077-work-keys.nt
+}
+
+@test "Work keys: part title case" {
+  make slices/titlepart-00077-work-keys.nt
+  # part title should be part of work key
+  grep -q -F '<http://purl.org/dc/terms/identifier> "dekamerone neljäs päivä ja siihen kuuluvat 10 kertomusta/boccaccio, giovanni"' slices/titlepart-00077-work-keys.nt
+}
+
+@test "Work keys: part number and title case" {
+  make slices/titlepart-00077-work-keys.nt
+  # part number and title should be part of work key, in that order
+  grep -q -F '<http://purl.org/dc/terms/identifier> "kootut teokset 3 näytelmiä olviretki schleusingenissä leo ja liisa canzino selman juonet alma/kivi, aleksis"' slices/titlepart-00077-work-keys.nt
 }
 
 @test "Work keys: no recurring spaces" {
