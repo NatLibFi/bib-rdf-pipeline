@@ -8,7 +8,7 @@ CONSTRUCT {
   ?w dct:identifier ?strkey .
   ?w dct:identifier ?strextrakey .
 } WHERE {
-  # main case, where we have both author and title
+  # main case, where we have both contributor and title
   {
     ?w a bf:Work .
 
@@ -22,20 +22,19 @@ CONSTRUCT {
       ?inst rdfs:label ?translatedTitle .
     }
 
-#    # otherwise fall back on workTitle
-#    OPTIONAL {
-#      ?w bf:workTitle ?title .
-#      ?title bf:titleValue ?titleValue .
-#    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
-#      OPTIONAL { ?title bf:subtitle ?subtitle }
-#      OPTIONAL { ?title bf:partNumber ?partNumber }
-#      OPTIONAL { ?title bf:partTitle ?partTitle }
-#      BIND(CONCAT(?titleValue, ' ', COALESCE(?subtitle, ''), ' ', COALESCE(?partNumber, ''), ' ', COALESCE(?partTitle, '')) AS ?fulltitle)
-#    }
-    
-    ?w ^bf:translationOf?/bf:contribution ?contribution .
-    ?contribution a bflc:PrimaryContribution .
-    ?contribution bf:agent/rdfs:label ?creator .
+    OPTIONAL {
+      # case where we have a primary contibutor
+      ?w ^bf:translationOf?/bf:contribution ?contribution .
+      ?contribution a bflc:PrimaryContribution .
+      ?contribution bf:agent/rdfs:label ?creator .
+    }
+
+    OPTIONAL {
+      # fallback case where we don't have a primary contributor
+      ?w ^bf:translationOf?/bf:contribution ?contribution .
+      ?contribution bf:agent/rdfs:label ?creator .
+    }
+
     BIND(REPLACE(LCASE(?creator), '\\.|,? \\d+-\\d*', '') AS ?creatorkey)
     BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?key)
     BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?extrakey)
@@ -47,31 +46,10 @@ CONSTRUCT {
     ?w bf:hasInstance [] . # not a series
     ?w bf:title/bf:mainTitle ?title .
     FILTER NOT EXISTS {
-       # has no primary contributor
+       # has no contributors
        ?w bf:contribution ?contribution . 
-       ?contribution a bflc:PrimaryContribution .
     }
     BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
-  }
-  UNION
-  # has title (245) but no uniform title or primary authors (1xx)
-  {
-    ?w a bf:Work .
-    FILTER NOT EXISTS { ?w bf:creator [] }
-    FILTER NOT EXISTS { ?w madsrdf:authoritativeLabel [] }
-    ?w bf:workTitle ?title .
-    ?title bf:titleValue ?titleValue .
-    FILTER NOT EXISTS { ?title bf:titleType "parallel" }
-    OPTIONAL { ?title bf:subtitle ?subtitle }
-    OPTIONAL { ?title bf:partNumber ?partNumber }
-    OPTIONAL { ?title bf:partTitle ?partTitle }
-    BIND(CONCAT(?titleValue, ' ', COALESCE(?subtitle, ''), ' ', COALESCE(?partNumber, ''), ' ', COALESCE(?partTitle, '')) AS ?fulltitle)
-    ?w ?role ?contributor .
-    { ?contributor a bf:Person } UNION { ?contributor a bf:Organization }
-    FILTER (?role != bf:subject)
-    ?contributor bf:label ?name .
-    BIND(REPLACE(LCASE(?name), '\\.|,? \\d+-\\d*', '') AS ?namekey)
-    BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?namekey) AS ?key)
   }
   # has only title (245) but no author (1xx or 7xx) - not relevant since records with no key are simply retained
 
