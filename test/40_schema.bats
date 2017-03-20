@@ -56,6 +56,14 @@ setup () {
   grep -q "$inst <http://schema.org/datePublished> \"1984\"" slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of author (original work, translated work and instance)" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
+  [ "$output" -eq "3" ]
+  # check that schema:creator is not used by mistake
+  ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
+}
+
 @test "Schema.org RDF: conversion of publisher" {
   make slices/raamattu-00000-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
@@ -101,12 +109,6 @@ setup () {
   ! grep -q 'http://ethesis.helsinki.fi/julkaisut/kay/fonet/vk/rautakoski/' slices/bad-url-00733-schema.nt 
 }
 
-@test "Schema.org RDF: modelling author as schema:author, not schema:creator" {
-  make slices/ajanlyhythistoria-00009-schema.nt
-  ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
-  run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
-  [ "$output" -eq "3" ]
-}
 
 @test "Schema.org RDF: organization name should not end in full stop" {
   make slices/jakaja-00005-schema.nt
