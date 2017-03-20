@@ -31,7 +31,7 @@ CONSTRUCT {
     schema:name ?instName ;
     schema:bookFormat schema:EBook .
   ?work a schema:CreativeWork ;
-    schema:workExample ?inst ;
+    schema:workExample ?inst, ?elec ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;
     schema:author ?creator ;
