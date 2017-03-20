@@ -66,6 +66,9 @@ setup () {
   make slices/raamattu-00000-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
   grep -q "$inst <http://schema.org/datePublished> \"1984\"" slices/raamattu-00000-schema.nt
+  # check that it's expressed only one way
+  run grep -c -F '<http://schema.org/datePublished>' slices/raamattu-00000-schema.nt
+  [ "$output" -eq "1" ]
 }
 
 @test "Schema.org RDF: conversion of ISBNs" {
