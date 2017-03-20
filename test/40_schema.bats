@@ -8,9 +8,80 @@ setup () {
 }
 
 @test "Schema.org RDF: basic conversion" {
-  rm -f slices/*-schema.nt
+  rm -f slices/kotona-00097-schema.nt
   make -j2 schema
   [ -s slices/kotona-00097-schema.nt ]
+}
+
+@test "Schema.org RDF: conversion of bf:Work and bf:Instance to schema:CreativeWork" {
+  make slices/raamattu-00000-schema.nt
+  run grep -c -F '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>' slices/raamattu-00000-schema.nt
+  [ "$output" -eq "2" ]
+  grep -q '<http://schema.org/exampleOfWork>' slices/raamattu-00000-schema.nt
+  grep -q '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of titles" {
+  make slices/raamattu-00000-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$work <http://schema.org/name> \"Pyhä Raamattu\"" slices/raamattu-00000-schema.nt
+  grep -q "$inst <http://schema.org/name> \"Pyhä Raamattu\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of notes" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$inst <http://schema.org/description> \"Selkänimeke: Raamattu.\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of languages" {
+  make slices/raamattu-00000-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
+  grep -q "$work <http://schema.org/inLanguage> \"fin\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of number of pages" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$inst <http://schema.org/numberOfPages> \"363 s. ;\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of publication year" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$inst <http://schema.org/datePublished> \"1984\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of publisher" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  # find the uri/bnode of the publisher
+  uri="$(grep "$inst <http://schema.org/publisher>" slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  # make sure it's set to something
+  [ -n "$uri" ]
+  # check the name of the publisher
+  grep -q -F "$uri <http://schema.org/name> \"Suomen pipliaseura\"" slices/raamattu-00000-schema.nt
+  # check the type of the publisher
+  grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of RDA content types" {
+  make slices/raamattu-00000-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
+  grep -q "$work <http://rdaregistry.info/Elements/u/P60049> \"teksti\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of RDA carrier types" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$inst <http://rdaregistry.info/Elements/u/P60048> \"nide\"" slices/raamattu-00000-schema.nt
+}
+
+@test "Schema.org RDF: conversion of RDA media types" {
+  make slices/raamattu-00000-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  grep -q "$inst <http://rdaregistry.info/Elements/u/P60050> \"käytettävissä ilman laitetta\"" slices/raamattu-00000-schema.nt
 }
 
 @test "Schema.org RDF: quoting bad URLs" {

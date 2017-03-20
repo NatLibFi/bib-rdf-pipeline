@@ -8,7 +8,7 @@ setup () {
 }
 
 @test "Reconcile: basic reconciliation" {
-  rm -f slices/*-reconciled.nt
+  rm -f slices/kotona-00097-reconciled.nt
   make -j2 reconcile
   [ -s slices/kotona-00097-reconciled.nt ]
 }
