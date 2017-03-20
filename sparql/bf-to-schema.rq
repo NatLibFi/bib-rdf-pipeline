@@ -43,9 +43,7 @@ CONSTRUCT {
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageVal ;
-    schema:author ?origworkCreator .
-  ?origworkCreator a schema:Person ;
-    schema:name ?origworkCreatorLabel .
+    schema:author ?creator .
   ?series a schema:CreativeWorkSeries, ?seriesType ;
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
@@ -90,24 +88,25 @@ WHERE {
   }
   OPTIONAL {
     VALUES (?bfCreatorType ?schemaCreatorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
-    ?work bf:creator ?creator .
+    ?work bf:contribution ?creation .
+    ?creation a bflc:PrimaryContribution .
+    ?creation bf:agent ?creator .
     ?creator a ?bfCreatorType .
-    ?creator bf:label ?creatorLabelRaw .
+    ?creator rdfs:label ?creatorLabelRaw .
     BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
   }
   OPTIONAL {
     VALUES (?bfContributorType ?schemaContributorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
-    ?work bf:contributor ?contributor .
+    ?work bf:contribution ?contribution .
+    FILTER NOT EXISTS { ?contribution a bflc:PrimaryContribution }
+    ?contribution bf:agent ?contributor .
     ?contributor a ?bfContributorType .
-    ?contributor bf:label ?contributorLabelRaw .
+    ?contributor rdfs:label ?contributorLabelRaw .
     BIND(REPLACE(?contributorLabelRaw, '[ \\.]+$', '') AS ?contributorLabel)
   }
   OPTIONAL {
     ?work bf:translationOf ?origwork .
-    ?origwork bf:title ?origworkTitle .
-    ?origwork bf:creator ?origworkCreator .
-    ?origworkCreator bf:label ?origworkCreatorLabel .
-    FILTER(LANG(?origworkTitle) != 'x-bf-sort')
+    ?origwork bf:title/rdfs:label ?origworkTitle .
   }
   OPTIONAL {
     ?work bf:series ?series .
@@ -121,27 +120,27 @@ WHERE {
   }
 
   ?work bf:language ?language .
+  FILTER NOT EXISTS { ?language bf:part "original" }
   FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
   BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
 
   OPTIONAL {
     ?work bf:language ?origLanguage .
-    ?origLanguage bf:resourcePart "original" .
-    ?origLanguage bf:languageOfPartUri ?origLanguageUri .
-    BIND(STRAFTER(STR(?origLanguageUri), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
+    ?origLanguage bf:part "original" .
+    BIND(STRAFTER(STR(?origLanguage), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
   }
 
   OPTIONAL {
     # Topic as subject
     ?work bf:subject ?topic .
     ?topic a bf:Topic .
-    ?topic bf:authorizedAccessPoint ?topicLabel .
+    ?topic rdfs:label ?topicLabel .
   }
 
   OPTIONAL {
     # Organization or Meeting as subject
     ?work bf:subject ?subjectOrg .
-    ?subjectOrg bf:authorizedAccessPoint ?subjectOrgNameRaw .
+    ?subjectOrg rdfs:label ?subjectOrgNameRaw .
     BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
     {
       { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
