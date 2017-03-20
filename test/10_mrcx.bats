@@ -91,3 +91,9 @@ setup () {
   make slices/tvennekomedier-00034.mrcx
   xmllint --format slices/tvennekomedier-00034.mrcx | grep -A 1 'Chronander, Jacob Pettersson' | grep -q 'marc:subfield code="d"'
 }
+
+@test "MARCXML: avoid concatenating names of authors (may happen with older versions of Catmandu)" {
+  make slices/part-uri-00683.mrcx
+  xmllint --format slices/part-uri-00683.mrcx | grep -q -F '<marc:subfield code="a">Pelto-Huikko, Aino</marc:subfield>'
+  ! xmllint --format slices/part-uri-00683.mrcx | grep 'Kaunisto, TuijaPelto-Huikko, Aino'
+}
