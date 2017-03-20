@@ -125,6 +125,37 @@ setup () {
   grep -q "$inst <http://rdaregistry.info/Elements/u/P60050> \"käytettävissä ilman laitetta\"" slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of electronic version" {
+  make slices/verkkoaineisto-00608-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1 | head -n 1)"
+  elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1)"
+  # check that we found an electronic resource
+  [ -n "$elec" ]
+  # check that it is linked to the work both ways
+  grep -q "$work <http://schema.org/workExample> $elec" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://schema.org/exampleOfWork> $work" slices/verkkoaineisto-00608-schema.nt
+  # check that it has the correct information
+  grep -q "$elec <http://schema.org/url> <http://urn.fi/URN:ISBN:978-951-39-4908-2>" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://schema.org/name> \"Open sourcing digital heritage : digital surrogates, museums and knowledge management in the age of open networks\"" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Book>" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://schema.org/author>" slices/verkkoaineisto-00608-schema.nt
+}
+
+@test "Schema.org RDF: conversion of series" {
+  make slices/etyk-00012-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  series="$(grep "<http://schema.org/hasPart> $work" slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  # check that we found a series
+  [ -n "$series" ]
+  # check that it has the correct information
+  grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Periodical>" slices/etyk-00012-schema.nt
+  grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWorkSeries>" slices/etyk-00012-schema.nt
+  grep -q "$series <http://schema.org/name> \"Julkaisusarja / Maanpuolustuskorkeakoulu, strategian laitos. 1, Strategian tutkimuksia\"" slices/etyk-00012-schema.nt
+  grep -q "$series <http://schema.org/issn> \"1236-4959\"" slices/etyk-00012-schema.nt
+  
+}
+
 @test "Schema.org RDF: quoting bad URLs" {
   make slices/bad-url-00639-schema.nt slices/bad-url-00642-schema.nt
   grep -q 'SYNTAX ERROR, quoting' slices/bad-url-00639-schema.log
