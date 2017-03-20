@@ -55,23 +55,18 @@ CONSTRUCT {
 WHERE {
   ?inst bf:instanceOf ?work .
 
-  OPTIONAL {
-    ?inst bf:title ?instTitle .
-    ?instTitle bf:mainTitle ?instMainTitle .
-    OPTIONAL { ?instTitle bf:subtitle ?instSubtitle }
-    BIND(COALESCE(CONCAT(?instMainTitle, ' : ', ?instSubtitle), ?instMainTitle) AS ?instTitleCombined)
-    OPTIONAL { ?instTitle bf:partNumber ?instPartNumber }
-    OPTIONAL { ?instTitle bf:partName ?instPartName }
-    BIND(COALESCE(
-      CONCAT(?instTitleCombined, ' : ', ?instPartNumber, ', ', ?instPartName),
-      CONCAT(?instTitleCombined, ' : ', ?instPartNumber),
-      CONCAT(?instTitleCombined, ' : ', ?instPartName),
-      ?instTitleCombined
-    ) AS ?instNameRaw)
-  }
-#  OPTIONAL {
-#    ?inst bf:title/rdfs:label ?instNameRaw .
-#  }
+  ?inst bf:title ?instTitle .
+  ?instTitle bf:mainTitle ?instMainTitle .
+  OPTIONAL { ?instTitle bf:subtitle ?instSubtitle }
+  BIND(COALESCE(CONCAT(?instMainTitle, ' : ', ?instSubtitle), ?instMainTitle) AS ?instTitleCombined)
+  OPTIONAL { ?instTitle bf:partNumber ?instPartNumber }
+  OPTIONAL { ?instTitle bf:partName ?instPartName }
+  BIND(COALESCE(
+    CONCAT(?instTitleCombined, ' : ', ?instPartNumber, ', ', ?instPartName),
+    CONCAT(?instTitleCombined, ' : ', ?instPartNumber),
+    CONCAT(?instTitleCombined, ' : ', ?instPartName),
+    ?instTitleCombined
+  ) AS ?instNameRaw)
   BIND(REPLACE(?instNameRaw, '[ \\./]+$', '') AS ?instName)
 
   OPTIONAL {
@@ -98,9 +93,8 @@ WHERE {
     ?inst bf:note/rdfs:label ?note .
   }
   OPTIONAL {
-    ?elec bf:instanceOf ?work .
-    ?elec a bf:Electronic .
-    ?elec bf:uri ?elecUri .
+    ?elec bf:itemOf ?inst .
+    ?elec bf:electronicLocator/bflc:locator ?elecUri .
   }
   OPTIONAL {
     VALUES (?bfCreatorType ?schemaCreatorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
@@ -125,12 +119,14 @@ WHERE {
     ?origwork bf:title/rdfs:label ?origworkTitle .
   }
   OPTIONAL {
-    ?work bf:series ?series .
-    ?series bf:title ?seriesTitle .
-    BIND(REPLACE(?seriesTitle, ',[^,]+$', '') AS ?seriesTitleValue)
+    ?work bf:hasSeries ?series .
+    ?series bf:title/rdfs:label ?seriesTitle .
+    BIND(REPLACE(?seriesTitle, '[ ,]+$', '') AS ?seriesTitleValue)
     OPTIONAL {
-      ?series bf:issn ?seriesIssn .
-      BIND(STRBEFORE(STRAFTER(STR(?seriesIssn), 'urn:issn:'),';') AS ?seriesIssnValue)
+      ?series bf:identifiedBy ?seriesIssn .
+      ?seriesIssn a bf:Issn .
+      ?seriesIssn rdf:value ?seriesIssnValueRaw .
+      BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
       BIND(schema:Periodical as ?seriesType)
     }
   }
