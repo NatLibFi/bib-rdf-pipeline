@@ -93,7 +93,8 @@ WHERE {
     }
   }
   OPTIONAL {
-    ?inst bf:extent ?extent .
+    ?inst bf:extent ?extentRaw .
+    BIND(REPLACE(?extentRaw, '[ ;]+$', '') AS ?extent)
   }
   OPTIONAL {
     ?inst bf:note ?note .

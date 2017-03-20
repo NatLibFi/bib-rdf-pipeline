@@ -39,12 +39,15 @@ setup () {
   make slices/raamattu-00000-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
   grep -q "$work <http://schema.org/inLanguage> \"fin\"" slices/raamattu-00000-schema.nt
+  # check that original language is not declared for the translated work
+  ! grep -q "$work <http://schema.org/inLanguage> \"grc\"" slices/raamattu-00000-schema.nt
+  ! grep -q "$work <http://schema.org/inLanguage> \"heb\"" slices/raamattu-00000-schema.nt
 }
 
 @test "Schema.org RDF: conversion of number of pages" {
   make slices/raamattu-00000-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
-  grep -q "$inst <http://schema.org/numberOfPages> \"363 s. ;\"" slices/raamattu-00000-schema.nt
+  grep -q "$inst <http://schema.org/numberOfPages> \"363 s.\"" slices/raamattu-00000-schema.nt
 }
 
 @test "Schema.org RDF: conversion of publication year" {
