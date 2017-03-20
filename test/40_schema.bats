@@ -21,6 +21,18 @@ setup () {
   grep -q '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of original work for translation" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
+  orig="$(grep "$work <http://schema.org/translationOfWork>" slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
+  # make sure we have some URI/bnode for the original work
+  [ -n "$orig" ]
+  grep -q "$orig <http://schema.org/name> \"A brief history of time\"" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$orig <http://schema.org/inLanguage> \"eng\"" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$orig <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$orig <http://schema.org/workTranslation> $work" slices/ajanlyhythistoria-00009-schema.nt
+}
+
 @test "Schema.org RDF: conversion of titles" {
   make slices/raamattu-00000-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
@@ -56,12 +68,27 @@ setup () {
   grep -q "$inst <http://schema.org/datePublished> \"1984\"" slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of ISBNs" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
+  # ISBN-13
+  grep -q "$inst <http://schema.org/isbn> \"9789510194409\"" slices/ajanlyhythistoria-00009-schema.nt
+  # ISBN-10
+  grep -q "$inst <http://schema.org/isbn> \"9510194409\"" slices/ajanlyhythistoria-00009-schema.nt
+}
+
 @test "Schema.org RDF: conversion of author (original work, translated work and instance)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "3" ]
   # check that schema:creator is not used by mistake
   ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
+}
+
+@test "Schema.org RDF: conversion of contributors" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  run grep -c -F '<http://schema.org/contributor>' slices/ajanlyhythistoria-00009-schema.nt
+  [ "$output" -eq "2" ]
 }
 
 @test "Schema.org RDF: conversion of publisher" {
@@ -109,7 +136,6 @@ setup () {
   ! grep -q 'http://ethesis.helsinki.fi/julkaisut/kay/fonet/vk/rautakoski/' slices/bad-url-00733-schema.nt 
 }
 
-
 @test "Schema.org RDF: organization name should not end in full stop" {
   make slices/jakaja-00005-schema.nt
   ! grep -q -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
@@ -150,6 +176,16 @@ setup () {
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
   # double-check that it's not a Person
   ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+}
+
+@test "Schema.org RDF: conversion of subjects" {
+  make slices/ajanlyhythistoria-00009-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
+  # check that a particular subject is found
+  grep -q -F "$work <http://schema.org/about> \"suhteellisuusteoria\"" slices/ajanlyhythistoria-00009-schema.nt
+  # check that the number of subjects is expected
+  run grep -c -F "$work <http://schema.org/about>" slices/ajanlyhythistoria-00009-schema.nt
+  [ "$output" -eq "7" ]
 }
 
 @test "Schema.org RDF: modelling organization subjects as schema:Organization" {
