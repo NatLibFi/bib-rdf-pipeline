@@ -20,15 +20,6 @@ unless exists(origtitle)
             marc_remove('500')
         end
     end
-
-    # If the above was not successful, try to add 240 from 130
-    unless exists(origtitle)
-        marc_map('130a', uniformtitle)
-        if exists(uniformtitle)
-            marc_add('240', a, $.uniformtitle)
-            copy_field(uniformtitle, origtitle)
-        end
-    end
 end
 
 # Set 240$l to language name, if a 240 exists without language information

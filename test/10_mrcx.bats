@@ -31,11 +31,6 @@ setup () {
   ! xmllint --format slices/origwork-00271.mrcx | grep -A 1 'tag="500"' | grep 'marc:subfield code="a">Alkuteos : Nationalökonimien i hovedtraek.'
 }
 
-@test "MARCXML: adds missing 240\$a from 130\$a" {
-  make slices/origwork-00041.mrcx
-  xmllint --format slices/origwork-00041.mrcx | grep -A 1 'tag="240"' | grep 'marc:subfield code="a">New international manual of Braille music notation'
-}
-
 @test "MARCXML: adds missing 240\$l subfield" {
   make slices/ajanlyhythistoria-00009.mrcx
   xmllint --format slices/ajanlyhythistoria-00009.mrcx | grep -A 3 'tag="240"' | grep 'marc:subfield code="l"'
