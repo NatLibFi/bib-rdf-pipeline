@@ -47,7 +47,7 @@ setup () {
 @test "Schema.org RDF: conversion of number of pages" {
   make slices/raamattu-00000-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
-  grep -q "$inst <http://schema.org/numberOfPages> \"363 s. ;\"" slices/raamattu-00000-schema.nt
+  grep -q "$inst <http://schema.org/numberOfPages> \"363 s.\"" slices/raamattu-00000-schema.nt
 }
 
 @test "Schema.org RDF: conversion of publication year" {
