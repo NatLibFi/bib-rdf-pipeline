@@ -1,4 +1,6 @@
-PREFIX bf: <http://bibframe.org/vocab/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX bf: <http://id.loc.gov/ontologies/bibframe/>
+PREFIX bflc: <http://id.loc.gov/ontologies/bflc/>
 PREFIX schema: <http://schema.org/>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
@@ -12,8 +14,8 @@ CONSTRUCT {
     schema:isbn ?isbn10val, ?isbn13val ;
     schema:datePublished ?providerDate ;
     schema:numberOfPages ?extent ;
-    rdau:P60048 ?carrierCategoryValue ;
-    rdau:P60050 ?mediaCategoryValue ;
+    rdau:P60048 ?carrierCategory ;
+    rdau:P60050 ?mediaCategory ;
     schema:publisher ?providerOrganization .
   ?providerOrganization a schema:Organization ;
     schema:name ?providerOrganizationLabel .
@@ -35,7 +37,7 @@ CONSTRUCT {
     schema:contributor ?contributor ;
     schema:inLanguage ?languageVal ;
     schema:about ?topicLabel, ?subjectOrg ;
-    rdau:P60049 ?contentCategoryValue ;
+    rdau:P60049 ?contentCategory ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
@@ -54,25 +56,8 @@ CONSTRUCT {
 WHERE {
   ?inst bf:instanceOf ?work .
 
-  # title from the literal title statement
-  { ?inst bf:titleStatement ?instNameRaw }
-  UNION
-  # title from the title resources
-  {
-    ?inst bf:instanceTitle ?instTitle .
-    ?instTitle bf:titleValue ?instTitleValue .
-    OPTIONAL { ?instTitle bf:subtitle ?instSubtitle }
-    BIND(COALESCE(CONCAT(?instTitleValue, ' ', REPLACE(?instSubtitle,'^ +', '')), ?instTitleValue) AS ?instTitleCombined)
-    OPTIONAL { ?instTitle bf:partNumber ?instPartNumber }
-    OPTIONAL { ?instTitle bf:partTitle ?instPartTitle }
-    BIND(COALESCE(
-      CONCAT(?instTitleCombined, ' : ', ?instPartNumber, ', ', ?instPartTitle),
-      CONCAT(?instTitleCombined, ' : ', ?instPartNumber),
-      CONCAT(?instTitleCombined, ' : ', ?instPartTitle),
-      ?instTitleCombined
-    ) AS ?instNameRaw)
-  }
-  BIND(REPLACE(?instNameRaw, '[ \\.]+$', '') AS ?instName)
+  ?inst bf:title/bf:mainTitle ?instName .
+
   OPTIONAL {
     ?inst bf:isbn10 ?isbn10 .
     BIND(STRAFTER(STR(?isbn10), 'http://isbn.example.org/') AS ?isbn10val) 
@@ -82,22 +67,21 @@ WHERE {
       BIND(STRAFTER(STR(?isbn13), 'http://isbn.example.org/') AS ?isbn13val) 
   }
   OPTIONAL {
-    ?inst bf:publication ?provider .
+    ?inst bf:provisionActivity ?provision .
     OPTIONAL {
-      ?provider bf:providerDate ?providerDate .
+      ?provider bf:date ?providerDate .
     }
     OPTIONAL {
-      ?provider bf:providerName ?providerOrganization .
-      ?providerOrganization bf:label ?providerOrganizationLabelRaw .
+      ?provider bf:agent ?providerOrganization .
+      ?providerOrganization rdfs:label ?providerOrganizationLabelRaw .
       BIND(REPLACE(?providerOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?providerOrganizationLabel)
     }
   }
   OPTIONAL {
-    ?inst bf:extent ?extentRaw .
-    BIND(REPLACE(?extentRaw, '[ ;]+$', '') AS ?extent)
+    ?inst bf:extent/rdfs:label ?extent .
   }
   OPTIONAL {
-    ?inst bf:note ?note .
+    ?inst bf:note/rdfs:label ?note .
   }
   OPTIONAL {
     ?elec bf:instanceOf ?work .
@@ -165,17 +149,14 @@ WHERE {
   }
 
   OPTIONAL {
-    ?inst bf:carrierCategory ?carrierCategory .
-    ?carrierCategory bf:categoryValue ?carrierCategoryValue .
+    ?inst bf:carrier/rdfs:label ?carrierCategory .
   }
 
   OPTIONAL {
-    ?inst bf:mediaCategory ?mediaCategory .
-    ?mediaCategory bf:categoryValue ?mediaCategoryValue .
+    ?inst bf:media/rdfs:label ?mediaCategory .
   }
 
   OPTIONAL {
-    ?work bf:contentCategory ?contentCategory .
-    ?contentCategory bf:categoryValue ?contentCategoryValue .
+    ?work bf:content/rdfs:label ?contentCategory .
   }
 }
