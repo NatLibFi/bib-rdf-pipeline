@@ -74,10 +74,7 @@ setup () {
 @test "Schema.org RDF: conversion of ISBNs" {
   make slices/ajanlyhythistoria-00009-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
-  # ISBN-13
-  grep -q "$inst <http://schema.org/isbn> \"9789510194409\"" slices/ajanlyhythistoria-00009-schema.nt
-  # ISBN-10
-  grep -q "$inst <http://schema.org/isbn> \"9510194409\"" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$inst <http://schema.org/isbn> \"951-0-19440-9\"" slices/ajanlyhythistoria-00009-schema.nt
 }
 
 @test "Schema.org RDF: conversion of author (original work, translated work and instance)" {
@@ -223,7 +220,7 @@ setup () {
 
 @test "Schema.org RDF: including parallel titles as names" {
   make slices/ekumeeninen-00585-schema.nt
-  grep -q '<http://schema.org/name> "Ekumeniska rådet i Finland verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
+  grep -q '<http://schema.org/name> "Ekumeniska rådet i Finland : verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
 }
 
 @test "Schema.org RDF: including part information in names" {

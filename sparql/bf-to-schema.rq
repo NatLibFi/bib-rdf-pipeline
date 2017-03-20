@@ -1,3 +1,4 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bf: <http://id.loc.gov/ontologies/bibframe/>
 PREFIX bflc: <http://id.loc.gov/ontologies/bflc/>
@@ -11,7 +12,7 @@ CONSTRUCT {
     schema:description ?note ;
     schema:author ?creator ;
     schema:exampleOfWork ?work ;
-    schema:isbn ?isbn10val, ?isbn13val ;
+    schema:isbn ?isbnVal ;
     schema:datePublished ?providerDate ;
     schema:numberOfPages ?extent ;
     rdau:P60048 ?carrierCategory ;
@@ -54,20 +55,35 @@ CONSTRUCT {
 WHERE {
   ?inst bf:instanceOf ?work .
 
-  ?inst bf:title/bf:mainTitle ?instName .
+  OPTIONAL {
+    ?inst bf:title ?instTitle .
+    ?instTitle bf:mainTitle ?instMainTitle .
+    OPTIONAL { ?instTitle bf:subtitle ?instSubtitle }
+    BIND(COALESCE(CONCAT(?instMainTitle, ' : ', ?instSubtitle), ?instMainTitle) AS ?instTitleCombined)
+    OPTIONAL { ?instTitle bf:partNumber ?instPartNumber }
+    OPTIONAL { ?instTitle bf:partName ?instPartName }
+    BIND(COALESCE(
+      CONCAT(?instTitleCombined, ' : ', ?instPartNumber, ', ', ?instPartName),
+      CONCAT(?instTitleCombined, ' : ', ?instPartNumber),
+      CONCAT(?instTitleCombined, ' : ', ?instPartName),
+      ?instTitleCombined
+    ) AS ?instNameRaw)
+  }
+#  OPTIONAL {
+#    ?inst bf:title/rdfs:label ?instNameRaw .
+#  }
+  BIND(REPLACE(?instNameRaw, '[ \\./]+$', '') AS ?instName)
 
   OPTIONAL {
-    ?inst bf:isbn10 ?isbn10 .
-    BIND(STRAFTER(STR(?isbn10), 'http://isbn.example.org/') AS ?isbn10val) 
-  }
-  OPTIONAL {
-    ?inst bf:isbn13 ?isbn13 
-      BIND(STRAFTER(STR(?isbn13), 'http://isbn.example.org/') AS ?isbn13val) 
+    ?inst bf:identifiedBy ?isbn .
+    ?isbn a bf:Isbn .
+    ?isbn rdf:value ?isbnVal .
   }
   OPTIONAL {
     ?inst bf:provisionActivity ?provision .
     OPTIONAL {
-      ?provider bf:date ?providerDate .
+      ?provider bf:date ?providerDateRaw .
+      BIND(STR(?providerDateRaw) AS ?providerDate)
     }
     OPTIONAL {
       ?provider bf:agent ?providerOrganization .
