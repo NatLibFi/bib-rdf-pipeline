@@ -94,7 +94,14 @@ WHERE {
   }
   OPTIONAL {
     ?elec bf:itemOf ?inst .
-    ?elec bf:electronicLocator/bflc:locator ?elecUri .
+    OPTIONAL {
+        # case 1: with a separate resource using bflc:locator
+        ?elec bf:electronicLocator/bflc:locator ?elecUri .
+    }
+    OPTIONAL {
+        # case 2: plain URI
+        ?elec bf:electronicLocator ?elecUri .
+    }
   }
   OPTIONAL {
     VALUES (?bfCreatorType ?schemaCreatorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}

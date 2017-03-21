@@ -122,7 +122,7 @@ setup () {
   grep -q "$inst <http://rdaregistry.info/Elements/u/P60050> \"käytettävissä ilman laitetta\"" slices/raamattu-00000-schema.nt
 }
 
-@test "Schema.org RDF: conversion of electronic version" {
+@test "Schema.org RDF: conversion of electronic version (856 with $y case)" {
   make slices/verkkoaineisto-00608-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1 | head -n 1)"
   elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1)"
@@ -137,6 +137,12 @@ setup () {
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Book>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://schema.org/author>" slices/verkkoaineisto-00608-schema.nt
+}
+
+@test "Schema.org RDF: conversion of electronic version (856 without $y case)" {
+  make slices/fanrik-manninen-00641-schema.nt
+  elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/fanrik-manninen-00641-schema.nt | cut -d ' ' -f 1)"
+  grep -q "$elec <http://schema.org/url> <http://www.gutenberg.org/etext/12757>" slices/fanrik-manninen-00641-schema.nt
 }
 
 @test "Schema.org RDF: conversion of series" {
