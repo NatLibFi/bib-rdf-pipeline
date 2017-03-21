@@ -1,0 +1,54 @@
+000006980 FMT   L BK
+000006980 LDR   L ^^^^^cam^a2200529zi^4500
+000006980 001   L 000006980
+000006980 005   L 20151222163835.0
+000006980 008   L 851008s1985^^^^fi^|||||||||||||||||swe||
+000006980 015   L $$af853072$$2skl
+000006980 035   L $$a(FI-MELINDA)000006980
+000006980 040   L $$aFI-NL
+000006980 0411  L $$aswe$$hfin
+000006980 042   L $$afinb
+000006980 080   L $$a06$$9FENNI<KEEP>
+000006980 080   L $$a676$$9FENNI<KEEP>
+000006980 080   L $$a069.02$$9FENNI<KEEP>
+000006980 1102  L $$aVerlan tehdasmuseo.
+000006980 24010 L $$aVerlan tehdasmuseo
+000006980 24510 L $$aVerla fabriksmuseum /$$c[Veikko Talvi].
+000006980 260   L $$aVerla :$$bKymmene-Strömberg ab,$$c1985$$e([Kouvola] :$$fKouvolan kirjap.)
+000006980 300   L $$a[2], 20, [2] s. :$$bkuvitettu, karttoja ;$$c18 cm
+000006980 336   L $$ateksti$$btxt$$2rdacontent
+000006980 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000006980 338   L $$anide$$bnc$$2rdacarrier
+000006980 61024 L $$aVerla fabriksmuseum.
+000006980 7001  L $$aTalvi, Veikko.
+000006980 903   L $$ab$$5FENNI
+000006980 904   L $$ap$$5FENNI
+000006980 9102  L $$aVerla fabriksmuseum$$yVerlan tehdasmuseo
+000007655 FMT   L BK
+000007655 LDR   L ^^^^^cam^a2200613zi^4500
+000007655 001   L 000007655
+000007655 005   L 20151222164446.0
+000007655 008   L 871007s1987^^^^fi^|||||||||||||||||fin||
+000007655 015   L $$af872658$$2skl
+000007655 035   L $$a(FI-MELINDA)000007655
+000007655 040   L $$aFI-NL
+000007655 0411  L $$afin$$hswe
+000007655 042   L $$afinb
+000007655 080   L $$a637$$9FENNI<KEEP>
+000007655 1001  L $$aKarlsson, Svenolof.
+000007655 24010 L $$aHistorien om Vasa-mjölken : ...och mejeriandelslaget Milka under femtio år
+000007655 24510 L $$aVaasalaisen maidon historiaa :$$b...ja meijeriosuuskunta Milkan historiaa viideltä vuosikymmeneltä /$$c[Svenolof Karlsson] ; [suom. Tuija Nikko].
+000007655 260   L $$aVaasa :$$bMeijeriosuuskunta Milka,$$c1987$$f(Fram)
+000007655 300   L $$a295 s. :$$bkuvitettu, karttoja ;$$c25 cm
+000007655 336   L $$ateksti$$btxt$$2rdacontent
+000007655 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000007655 338   L $$anide$$bnc$$2rdacarrier
+000007655 61024 L $$aMilka (Meijeriosuuskunta).
+000007655 650 7 L $$ayrityshistoriikit$$2ysa$$9FENNI<KEEP>
+000007655 650 7 L $$ameijerit$$2ysa$$9FENNI<KEEP>
+000007655 650 7 L $$ameijerit$$zVaasa$$2ysa
+000007655 650 7 L $$amaitotalous$$2eks
+000007655 650 7 L $$ameijerit$$2eks
+000007655 651 7 L $$aVaasa$$2ysa$$9FENNI<KEEP>
+000007655 7001  L $$aNikko, Tuija.
+000007655 7102  L $$aMilka(mejeriandelslaget)
