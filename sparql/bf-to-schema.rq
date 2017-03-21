@@ -13,13 +13,13 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbnVal ;
-    schema:datePublished ?providerDate ;
+    schema:datePublished ?publicationDate ;
     schema:numberOfPages ?extent ;
     rdau:P60048 ?carrierCategory ;
     rdau:P60050 ?mediaCategory ;
-    schema:publisher ?providerOrganization .
-  ?providerOrganization a schema:Organization ;
-    schema:name ?providerOrganizationLabel .
+    schema:publisher ?publisherOrganization .
+  ?publisherOrganization a schema:Organization ;
+    schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
     schema:name ?creatorLabel .
   ?contributor a ?schemaContributorType ;
@@ -75,15 +75,16 @@ WHERE {
     ?isbn rdf:value ?isbnVal .
   }
   OPTIONAL {
-    ?inst bf:provisionActivity ?provision .
+    ?inst bf:provisionActivity ?publication .
+    ?publication a bf:Publication .
     OPTIONAL {
-      ?provision bf:date ?providerDateRaw .
-      BIND(STR(?providerDateRaw) AS ?providerDate)
+      ?publication bf:date ?publicationDateRaw .
+      BIND(STR(?publicationDateRaw) AS ?publicationDate)
     }
     OPTIONAL {
-      ?provision bf:agent ?providerOrganization .
-      ?providerOrganization rdfs:label ?providerOrganizationLabelRaw .
-      BIND(REPLACE(?providerOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?providerOrganizationLabel)
+      ?publication bf:agent ?publisherOrganization .
+      ?publisherOrganization rdfs:label ?publisherOrganizationLabelRaw .
+      BIND(REPLACE(?publisherOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?publisherOrganizationLabel)
     }
   }
   OPTIONAL {

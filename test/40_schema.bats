@@ -102,6 +102,9 @@ setup () {
   grep -q -F "$uri <http://schema.org/name> \"Suomen pipliaseura\"" slices/raamattu-00000-schema.nt
   # check the type of the publisher
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/raamattu-00000-schema.nt
+  # check that there is only one publisher (e.g. not manufacturer)
+  run grep -c -F '<http://schema.org/publisher>' slices/raamattu-00000-schema.nt
+  [ "$output" -eq "1" ]
 }
 
 @test "Schema.org RDF: conversion of RDA content types" {
@@ -122,7 +125,7 @@ setup () {
   grep -q "$inst <http://rdaregistry.info/Elements/u/P60050> \"käytettävissä ilman laitetta\"" slices/raamattu-00000-schema.nt
 }
 
-@test "Schema.org RDF: conversion of electronic version (856 with $y case)" {
+@test "Schema.org RDF: conversion of electronic version (856 with \$y case)" {
   make slices/verkkoaineisto-00608-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1 | head -n 1)"
   elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/verkkoaineisto-00608-schema.nt | cut -d ' ' -f 1)"
@@ -139,7 +142,7 @@ setup () {
   grep -q "$elec <http://schema.org/author>" slices/verkkoaineisto-00608-schema.nt
 }
 
-@test "Schema.org RDF: conversion of electronic version (856 without $y case)" {
+@test "Schema.org RDF: conversion of electronic version (856 without \$y case)" {
   make slices/fanrik-manninen-00641-schema.nt
   elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/fanrik-manninen-00641-schema.nt | cut -d ' ' -f 1)"
   grep -q "$elec <http://schema.org/url> <http://www.gutenberg.org/etext/12757>" slices/fanrik-manninen-00641-schema.nt
