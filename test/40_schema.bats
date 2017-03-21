@@ -269,3 +269,19 @@ setup () {
   grep -q '<http://schema.org/name> "Kootut lastut : 1"' slices/titlepart-00077-schema.nt
   grep -q '<http://schema.org/name> "Dekamerone : Neljäs päivä ja siihen kuuluvat 10 kertomusta"' slices/titlepart-00077-schema.nt
 }
+
+@test "Schema.org RDF: not mixing up languages from different records" {
+  make slices/langpart-00000-schema.nt
+  inst1="$(grep '<http://schema.org/datePublished> "1985"' slices/langpart-00000-schema.nt | cut -d ' ' -f 1)"
+  [ -n "$inst1" ]
+  work1="$(grep "<http://schema.org/workExample> $inst1" slices/langpart-00000-schema.nt | cut -d ' ' -f 1)"
+  [ -n "$work1" ]
+  orig1="$(grep "<http://schema.org/workTranslation> $work1" slices/langpart-00000-schema.nt | cut -d ' ' -f 1)"
+  [ -n "$orig1" ]
+
+  grep -q "$work1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
+  grep -q "$orig1 <http://schema.org/inLanguage> \"fin\"" slices/langpart-00000-schema.nt
+
+  ! grep "$work1 <http://schema.org/inLanguage> \"fin\"" slices/langpart-00000-schema.nt
+  ! grep "$orig1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
+}

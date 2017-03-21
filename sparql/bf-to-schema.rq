@@ -139,10 +139,12 @@ WHERE {
     }
   }
 
-  ?work bf:language ?language .
-  FILTER NOT EXISTS { ?language bf:part "original" }
-  FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
-  BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
+  OPTIONAL {
+    ?work bf:language ?language .
+    FILTER NOT EXISTS { ?language bf:part "original" }
+    FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
+    BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
+  }
 
   OPTIONAL {
     ?work bf:language ?origLanguage .
