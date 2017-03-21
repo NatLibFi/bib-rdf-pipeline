@@ -77,11 +77,11 @@ WHERE {
   OPTIONAL {
     ?inst bf:provisionActivity ?provision .
     OPTIONAL {
-      ?provider bf:date ?providerDateRaw .
+      ?provision bf:date ?providerDateRaw .
       BIND(STR(?providerDateRaw) AS ?providerDate)
     }
     OPTIONAL {
-      ?provider bf:agent ?providerOrganization .
+      ?provision bf:agent ?providerOrganization .
       ?providerOrganization rdfs:label ?providerOrganizationLabelRaw .
       BIND(REPLACE(?providerOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?providerOrganizationLabel)
     }
