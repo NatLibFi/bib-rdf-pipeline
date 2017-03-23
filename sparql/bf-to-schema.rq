@@ -36,14 +36,14 @@ CONSTRUCT {
     schema:isPartOf ?series ;
     schema:author ?creator ;
     schema:contributor ?contributor ;
-    schema:inLanguage ?languageVal ;
+    schema:inLanguage ?languageCode ;
     schema:about ?topicLabel, ?subjectOrg ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
-    schema:inLanguage ?origLanguageVal ;
+    schema:inLanguage ?origLanguageCode ;
     schema:author ?creator .
   ?series a schema:CreativeWorkSeries, ?seriesType ;
     schema:hasPart ?work ;
@@ -142,14 +142,22 @@ WHERE {
   OPTIONAL {
     ?work bf:language ?language .
     FILTER NOT EXISTS { ?language bf:part "original" }
-    FILTER (STRSTARTS(STR(?language), 'http://id.loc.gov/vocabulary/languages/'))
-    BIND(STRAFTER(STR(?language), 'http://id.loc.gov/vocabulary/languages/') AS ?languageVal)
+    OPTIONAL {
+      ?language rdf:value ?languageValue .
+    }
+    BIND(COALESCE(?languageValue, ?language) AS ?languageVal)
+    FILTER (STRSTARTS(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/'))
+    BIND(STRAFTER(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/') AS ?languageCode)
   }
 
   OPTIONAL {
     ?work bf:language ?origLanguage .
     ?origLanguage bf:part "original" .
-    BIND(STRAFTER(STR(?origLanguage), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageVal)
+    OPTIONAL {
+      ?origLanguage rdf:value ?origLanguageValue .
+    }
+    BIND(COALESCE(?origLanguageValue, ?origLanguage) AS ?origLanguageVal)
+    BIND(STRAFTER(STR(?origLanguageVal), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
   }
 
   OPTIONAL {
