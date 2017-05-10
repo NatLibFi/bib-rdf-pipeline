@@ -12,9 +12,10 @@ seen = set()
 for line in sys.stdin:
     recid = line[:9]
     fld = line[10:13]
-    # only one of 100,110,111 should exist
+    # only one of 100,110,111,130 should exist
     fld = fld.replace('110','100')
     fld = fld.replace('111','100')
+    fld = fld.replace('130','100')
     if fld in FIELDS:
         tag = (recid, fld)
         if tag in seen:

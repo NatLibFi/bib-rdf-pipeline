@@ -23,3 +23,8 @@ setup () {
   ! grep -q kosmologia slices/ajanlyhythistoria-00009-preprocessed.alephseq
 }
 
+@test "Preprocess MARC: drop duplicate 130 fields" {
+  make slices/sioninwirret-00061-preprocessed.alephseq
+  run grep -c -F ' 130' slices/sioninwirret-00061-preprocessed.alephseq
+  [ "$output" -eq "1" ]
+}
