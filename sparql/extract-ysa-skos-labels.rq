@@ -3,11 +3,13 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 CONSTRUCT {
   ?c skos:prefLabel ?label .
   ?c skos:altLabel ?alabel .
-  ?c skos:closeMatch ?match .
+  ?c skos:closeMatch ?closeMatch .
+  ?c skos:exactMatch ?exactMatch .
 } WHERE {
   GRAPH <http://www.yso.fi/onto/ysa/> {
     ?c skos:prefLabel ?label .
     OPTIONAL { ?c skos:altLabel ?alabel }
-    OPTIONAL { ?c skos:closeMatch ?match }
+    OPTIONAL { ?c skos:closeMatch ?closeMatch }
+    OPTIONAL { ?c skos:exactMatch ?exactMatch }
   }
 }

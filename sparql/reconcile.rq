@@ -38,7 +38,7 @@ CONSTRUCT {
     OPTIONAL {
       GRAPH ?ysaGraph { 
         ?ysac skos:prefLabel ?topicLabelFi .
-        OPTIONAL { ?ysac skos:closeMatch ?ysoSubject }
+        OPTIONAL { ?ysac skos:exactMatch|skos:closeMatch ?ysoSubject }
         # Make sure it's really a YSA concept and not e.g. RDA Carrier type
         FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
       }
