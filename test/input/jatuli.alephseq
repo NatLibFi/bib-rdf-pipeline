@@ -1,0 +1,25 @@
+000006753 FMT   L BK
+000006753 LDR   L 00000cam^a2200457zi^4500
+000006753 001   L 000006753
+000006753 005   L 20160519144420.0
+000006753 008   L 850314r19841949fi^|||||||||||||||||fin||
+000006753 015   L $$af850721$$2skl
+000006753 035   L $$a(FI-MELINDA)000006753
+000006753 040   L $$aFI-NL
+000006753 0410  L $$afin
+000006753 042   L $$afinb
+000006753 080   L $$a908 Kemi$$9FENNI<KEEP>
+000006753 24500 L $$aJatuli :$$bKemin kotiseutu- ja museoyhdistyksen julkaisu.$$n1 /$$c[toimituskunta: Aino Piispanen...ja muita] ; [toim.: Lauri Keränen].
+000006753 250   L $$aNäköisp.
+000006753 260   L $$a[Kemi] :$$bPohjolan sanomat,$$c1984.
+000006753 300   L $$a81, [21] s. :$$bkuvitettu, karttoja ;$$c26 cm
+000006753 336   L $$ateksti$$btxt$$2rdacontent
+000006753 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000006753 338   L $$anide$$bnc$$2rdacarrier
+000006753 500   L $$aIlmoituksia.$$9FENNI<KEEP>
+000006753 500   L $$aNäköisp. Alkuteos julk.: Kemi : Kemin kotiseutu- ja museoyhdistys, 1949$$9FENNI<KEEP>
+000006753 530   L $$aDigitaalinen kopio;$$cKäytettävissä vapaakappalekirjastoissa$$uhttp://urn.fi/URN:ISBN:978-0-357-35801-6$$9FENNI<KEEP>
+000006753 7001  L $$aPiispanen, Aino.
+000006753 7001  L $$aKeränen, Lauri,$$d1906-
+000006753 7102  L $$aKemin kotiseutu- ja museoyhdistys.
+000006753 902   L $$ab$$5FENNI

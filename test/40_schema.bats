@@ -148,6 +148,14 @@ setup () {
   grep -q "$elec <http://schema.org/url> <http://www.gutenberg.org/etext/12757>" slices/fanrik-manninen-00641-schema.nt
 }
 
+@test "Schema.org RDF: conversion on electronic version (530 with \$u case)" {
+  make slices/jatuli-00000-schema.nt
+  elec="$(grep '<http://schema.org/bookFormat> <http://schema.org/EBook>' slices/jatuli-00000-schema.nt | cut -d ' ' -f 1)"
+  grep -q "$elec <http://schema.org/url> <http://urn.fi/URN:ISBN:978-0-357-35801-6>" slices/jatuli-00000-schema.nt
+  # check that the electronic instance is not a blank node
+  [ "${elec:0:1}" != "_" ]
+}
+
 @test "Schema.org RDF: conversion of series" {
   make slices/etyk-00012-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"

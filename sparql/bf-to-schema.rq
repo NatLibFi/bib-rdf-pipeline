@@ -24,14 +24,14 @@ CONSTRUCT {
     schema:name ?creatorLabel .
   ?contributor a ?schemaContributorType ;
     schema:name ?contributorLabel .
-  ?elec a schema:Book, schema:CreativeWork ;
+  ?elecInst a schema:Book, schema:CreativeWork ;
     schema:exampleOfWork ?work ;
     schema:author ?creator ;
     schema:url ?elecUri ;
     schema:name ?instName ;
     schema:bookFormat schema:EBook .
   ?work a schema:CreativeWork ;
-    schema:workExample ?inst, ?elec ;
+    schema:workExample ?inst, ?elecInst ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;
     schema:author ?creator ;
@@ -95,6 +95,7 @@ WHERE {
   }
   OPTIONAL {
     ?elec bf:itemOf ?inst .
+    BIND(?inst AS ?elecInst) 
     OPTIONAL {
         # case 1: with a separate resource using bflc:locator
         ?elec bf:electronicLocator/bflc:locator ?elecUri .
