@@ -5,12 +5,14 @@ CONSTRUCT {
   ?s schema:sameAs ?replacement .
 } WHERE {
   {
-    SELECT ?s (MIN(STR(?repl)) AS ?minrepl)
+    SELECT ?s (MIN(?fldrepl) AS ?minfldrepl)
     WHERE {
       ?s (dct:identifier/^dct:identifier)+ ?repl .
+      BIND(SUBSTR(STRAFTER(STR(?repl), '#Work'), 1, 3) AS ?field)
+      BIND(CONCAT(IF(?field='','000',?field),STR(?repl)) AS ?fldrepl)
     }
     GROUP BY ?s
   }
-  BIND(IRI(?minrepl) AS ?replacement)
+  BIND(IRI(SUBSTR(?minfldrepl,4)) AS ?replacement)
   FILTER (?s != ?replacement)
 }

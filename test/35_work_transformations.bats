@@ -18,3 +18,9 @@ setup () {
   count="$(cut -d ' ' -f 3 refdata/hawking-work-transformations.nt | grep -c '000095841#Work>')"
   [ "$count" -eq 5 ]
 }
+
+@test "Work transformations: prefer URIs for main works" {
+  make refdata/kotona-work-transformations.nt
+  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:fennica:005083536#Work> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:fennica:000971472#Work765-33>' refdata/kotona-work-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:fennica:000971472#Work765-33> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:fennica:005083536#Work>' refdata/kotona-work-transformations.nt
+}
