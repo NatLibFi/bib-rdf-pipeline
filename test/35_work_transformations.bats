@@ -12,3 +12,9 @@ setup () {
   make -j2 work-transformations
   [ -s refdata/fanrik-manninen-work-transformations.nt ]
 }
+
+@test "Work transformations: translations are consolidated to same original work" {
+  make refdata/hawking-work-transformations.nt
+  count="$(cut -d ' ' -f 3 refdata/hawking-work-transformations.nt | grep -c '000095841#Work>')"
+  [ "$count" -eq 5 ]
+}
