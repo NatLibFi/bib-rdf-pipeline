@@ -122,6 +122,8 @@ nt: $(patsubst %-in.alephseq,%-bf2.nt,$(wildcard slices/*-in.alephseq))
 
 work-keys: $(patsubst %-in.alephseq,%-work-keys.nt,$(wildcard slices/*-in.alephseq))
 
+work-transformations: $(patsubst input/%.alephseq,refdata/%-work-transformations.nt,$(wildcard input/*.alephseq))
+
 schema: $(patsubst %-in.alephseq,%-schema.nt,$(wildcard slices/*-in.alephseq))
 
 reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.alephseq))
