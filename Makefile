@@ -15,7 +15,7 @@ HDTSPARQL=hdtsparql.sh
 # Other configuration settings
 FINTOSPARQL=http://api.dev.finto.fi/sparql
 URIBASEFENNICA=http://urn.fi/URN:NBN:fi:bib:fennica:
-JVMARGS="-Xmx2G"
+JVMARGS="-Xmx4G"
 
 # Pattern rules used internally
 
@@ -76,7 +76,7 @@ refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-
 	$(RIOT) $^ >$@
 
 %-work-transformations.nt: %-work-keys.nt
-	$(SPARQL) --data $< --query sparql/create-work-transformations.rq --out=NT >$@
+	scripts/create-work-transformations.py <$^ >$@
 
 slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge-works.rq --out=NT >$@
