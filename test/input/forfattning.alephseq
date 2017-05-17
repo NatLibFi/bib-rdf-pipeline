@@ -1,0 +1,57 @@
+000061544 FMT   L SE
+000061544 LDR   L ^^^^^cas^a2201297^i^4500
+000061544 001   L 000061544
+000061544 005   L 20160203120458.0
+000061544 007   L ta
+000061544 008   L 891213d19172014fi^z|^^|^l^^^o0^^^b0swe|^
+000061544 015   L $$afx181973$$2skl
+000061544 0220  L $$a0787-3182$$l0787-3182$$2a
+000061544 035   L $$a(FI-MELINDA)000061544
+000061544 040   L $$aFI-NL
+000061544 0410  L $$aswe
+000061544 042   L $$afinb
+000061544 080   L $$a34$$9FENNI<KEEP>
+000061544 080   L $$a34$$x(094)
+000061544 080   L $$a34$$x(480)
+000061544 084   L $$aHo:2.3$$2z
+000061544 2101  L $$aFinl. författn.saml.
+000061544 222 0 L $$aFinlands författningssamling
+000061544 24500 L $$aFinlands författningssamling.
+000061544 260   L $$aHfors :$$b[Staten publikationsbyrå, distr.],$$c1917-2014.
+000061544 300   L $$c8:o
+000061544 336   L $$ateksti$$btxt$$2rdacontent
+000061544 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000061544 338   L $$anide$$bnc$$2rdacarrier
+000061544 3620  L $$a1917, nr 1-2014, nr 1459.
+000061544 500   L $$aInnehållande nr... jämte kronologiskt och alfabetiskt register.$$9FENNI<KEEP>
+000061544 530   L $$aJulkaistu myös verkkoaineistona 1995-$$9FENNI<KEEP>
+000061544 550   L $$aKustantaja myöhemmin: Edita. - Julkaisija myöhemmin: Justitieministeriet.$$9FENNI<KEEP>
+000061544 650 7 L $$asäädöskokoelmat$$zSuomi$$2ysa
+000061544 650 7 L $$aasetukset$$xlait$$2ysa
+000061544 650 7 L $$asäädökset$$zSuomi$$2ysa
+000061544 650 7 L $$aasetukset$$zSuomi$$2ysa
+000061544 650 7 L $$alainsäädäntö$$zSuomi$$2ysa
+000061544 650 7 L $$akausijulkaisut$$xasetukset$$2ysa
+000061544 650 7 L $$asäädökset$$2ysa
+000061544 650 7 L $$asäädöskokoelmat$$2ysa
+000061544 650 7 L $$aförfattningssamlingar$$zFinland$$2allars
+000061544 650 7 L $$aförfattningar$$zFinland$$2allars
+000061544 650 7 L $$aförordningar$$zFinland$$2allars
+000061544 650 7 L $$alagstiftning$$zFinland$$2allars
+000061544 650 7 L $$aförfattningar$$2allars
+000061544 650 7 L $$aförfattningssamlingar$$2allars
+000061544 653   L $$aasetuskokoelmat
+000061544 655 7 L $$avirallisjulkaisut$$2ysa$$9FENNI<KEEP>
+000061544 655 7 L $$avuosikirjat$$2ysa
+000061544 7101  L $$aFinland$$bJustitieministeriet.
+000061544 7101  L $$aSuomi.$$bOikeusministeriö.
+000061544 720   L $$aJustitieministeriet
+000061544 7650  L $$tSuomen asetuskokoelma$$x0787-314X$$9FENNI<KEEP>
+000061544 7650  L $$tSuomen säädöskokoelma$$x1237-3419$$9FENNI<KEEP>
+000061544 7700  L $$tFinlands forfattningssamlings fördragsserie. Europeiska ekonomiska samarbetsområdet$$9FENNI<KEEP>
+000061544 7700  L $$tFinlands författningssamling. Budgetserien$$9FENNI<KEEP>
+000061544 7700  L $$tFinlands författningssamlings fördragsserie. Överenskommelser med främmande makter$$x0787-3239$$9FENNI<KEEP>
+000061544 7760  L $$tElektronisk Finlands författningssamling$$x1456-9663$$9FENNI<KEEP>
+000061544 77608 L $$iVerkkoaineisto:$$tFinlands författningssamling$$x1456-9663
+000061544 78000 L $$tStorfurstendömet Finlands författningssamling$$9FENNI<KEEP>
+000061544 935   L $$a201601c$$5FENNI

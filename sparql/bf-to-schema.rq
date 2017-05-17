@@ -40,10 +40,11 @@ CONSTRUCT {
     schema:about ?topicLabel, ?subjectWork, ?subjectOrg ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
-  ?origwork a schema:CreativeWork ;
+  ?origwork a schema:CreativeWork, ?origworkType, ?origworkType2 ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageCode ;
+    schema:issn ?origworkIssnValue ;
     schema:author ?creator .
   ?series a schema:CreativeWorkSeries, ?seriesType ;
     schema:hasPart ?work ;
@@ -130,7 +131,16 @@ WHERE {
   }
   OPTIONAL {
     ?work bf:translationOf ?origwork .
-    ?origwork bf:title/rdfs:label ?origworkTitle .
+    { ?origwork bf:title/rdfs:label ?origworkTitle }
+    UNION
+    { ?origwork bf:hasInstance/bf:title/rdfs:label ?origworkTitle }
+    OPTIONAL {
+      ?origwork bf:hasInstance/bf:identifiedBy ?origworkIssn .
+      ?origworkIssn a bf:Issn .
+      ?origworkIssn rdf:value ?origworkIssnValue .
+      BIND(schema:Periodical as ?origworkType)
+      BIND(schema:CreativeWorkSeries as ?origworkType2)
+    }
   }
   OPTIONAL {
     ?work bf:hasSeries ?series .

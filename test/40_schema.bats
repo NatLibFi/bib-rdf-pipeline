@@ -21,7 +21,7 @@ setup () {
   grep -q '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt
 }
 
-@test "Schema.org RDF: conversion of original work for translation" {
+@test "Schema.org RDF: conversion of original work for translation (240 / 765 \$s case)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
   orig="$(grep "$work <http://schema.org/translationOfWork>" slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
@@ -31,6 +31,14 @@ setup () {
   grep -q "$orig <http://schema.org/inLanguage> \"eng\"" slices/ajanlyhythistoria-00009-schema.nt
   grep -q "$orig <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/ajanlyhythistoria-00009-schema.nt
   grep -q "$orig <http://schema.org/workTranslation> $work" slices/ajanlyhythistoria-00009-schema.nt
+}
+
+@test "Schema.org RDF: conversion of original work for translation (765 \$t case)" {
+  make slices/forfattning-00006-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/forfattning-00006-schema.nt | cut -d ' ' -f 1)"
+  grep -q "$work <http://schema.org/translationOfWork>" slices/forfattning-00006-schema.nt
+  # make sure ISSNs of the original work are preserved too
+  grep -q '<http://schema.org/issn> "1237-3419"' slices/forfattning-00006-schema.nt
 }
 
 @test "Schema.org RDF: conversion of titles" {
