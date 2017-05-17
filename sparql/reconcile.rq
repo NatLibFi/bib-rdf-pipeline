@@ -6,7 +6,7 @@ PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 CONSTRUCT {
   ?s ?p ?o .
   ?s schema:inLanguage ?languageCode .
-  ?s schema:about ?subject, ?ysoSubject .
+  ?s schema:about ?subjectUri, ?subject, ?ysoSubject .
   ?s rdau:P60048 ?rdaCarrierType .
   ?s rdau:P60049 ?rdaContentType .
   ?s rdau:P60050 ?rdaMediaType .
@@ -29,6 +29,11 @@ CONSTRUCT {
       }
     }
     BIND(COALESCE(?iso6391code, ?languageVal) AS ?languageCode)
+  }
+  UNION
+  {
+    ?s schema:about ?subjectUri .
+    FILTER(isIRI(?subjectUri))
   }
   UNION
   {

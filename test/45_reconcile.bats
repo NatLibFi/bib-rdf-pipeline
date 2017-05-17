@@ -19,6 +19,12 @@ setup () {
   ! grep -q -F '<http://schema.org/inLanguage> "fin"' slices/ajattelemisenalku-00098-reconciled.nt
 }
 
+@test "Reconcile: retaining work subjects" {
+  make slices/trauma-00583-reconciled.nt
+  count="$(grep -c '<http://schema.org/about> <.*#Work.*>' slices/trauma-00583-reconciled.nt)"
+  [ "$count" -eq 12 ]
+}
+
 @test "Reconcile: converting to YSA URIs, basic case" {
   make slices/ajattelemisenalku-00098-reconciled.nt
   # "myytit" -> ysa:Y97600

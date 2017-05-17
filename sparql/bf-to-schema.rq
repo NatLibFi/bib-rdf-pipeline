@@ -37,7 +37,7 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
-    schema:about ?topicLabel, ?subjectOrg ;
+    schema:about ?topicLabel, ?subjectWork, ?subjectOrg ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork ;
@@ -49,6 +49,11 @@ CONSTRUCT {
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
+  ?subjectWork a schema:CreativeWork ;
+    schema:author ?subjectWorkAgent ;
+    schema:name ?subjectWorkName .
+  ?subjectWorkAgent a schema:Person ;
+    schema:name ?subjectWorkAgentName .
   ?subjectOrg a schema:Organization ;
     schema:name ?subjectOrgName .
 }
@@ -159,6 +164,18 @@ WHERE {
     }
     BIND(COALESCE(?origLanguageValue, ?origLanguage) AS ?origLanguageVal)
     BIND(STRAFTER(STR(?origLanguageVal), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
+  }
+
+  OPTIONAL {
+    # Work as subject
+    ?work bf:subject ?subjectWork .
+    ?subjectWork a bf:Work .
+    ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
+    ?subjectWorkAgent a bf:Person .
+    ?subjectWorkAgent rdfs:label ?subjectWorkAgentNameRaw .
+    BIND(REPLACE(?subjectWorkAgentNameRaw, '[ \\./]+$', '') AS ?subjectWorkAgentName)
+    ?subjectWork rdfs:label ?subjectWorkNameRaw .
+    BIND(REPLACE(?subjectWorkNameRaw, '[ \\./]+$', '') AS ?subjectWorkName)
   }
 
   OPTIONAL {

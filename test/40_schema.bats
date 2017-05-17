@@ -226,7 +226,30 @@ setup () {
   ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
 }
 
-@test "Schema.org RDF: conversion of subjects" {
+@test "Schema.org RDF: conversion of 600 \$t work subjects" {
+  make slices/trauma-00583-schema.nt
+  # find out the URI of a subject work
+  work="$(grep 'King Lear' slices/trauma-00583-schema.nt | cut -d ' ' -f 1)"
+  # make sure it is set to something
+  [ -n "$work" ]
+  # check that it's a CreativeWork
+  grep -q -F "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/trauma-00583-schema.nt
+  # check its name
+  grep -q -F "$work <http://schema.org/name> \"King Lear\"" slices/trauma-00583-schema.nt
+  # check that the main work is about it
+  grep -q -F "<http://schema.org/about> $work" slices/trauma-00583-schema.nt
+
+  # find out the author URI of that work
+  author="$(grep "$work <http://schema.org/author>" slices/trauma-00583-schema.nt | cut -d ' ' -f 3)"
+  # make sure it's set to something
+  [ -n "$author" ]
+  # check that it's a Person
+  grep -q -F "$author <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/trauma-00583-schema.nt
+  # check its name
+  grep -q -F "$author <http://schema.org/name> \"Shakespeare, William\"" slices/trauma-00583-schema.nt
+}
+
+@test "Schema.org RDF: conversion of 650 subjects" {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
   # check that a particular subject is found
