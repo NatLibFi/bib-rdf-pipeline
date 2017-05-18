@@ -14,7 +14,7 @@ HDTSPARQL=hdtsparql.sh
 
 # Other configuration settings
 FINTOSPARQL=http://api.dev.finto.fi/sparql
-URIBASEFENNICA=http://urn.fi/URN:NBN:fi:bib:fennica:
+URIBASEFENNICA=http://urn.fi/URN:NBN:fi:bib:me:
 JVMARGS="-Xmx4G"
 
 # Pattern rules used internally
