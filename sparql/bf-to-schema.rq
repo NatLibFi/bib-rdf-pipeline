@@ -75,42 +75,60 @@ WHERE {
   ) AS ?instNameRaw)
   BIND(REPLACE(?instNameRaw, '[ \\./]+$', '') AS ?instName)
 
+  # instance-related properties, all optional
   OPTIONAL {
-    ?inst bf:identifiedBy ?isbn .
-    ?isbn a bf:Isbn .
-    ?isbn rdf:value ?isbnVal .
-  }
-  OPTIONAL {
-    ?inst bf:provisionActivity ?publication .
-    ?publication a bf:Publication .
-    OPTIONAL {
-      ?publication bf:date ?publicationDateRaw .
-      BIND(STR(?publicationDateRaw) AS ?publicationDate)
+    {
+      ?inst bf:identifiedBy ?isbn .
+      ?isbn a bf:Isbn .
+      ?isbn rdf:value ?isbnVal .
     }
-    OPTIONAL {
-      ?publication bf:agent ?publisherOrganization .
-      ?publisherOrganization rdfs:label ?publisherOrganizationLabelRaw .
-      BIND(REPLACE(?publisherOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?publisherOrganizationLabel)
+    UNION
+    {
+      ?inst bf:provisionActivity ?publication .
+      ?publication a bf:Publication .
+      OPTIONAL {
+        ?publication bf:date ?publicationDateRaw .
+        BIND(STR(?publicationDateRaw) AS ?publicationDate)
+      }
+      OPTIONAL {
+        ?publication bf:agent ?publisherOrganization .
+        ?publisherOrganization rdfs:label ?publisherOrganizationLabelRaw .
+        BIND(REPLACE(?publisherOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?publisherOrganizationLabel)
+      }
+    }
+    UNION
+    {
+      ?inst bf:extent/rdfs:label ?extent .
+    }
+    UNION
+    {
+      ?inst bf:note/rdfs:label ?note .
+    }
+    UNION
+    {
+      ?elec bf:itemOf ?inst .
+      BIND(?inst AS ?elecInst) 
+      OPTIONAL {
+          # case 1: with a separate resource using bflc:locator
+          ?elec bf:electronicLocator/bflc:locator ?elecUri .
+      }
+      OPTIONAL {
+          # case 2: plain URI
+          ?elec bf:electronicLocator ?elecUri .
+      }
+    }
+    UNION
+    {
+      ?inst bf:carrier/rdfs:label ?carrierCategory .
+    }
+    UNION
+    {
+      ?inst bf:media/rdfs:label ?mediaCategory .
     }
   }
-  OPTIONAL {
-    ?inst bf:extent/rdfs:label ?extent .
-  }
-  OPTIONAL {
-    ?inst bf:note/rdfs:label ?note .
-  }
-  OPTIONAL {
-    ?elec bf:itemOf ?inst .
-    BIND(?inst AS ?elecInst) 
-    OPTIONAL {
-        # case 1: with a separate resource using bflc:locator
-        ?elec bf:electronicLocator/bflc:locator ?elecUri .
-    }
-    OPTIONAL {
-        # case 2: plain URI
-        ?elec bf:electronicLocator ?elecUri .
-    }
-  }
+
+  # ?creator is needed in many branches below, so it has to be bound
+  # separately from the UNIONed blocks
   OPTIONAL {
     VALUES (?bfCreatorType ?schemaCreatorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
     ?work bf:contribution ?creation .
@@ -120,100 +138,97 @@ WHERE {
     ?creator rdfs:label ?creatorLabelRaw .
     BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
   }
-  OPTIONAL {
-    VALUES (?bfContributorType ?schemaContributorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
-    ?work bf:contribution ?contribution .
-    FILTER NOT EXISTS { ?contribution a bflc:PrimaryContribution }
-    ?contribution bf:agent ?contributor .
-    ?contributor a ?bfContributorType .
-    ?contributor rdfs:label ?contributorLabelRaw .
-    BIND(REPLACE(?contributorLabelRaw, '[ \\.]+$', '') AS ?contributorLabel)
-  }
-  OPTIONAL {
-    ?work bf:translationOf ?origwork .
-    { ?origwork bf:title/rdfs:label ?origworkTitle }
-    UNION
-    { ?origwork bf:hasInstance/bf:title/rdfs:label ?origworkTitle }
-    OPTIONAL {
-      ?origwork bf:hasInstance/bf:identifiedBy ?origworkIssn .
-      ?origworkIssn a bf:Issn .
-      ?origworkIssn rdf:value ?origworkIssnValue .
-      BIND(schema:Periodical as ?origworkType)
-      BIND(schema:CreativeWorkSeries as ?origworkType2)
-    }
-  }
-  OPTIONAL {
-    ?work bf:hasSeries ?series .
-    ?series bf:title/rdfs:label ?seriesTitle .
-    BIND(REPLACE(?seriesTitle, '[ ,]+$', '') AS ?seriesTitleValue)
-    OPTIONAL {
-      ?series bf:identifiedBy ?seriesIssn .
-      ?seriesIssn a bf:Issn .
-      ?seriesIssn rdf:value ?seriesIssnValueRaw .
-      BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
-      BIND(schema:Periodical as ?seriesType)
-    }
-  }
 
+  # work-related properties, all optional
   OPTIONAL {
-    ?work bf:language ?language .
-    FILTER NOT EXISTS { ?language bf:part "original" }
-    OPTIONAL {
-      ?language rdf:value ?languageValue .
-    }
-    BIND(COALESCE(?languageValue, ?language) AS ?languageVal)
-    FILTER (STRSTARTS(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/'))
-    BIND(STRAFTER(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/') AS ?languageCode)
-  }
-
-  OPTIONAL {
-    ?work bf:language ?origLanguage .
-    ?origLanguage bf:part "original" .
-    OPTIONAL {
-      ?origLanguage rdf:value ?origLanguageValue .
-    }
-    BIND(COALESCE(?origLanguageValue, ?origLanguage) AS ?origLanguageVal)
-    BIND(STRAFTER(STR(?origLanguageVal), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
-  }
-
-  OPTIONAL {
-    # Work as subject
-    ?work bf:subject ?subjectWork .
-    ?subjectWork a bf:Work .
-    ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
-    ?subjectWorkAgent a bf:Person .
-    ?subjectWorkAgent rdfs:label ?subjectWorkAgentNameRaw .
-    BIND(REPLACE(?subjectWorkAgentNameRaw, '[ \\./]+$', '') AS ?subjectWorkAgentName)
-    ?subjectWork rdfs:label ?subjectWorkNameRaw .
-    BIND(REPLACE(?subjectWorkNameRaw, '[ \\./]+$', '') AS ?subjectWorkName)
-  }
-
-  OPTIONAL {
-    # Topic as subject
-    ?work bf:subject ?topic .
-    ?topic a bf:Topic .
-    ?topic rdfs:label ?topicLabel .
-  }
-
-  OPTIONAL {
-    # Organization or Meeting as subject
-    ?work bf:subject ?subjectOrg .
-    ?subjectOrg rdfs:label ?subjectOrgNameRaw .
-    BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
     {
-      { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
+      VALUES (?bfContributorType ?schemaContributorType) { (bf:Person schema:Person) (bf:Jurisdiction schema:Organization) (bf:Organization schema:Organization)}
+      ?work bf:contribution ?contribution .
+      FILTER NOT EXISTS { ?contribution a bflc:PrimaryContribution }
+      ?contribution bf:agent ?contributor .
+      ?contributor a ?bfContributorType .
+      ?contributor rdfs:label ?contributorLabelRaw .
+      BIND(REPLACE(?contributorLabelRaw, '[ \\.]+$', '') AS ?contributorLabel)
     }
-  }
-
-  OPTIONAL {
-    ?inst bf:carrier/rdfs:label ?carrierCategory .
-  }
-
-  OPTIONAL {
-    ?inst bf:media/rdfs:label ?mediaCategory .
-  }
-
-  OPTIONAL {
-    ?work bf:content/rdfs:label ?contentCategory .
+    UNION
+    {
+      ?work bf:translationOf ?origwork .
+      { ?origwork bf:title/rdfs:label ?origworkTitle }
+      UNION
+      { ?origwork bf:hasInstance/bf:title/rdfs:label ?origworkTitle }
+      OPTIONAL {
+        ?origwork bf:hasInstance/bf:identifiedBy ?origworkIssn .
+        ?origworkIssn a bf:Issn .
+        ?origworkIssn rdf:value ?origworkIssnValue .
+        BIND(schema:Periodical as ?origworkType)
+        BIND(schema:CreativeWorkSeries as ?origworkType2)
+      }
+      OPTIONAL {
+        ?work bf:language ?origLanguage .
+        ?origLanguage bf:part "original" .
+        OPTIONAL {
+          ?origLanguage rdf:value ?origLanguageValue .
+        }
+        BIND(COALESCE(?origLanguageValue, ?origLanguage) AS ?origLanguageVal)
+        BIND(STRAFTER(STR(?origLanguageVal), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
+      }
+    }
+    UNION
+    {
+      ?work bf:hasSeries ?series .
+      ?series bf:title/rdfs:label ?seriesTitle .
+      BIND(REPLACE(?seriesTitle, '[ ,]+$', '') AS ?seriesTitleValue)
+      OPTIONAL {
+        ?series bf:identifiedBy ?seriesIssn .
+        ?seriesIssn a bf:Issn .
+        ?seriesIssn rdf:value ?seriesIssnValueRaw .
+        BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
+        BIND(schema:Periodical as ?seriesType)
+      }
+    }
+    UNION
+    {
+      ?work bf:language ?language .
+      FILTER NOT EXISTS { ?language bf:part "original" }
+      OPTIONAL {
+        ?language rdf:value ?languageValue .
+      }
+      BIND(COALESCE(?languageValue, ?language) AS ?languageVal)
+      FILTER (STRSTARTS(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/'))
+      BIND(STRAFTER(STR(?languageVal), 'http://id.loc.gov/vocabulary/languages/') AS ?languageCode)
+    }
+    UNION
+    {
+      # Work as subject
+      ?work bf:subject ?subjectWork .
+      ?subjectWork a bf:Work .
+      ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
+      ?subjectWorkAgent a bf:Person .
+      ?subjectWorkAgent rdfs:label ?subjectWorkAgentNameRaw .
+      BIND(REPLACE(?subjectWorkAgentNameRaw, '[ \\./]+$', '') AS ?subjectWorkAgentName)
+      ?subjectWork rdfs:label ?subjectWorkNameRaw .
+      BIND(REPLACE(?subjectWorkNameRaw, '[ \\./]+$', '') AS ?subjectWorkName)
+    }
+    UNION
+    {
+      # Topic as subject
+      ?work bf:subject ?topic .
+      ?topic a bf:Topic .
+      ?topic rdfs:label ?topicLabel .
+    }
+    UNION
+    {
+      # Organization or Meeting as subject
+      ?work bf:subject ?subjectOrg .
+      ?subjectOrg rdfs:label ?subjectOrgNameRaw .
+      BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
+      {
+        { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
+      }
+    }
+    UNION
+    {
+      ?work bf:content/rdfs:label ?contentCategory .
+    }
   }
 }
