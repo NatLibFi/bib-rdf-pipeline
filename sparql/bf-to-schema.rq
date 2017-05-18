@@ -14,10 +14,17 @@ CONSTRUCT {
     schema:exampleOfWork ?work ;
     schema:isbn ?isbnVal ;
     schema:datePublished ?publicationDate ;
+    schema:publication ?publicationEvent ;
     schema:numberOfPages ?extent ;
     rdau:P60048 ?carrierCategory ;
     rdau:P60050 ?mediaCategory ;
     schema:publisher ?publisherOrganization .
+  ?publicationEvent a schema:PublicationEvent ;
+    schema:organizer ?publisherOrganization ;
+    schema:location ?publicationPlace ;
+    schema:startDate ?publicationDate .
+  ?publicationPlace a schema:Place ;
+    schema:name ?publicationPlaceName .
   ?publisherOrganization a schema:Organization ;
     schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
@@ -86,14 +93,18 @@ WHERE {
     {
       ?inst bf:provisionActivity ?publication .
       ?publication a bf:Publication .
+      ?publication bf:date ?publicationDateRaw .
+      BIND(STR(?publicationDateRaw) AS ?publicationDate)
       OPTIONAL {
-        ?publication bf:date ?publicationDateRaw .
-        BIND(STR(?publicationDateRaw) AS ?publicationDate)
+        ?publication bf:place ?publicationPlace .
+        ?publicationPlace rdfs:label ?publicationPlaceName .
       }
       OPTIONAL {
         ?publication bf:agent ?publisherOrganization .
         ?publisherOrganization rdfs:label ?publisherOrganizationLabelRaw .
         BIND(REPLACE(?publisherOrganizationLabelRaw, '^(jakelija:)? *(.*?)(,? jakaja)?[ \\.]*$', '$2') AS ?publisherOrganizationLabel)
+        # If we have a known publisher, create a publication event too
+        BIND(?publication as ?publicationEvent)
       }
     }
     UNION

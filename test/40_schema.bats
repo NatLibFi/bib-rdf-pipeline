@@ -79,6 +79,23 @@ setup () {
   [ "$output" -eq "1" ]
 }
 
+@test "Schema.org RDF: conversion of publication event" {
+  make slices/punataudista-00084-schema.nt
+  # check that there is only one publication event
+  run grep -c -F '<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PublicationEvent>' slices/punataudista-00084-schema.nt
+  [ "$output" -eq "1" ]
+  pubevt="$(grep '<http://schema.org/publication>' slices/punataudista-00084-schema.nt | cut -d ' ' -f 3)"
+  # make sure we have some URI/bnode for the publication event
+  [ -n "$pubevt" ]
+  grep -q "$pubevt <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PublicationEvent>" slices/punataudista-00084-schema.nt
+  grep -q "$pubevt <http://schema.org/startDate> \"1915\"" slices/punataudista-00084-schema.nt
+  # check the publication place
+  place="$(grep "$pubevt <http://schema.org/location>" slices/punataudista-00084-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$place" ]
+  grep -q "$place <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Place>" slices/punataudista-00084-schema.nt
+  grep -q "$place <http://schema.org/name> \"Tampere\"" slices/punataudista-00084-schema.nt
+}
+
 @test "Schema.org RDF: conversion of ISBNs" {
   make slices/ajanlyhythistoria-00009-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
