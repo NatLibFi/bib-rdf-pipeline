@@ -31,7 +31,7 @@ CONSTRUCT {
     schema:name ?creatorLabel .
   ?contributor a ?schemaContributorType ;
     schema:name ?contributorLabel .
-  ?elecInst a schema:Book, schema:CreativeWork ;
+  ?elecInst a schema:Book, schema:CreativeWork, bf:Instance ;
     schema:exampleOfWork ?work ;
     schema:author ?creator ;
     schema:url ?elecUri ;
@@ -47,7 +47,7 @@ CONSTRUCT {
     schema:about ?topicLabel, ?subjectWork, ?subjectOrg ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
-  ?origwork a schema:CreativeWork, ?origworkType, ?origworkType2 ;
+  ?origwork a schema:CreativeWork, bf:Work, ?origworkType, ?origworkType2 ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageCode ;
@@ -57,7 +57,7 @@ CONSTRUCT {
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
-  ?subjectWork a schema:CreativeWork ;
+  ?subjectWork a schema:CreativeWork, bf:Work ;
     schema:author ?subjectWorkAgent ;
     schema:name ?subjectWorkName .
   ?subjectWorkAgent a schema:Person ;

@@ -42,6 +42,7 @@ setup () {
   grep -q "$orig <http://schema.org/name> \"A brief history of time\"" slices/ajanlyhythistoria-00009-schema.nt
   grep -q "$orig <http://schema.org/inLanguage> \"eng\"" slices/ajanlyhythistoria-00009-schema.nt
   grep -q "$orig <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$orig <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Work>" slices/ajanlyhythistoria-00009-schema.nt
   grep -q "$orig <http://schema.org/workTranslation> $work" slices/ajanlyhythistoria-00009-schema.nt
 }
 
@@ -176,6 +177,7 @@ setup () {
   grep -q "$elec <http://schema.org/name> \"Open sourcing digital heritage : digital surrogates, museums and knowledge management in the age of open networks\"" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Book>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/verkkoaineisto-00608-schema.nt
+  grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Instance>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://schema.org/author>" slices/verkkoaineisto-00608-schema.nt
 }
 
@@ -269,8 +271,9 @@ setup () {
   work="$(grep 'King Lear' slices/trauma-00583-schema.nt | cut -d ' ' -f 1)"
   # make sure it is set to something
   [ -n "$work" ]
-  # check that it's a CreativeWork
+  # check that it's a CreativeWork and a bf:Work
   grep -q -F "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/trauma-00583-schema.nt
+  grep -q -F "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Work>" slices/trauma-00583-schema.nt
   # check its name
   grep -q -F "$work <http://schema.org/name> \"King Lear\"" slices/trauma-00583-schema.nt
   # check that the main work is about it
