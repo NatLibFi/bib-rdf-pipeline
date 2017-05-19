@@ -61,6 +61,7 @@ setup () {
   make slices/ekumeeninen-00585-reconciled.nt
   # "Suomen ekumeeninen neuvosto" -> cn:26756A
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:26756A>' slices/ekumeeninen-00585-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:26756A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/ekumeeninen-00585-reconciled.nt
   # check that no blank nodes remain
   ! grep -q -F '<http://schema.org/publisher> _:' slices/ekumeeninen-00585-reconciled.nt
   ! grep -q '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/ekumeeninen-00585-reconciled.nt
@@ -70,9 +71,17 @@ setup () {
   make slices/verkkoaineisto-00608-reconciled.nt
   # "University of Jyväskylä" -> cn:8274A
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:8274A>' slices/verkkoaineisto-00608-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:8274A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
   # check that no blank nodes remain
   ! grep -q -F '<http://schema.org/publisher> _:' slices/verkkoaineisto-00608-reconciled.nt
   ! grep -q '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
+}
+
+@test "Reconcile: retain publisher organizations that cannot be reconciled with CN" {
+  make slices/punataudista-00084-reconciled.nt
+  org="$(grep "<http://schema.org/name> \"Tekijä\"" slices/punataudista-00084-reconciled.nt | cut -d ' ' -f 1)"
+  [ -n "$org" ]
+  grep -q -F "$org <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/punataudista-00084-reconciled.nt
 }
 
 @test "Reconcile: express subject organizations using CN" {

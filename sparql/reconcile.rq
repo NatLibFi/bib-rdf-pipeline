@@ -12,6 +12,7 @@ CONSTRUCT {
   ?s rdau:P60050 ?rdaMediaType .
   ?s ?p ?organization .
   ?organization schema:name ?orgName .
+  ?organization a schema:Organization .
 } WHERE {
   {
     ?s ?p ?o .
