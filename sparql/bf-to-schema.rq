@@ -6,7 +6,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 CONSTRUCT {
-  ?inst a schema:Book, schema:CreativeWork ;
+  ?inst a schema:Book, schema:CreativeWork, bf:Instance ;
     schema:exampleOfWork ?work ;
     schema:name ?instName ;
     schema:description ?note ;
@@ -37,7 +37,7 @@ CONSTRUCT {
     schema:url ?elecUri ;
     schema:name ?instName ;
     schema:bookFormat schema:EBook .
-  ?work a schema:CreativeWork ;
+  ?work a schema:CreativeWork, bf:Work ;
     schema:workExample ?inst, ?elecInst ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;

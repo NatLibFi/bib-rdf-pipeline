@@ -21,6 +21,18 @@ setup () {
   grep -q '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of additional types" {
+  make slices/raamattu-00000-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
+  inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"
+  # Works should be typed schema:CreativeWork and bf:Work
+  grep -q "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/raamattu-00000-schema.nt
+  grep -q "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Work>" slices/raamattu-00000-schema.nt
+  # Instances should be typed schema:CreativeWork and bf:Instance
+  grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/raamattu-00000-schema.nt
+  grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Instance>" slices/raamattu-00000-schema.nt
+}
+
 @test "Schema.org RDF: conversion of original work for translation (240 / 765 \$s case)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
