@@ -84,13 +84,16 @@ slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's
 merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged.nt/')
 	$(RIOT) $^ >$@
 
+%-rewritten.nt: %-merged.nt
+	scripts/rewrite-uris.py $^ >$@
+
 %.hdt: %.nt
 	$(RDF2HDT) $< $@
 	# also (re)generate index, for later querying
 	rm -f $@.index*
 	$(HDTSEARCH) -q 0 $@
 
-output/%.nt: merged/%-merged.hdt
+output/%.nt: merged/%-rewritten.hdt
 	JAVA_OPTIONS=$(JVMARGS) $(HDTSPARQL) $^ "`cat sparql/consolidate-works.rq`" >$@
 
 # Targets to be run externally
@@ -128,7 +131,9 @@ schema: $(patsubst %-in.alephseq,%-schema.nt,$(wildcard slices/*-in.alephseq))
 
 reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.alephseq))
 
-merge: $(patsubst input/%.alephseq,merged/%-merged.hdt,$(wildcard input/*.alephseq))
+merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
+
+rewrite: $(patsubst input/%.alephseq,merged/%-rewritten.hdt,$(wildcard input/*.alephseq))
 
 consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
 

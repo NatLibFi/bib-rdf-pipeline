@@ -8,9 +8,9 @@ setup () {
 }
 
 @test "Merge works: basic merging" {
-  rm -f merged/hawking-merged.hdt
+  rm -f merged/hawking-merged.nt
   make -j2 merge
-  [ -s merged/hawking-merged.hdt ]
+  [ -s merged/hawking-merged.nt ]
 }
 
 @test "Merge works: translations are linked to same original work" {
