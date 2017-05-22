@@ -188,7 +188,7 @@ WHERE {
     {
       ?work bf:hasSeries ?series .
       ?series bf:title/rdfs:label ?seriesTitle .
-      BIND(REPLACE(?seriesTitle, '[ ,]+$', '') AS ?seriesTitleValue)
+      BIND(REPLACE(?seriesTitle, '[ ,;]+$', '') AS ?seriesTitleValue)
       OPTIONAL {
         ?series bf:identifiedBy ?seriesIssn .
         ?seriesIssn a bf:Issn .

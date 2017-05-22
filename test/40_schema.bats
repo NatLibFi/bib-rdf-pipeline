@@ -214,6 +214,13 @@ setup () {
   
 }
 
+@test "Schema.org RDF: conversion of series with volumes" {
+  # TODO: this is incomplete: we should also convert volume numbers etc. See issue #46
+  make slices/origwork-00041-schema.nt
+  grep -q -F '<http://schema.org/name> "Braille-neuvottelukunnan julkaisuja"' slices/origwork-00041-schema.nt
+  ! grep -F '<http://schema.org/name> "Braille-neuvottelukunnan julkaisuja ;"' slices/origwork-00041-schema.nt
+}
+
 @test "Schema.org RDF: quoting bad URLs" {
   make slices/bad-url-00639-schema.nt slices/bad-url-00642-schema.nt
   grep -q 'SYNTAX ERROR, quoting' slices/bad-url-00639-schema.log
