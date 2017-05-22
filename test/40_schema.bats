@@ -129,6 +129,11 @@ setup () {
   [ "$output" -eq "2" ]
 }
 
+@test "Schema.org RDF: conversion of contributors with roles" {
+  make slices/origwork-00004-schema.nt
+  grep -q -F '<http://schema.org/name> "Aho, Oili"' slices/origwork-00004-schema.nt
+}
+
 @test "Schema.org RDF: conversion of publisher" {
   make slices/raamattu-00000-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 3)"

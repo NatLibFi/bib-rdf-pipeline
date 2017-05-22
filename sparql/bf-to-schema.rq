@@ -159,7 +159,7 @@ WHERE {
       ?contribution bf:agent ?contributor .
       ?contributor a ?bfContributorType .
       ?contributor rdfs:label ?contributorLabelRaw .
-      BIND(REPLACE(?contributorLabelRaw, '[ \\.]+$', '') AS ?contributorLabel)
+      BIND(REPLACE(?contributorLabelRaw, '[ ,\\.]+$', '') AS ?contributorLabel)
     }
     UNION
     {
