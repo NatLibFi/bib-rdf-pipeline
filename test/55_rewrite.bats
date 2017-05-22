@@ -26,11 +26,16 @@ setup () {
 @test "Rewrite URIs: rewriting person URIs" {
   make merged/origwork-rewritten.nt
   # author uses 01 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:A00004118101> <http://schema.org/name> "Burgess, Alan"' merged/origwork-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118101> <http://schema.org/name> "Burgess, Alan"' merged/origwork-rewritten.nt
   # translator uses 02 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:A00004118102> <http://schema.org/name> "Aho, Oili"' merged/origwork-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118102> <http://schema.org/name> "Aho, Oili"' merged/origwork-rewritten.nt
   # if there is no main author, then the first contributor (700) uses 01 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:A00041961501> <http://schema.org/name> "Krolick, Bettye"' merged/origwork-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00041961501> <http://schema.org/name> "Krolick, Bettye"' merged/origwork-rewritten.nt
+}
+
+@test "Rewrite URIs: rewriting organization URIs" {
+  make merged/forfattning-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:O00006154401> <http://schema.org/name> "Finland Justitieministeriet"' merged/forfattning-rewritten.nt
 }
 
 @test "Rewrite URIs: rewriting series URIs" {

@@ -18,7 +18,10 @@ TRIPLE_RE = re.compile(TRIPLE)
 def get_typeid(typename, field):
     """determine type ID (single letter indicating type) based on type name and optional field tag parsed from the URI"""
     if typename == 'Agent':
-        return 'A'
+        if field in ('100', '600', '700'):
+            return 'P' # Person
+        else:
+            return 'O' # Organization
     if typename == 'Instance':
         return 'I'
     if typename == 'Work':
