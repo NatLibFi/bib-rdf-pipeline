@@ -25,10 +25,7 @@ def get_typeid(typename, field):
     if typename == 'Instance':
         return 'I'
     if typename == 'Work':
-        if field in ('440', '800', '810', '830', '880'):
-            return 'S' # Series
-        else:
-            return 'W' # Work
+        return 'W' # Work
     return 'X' # unknown, should never happen
 
 def collect_uris(ntfile):

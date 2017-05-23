@@ -6,13 +6,14 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 CONSTRUCT {
-  ?inst a schema:Book, schema:CreativeWork, bf:Instance ;
+  ?inst a schema:Book, schema:CreativeWork, bf:Instance, ?instSeriesType, ?instPeriodicalType ;
     schema:exampleOfWork ?work ;
     schema:name ?instName ;
     schema:description ?note ;
     schema:author ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbnVal ;
+    schema:issn ?issnVal ;
     schema:datePublished ?publicationDate ;
     schema:publication ?publicationEvent ;
     schema:numberOfPages ?extent ;
@@ -37,7 +38,7 @@ CONSTRUCT {
     schema:url ?elecUri ;
     schema:name ?instName ;
     schema:bookFormat schema:EBook .
-  ?work a schema:CreativeWork, bf:Work ;
+  ?work a schema:CreativeWork, bf:Work, ?workSeriesType, ?workPeriodicalType ;
     schema:workExample ?inst, ?elecInst ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;
@@ -53,7 +54,7 @@ CONSTRUCT {
     schema:inLanguage ?origLanguageCode ;
     schema:issn ?origworkIssnValue ;
     schema:author ?creator .
-  ?series a schema:CreativeWorkSeries, ?seriesType ;
+  ?series a schema:CreativeWork, bf:Work, schema:CreativeWorkSeries, ?seriesPeriodicalType ;
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
@@ -85,9 +86,25 @@ WHERE {
   # instance-related properties, all optional
   OPTIONAL {
     {
+      ?inst bf:issuance <http://id.loc.gov/vocabulary/issuance/serl>
+      BIND(schema:CreativeWorkSeries AS ?workSeriesType)
+      BIND(schema:CreativeWorkSeries AS ?instSeriesType)
+    }
+    UNION
+    {
       ?inst bf:identifiedBy ?isbn .
       ?isbn a bf:Isbn .
       ?isbn rdf:value ?isbnVal .
+    }
+    UNION
+    {
+      ?inst bf:identifiedBy ?issn .
+      ?issn a bf:Issn .
+      ?issn rdf:value ?issnVal .
+      BIND(schema:CreativeWorkSeries AS ?workSeriesType)
+      BIND(schema:CreativeWorkSeries AS ?instSeriesType)
+      BIND(schema:Periodical AS ?workPeriodicalType)
+      BIND(schema:Periodical AS ?instPeriodicalType)
     }
     UNION
     {
@@ -194,7 +211,7 @@ WHERE {
         ?seriesIssn a bf:Issn .
         ?seriesIssn rdf:value ?seriesIssnValueRaw .
         BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
-        BIND(schema:Periodical as ?seriesType)
+        BIND(schema:Periodical as ?seriesPeriodicalType)
       }
     }
     UNION

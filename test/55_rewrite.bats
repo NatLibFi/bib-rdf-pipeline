@@ -41,9 +41,9 @@ setup () {
 @test "Rewrite URIs: rewriting series URIs" {
   make merged/origwork-rewritten.nt
   # 1st series statement uses 01 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:S00041961501> <http://schema.org/name> "Braille-neuvottelukunnan julkaisuja"' merged/origwork-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00041961501> <http://schema.org/name> "Braille-neuvottelukunnan julkaisuja"' merged/origwork-rewritten.nt
   # 2nd series statement uses 02 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:S00041961502> <http://schema.org/name> "Braille-delegationens publikationer"' merged/origwork-rewritten.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00041961502> <http://schema.org/name> "Braille-delegationens publikationer"' merged/origwork-rewritten.nt
 }
 
 @test "Rewrite URIs: work URIs when the URI from the record itself has been merged with another" {
