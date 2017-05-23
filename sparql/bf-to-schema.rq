@@ -10,7 +10,6 @@ CONSTRUCT {
     schema:exampleOfWork ?work ;
     schema:name ?instName ;
     schema:description ?note ;
-    schema:author ?creator ;
     schema:exampleOfWork ?work ;
     schema:isbn ?isbnVal ;
     schema:issn ?issnVal ;
@@ -34,7 +33,6 @@ CONSTRUCT {
     schema:name ?contributorLabel .
   ?elecInst a schema:Book, schema:CreativeWork, bf:Instance ;
     schema:exampleOfWork ?work ;
-    schema:author ?creator ;
     schema:url ?elecUri ;
     schema:name ?instName ;
     schema:bookFormat schema:EBook .

@@ -115,10 +115,10 @@ setup () {
   grep -q "$inst <http://schema.org/isbn> \"951-0-19440-9\"" slices/ajanlyhythistoria-00009-schema.nt
 }
 
-@test "Schema.org RDF: conversion of author (original work, translated work and instance)" {
+@test "Schema.org RDF: conversion of author (original work and translated work)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
-  [ "$output" -eq "3" ]
+  [ "$output" -eq "2" ]
   # check that schema:creator is not used by mistake
   ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
 }
@@ -183,7 +183,6 @@ setup () {
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Book>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/verkkoaineisto-00608-schema.nt
   grep -q "$elec <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Instance>" slices/verkkoaineisto-00608-schema.nt
-  grep -q "$elec <http://schema.org/author>" slices/verkkoaineisto-00608-schema.nt
 }
 
 @test "Schema.org RDF: conversion of electronic version (856 without \$y case)" {
