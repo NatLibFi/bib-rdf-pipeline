@@ -48,4 +48,4 @@ before_install:
   - popd
 script:
   - cd test
-  - bats .
+  - travis_wait 20 bats .
