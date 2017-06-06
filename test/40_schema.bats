@@ -204,12 +204,10 @@ setup () {
   work="$(grep '<http://schema.org/workExample>' slices/forfattning-00006-schema.nt | head -n 1 | cut -d ' ' -f 1)"
   [ -n "$work" ]
   grep -q "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Periodical>" slices/forfattning-00006-schema.nt
-  grep -q "$work <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWorkSeries>" slices/forfattning-00006-schema.nt
 
   inst="$(grep '<http://rdaregistry.info/Elements/u/P60048> "nide"' slices/forfattning-00006-schema.nt | cut -d ' ' -f 1)"
   [ -n "$inst" ]
   grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Periodical>" slices/forfattning-00006-schema.nt
-  grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWorkSeries>" slices/forfattning-00006-schema.nt
   grep -q "$inst <http://schema.org/issn> \"0787-3182\"" slices/forfattning-00006-schema.nt
 }
 
@@ -221,7 +219,6 @@ setup () {
   [ -n "$series" ]
   # check that it has the correct information
   grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Periodical>" slices/etyk-00012-schema.nt
-  grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWorkSeries>" slices/etyk-00012-schema.nt
   grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/etyk-00012-schema.nt
   grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Work>" slices/etyk-00012-schema.nt
   grep -q "$series <http://schema.org/name> \"Julkaisusarja / Maanpuolustuskorkeakoulu, strategian laitos. 1, Strategian tutkimuksia\"" slices/etyk-00012-schema.nt

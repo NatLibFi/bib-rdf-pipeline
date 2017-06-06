@@ -6,7 +6,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
 
 CONSTRUCT {
-  ?inst a schema:CreativeWork, bf:Instance, ?instSeriesType, ?instPeriodicalType ;
+  ?inst a schema:CreativeWork, bf:Instance, ?instPeriodicalType ;
     schema:exampleOfWork ?work ;
     schema:name ?instName ;
     schema:description ?note ;
@@ -36,7 +36,7 @@ CONSTRUCT {
     schema:url ?elecUri ;
     schema:name ?instName ;
     schema:bookFormat schema:EBook .
-  ?work a schema:CreativeWork, bf:Work, ?workSeriesType, ?workPeriodicalType ;
+  ?work a schema:CreativeWork, bf:Work, ?workPeriodicalType ;
     schema:workExample ?inst, ?elecInst ;
     schema:translationOfWork ?origwork ;
     schema:isPartOf ?series ;
@@ -46,13 +46,13 @@ CONSTRUCT {
     schema:about ?topicLabel, ?subjectWork, ?subjectOrg ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
-  ?origwork a schema:CreativeWork, bf:Work, ?origworkType, ?origworkType2 ;
+  ?origwork a schema:CreativeWork, bf:Work, ?origworkType ;
     schema:workTranslation ?work ;
     schema:name ?origworkTitle ;
     schema:inLanguage ?origLanguageCode ;
     schema:issn ?origworkIssnValue ;
     schema:author ?creator .
-  ?series a schema:CreativeWork, bf:Work, schema:CreativeWorkSeries, ?seriesPeriodicalType ;
+  ?series a schema:CreativeWork, bf:Work, schema:Periodical ;
     schema:hasPart ?work ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
@@ -85,8 +85,6 @@ WHERE {
   OPTIONAL {
     {
       ?inst bf:issuance <http://id.loc.gov/vocabulary/issuance/serl>
-      BIND(schema:CreativeWorkSeries AS ?workSeriesType)
-      BIND(schema:CreativeWorkSeries AS ?instSeriesType)
     }
     UNION
     {
@@ -99,8 +97,6 @@ WHERE {
       ?inst bf:identifiedBy ?issn .
       ?issn a bf:Issn .
       ?issn rdf:value ?issnVal .
-      BIND(schema:CreativeWorkSeries AS ?workSeriesType)
-      BIND(schema:CreativeWorkSeries AS ?instSeriesType)
       BIND(schema:Periodical AS ?workPeriodicalType)
       BIND(schema:Periodical AS ?instPeriodicalType)
     }
@@ -187,7 +183,6 @@ WHERE {
         ?origworkIssn a bf:Issn .
         ?origworkIssn rdf:value ?origworkIssnValue .
         BIND(schema:Periodical as ?origworkType)
-        BIND(schema:CreativeWorkSeries as ?origworkType2)
       }
       OPTIONAL {
         ?work bf:language ?origLanguage .
@@ -209,7 +204,6 @@ WHERE {
         ?seriesIssn a bf:Issn .
         ?seriesIssn rdf:value ?seriesIssnValueRaw .
         BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
-        BIND(schema:Periodical as ?seriesPeriodicalType)
       }
     }
     UNION
