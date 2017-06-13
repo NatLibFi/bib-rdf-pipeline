@@ -37,8 +37,12 @@ def uri_sort_key(uri):
     # determine priority based on MARC field
     if field == '': # Work for record itself has highest priority
         priority = 0
-    elif field == '765': # 765 (original of translation) has  second highest priority
+    elif field == '130': # 130 (uniform title) has second highest priority
         priority = 1
+    elif field == '240': # 240 (uniform title / original of translation) has third highest priority
+        priority = 2
+    elif field == '765': # 765 (original of translation) has fourth highest priority
+        priority = 3
     else:
         priority = int(field) # for the rest, use the field number as priority value
     return (priority, uri)

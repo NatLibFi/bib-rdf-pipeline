@@ -34,16 +34,6 @@ if exists(origtitle)
     end
 end
 
-# Add 765 with uniform title for translations
-marc_map('765s', origuniftitle)
-if exists(origlang)
-    unless exists(origuniftitle)
-	if exists(origtitle)
-            marc_add('765', s, $.origtitle)
-        end
-    end
-end
-
 # Remove 336$2 subfield (it confuses the marc2bibframe conversion)
 marc_remove('3362')
 

@@ -33,7 +33,7 @@ setup () {
   grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Instance>" slices/raamattu-00000-schema.nt
 }
 
-@test "Schema.org RDF: conversion of original work for translation (240 / 765 \$s case)" {
+@test "Schema.org RDF: conversion of original work for translation (240 case)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
   orig="$(grep "$work <http://schema.org/translationOfWork>" slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"

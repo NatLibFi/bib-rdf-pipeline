@@ -185,19 +185,15 @@ WHERE {
         BIND(schema:Periodical as ?origworkType)
       }
       OPTIONAL {
-        ?work bf:language ?origLanguage .
-        ?origLanguage bf:part "original" .
-        OPTIONAL {
-          ?origLanguage rdf:value ?origLanguageValue .
-        }
-        BIND(COALESCE(?origLanguageValue, ?origLanguage) AS ?origLanguageVal)
-        BIND(STRAFTER(STR(?origLanguageVal), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
+        ?origwork bf:language ?origLanguage .
+        BIND(STRAFTER(STR(?origLanguage), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
       }
     }
     UNION
     {
-      ?work bf:hasSeries ?series .
-      ?series bf:title/rdfs:label ?seriesTitle .
+      ?inst bf:hasSeries ?seriesInst .
+      ?seriesInst rdfs:label ?seriesTitle .
+      ?seriesInst bf:instanceOf ?series .
       BIND(REPLACE(?seriesTitle, '[ ,;]+$', '') AS ?seriesTitleValue)
       OPTIONAL {
         ?series bf:identifiedBy ?seriesIssn .
