@@ -51,7 +51,7 @@ refdata/RDAMediaType.nt:
 	curl -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
 
 %-preprocessed.alephseq: %-in.alephseq
-	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py >$@
+	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py | (cd $(PATH_PREFIX)../aleph-processor/ ; Rscript enrich_aleph.R) >$@
 
 %.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv
 	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix <$< >$@
