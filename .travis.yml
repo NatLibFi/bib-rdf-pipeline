@@ -14,7 +14,7 @@ addons:
     packages:
     - libxml2-utils
     - xsltproc
-    - r-base-dev
+    - r-base
 before_install:
   # Perl dependencies i.e. Catmandu
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
