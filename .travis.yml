@@ -9,9 +9,12 @@ cache:
     - $HOME/.m2
 addons:
   apt:
+    sources:
+    - r-packages-trusty
     packages:
     - libxml2-utils
     - xsltproc
+    - r-base-dev
 before_install:
   # Perl dependencies i.e. Catmandu
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
