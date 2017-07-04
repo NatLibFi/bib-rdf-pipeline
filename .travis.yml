@@ -18,7 +18,7 @@ addons:
 before_install:
   # R dependencies i.e. aleph-processor and bibliographica
   - pushd $HOME/git
-  - git clone --depth 1 https://github.com/COMHIS/aleph-processor.git  
+  - if [ ! -d aleph-processor ]; then git clone --depth 1 https://github.com/COMHIS/aleph-processor.git; fi
   - pushd aleph-processor
   - R -e "0" --args --bootstrap-packrat
   - popd
