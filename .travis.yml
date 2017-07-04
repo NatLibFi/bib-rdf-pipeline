@@ -17,6 +17,7 @@ addons:
     - r-base
 before_install:
   # R dependencies i.e. aleph-processor and bibliographica
+  - echo "options(repos = c(CRAN = "https://cloud.r-project.org"))" >.Rprofile
   - pushd $HOME/git
   - if [ ! -d aleph-processor ]; then git clone --depth 1 https://github.com/COMHIS/aleph-processor.git; fi
   - pushd aleph-processor
