@@ -16,6 +16,11 @@ addons:
     - xsltproc
     - r-base
 before_install:
+  # R dependencies i.e. aleph-processor and bibliographica
+  - pushd $HOME/git
+  - git clone --depth 1 https://github.com/COMHIS/aleph-processor.git  
+  - R -e "0" --args --bootstrap-packrat
+  - popd
   # Perl dependencies i.e. Catmandu
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
   - eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
