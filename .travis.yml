@@ -17,10 +17,10 @@ addons:
     - r-base
 before_install:
   # R dependencies i.e. aleph-processor and bibliographica
-  - echo "options(repos = c(CRAN = "https://cloud.r-project.org"))" >$HOME/.Rprofile
   - pushd $HOME/git
   - if [ ! -d aleph-processor ]; then git clone --depth 1 https://github.com/COMHIS/aleph-processor.git; fi
   - pushd aleph-processor
+  - echo "options(repos = c(CRAN = "https://cloud.r-project.org"))" >.Rprofile
   - R -e "0" --args --bootstrap-packrat
   - popd
   - popd
