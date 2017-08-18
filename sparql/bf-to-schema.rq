@@ -227,9 +227,9 @@ WHERE {
     }
     UNION
     {
-      # Topic as subject
+      # Topic or Place as subject
       ?work bf:subject ?topic .
-      ?topic a bf:Topic .
+      { ?topic a bf:Topic } UNION { ?topic a bf:Place }
       ?topic rdfs:label ?topicLabel .
     }
     UNION

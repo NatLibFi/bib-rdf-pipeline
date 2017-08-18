@@ -323,6 +323,16 @@ setup () {
   [ "$output" -eq "7" ]
 }
 
+@test "Schema.org RDF: conversion of 651 subjects" {
+  make slices/etyk-00012-schema.nt
+  work="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  # check that a particular subject is found
+  grep -q -F "$work <http://schema.org/about> \"Eurooppa\"" slices/etyk-00012-schema.nt
+  # check that the number of subjects is expected
+  run grep -c -F "$work <http://schema.org/about>" slices/etyk-00012-schema.nt
+  [ "$output" -eq "10" ]
+}
+
 @test "Schema.org RDF: modelling organization subjects as schema:Organization" {
   make slices/etyk-00012-schema.nt
   # find out the URI of the org-subject
