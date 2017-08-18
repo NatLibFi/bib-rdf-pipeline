@@ -69,7 +69,8 @@ setup () {
 @test "Work keys: parallel title case" {
   make slices/jakaja-00005-work-keys.nt
   # parallel titles should not be used as work keys
-  ! grep -q -F '<http://purl.org/dc/terms/identifier> "grundlagarna och statshushållningen kommittén för revision av grundlagarnas stadganden om statshushållning' slices/jakaja-00005-work-keys.nt
+  run grep -F '<http://purl.org/dc/terms/identifier> "grundlagarna och statshushållningen kommittén för revision av grundlagarnas stadganden om statshushållning' slices/jakaja-00005-work-keys.nt
+  [ $status -ne 0 ]
 }
 
 @test "Work keys: subtitle case" {
@@ -77,7 +78,8 @@ setup () {
   # subtitle should be part of work key
   grep -q -F '<http://purl.org/dc/terms/identifier> "ajan lyhyt historia alkuräjähdyksestä mustiin aukkoihin/hawking, stephen"' slices/ajanlyhythistoria-00009-work-keys.nt
   # title without subtitle should not be used for work keys
-  ! grep -q -F '<http://purl.org/dc/terms/identifier> "ajan lyhyt historia/hawking, stephen"' slices/ajanlyhythistoria-00009-work-keys.nt
+  run grep -F '<http://purl.org/dc/terms/identifier> "ajan lyhyt historia/hawking, stephen"' slices/ajanlyhythistoria-00009-work-keys.nt
+  [ $status -ne 0 ]
 }
 
 @test "Work keys: part number case" {
@@ -100,10 +102,12 @@ setup () {
 
 @test "Work keys: no recurring spaces" {
   make refdata/fanrik-manninen-work-keys.nt
-  ! grep '  ' refdata/fanrik-manninen-work-keys.nt
+  run grep '  ' refdata/fanrik-manninen-work-keys.nt
+  [ $status -ne 0 ]
 }
 
 @test "Work keys: no trailing spaces in titles" {
   make refdata/fanrik-manninen-work-keys.nt
-  ! grep ' /' refdata/fanrik-manninen-work-keys.nt
+  run grep ' /' refdata/fanrik-manninen-work-keys.nt
+  [ $status -ne 0 ]
 }

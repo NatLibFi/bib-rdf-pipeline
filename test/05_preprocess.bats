@@ -20,7 +20,8 @@ setup () {
 
 @test "Preprocess MARC: drops subject without KEEP tag" {
   make slices/ajanlyhythistoria-00009-preprocessed.alephseq
-  ! grep -q kosmologia slices/ajanlyhythistoria-00009-preprocessed.alephseq
+  run grep kosmologia slices/ajanlyhythistoria-00009-preprocessed.alephseq
+  [ $status -ne 0 ]
 }
 
 @test "Preprocess MARC: drop duplicate 130 fields" {

@@ -16,7 +16,8 @@ setup () {
 @test "Reconcile: converting language codes to ISO 639-1" {
   make slices/ajattelemisenalku-00098-reconciled.nt
   grep -q -F '<http://schema.org/inLanguage> "fi"' slices/ajattelemisenalku-00098-reconciled.nt
-  ! grep -q -F '<http://schema.org/inLanguage> "fin"' slices/ajattelemisenalku-00098-reconciled.nt
+  run grep -F '<http://schema.org/inLanguage> "fin"' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: retaining work subjects" {
@@ -29,22 +30,26 @@ setup () {
   make slices/ajattelemisenalku-00098-reconciled.nt
   # "myytit" -> ysa:Y97600
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y97600>' slices/ajattelemisenalku-00098-reconciled.nt
-  ! grep -q -F '<http://schema.org/about> "myytit"' slices/ajattelemisenalku-00098-reconciled.nt
+  run grep -F '<http://schema.org/about> "myytit"' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: converting to YSA URIs, place case" {
   make slices/etyk-00012-reconciled.nt
   # "Eurooppa" -> ysa:Y94111
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y94111>' slices/etyk-00012-reconciled.nt
-  ! grep -q -F '<http://schema.org/about> "Eurooppa"' slices/etyk-00012-reconciled.nt
+  run grep -F '<http://schema.org/about> "Eurooppa"' slices/etyk-00012-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: converting to YSA URIs, coordinated case" {
   make slices/ajattelemisenalku-00098-reconciled.nt
   # "filosofia -- antiikki" -> ysa:Y95164
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y95164>' slices/ajattelemisenalku-00098-reconciled.nt
-  ! grep -q -F '<http://schema.org/about> "filosofia--antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
-  ! grep -q -F '<http://schema.org/about> "filosofia -- antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
+  run grep -q -F '<http://schema.org/about> "filosofia--antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+  run grep -q -F '<http://schema.org/about> "filosofia -- antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: converting to YSA URIs, not found in YSA case" {
@@ -55,7 +60,8 @@ setup () {
 
 @test "Reconcile: converting to YSA URIs, same term as RDA Carrier case" {
   make slices/verkkoaineisto-00608-reconciled.nt
-  ! grep -q '<http://schema.org/about> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/verkkoaineisto-00608-reconciled.nt
+  run grep '<http://schema.org/about> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/verkkoaineisto-00608-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: converting to YSO concept URIs" {
@@ -76,8 +82,10 @@ setup () {
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:26756A>' slices/ekumeeninen-00585-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:26756A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/ekumeeninen-00585-reconciled.nt
   # check that no blank nodes remain
-  ! grep -q -F '<http://schema.org/publisher> _:' slices/ekumeeninen-00585-reconciled.nt
-  ! grep -q '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/ekumeeninen-00585-reconciled.nt
+  run grep -F '<http://schema.org/publisher> _:' slices/ekumeeninen-00585-reconciled.nt
+  [ $status -ne 0 ]
+  run grep '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/ekumeeninen-00585-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: express publisher organizations using CN, alternate label case" {
@@ -86,8 +94,10 @@ setup () {
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:8274A>' slices/verkkoaineisto-00608-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:8274A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
   # check that no blank nodes remain
-  ! grep -q -F '<http://schema.org/publisher> _:' slices/verkkoaineisto-00608-reconciled.nt
-  ! grep -q '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
+  run grep -F '<http://schema.org/publisher> _:' slices/verkkoaineisto-00608-reconciled.nt
+  [ $status -ne 0 ]
+  run grep '^_:.* <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: retain publisher organizations that cannot be reconciled with CN" {
@@ -110,7 +120,8 @@ setup () {
 @test "Reconcile: expressing RDA carrier type" {
   make slices/kotona-00720-reconciled.nt
   grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/kotona-00720-reconciled.nt
-  ! grep -q '<http://rdaregistry.info/Elements/u/P60048> <http://www.yso.fi/onto/ysa/Y175712>' slices/kotona-00720-reconciled.nt
+  run grep '<http://rdaregistry.info/Elements/u/P60048> <http://www.yso.fi/onto/ysa/Y175712>' slices/kotona-00720-reconciled.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reconcile: expressing RDA content type" {

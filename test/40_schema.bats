@@ -73,8 +73,10 @@ setup () {
   work="$(grep '<http://schema.org/workExample>' slices/raamattu-00000-schema.nt | cut -d ' ' -f 1)"
   grep -q "$work <http://schema.org/inLanguage> \"fin\"" slices/raamattu-00000-schema.nt
   # check that original language is not declared for the translated work
-  ! grep -q "$work <http://schema.org/inLanguage> \"grc\"" slices/raamattu-00000-schema.nt
-  ! grep -q "$work <http://schema.org/inLanguage> \"heb\"" slices/raamattu-00000-schema.nt
+  run grep "$work <http://schema.org/inLanguage> \"grc\"" slices/raamattu-00000-schema.nt
+  [ $status -ne 0 ]
+  run grep "$work <http://schema.org/inLanguage> \"heb\"" slices/raamattu-00000-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of number of pages" {
@@ -120,7 +122,8 @@ setup () {
   run grep -c -F '<http://schema.org/author>' slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "2" ]
   # check that schema:creator is not used by mistake
-  ! grep -q -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
+  run grep -F '<http://schema.org/creator>' slices/ajanlyhythistoria-00009-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of contributors" {
@@ -230,7 +233,8 @@ setup () {
   # TODO: this is incomplete: we should also convert volume numbers etc. See issue #46
   make slices/origwork-00041-schema.nt
   grep -q -F '<http://schema.org/name> "Braille-neuvottelukunnan julkaisuja"' slices/origwork-00041-schema.nt
-  ! grep -F '<http://schema.org/name> "Braille-neuvottelukunnan julkaisuja ;"' slices/origwork-00041-schema.nt
+  run grep -F '<http://schema.org/name> "Braille-neuvottelukunnan julkaisuja ;"' slices/origwork-00041-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: quoting bad URLs" {
@@ -244,25 +248,30 @@ setup () {
 @test "Schema.org RDF: skipping bad URLs that cannot be quoted" {
   make slices/bad-url-00733-schema.nt
   grep -q 'SYNTAX ERROR, skipping' slices/bad-url-00733-schema.log
-  ! grep -q 'http://ethesis.helsinki.fi/julkaisut/kay/fonet/vk/rautakoski/' slices/bad-url-00733-schema.nt 
+  run grep 'http://ethesis.helsinki.fi/julkaisut/kay/fonet/vk/rautakoski/' slices/bad-url-00733-schema.nt 
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: organization name should not end in full stop" {
   make slices/jakaja-00005-schema.nt
-  ! grep -q -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
+  run grep -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: strip 'jakelija:' prefix from organization name" {
   make slices/superkumikana-cd-00611-schema.nt
   grep -q -F '<http://schema.org/name> "BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
-  ! grep -q -F '<http://schema.org/name> "jakelija: BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
+  run grep -F '<http://schema.org/name> "jakelija: BTJ Finland"' slices/superkumikana-cd-00611-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: strip 'jakaja' suffix from organization name" {
   make slices/jakaja-00005-schema.nt
   grep -q -F '<http://schema.org/name> "Valtion painatuskeskus"' slices/jakaja-00005-schema.nt
-  ! grep -q -F '<http://schema.org/name> "Valtion painatuskeskus, jakaja"' slices/jakaja-00005-schema.nt
-  ! grep -q -F '<http://schema.org/name> "Valtion painatuskeskus jakaja"' slices/jakaja-00005-schema.nt
+  run grep -F '<http://schema.org/name> "Valtion painatuskeskus, jakaja"' slices/jakaja-00005-schema.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/name> "Valtion painatuskeskus jakaja"' slices/jakaja-00005-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: modelling organization authors as schema:Organization" {
@@ -274,7 +283,8 @@ setup () {
   # check that it's an Organization
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
   # double-check that it's not a Person
-  ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+  run grep -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: modelling organization contributors as schema:Organization" {
@@ -286,7 +296,8 @@ setup () {
   # check that it's an Organization
   grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>" slices/jakaja-00005-schema.nt
   # double-check that it's not a Person
-  ! grep -q -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+  run grep -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of 600 \$t work subjects" {
@@ -387,6 +398,8 @@ setup () {
   grep -q "$work1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
   grep -q "$orig1 <http://schema.org/inLanguage> \"fin\"" slices/langpart-00000-schema.nt
 
-  ! grep "$work1 <http://schema.org/inLanguage> \"fin\"" slices/langpart-00000-schema.nt
-  ! grep "$orig1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
+  run grep "$work1 <http://schema.org/inLanguage> \"fin\"" slices/langpart-00000-schema.nt
+  [ $status -ne 0 ]
+  run grep "$orig1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
+  [ $status -ne 0 ]
 }

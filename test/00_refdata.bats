@@ -26,7 +26,8 @@ setup () {
   make refdata/cn-labels.nt
   [ -s refdata/cn-labels.nt ]
   # make sure language tags have been stripped
-  ! grep -q '"@' refdata/cn-labels.nt
+  run grep '"@' refdata/cn-labels.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reference data: RDA Carrier types" {
@@ -41,7 +42,8 @@ setup () {
 
 @test "Reference data: RDA Content types shouldn't have double slashes" {
   make refdata/RDAContentType.nt
-  ! grep 'RDAContentType//' refdata/RDAContentType.nt
+  run grep 'RDAContentType//' refdata/RDAContentType.nt
+  [ $status -ne 0 ]
 }
 
 @test "Reference data: RDA Media types" {
