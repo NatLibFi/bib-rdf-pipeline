@@ -26,33 +26,45 @@ setup () {
   [ "$count" -eq 12 ]
 }
 
-@test "Reconcile: converting to YSA URIs, basic case" {
+@test "Reconcile: converting to YSA/YSO URIs, basic case" {
   make slices/ajattelemisenalku-00098-reconciled.nt
-  # "myytit" -> ysa:Y97600
-  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y97600>' slices/ajattelemisenalku-00098-reconciled.nt
+  # "myytit" -> ysa:Y97600 -> yso:p1248
   run grep -F '<http://schema.org/about> "myytit"' slices/ajattelemisenalku-00098-reconciled.nt
   [ $status -ne 0 ]
+  run grep -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y97600>' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/about> <http://www.yso.fi/onto/allars/Y23220>' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p1248>' slices/ajattelemisenalku-00098-reconciled.nt
 }
 
-@test "Reconcile: converting to YSA URIs, place case" {
+@test "Reconcile: converting to YSA/YSO URIs, place case" {
   make slices/etyk-00012-reconciled.nt
-  # "Eurooppa" -> ysa:Y94111
-  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y94111>' slices/etyk-00012-reconciled.nt
+  # "Eurooppa" -> ysa:Y94111 -> yso:p94111
   run grep -F '<http://schema.org/about> "Eurooppa"' slices/etyk-00012-reconciled.nt
   [ $status -ne 0 ]
+  run grep -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y94111>' slices/etyk-00012-reconciled.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/about> <http://www.yso.fi/onto/allars/Y30166>' slices/etyk-00012-reconciled.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p94111>' slices/etyk-00012-reconciled.nt
 }
 
-@test "Reconcile: converting to YSA URIs, coordinated case" {
+@test "Reconcile: converting to YSA/YSO URIs, coordinated case" {
   make slices/ajattelemisenalku-00098-reconciled.nt
-  # "filosofia -- antiikki" -> ysa:Y95164
-  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y95164>' slices/ajattelemisenalku-00098-reconciled.nt
+  # "filosofia -- antiikki" -> ysa:Y95164 -> yso:p20343
   run grep -q -F '<http://schema.org/about> "filosofia--antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
   [ $status -ne 0 ]
   run grep -q -F '<http://schema.org/about> "filosofia -- antiikki"' slices/ajattelemisenalku-00098-reconciled.nt
   [ $status -ne 0 ]
+  run grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/ysa/Y95164>' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+  run grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/allars/Y39782>' slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p20343>' slices/ajattelemisenalku-00098-reconciled.nt
 }
 
-@test "Reconcile: converting to YSA URIs, not found in YSA case" {
+@test "Reconcile: converting to YSA/YSO URIs, not found in YSA case" {
   make slices/ajattelemisenalku-00098-reconciled.nt
   # "kirjallisuus -- antiikki" -> remains as literal
   grep -q -F '<http://schema.org/about> "kirjallisuus -- antiikki"@fi' slices/ajattelemisenalku-00098-reconciled.nt
@@ -62,18 +74,6 @@ setup () {
   make slices/verkkoaineisto-00608-reconciled.nt
   run grep '<http://schema.org/about> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/verkkoaineisto-00608-reconciled.nt
   [ $status -ne 0 ]
-}
-
-@test "Reconcile: converting to YSO concept URIs" {
-  make slices/ajattelemisenalku-00098-reconciled.nt
-  # "myytit" -> ysa:Y97600 -> yso:p1248
-  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p1248>' slices/ajattelemisenalku-00098-reconciled.nt
-}
-
-@test "Reconcile: converting to YSO Place URIs" {
-  make slices/ajattelemisenalku-00098-reconciled.nt
-  # "Eurooppa" -> ysa:Y94111 -> yso:p94111
-  grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p94111>' slices/etyk-00012-reconciled.nt
 }
 
 @test "Reconcile: express publisher organizations using CN, preferred label case" {
