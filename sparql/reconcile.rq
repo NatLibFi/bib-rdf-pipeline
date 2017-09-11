@@ -11,7 +11,7 @@ CONSTRUCT {
   ?s rdau:P60049 ?rdaContentType .
   ?s rdau:P60050 ?rdaMediaType .
   ?s ?p ?organization .
-  ?organization schema:name ?orgName .
+  ?organization schema:name ?organizationName .
   ?organization a schema:Organization .
 } WHERE {
   {
@@ -113,8 +113,10 @@ CONSTRUCT {
     OPTIONAL {
       GRAPH ?cnGraph {
         ?cnOrganization skos:altLabel ?orgName .
+        ?cnOrganization skos:prefLabel ?orgPrefLabel .
       }
     }
     BIND(COALESCE(?cnOrganization,?org) AS ?organization)
+    BIND(COALESCE(?orgPrefLabel, ?orgName) as ?organizationName)
   }
 }

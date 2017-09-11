@@ -93,6 +93,11 @@ setup () {
   # "University of Jyväskylä" -> cn:8274A
   grep -q -F '<http://schema.org/publisher> <http://urn.fi/URN:NBN:fi:au:cn:8274A>' slices/verkkoaineisto-00608-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:8274A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/verkkoaineisto-00608-reconciled.nt
+  # check that the authorized label from CN is used as schema:name
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:8274A> <http://schema.org/name> "Jyväskylän yliopisto"' slices/verkkoaineisto-00608-reconciled.nt
+  # check that the non-authorized (alternate) label is not used in the output
+  run grep -F '<http://schema.org/name> "University of Jyväskylä"' slices/verkkoaineisto-00608-reconciled.nt
+  [ $status -ne 0 ]
   # check that no blank nodes remain
   run grep -F '<http://schema.org/publisher> _:' slices/verkkoaineisto-00608-reconciled.nt
   [ $status -ne 0 ]
