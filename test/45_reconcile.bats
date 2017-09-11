@@ -7,11 +7,14 @@ setup () {
   make slice
 }
 
-@test "Reconcile: basic reconciliation" {
-  rm -f slices/kotona-00097-reconciled.nt
-  make -j2 reconcile
-  [ -s slices/kotona-00097-reconciled.nt ]
-}
+# Disabled, because running this takes a very long time and causes Travis timeouts.
+# Instead, reconciliation for single files at a time is done by individual tests.
+#
+#@test "Reconcile: basic reconciliation" {
+#  rm -f slices/kotona-00097-reconciled.nt
+#  make -j2 reconcile
+#  [ -s slices/kotona-00097-reconciled.nt ]
+#}
 
 @test "Reconcile: converting language codes to ISO 639-1" {
   make slices/ajattelemisenalku-00098-reconciled.nt
