@@ -79,6 +79,24 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Reconcile: express authors with ID using PN" {
+  make slices/kotkankasvisto-00641-reconciled.nt
+  grep -q -F '<http://schema.org/author> <http://urn.fi/URN:NBN:fi:au:pn:000061725>' slices/kotkankasvisto-00641-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000061725> <http://schema.org/name> "Ulvinen, Arvi"' slices/kotkankasvisto-00641-reconciled.nt
+  # check that no agent URIs derived from the bib record ID are left
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:006419003#Agent100" slices/kotkankasvisto-00641-reconciled.nt
+  [ $status -ne 0 ]
+}
+
+@test "Reconcile: express contributors with ID using PN" {
+  make slices/jatuli-00000-reconciled.nt
+  grep -q -F '<http://schema.org/contributor> <http://urn.fi/URN:NBN:fi:au:pn:000047367>' slices/jatuli-00000-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000047367> <http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-reconciled.nt
+  # check that no agent URIs derived from the bib record ID are left
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000006753#Agent700-22" slices/jatuli-00000-reconciled.nt
+  [ $status -ne 0 ]
+}
+
 @test "Reconcile: express publisher organizations using CN, preferred label case" {
   make slices/ekumeeninen-00585-reconciled.nt
   # "Suomen ekumeeninen neuvosto" -> cn:26756A

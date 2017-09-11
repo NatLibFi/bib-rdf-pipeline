@@ -28,9 +28,11 @@ CONSTRUCT {
   ?publisherOrganization a schema:Organization ;
     schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
-    schema:name ?creatorLabel .
+    schema:name ?creatorLabel ;
+    schema:identifier ?creatorIdentifier .
   ?contributor a ?schemaContributorType ;
-    schema:name ?contributorLabel .
+    schema:name ?contributorLabel ;
+    schema:identifier ?contributorIdentifier .
   ?elecInst a schema:Book, schema:CreativeWork, bf:Instance ;
     schema:exampleOfWork ?work ;
     schema:url ?elecUri ;
@@ -159,6 +161,9 @@ WHERE {
     ?creator a ?bfCreatorType .
     ?creator rdfs:label ?creatorLabelRaw .
     BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
+    OPTIONAL {
+      ?creator bf:identifiedBy/rdf:value ?creatorIdentifier .
+    }
   }
 
   # work-related properties, all optional
@@ -171,6 +176,9 @@ WHERE {
       ?contributor a ?bfContributorType .
       ?contributor rdfs:label ?contributorLabelRaw .
       BIND(REPLACE(?contributorLabelRaw, '[ ,\\.]+$', '') AS ?contributorLabel)
+      OPTIONAL {
+        ?contributor bf:identifiedBy/rdf:value ?contributorIdentifier .
+      }
     }
     UNION
     {

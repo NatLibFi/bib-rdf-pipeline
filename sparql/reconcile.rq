@@ -2,6 +2,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX lvont: <http://lexvo.org/ontology#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdau: <http://rdaregistry.info/Elements/u/>
+PREFIX pn: <http://urn.fi/URN:NBN:fi:au:pn:>
 
 CONSTRUCT {
   ?s ?p ?o .
@@ -10,6 +11,8 @@ CONSTRUCT {
   ?s rdau:P60048 ?rdaCarrierType .
   ?s rdau:P60049 ?rdaContentType .
   ?s rdau:P60050 ?rdaMediaType .
+  ?s ?p ?person .
+  ?person schema:name ?personName .
   ?s ?p ?organization .
   ?organization schema:name ?organizationName .
   ?organization a schema:Organization .
@@ -17,6 +20,8 @@ CONSTRUCT {
   {
     ?s ?p ?o .
     FILTER(?p NOT IN (schema:inLanguage, schema:about, rdau:P60048, rdau:P60049, rdau:P60050))
+    FILTER NOT EXISTS { ?o a schema:Person }
+    FILTER NOT EXISTS { ?s a schema:Person }
     FILTER NOT EXISTS { ?o a schema:Organization }
     FILTER NOT EXISTS { ?s a schema:Organization }
   }
@@ -99,6 +104,17 @@ CONSTRUCT {
       }
     }
 
+  }
+  UNION
+  {
+    ?s ?p ?pers .
+    ?pers a schema:Person .
+    ?pers schema:name ?personName .
+    OPTIONAL {
+      ?pers schema:identifier ?personIdentifier
+      BIND(IRI(CONCAT(STR(pn:), ?personIdentifier)) AS ?pnPerson)
+    }
+    BIND(COALESCE(?pnPerson, ?pers) AS ?person)
   }
   UNION
   {

@@ -126,10 +126,22 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Schema.org RDF: conversion of authors with ID" {
+  make slices/kotkankasvisto-00641-schema.nt
+  author="$(grep '<http://schema.org/author>' slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"
+  grep -q -F "$author <http://schema.org/identifier> \"000061725\"" slices/kotkankasvisto-00641-schema.nt
+}
+
 @test "Schema.org RDF: conversion of contributors" {
   make slices/ajanlyhythistoria-00009-schema.nt
   run grep -c -F '<http://schema.org/contributor>' slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "2" ]
+}
+
+@test "Schema.org RDF: conversion of contributors with ID" {
+  make slices/jatuli-00000-schema.nt
+  contributor="$(grep '<http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-schema.nt | cut -d ' ' -f 1)"
+  grep -q -F "$contributor <http://schema.org/identifier> \"000047367\"" slices/jatuli-00000-schema.nt
 }
 
 @test "Schema.org RDF: conversion of contributors with roles" {
