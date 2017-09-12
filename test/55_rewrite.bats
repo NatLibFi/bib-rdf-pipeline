@@ -27,8 +27,10 @@ setup () {
   make merged/origwork-rewritten.nt
   # author uses 01 sequence number
   grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118101> <http://schema.org/name> "Burgess, Alan"' merged/origwork-rewritten.nt
-  # translator uses 02 sequence number
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118102> <http://schema.org/name> "Aho, Oili"' merged/origwork-rewritten.nt
+  # subject uses 02 sequence number
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118102> <http://schema.org/name> "Roseveare, Helen"' merged/origwork-rewritten.nt
+  # translator uses 03 sequence number
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00004118103> <http://schema.org/name> "Aho, Oili"' merged/origwork-rewritten.nt
   # if there is no main author, then the first contributor (700) uses 01 sequence number
   grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00041961501> <http://schema.org/name> "Krolick, Bettye"' merged/origwork-rewritten.nt
 }

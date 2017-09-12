@@ -97,6 +97,15 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Reconcile: express person subjects with ID using PN" {
+  make slices/ajattelemisenalku-00098-reconciled.nt
+  grep -q -F '<http://schema.org/about> <http://urn.fi/URN:NBN:fi:au:pn:000043960>' slices/ajattelemisenalku-00098-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000043960> <http://schema.org/name> "Herakleitos"' slices/ajattelemisenalku-00098-reconciled.nt
+  # check that no agent URIs derived from the bib record ID are left
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000981258#Agent600-27" slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+}
+
 @test "Reconcile: express publisher organizations using CN, preferred label case" {
   make slices/ekumeeninen-00585-reconciled.nt
   # "Suomen ekumeeninen neuvosto" -> cn:26756A

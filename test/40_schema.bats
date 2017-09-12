@@ -129,6 +129,7 @@ setup () {
 @test "Schema.org RDF: conversion of authors with ID" {
   make slices/kotkankasvisto-00641-schema.nt
   author="$(grep '<http://schema.org/author>' slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$author" ]
   grep -q -F "$author <http://schema.org/identifier> \"000061725\"" slices/kotkankasvisto-00641-schema.nt
 }
 
@@ -141,6 +142,7 @@ setup () {
 @test "Schema.org RDF: conversion of contributors with ID" {
   make slices/jatuli-00000-schema.nt
   contributor="$(grep '<http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-schema.nt | cut -d ' ' -f 1)"
+  [ -n "$contributor" ]
   grep -q -F "$contributor <http://schema.org/identifier> \"000047367\"" slices/jatuli-00000-schema.nt
 }
 
@@ -310,6 +312,27 @@ setup () {
   # double-check that it's not a Person
   run grep -F "$uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/jakaja-00005-schema.nt
   [ $status -ne 0 ]
+}
+
+@test "Schema.org RDF: conversion of 600 \$a person subjects" {
+  make slices/origwork-00004-schema.nt
+  # find out the URI of a subject person
+  person="$(grep 'Roseveare, Helen' slices/origwork-00004-schema.nt | cut -d ' ' -f 1)"
+  # make sure it's set to something
+  [ -n "$person" ]
+  # check that it's a Person
+  grep -q -F "$person <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/origwork-00004-schema.nt
+  # check its name
+  grep -q -F "$person <http://schema.org/name> \"Roseveare, Helen\"" slices/origwork-00004-schema.nt
+  # check that the main work is about this person
+  grep -q -F "<http://schema.org/about> $person" slices/origwork-00004-schema.nt
+}
+
+@test "Schema.org RDF: conversion of person subjects with ID" {
+  make slices/ajattelemisenalku-00098-schema.nt
+  subject="$(grep '<http://schema.org/name> "Herakleitos"' slices/ajattelemisenalku-00098-schema.nt | cut -d ' ' -f 1)"
+  [ -n "$subject" ]
+  grep -q -F "$subject <http://schema.org/identifier> \"000043960\"" slices/ajattelemisenalku-00098-schema.nt
 }
 
 @test "Schema.org RDF: conversion of 600 \$t work subjects" {

@@ -45,7 +45,7 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
-    schema:about ?topicLabel, ?subjectWork, ?subjectOrg ;
+    schema:about ?topicLabel, ?subjectWork, ?subjectOrg, ?subjectPerson ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork, bf:Work, ?origworkType ;
@@ -65,6 +65,9 @@ CONSTRUCT {
     schema:name ?subjectWorkAgentName .
   ?subjectOrg a schema:Organization ;
     schema:name ?subjectOrgName .
+  ?subjectPerson a schema:Person ;
+    schema:name ?subjectPersonName ;
+    schema:identifier ?subjectPersonIdentifier .
 }
 WHERE {
   ?inst bf:instanceOf ?work .
@@ -248,6 +251,17 @@ WHERE {
       BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
       {
         { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
+      }
+    }
+    UNION
+    {
+      # Person as subject
+      ?work bf:subject ?subjectPerson .
+      ?subjectPerson a bf:Person .
+      ?subjectPerson rdfs:label ?subjectPersonNameRaw .
+      BIND(REPLACE(?subjectPersonNameRaw, '[ \\.]+$', '') AS ?subjectPersonName)
+      OPTIONAL {
+        ?subjectPerson bf:identifiedBy/rdf:value ?subjectPersonIdentifier
       }
     }
     UNION

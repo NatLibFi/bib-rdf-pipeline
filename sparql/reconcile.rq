@@ -40,6 +40,7 @@ CONSTRUCT {
   {
     ?s schema:about ?subjectUri .
     FILTER(isIRI(?subjectUri))
+    FILTER NOT EXISTS { ?subjectUri a schema:Person }
   }
   UNION
   {
