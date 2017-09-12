@@ -94,10 +94,19 @@ setup () {
   grep -q -F '<http://purl.org/dc/terms/identifier> "dekamerone neljäs päivä ja siihen kuuluvat 10 kertomusta/boccaccio, giovanni/elenius-pantzopoulos, anja"' slices/titlepart-00077-work-keys.nt
 }
 
-@test "Work keys: part number and title case" {
+@test "Work keys: part number and title case, with author" {
   make slices/titlepart-00077-work-keys.nt
   # part number and title should be part of work key, in that order
   grep -q -F '<http://purl.org/dc/terms/identifier> "kootut teokset 3 näytelmiä olviretki schleusingenissä leo ja liisa canzino selman juonet alma/kivi, aleksis"' slices/titlepart-00077-work-keys.nt
+}
+
+@test "Work keys: part number and title case, without author" {
+  make slices/peruskartta-00078-work-keys.nt
+  # part number and title should be part of work key, in that order
+  grep -q -F '<http://purl.org/dc/terms/identifier> "peruskartta 120000 2312 10 rintala"' slices/peruskartta-00078-work-keys.nt
+  # check that the short key is not used
+  run grep -q -F '<http://purl.org/dc/terms/identifier> "peruskartta 120000"' slices/peruskartta-00078-work-keys.nt
+  [ $status -ne 0 ]
 }
 
 @test "Work keys: no recurring spaces" {

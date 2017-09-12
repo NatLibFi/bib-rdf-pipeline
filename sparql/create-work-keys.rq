@@ -57,7 +57,7 @@ CONSTRUCT {
   {
     ?w a bf:Work .
     ?w bf:hasInstance [] . # not a series
-    ?w bf:title/bf:mainTitle ?title .
+    ?w bf:title/rdfs:label ?title .
     FILTER NOT EXISTS {
        # has no contributors
        ?w bf:contribution ?contribution . 
