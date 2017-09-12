@@ -117,3 +117,9 @@ setup () {
   run grep ',"' refdata/prepub-work-keys.nt
   [ $status -ne 0 ]
 }
+
+@test "Work keys: no birth/death years" {
+  make refdata/sjubroder-work-keys.nt
+  run grep '1834-1872' refdata/sjubroder-work-keys.nt
+  [ $status -ne 0 ]
+}

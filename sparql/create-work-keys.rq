@@ -35,7 +35,7 @@ CONSTRUCT {
       ?contribution bf:agent/rdfs:label ?creator .
     }
 
-    BIND(REPLACE(LCASE(?creator), '\\.|,?( \\d+-\\d*)?\\.?$', '') AS ?creatorkey)
+    BIND(REPLACE(LCASE(?creator), '(\\.|,)?( \\d+-\\d*)?(\\.|,?)$', '') AS ?creatorkey)
     BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?key)
     BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?extrakey)
   }
