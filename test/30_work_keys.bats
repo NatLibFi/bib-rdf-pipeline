@@ -111,3 +111,9 @@ setup () {
   run grep ' /' refdata/fanrik-manninen-work-keys.nt
   [ $status -ne 0 ]
 }
+
+@test "Work keys: no trailing commas" {
+  make refdata/prepub-work-keys.nt
+  run grep ',"' refdata/prepub-work-keys.nt
+  [ $status -ne 0 ]
+}
