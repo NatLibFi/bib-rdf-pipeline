@@ -19,6 +19,14 @@ setup () {
   [ "$count" -eq 5 ]
 }
 
+@test "Work transformations: different translations to the same language are kept apart" {
+  make refdata/sjubroder-work-transformations.nt
+  diktonius="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c '000103086#Work>')"
+  [ "$diktonius" -eq 8 ]
+  lauren="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c '000522904#Work>')"
+  [ "$lauren" -eq 4 ]
+}
+
 @test "Work transformations: prefer URIs for main works" {
   make refdata/kotona-work-transformations.nt
   grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:005083536#Work> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:000971472#Work240-13>' refdata/kotona-work-transformations.nt

@@ -8,7 +8,7 @@ CONSTRUCT {
   ?w dct:identifier ?strkey .
   ?w dct:identifier ?strextrakey .
 } WHERE {
-  # main case, where we have both contributor and title
+  # main case, where we have both creator/contributor and title
   {
     ?w a bf:Work .
 
@@ -35,9 +35,22 @@ CONSTRUCT {
       ?contribution bf:agent/rdfs:label ?creator .
     }
 
+    OPTIONAL {
+      # for translated works, try to guess the potential translator, based on contributors
+      { ?w bf:note/rdfs:label "Includes translation" } UNION { ?w bf:translationOf [] }
+      ?w bf:contribution ?translation .
+      ?translation bf:agent ?translationAgent .
+      ?translationAgent a bf:Person .
+      ?translationAgent rdfs:label ?contributor .
+      FILTER NOT EXISTS { ?translation a bflc:PrimaryContribution }
+      BIND(COALESCE(?contributor, '-') AS ?translator)
+    }
+
     BIND(REPLACE(LCASE(?creator), '(\\.|,)?( \\d+-\\d*)?(\\.|,?)$', '') AS ?creatorkey)
-    BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?key)
-    BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorkey) AS ?extrakey)
+    BIND(REPLACE(LCASE(?translator), '(\\.|,)?( \\d+-\\d*)?(\\.|,?)$', '') AS ?translatorkey)
+    BIND(IF(BOUND(?translator), CONCAT(?creatorkey, '/', ?translatorkey), ?creatorkey) AS ?creatorskey)
+    BIND(CONCAT(REPLACE(LCASE(?fulltitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorskey) AS ?key)
+    BIND(CONCAT(REPLACE(LCASE(?translatedTitle),'[^\\p{L}\\p{N}\\s]',''), '/', ?creatorskey) AS ?extrakey)
   }
   UNION
   # uniform title case (130)
