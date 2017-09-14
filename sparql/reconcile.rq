@@ -112,8 +112,10 @@ CONSTRUCT {
     ?pers a schema:Person .
     ?pers schema:name ?personName .
     OPTIONAL {
-      ?pers schema:identifier ?personIdentifier
-      BIND(IRI(CONCAT(STR(pn:), ?personIdentifier)) AS ?pnPerson)
+      ?pers schema:identifier ?personId .
+      ?personId schema:propertyID "FIN11" .
+      ?personId schema:value ?personIdValue .
+      BIND(IRI(CONCAT(STR(pn:), ?personIdValue)) AS ?pnPerson)
     }
     BIND(COALESCE(?pnPerson, ?pers) AS ?person)
   }

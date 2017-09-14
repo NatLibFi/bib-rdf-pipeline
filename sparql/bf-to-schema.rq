@@ -29,10 +29,16 @@ CONSTRUCT {
     schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
     schema:name ?creatorLabel ;
-    schema:identifier ?creatorIdentifier .
+    schema:identifier ?creatorId .
+  ?creatorId a schema:PropertyValue ;
+    schema:propertyID ?creatorIdentifierSource ;
+    schema:value ?creatorIdentifierValue .
   ?contributor a ?schemaContributorType ;
     schema:name ?contributorLabel ;
-    schema:identifier ?contributorIdentifier .
+    schema:identifier ?contributorId .
+  ?contributorId a schema:PropertyValue ;
+    schema:propertyID ?contributorIdentifierSource ;
+    schema:value ?contributorIdentifierValue .
   ?elecInst a schema:Book, schema:CreativeWork, bf:Instance ;
     schema:exampleOfWork ?work ;
     schema:url ?elecUri ;
@@ -67,7 +73,10 @@ CONSTRUCT {
     schema:name ?subjectOrgName .
   ?subjectPerson a schema:Person ;
     schema:name ?subjectPersonName ;
-    schema:identifier ?subjectPersonIdentifier .
+    schema:identifier ?subjectPersonId .
+  ?subjectPersonId a schema:PropertyValue ;
+    schema:propertyID ?subjectPersonIdentifierSource ;
+    schema:value ?subjectPersonIdentifierValue .
 }
 WHERE {
   ?inst bf:instanceOf ?work .
@@ -165,7 +174,9 @@ WHERE {
     ?creator rdfs:label ?creatorLabelRaw .
     BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
     OPTIONAL {
-      ?creator bf:identifiedBy/rdf:value ?creatorIdentifier .
+      ?creator bf:identifiedBy ?creatorId .
+      ?creatorId rdf:value ?creatorIdentifierValue .
+      ?creatorId bf:source/rdfs:label ?creatorIdentifierSource .
     }
   }
 
@@ -180,7 +191,9 @@ WHERE {
       ?contributor rdfs:label ?contributorLabelRaw .
       BIND(REPLACE(?contributorLabelRaw, '[ ,\\.]+$', '') AS ?contributorLabel)
       OPTIONAL {
-        ?contributor bf:identifiedBy/rdf:value ?contributorIdentifier .
+        ?contributor bf:identifiedBy ?contributorId .
+        ?contributorId rdf:value ?contributorIdentifierValue .
+        ?contributorId bf:source/rdfs:label ?contributorIdentifierSource .
       }
     }
     UNION
@@ -261,7 +274,9 @@ WHERE {
       ?subjectPerson rdfs:label ?subjectPersonNameRaw .
       BIND(REPLACE(?subjectPersonNameRaw, '[ \\.]+$', '') AS ?subjectPersonName)
       OPTIONAL {
-        ?subjectPerson bf:identifiedBy/rdf:value ?subjectPersonIdentifier
+        ?subjectPerson bf:identifiedBy ?subjectPersonId .
+        ?subjectPersonId rdf:value ?subjectPersonIdentifierValue .
+        ?subjectPersonId bf:source/rdfs:label ?subjectPersonIdentifierSource .
       }
     }
     UNION

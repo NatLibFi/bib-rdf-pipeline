@@ -130,7 +130,12 @@ setup () {
   make slices/kotkankasvisto-00641-schema.nt
   author="$(grep '<http://schema.org/author>' slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"
   [ -n "$author" ]
-  grep -q -F "$author <http://schema.org/identifier> \"000061725\"" slices/kotkankasvisto-00641-schema.nt
+  id="$(grep -F "$author <http://schema.org/identifier>" slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$id" ]
+  # check that it is a PropertyValue with the right fields
+  grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/kotkankasvisto-00641-schema.nt 
+  grep -q -F "$id <http://schema.org/propertyID> \"FIN11\"" slices/kotkankasvisto-00641-schema.nt 
+  grep -q -F "$id <http://schema.org/value> \"000061725\"" slices/kotkankasvisto-00641-schema.nt 
 }
 
 @test "Schema.org RDF: conversion of contributors" {
@@ -143,7 +148,12 @@ setup () {
   make slices/jatuli-00000-schema.nt
   contributor="$(grep '<http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-schema.nt | cut -d ' ' -f 1)"
   [ -n "$contributor" ]
-  grep -q -F "$contributor <http://schema.org/identifier> \"000047367\"" slices/jatuli-00000-schema.nt
+  id="$(grep -F "$contributor <http://schema.org/identifier>" slices/jatuli-00000-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$id" ]
+  # check that it is a PropertyValue with the right fields
+  grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/jatuli-00000-schema.nt 
+  grep -q -F "$id <http://schema.org/propertyID> \"FIN11\"" slices/jatuli-00000-schema.nt 
+  grep -q -F "$id <http://schema.org/value> \"000047367\"" slices/jatuli-00000-schema.nt 
 }
 
 @test "Schema.org RDF: conversion of contributors with roles" {
@@ -332,7 +342,12 @@ setup () {
   make slices/ajattelemisenalku-00098-schema.nt
   subject="$(grep '<http://schema.org/name> "Herakleitos"' slices/ajattelemisenalku-00098-schema.nt | cut -d ' ' -f 1)"
   [ -n "$subject" ]
-  grep -q -F "$subject <http://schema.org/identifier> \"000043960\"" slices/ajattelemisenalku-00098-schema.nt
+  id="$(grep -F "$subject <http://schema.org/identifier>" slices/ajattelemisenalku-00098-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$id" ]
+  # check that it is a PropertyValue with the right fields
+  grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/ajattelemisenalku-00098-schema.nt 
+  grep -q -F "$id <http://schema.org/propertyID> \"FIN11\"" slices/ajattelemisenalku-00098-schema.nt 
+  grep -q -F "$id <http://schema.org/value> \"000043960\"" slices/ajattelemisenalku-00098-schema.nt 
 }
 
 @test "Schema.org RDF: conversion of 600 \$t work subjects" {
