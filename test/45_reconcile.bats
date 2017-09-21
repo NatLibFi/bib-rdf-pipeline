@@ -73,6 +73,16 @@ setup () {
   grep -q -F '<http://schema.org/about> "kirjallisuus -- antiikki"@fi' slices/ajattelemisenalku-00098-reconciled.nt
 }
 
+@test "Reconcile: converting to YSA/YSO URIs, cyrillic case" {
+  make slices/hulluntaivaassa-00490-reconciled.nt
+  # "проза--пер. с финск."@ru-cyrl -> removed, as it was an accident that it got through the replication (via 880)
+  run grep -q -F '<http://schema.org/about> "проза--пер. с финск."@ru-cyrl' slices/hulluntaivaassa-00490-reconciled.nt
+  [ $status -ne 0 ]
+  # check that no other subjects are added by mistake
+  run grep '<http://schema.org/about>' slices/hulluntaivaassa-00490-reconciled.nt
+  [ $status -ne 0 ]
+}
+
 @test "Reconcile: converting to YSA URIs, same term as RDA Carrier case" {
   make slices/verkkoaineisto-00608-reconciled.nt
   run grep '<http://schema.org/about> <http://rdaregistry.info/termList/RDACarrierType/1018>' slices/verkkoaineisto-00608-reconciled.nt

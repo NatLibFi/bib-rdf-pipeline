@@ -46,6 +46,7 @@ CONSTRUCT {
   {
     ?s schema:about ?topicLabel .
     FILTER(isLiteral(?topicLabel))
+    FILTER(LANG(?topicLabel) = '')
     BIND(STRLANG(REPLACE(?topicLabel, '--', ' -- '), 'fi') AS ?topicLabelFi)
     OPTIONAL {
       GRAPH ?ysaGraph { 
