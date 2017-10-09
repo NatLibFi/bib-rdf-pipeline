@@ -43,7 +43,7 @@ REMOVE_ALWAYS = set([
 KEEP = re.compile(r'\$\$9FENNI<KEEP>')
 DROP = re.compile(r'\$\$9FENNI<DROP>')
 FENNI = re.compile(r'\$\$5(FENNI|FI-NL)')
-OTHERTAG = re.compile(r'\$\$9\w+<(KEEP|DROP)>')
+OTHERTAG = re.compile(r'\$\$9\w+<(KEEP|DROP)>(,\s*\w+<(KEEP|DROP)>)*')
 
 for line in sys.stdin:
     if DROP.search(line) is not None:

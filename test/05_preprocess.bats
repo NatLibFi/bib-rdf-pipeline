@@ -29,3 +29,9 @@ setup () {
   run grep -c -F ' 130' slices/sioninwirret-00061-preprocessed.alephseq
   [ "$output" -eq "1" ]
 }
+
+@test "Preprocess MARC: drop \$9 subfields with multiple values" {
+  make slices/aikuiskasvatus-00602-preprocessed.alephseq
+  run grep '000114384,' slices/aikuiskasvatus-00602-preprocessed.alephseq
+  [ $status -ne 0 ]
+}
