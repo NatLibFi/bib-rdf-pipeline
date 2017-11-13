@@ -92,7 +92,7 @@ merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.a
 	rm -f $@.index*
 	$(HDTSEARCH) -q 0 $@
 
-output/%.nt: merged/%-rewritten.hdt
+output/%.nt: merged/%-merged.hdt
 	JAVA_OPTIONS=$(JVMARGS) $(HDTSPARQL) $^ "`cat sparql/consolidate-works.rq`" >$@
 
 # Targets to be run externally
@@ -132,7 +132,7 @@ reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.aleph
 
 merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
 
-consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
+consolidate: $(patsubst input/%.alephseq,output/%.nt,$(wildcard input/*.alephseq))
 
 .PHONY: all realclean clean slice preprocess mrcx rdf rewrite work-keys schema merge consolidate
 .DEFAULT_GOAL := all

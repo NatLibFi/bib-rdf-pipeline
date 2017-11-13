@@ -8,6 +8,7 @@ setup () {
 }
 
 @test "Consolidate works: basic consolidation" {
+  skip "not implemented, see https://github.com/NatLibFi/bib-rdf-pipeline/issues/3"
   rm -f output/hawking.nt
   rm -f output/hawking.hdt
   make -j2 consolidate
