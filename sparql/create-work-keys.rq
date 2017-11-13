@@ -1,3 +1,4 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX bf: <http://id.loc.gov/ontologies/bibframe/>
 PREFIX bflc: <http://id.loc.gov/ontologies/bflc/>
@@ -64,9 +65,27 @@ CONSTRUCT {
     }
     BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
   }
+  UNION
+  # Series with title
+  {
+    ?w2 bf:hasSeries/bf:instanceOf ?w .
+    ?w a bf:Work .
+    ?w bf:title/rdfs:label ?title .
+    BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
+  }
+  UNION
+  # Series with ISSN
+  {
+    ?w a bf:Work .
+    ?w bf:identifiedBy ?identifier .
+    ?identifier a bf:Issn .
+    ?identifier rdf:value ?issn .
+    BIND(CONCAT("issn:", ?issn) AS ?key)
+  }
+
   # has only title (245) but no author (1xx or 7xx) - not relevant since records with no key are simply retained
 
-  # strip recurring and whitespace from keys, as well as trailing space in the title part
-  BIND(REPLACE(REPLACE(?key, '\\p{Z}+', ' '), ' +/', '/') AS ?strkey)
-  BIND(REPLACE(REPLACE(?extrakey, '\\p{Z}+', ' '), ' +/', '/') AS ?strextrakey)
+  # strip recurring and whitespace from keys, as well as trailing space from the title part and full key
+  BIND(REPLACE(REPLACE(REPLACE(?key, '\\p{Z}+', ' '), ' +/', '/'), ' +$', '') AS ?strkey)
+  BIND(REPLACE(REPLACE(REPLACE(?extrakey, '\\p{Z}+', ' '), ' +/', '/'), ' +$', '') AS ?strextrakey)
 }

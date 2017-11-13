@@ -29,3 +29,15 @@ setup () {
   # Ideally the count would be just 1, but since we don't use person authorities yet,
   # there is one outlier in the set
 }
+
+@test "Merge works: series are merged based on title" {
+  make merged/fanrik-manninen-merged.nt
+  count="$(grep -c -F '<http://schema.org/name> "Helppohintainen koulu- ja kansankirjasto"' merged/fanrik-manninen-merged.nt)"
+  [ "$count" -eq 1 ]
+}
+
+@test "Merge works: series are merged based on ISSN" {
+  make merged/kotona-merged.nt
+  count="$(grep -F '<http://schema.org/issn> "0357-7937"' merged/kotona-merged.nt | cut -d ' ' -f 1 | sort | uniq | wc -l)"
+  [ "$count" -eq 1 ]
+}
