@@ -407,6 +407,47 @@
 006457602 85640 L $$uhttp://urn.fi/URN:ISBN:978-951-0-39486-1$$zKäytettävissä vapaakappalekirjastoissa$$5FENNI
 006457602 9001  L $$aHawking, Stephen$$yHawking, Stephen W.
 006457602 901   L $$aSU20131108$$5FENNI
+006944716 FMT   L BK
+006944716 LDR   L 00000cam^a2200961^i^4500
+006944716 001   L 006944716
+006944716 005   L 20170819010453.0
+006944716 008   L 141015s2014^^^^fi^a^^^|^||||^000^0afin|^
+006944716 020   L $$a978-951-0-40676-2$$qsidottu
+006944716 0243  L $$a9789510406762
+006944716 035   L $$a(FI-MELINDA)006944716
+006944716 040   L $$aFI-NL
+006944716 0411  L $$afin$$heng
+006944716 042   L $$afinb
+006944716 080   L $$a929 Hawking$$9FENNI<KEEP>
+006944716 080   L $$a53$$9FENNI<KEEP>
+006944716 084   L $$a99.15$$2ykl$$9FENNI<KEEP>
+006944716 084   L $$a53$$2uef
+006944716 1001  L $$aHawking, Stephen,$$ekirjoittaja.$$0(FIN11)000043470
+006944716 24010 L $$aMy brief history,$$lsuomi
+006944716 24510 L $$aMinun lyhyt historiani /$$cStephen Hawking ; suomentanut Markus Hotakainen.
+006944716 260   L $$aHelsinki :$$bWSOY,$$c© 2014$$e(painettu EU:ssa)
+006944716 300   L $$a124 s. :$$bkuvitettu ;$$c21 cm
+006944716 336   L $$ateksti$$btxt$$2rdacontent
+006944716 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+006944716 338   L $$anide$$bnc$$2rdacarrier
+006944716 500   L $$aSisältää hakemiston.
+006944716 60014 L $$aHawking, Stephen.$$0(FIN11)000043470$$9FENNI<KEEP>
+006944716 650 7 L $$afyysikot$$2ysa$$9FENNI<KEEP>
+006944716 650 7 L $$ateoreettinen tutkimus$$2ysa$$9FENNI<KEEP>
+006944716 650 7 L $$afysiikka$$2ysa$$9FENNI<KEEP>
+006944716 650 7 L $$asairastuminen$$2ysa$$9FENNI<KEEP>
+006944716 650 7 L $$aamyotrofinen lateraaliskleroosi$$2ysa$$9FENNI<KEEP>
+006944716 650 7 L $$amuistelmat$$2ysa
+006944716 650 7 L $$asairastuminen$$xamyotrofinen lateraaliskleroosi$$2ysa
+006944716 650 7 L $$afysiker$$2allars
+006944716 650 7 L $$ateoretisk forskning$$2allars
+006944716 650 7 L $$afysik$$2allars
+006944716 650 7 L $$ainsjuknande$$2allars
+006944716 650 7 L $$aamyotrofisk lateralskleros$$2allars
+006944716 655 7 L $$amuistelmat$$2ysa$$9FENNI<KEEP>
+006944716 655 7 L $$amemoarer$$2allars
+006944716 7001  L $$aHotakainen, Markus,$$d1963-$$ekääntäjä.$$0(FIN11)000044524
+006944716 901   L $$aMU20150121$$5FENNI
 007343046 FMT   L BK
 007343046 LDR   L ^^^^^cam^a2201021^i^4500
 007343046 001   L 007343046

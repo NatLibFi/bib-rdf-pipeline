@@ -126,6 +126,13 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Schema.org RDF: avoid trailing commas in author names" {
+  make slices/hawking-00694-schema.nt
+  run grep -F '<http://schema.org/name> "Hawking, Stephen,"' slices/hawking-00694-schema.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://schema.org/name> "Hawking, Stephen"' slices/hawking-00694-schema.nt
+}
+
 @test "Schema.org RDF: conversion of authors with ID" {
   make slices/kotkankasvisto-00641-schema.nt
   author="$(grep '<http://schema.org/author>' slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"

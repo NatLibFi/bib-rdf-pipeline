@@ -172,7 +172,7 @@ WHERE {
     ?creation bf:agent ?creator .
     ?creator a ?bfCreatorType .
     ?creator rdfs:label ?creatorLabelRaw .
-    BIND(REPLACE(?creatorLabelRaw, '[ \\.]+$', '') AS ?creatorLabel)
+    BIND(REPLACE(?creatorLabelRaw, '[ ,\\.]+$', '') AS ?creatorLabel)
     OPTIONAL {
       ?creator bf:identifiedBy ?creatorId .
       ?creatorId rdf:value ?creatorIdentifierValue .
@@ -245,9 +245,9 @@ WHERE {
       ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
       ?subjectWorkAgent a bf:Person .
       ?subjectWorkAgent rdfs:label ?subjectWorkAgentNameRaw .
-      BIND(REPLACE(?subjectWorkAgentNameRaw, '[ \\./]+$', '') AS ?subjectWorkAgentName)
+      BIND(REPLACE(?subjectWorkAgentNameRaw, '[ ,\\./]+$', '') AS ?subjectWorkAgentName)
       ?subjectWork rdfs:label ?subjectWorkNameRaw .
-      BIND(REPLACE(?subjectWorkNameRaw, '[ \\./]+$', '') AS ?subjectWorkName)
+      BIND(REPLACE(?subjectWorkNameRaw, '[ ,\\./]+$', '') AS ?subjectWorkName)
     }
     UNION
     {
@@ -261,7 +261,7 @@ WHERE {
       # Organization or Meeting as subject
       ?work bf:subject ?subjectOrg .
       ?subjectOrg rdfs:label ?subjectOrgNameRaw .
-      BIND(REPLACE(?subjectOrgNameRaw, '[ \\.]+$', '') AS ?subjectOrgName)
+      BIND(REPLACE(?subjectOrgNameRaw, '[ ,\\.]+$', '') AS ?subjectOrgName)
       {
         { ?subjectOrg a bf:Organization } UNION { ?subjectOrg a bf:Meeting }
       }
@@ -272,7 +272,7 @@ WHERE {
       ?work bf:subject ?subjectPerson .
       ?subjectPerson a bf:Person .
       ?subjectPerson rdfs:label ?subjectPersonNameRaw .
-      BIND(REPLACE(?subjectPersonNameRaw, '[ \\.]+$', '') AS ?subjectPersonName)
+      BIND(REPLACE(?subjectPersonNameRaw, '[ ,\\.]+$', '') AS ?subjectPersonName)
       OPTIONAL {
         ?subjectPerson bf:identifiedBy ?subjectPersonId .
         ?subjectPersonId rdf:value ?subjectPersonIdentifierValue .
