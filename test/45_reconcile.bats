@@ -25,7 +25,7 @@ setup () {
 
 @test "Reconcile: retaining work subjects" {
   make slices/trauma-00583-reconciled.nt
-  count="$(grep -c '<http://schema.org/about> <.*#Work.*>' slices/trauma-00583-reconciled.nt)"
+  count="$(grep -c '<http://schema.org/about> <http://urn.fi/URN:NBN:fi:bib:me:W.*>' slices/trauma-00583-reconciled.nt)"
   [ "$count" -eq 12 ]
 }
 

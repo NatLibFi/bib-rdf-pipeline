@@ -15,26 +15,26 @@ setup () {
 
 @test "Work transformations: translations are consolidated to same original work" {
   make refdata/hawking-work-transformations.nt
-  count="$(cut -d ' ' -f 3 refdata/hawking-work-transformations.nt | grep -c '000095841#Work>')"
-  [ "$count" -eq 5 ]
+  count="$(cut -d ' ' -f 3 refdata/hawking-work-transformations.nt | grep -c 'W00009584101>')"
+  [ "$count" -eq 3 ]
 }
 
 @test "Work transformations: different translations to the same language are kept apart" {
   make refdata/sjubroder-work-transformations.nt
-  diktonius="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c '000103086#Work>')"
+  diktonius="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c 'W00010308600>')"
   [ "$diktonius" -eq 8 ]
-  lauren="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c '000522904#Work>')"
+  lauren="$(cut -d ' ' -f 3 refdata/sjubroder-work-transformations.nt | grep -c 'W00052290400>')"
   [ "$lauren" -eq 4 ]
 }
 
 @test "Work transformations: prefer URIs for main works" {
   make refdata/kotona-work-transformations.nt
-  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:005083536#Work> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:000971472#Work240-13>' refdata/kotona-work-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:000971472#Work240-13> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:005083536#Work>' refdata/kotona-work-transformations.nt
+  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00508353600> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00097147201>' refdata/kotona-work-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00097147201> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00508353600>' refdata/kotona-work-transformations.nt
 }
 
 @test "Work transformations: prefer 240-generated URIs for works over 600-generated URIs" {
   make refdata/trauma-work-transformations.nt
-  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:000727468#Work240-14> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:005838226#Work600-36>' refdata/trauma-work-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:005838226#Work600-36> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:000727468#Work240-14>' refdata/trauma-work-transformations.nt
+  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00072746801> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00583822610>' refdata/trauma-work-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00583822610> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00072746801>' refdata/trauma-work-transformations.nt
 }

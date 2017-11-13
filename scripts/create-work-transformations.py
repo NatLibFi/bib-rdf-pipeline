@@ -32,19 +32,8 @@ def traverse_uris(uri):
     return seen
 
 def uri_sort_key(uri):
-    """return a sort key for the given URI which takes into account originating MARC field"""
-    field = uri.split('#Work')[1][:3] # may be '' when field is nonexistent
-    # determine priority based on MARC field
-    if field == '': # Work for record itself has highest priority
-        priority = 0
-    elif field == '130': # 130 (uniform title) has second highest priority
-        priority = 1
-    elif field == '240': # 240 (uniform title / original of translation) has third highest priority
-        priority = 2
-    elif field == '765': # 765 (original of translation) has fourth highest priority
-        priority = 3
-    else:
-        priority = int(field) # for the rest, use the field number as priority value
+    """return a sort key for the given URI, based on whether it represents the primary work in the record"""
+    priority = int(uri[-2:]) # last two digits are 00 for the primary work, 01+ for other works mentioned
     return (priority, uri)
 
 def select_uri(uris):

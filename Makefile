@@ -3,7 +3,6 @@
 CATMANDU=catmandu
 MARC2BIBFRAME2=$(PATH_PREFIX)../marc2bibframe2
 XSLTPROC=xsltproc
-RAPPER=rapper
 RSPARQL=rsparql
 RIOT=riot
 SPARQL=sparql
@@ -59,16 +58,19 @@ refdata/RDAMediaType.nt:
 %-bf2.rdf: %.mrcx
 	$(XSLTPROC) --stringparam baseuri $(URIBASEFENNICA) $(MARC2BIBFRAME2)/xsl/marc2bibframe2.xsl $^ >$@
 
-%-schema.nt: %-bf2.rdf
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+%.nt: %.rdf
+	$(RIOT) $^ -q >$@
+
+%-rewritten.nt: %-bf2.nt
+	scripts/rewrite-uris.py $^ | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
+
+%-schema.nt: %-rewritten.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT >$@ 
 
 %-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt refdata/cn-labels.nt
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --namedGraph $(word 7,$^) --query sparql/reconcile.rq --out=NT >$@
 	
-%.nt: %.rdf
-	rapper $^ -q >$@
-
-%-work-keys.nt: %-bf2.rdf
+%-work-keys.nt: %-rewritten.nt
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@
 
 .SECONDEXPANSION:
@@ -83,9 +85,6 @@ slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's
 
 merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged.nt/')
 	$(RIOT) $^ >$@
-
-%-rewritten.nt: %-merged.nt
-	scripts/rewrite-uris.py $^ >$@
 
 %.hdt: %.nt
 	$(RDF2HDT) $< $@
@@ -121,7 +120,7 @@ mrcx: $(patsubst %-in.alephseq,%.mrcx,$(wildcard slices/*-in.alephseq))
 
 rdf: $(patsubst %-in.alephseq,%-bf2.rdf,$(wildcard slices/*-in.alephseq))
 
-nt: $(patsubst %-in.alephseq,%-bf2.nt,$(wildcard slices/*-in.alephseq))
+rewrite: $(patsubst %-in.alephseq,%-rewritten.nt,$(wildcard slices/*-in.alephseq))
 
 work-keys: $(patsubst %-in.alephseq,%-work-keys.nt,$(wildcard slices/*-in.alephseq))
 
@@ -133,11 +132,9 @@ reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.aleph
 
 merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
 
-rewrite: $(patsubst input/%.alephseq,merged/%-rewritten.hdt,$(wildcard input/*.alephseq))
-
 consolidate: $(patsubst input/%.alephseq,output/%.hdt,$(wildcard input/*.alephseq))
 
-.PHONY: all realclean clean slice preprocess mrcx rdf nt work-keys schema merge consolidate
+.PHONY: all realclean clean slice preprocess mrcx rdf rewrite work-keys schema merge consolidate
 .DEFAULT_GOAL := all
 
 # retain all intermediate files
