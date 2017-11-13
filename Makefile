@@ -59,7 +59,7 @@ refdata/RDAMediaType.nt:
 	$(XSLTPROC) --stringparam baseuri $(URIBASEFENNICA) $(MARC2BIBFRAME2)/xsl/marc2bibframe2.xsl $^ >$@
 
 %.nt: %.rdf
-	$(RIOT) $^ -q >$@
+	$(RIOT) -q $^ >$@
 
 %-rewritten.nt: %-bf2.nt
 	scripts/rewrite-uris.py $^ | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
