@@ -8,7 +8,7 @@ setup () {
 }
 
 # Disabled, because running this takes a very long time and causes Travis timeouts.
-# Instead, reconciliation for single files at a time is done by individual tests.
+# Instead, merging single files at a time is done by individual tests.
 #
 #@test "Merge works: basic merging" {
 #  rm -f merged/hawking-merged.nt
