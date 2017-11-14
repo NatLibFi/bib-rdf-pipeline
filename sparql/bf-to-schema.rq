@@ -18,6 +18,7 @@ CONSTRUCT {
     schema:numberOfPages ?extent ;
     rdau:P60048 ?carrierCategory ;
     rdau:P60050 ?mediaCategory ;
+    schema:identifier ?instanceId ;
     schema:publisher ?publisherOrganization .
   ?publicationEvent a schema:PublicationEvent ;
     schema:organizer ?publisherOrganization ;
@@ -25,6 +26,9 @@ CONSTRUCT {
     schema:startDate ?publicationDate .
   ?publicationPlace a schema:Place ;
     schema:name ?publicationPlaceName .
+  ?instanceId a schema:PropertyValue ;
+    schema:propertyID ?instanceIdSource ;
+    schema:value ?instanceIdValue .
   ?publisherOrganization a schema:Organization ;
     schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
@@ -160,6 +164,12 @@ WHERE {
     UNION
     {
       ?inst bf:media/rdfs:label ?mediaCategory .
+    }
+    UNION
+    {
+      ?inst bf:identifiedBy ?instanceId .
+      ?instanceId rdf:value ?instanceIdValue .
+      ?instanceId bf:source/rdfs:label ?instanceIdSource .
     }
   }
 

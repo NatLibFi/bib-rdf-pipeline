@@ -33,6 +33,17 @@ setup () {
   grep -q "$inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Instance>" slices/raamattu-00000-schema.nt
 }
 
+@test "Schema.org RDF: conversion of instance identifier" {
+  make slices/kotona-00097-schema.nt
+  inst="$(grep '<http://schema.org/workExample>' slices/kotona-00097-schema.nt | cut -d ' ' -f 3)"
+  id="$(grep -F "$inst <http://schema.org/identifier>" slices/kotona-00097-schema.nt | cut -d ' ' -f 3)"
+  [ -n "$id" ]
+  # check that it is a PropertyValue with the right fields
+  grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/kotona-00097-schema.nt
+  grep -q -F "$id <http://schema.org/propertyID> \"FI-FENNI\"" slices/kotona-00097-schema.nt
+  grep -q -F "$id <http://schema.org/value> \"848382\"" slices/kotona-00097-schema.nt
+}
+
 @test "Schema.org RDF: conversion of original work for translation (240 case)" {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"

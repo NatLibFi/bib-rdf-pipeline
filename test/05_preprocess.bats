@@ -35,3 +35,8 @@ setup () {
   run grep '000114384,' slices/aikuiskasvatus-00602-preprocessed.alephseq
   [ $status -ne 0 ]
 }
+
+@test "Preprocess MARC: convert Fennica SID to 035 field" {
+  make slices/kotona-00097-preprocessed.alephseq
+  grep -F '000971472 035   L $$a(FI-FENNI)848382' slices/kotona-00097-preprocessed.alephseq
+}

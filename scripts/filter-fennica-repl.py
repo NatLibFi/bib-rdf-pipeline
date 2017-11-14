@@ -44,6 +44,7 @@ KEEP = re.compile(r'\$\$9FENNI<KEEP>')
 DROP = re.compile(r'\$\$9FENNI<DROP>')
 FENNI = re.compile(r'\$\$5(FENNI|FI-NL)')
 OTHERTAG = re.compile(r'\$\$9\w+<(KEEP|DROP)>(,\s*\w+<(KEEP|DROP)>)*')
+FENNICAID = re.compile(r'\$\$c(\d+)\$\$bfenni')
 
 for line in sys.stdin:
     if DROP.search(line) is not None:
@@ -51,6 +52,13 @@ for line in sys.stdin:
         continue
     
     fld = line[10:13]
+    
+    # Convert Fennica system ID from SID field to 035 field
+    if fld == 'SID':
+        match = FENNICAID.search(line)
+        if match is not None:
+            fld = '035'
+            line = line[:10] + '035   L $$a(FI-FENNI)%s\n' % match.group(1)
     
     if fld in REMOVE_ALWAYS:
         # skip field that should always be removed
