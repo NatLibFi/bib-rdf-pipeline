@@ -427,6 +427,11 @@ setup () {
   grep -q '<http://schema.org/name> "Suomen ekumeeninen neuvosto : toimintakertomus 2009 = Ekumeniska rådet i Finland : verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt
 }
 
+@test "Schema.org RDF: name does not end in comma" {
+  make slices/hawking-00694-schema.nt
+  grep -q '<http://schema.org/name> "My brief history"' slices/hawking-00694-schema.nt
+}
+
 @test "Schema.org RDF: including parallel titles as names" {
   make slices/ekumeeninen-00585-schema.nt
   grep -q '<http://schema.org/name> "Ekumeniska rådet i Finland : verksamhetsberättelse 2009"' slices/ekumeeninen-00585-schema.nt

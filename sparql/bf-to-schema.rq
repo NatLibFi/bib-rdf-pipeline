@@ -209,9 +209,10 @@ WHERE {
     UNION
     {
       ?work bf:translationOf ?origwork .
-      { ?origwork bf:title/rdfs:label ?origworkTitle }
+      { ?origwork bf:title/rdfs:label ?origworkTitleRaw }
       UNION
-      { ?origwork bf:hasInstance/bf:title/rdfs:label ?origworkTitle }
+      { ?origwork bf:hasInstance/bf:title/rdfs:label ?origworkTitleRaw }
+      BIND(REPLACE(?origworkTitleRaw, '[ ,\\.]+$', '') AS ?origworkTitle)
       OPTIONAL {
         ?origwork bf:hasInstance/bf:identifiedBy ?origworkIssn .
         ?origworkIssn a bf:Issn .
