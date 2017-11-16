@@ -19,6 +19,7 @@ CONSTRUCT {
     rdau:P60048 ?carrierCategory ;
     rdau:P60050 ?mediaCategory ;
     schema:identifier ?instanceId ;
+    schema:isPartOf ?series ;
     schema:publisher ?publisherOrganization .
   ?publicationEvent a schema:PublicationEvent ;
     schema:organizer ?publisherOrganization ;
@@ -64,8 +65,8 @@ CONSTRUCT {
     schema:inLanguage ?origLanguageCode ;
     schema:issn ?origworkIssnValue ;
     schema:author ?creator .
-  ?series a schema:CreativeWork, bf:Work, schema:Periodical ;
-    schema:hasPart ?work ;
+  ?series a schema:CreativeWork, bf:Work, schema:CreativeWorkSeries ;
+    schema:hasPart ?inst ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
   ?subjectWork a schema:CreativeWork, bf:Work ;

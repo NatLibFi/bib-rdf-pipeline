@@ -258,12 +258,12 @@ setup () {
 
 @test "Schema.org RDF: conversion of series (series statement case)" {
   make slices/etyk-00012-schema.nt
-  work="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
-  series="$(grep "<http://schema.org/hasPart> $work" slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
+  inst="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 3)"
+  series="$(grep "<http://schema.org/hasPart> $inst" slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
   # check that we found a series
   [ -n "$series" ]
   # check that it has the correct information
-  grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Periodical>" slices/etyk-00012-schema.nt
+  grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWorkSeries>" slices/etyk-00012-schema.nt
   grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork>" slices/etyk-00012-schema.nt
   grep -q "$series <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://id.loc.gov/ontologies/bibframe/Work>" slices/etyk-00012-schema.nt
   grep -q "$series <http://schema.org/name> \"Julkaisusarja / Maanpuolustuskorkeakoulu, strategian laitos. 1, Strategian tutkimuksia\"" slices/etyk-00012-schema.nt
