@@ -48,16 +48,26 @@ setup () {
 
 @test "MARCXML: removes birth/death years from living people" {
   make slices/kotona-00508.mrcx
-  ! xmllint --format slices/kotona-00508.mrcx | grep -A 1 'Valtaoja, Esko' | grep 'marc:subfield code="d"'
+  run bash -c "xmllint --format slices/kotona-00508.mrcx | grep -A 1 'Valtaoja, Esko' | grep 'marc:subfield code=.d.'"
+  [ "$status" -ne 0 ]
+  make slices/monot-00487.mrcx
+  run bash -c "xmllint --format slices/monot-00487.mrcx | grep -A 1 'Harjanne, Maikki' | grep 'marc:subfield code=.d.'"
+  [ "$status" -ne 0 ]
   make slices/origwork-00041.mrcx
-  ! xmllint --format slices/origwork-00041.mrcx | grep -A 1 'Tanskanen, Raimo' | grep 'marc:subfield code="d"'
+  run bash -c "xmllint --format slices/origwork-00041.mrcx | grep -A 1 'Tanskanen, Raimo' | grep 'marc:subfield code=.d.'"
+  [ "$status" -ne 0 ]
 }
 
 @test "MARCXML: removes trailing punctuation from names of people with removed birth/death years" {
   make slices/kotona-00508.mrcx
-  ! xmllint --format slices/kotona-00508.mrcx | grep 'Valtaoja, Esko,'
+  run bash -c "xmllint --format slices/kotona-00508.mrcx | grep 'Valtaoja, Esko,'"
+  [ "$status" -ne 0 ]
+  make slices/monot-00487.mrcx
+  run bash -c "xmllint --format slices/monot-00487.mrcx | grep 'Harjanne, Maikki,'"
+  [ "$status" -ne 0 ]
   make slices/origwork-00041.mrcx
-  ! xmllint --format slices/origwork-00041.mrcx | grep 'Tanskanen, Raimo,'
+  run bash -c "xmllint --format slices/origwork-00041.mrcx | grep 'Tanskanen, Raimo,'"
+  [ "$status" -ne 0 ]
 }
 
 @test "MARCXML: removes birth/death years from recently dead people" {
