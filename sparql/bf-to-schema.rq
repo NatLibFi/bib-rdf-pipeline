@@ -171,6 +171,19 @@ WHERE {
       ?instanceId rdf:value ?instanceIdValue .
       ?instanceId bf:source/rdfs:label ?instanceIdSource .
     }
+    UNION
+    {
+      ?inst bf:hasSeries ?seriesInst .
+      ?seriesInst bf:instanceOf ?series .
+      ?series rdfs:label ?seriesTitle .
+      BIND(REPLACE(?seriesTitle, '[ ,;\\.]+$', '') AS ?seriesTitleValue)
+      OPTIONAL {
+        ?series bf:identifiedBy ?seriesIssn .
+        ?seriesIssn a bf:Issn .
+        ?seriesIssn rdf:value ?seriesIssnValueRaw .
+        BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
+      }
+    }
   }
 
   # ?creator is needed in many branches below, so it has to be bound
@@ -222,19 +235,6 @@ WHERE {
       OPTIONAL {
         ?origwork bf:language ?origLanguage .
         BIND(STRAFTER(STR(?origLanguage), 'http://id.loc.gov/vocabulary/languages/') as ?origLanguageCode)
-      }
-    }
-    UNION
-    {
-      ?inst bf:hasSeries ?seriesInst .
-      ?seriesInst rdfs:label ?seriesTitle .
-      ?seriesInst bf:instanceOf ?series .
-      BIND(REPLACE(?seriesTitle, '[ ,;]+$', '') AS ?seriesTitleValue)
-      OPTIONAL {
-        ?series bf:identifiedBy ?seriesIssn .
-        ?seriesIssn a bf:Issn .
-        ?seriesIssn rdf:value ?seriesIssnValueRaw .
-        BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
       }
     }
     UNION

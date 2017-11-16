@@ -279,6 +279,16 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Schema.org RDF: conversion of series title in case of multiple 490/830" {
+  make slices/kolmestilaukeava-00581-schema.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00581442110> <http://schema.org/name> "WSOY pokkari"' slices/kolmestilaukeava-00581-schema.nt
+  run grep -F '<http://urn.fi/URN:NBN:fi:bib:me:W00581442111> <http://schema.org/name> "WSOY pokkari"' slices/kolmestilaukeava-00581-schema.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00581442111> <http://schema.org/name> "Johnny & Bantzo"' slices/kolmestilaukeava-00581-schema.nt
+  run grep -F '<http://urn.fi/URN:NBN:fi:bib:me:W00581442110> <http://schema.org/name> "Johnny & Bantzo"' slices/kolmestilaukeava-00581-schema.nt
+  [ $status -ne 0 ]
+}
+
 @test "Schema.org RDF: organization name should not end in full stop" {
   make slices/jakaja-00005-schema.nt
   run grep -F '<http://schema.org/name> "Kauppa- ja teollisuusministeriö "' slices/jakaja-00005-schema.nt
