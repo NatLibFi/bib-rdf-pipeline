@@ -1,0 +1,38 @@
+004871089 FMT   L BK
+004871089 LDR   L 00000cam^a2200805^i^4500
+004871089 001   L 004871089
+004871089 005   L 20170817223556.0
+004871089 008   L 080909s2008^^^^fi^||||||||||||||||afin|^
+004871089 015   L $$afx892691$$2skl
+004871089 020   L $$a978-951-1-20649-1$$qsidottu
+004871089 0243  L $$a9789511206491
+004871089 0248  L $$aA1296415
+004871089 035   L $$a(FI-MELINDA)004871089
+004871089 040   L $$aFI-NL
+004871089 0410  L $$afin
+004871089 042   L $$afinb
+004871089 072 7 L $$a87$$2kkaa
+004871089 080   L $$a929 Harjanne$$9FENNI<KEEP>
+004871089 080   L $$a82$$9FENNI<KEEP>
+004871089 084   L $$a86.2$$2ykl$$9FENNI<KEEP>
+004871089 084   L $$a86.2
+004871089 084   L $$a86.2174$$2ykl
+004871089 084   L $$a86.11$$2ykl
+004871089 1001  L $$aHarjanne, Maikki,$$d1944-$$0(FIN11)000043264
+004871089 24510 L $$aIlmaiset monot /$$cMaikki Harjanne.
+004871089 260   L $$aHelsingissä :$$bOtava,$$c2008$$e(Keuruu :$$fOtavan Kirjapaino)
+004871089 300   L $$a116 s. :$$bkuvitettu ;$$c23 cm
+004871089 336   L $$ateksti$$btxt$$2rdacontent
+004871089 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+004871089 338   L $$anide$$bnc$$2rdacarrier
+004871089 60014 L $$aHarjanne, Maikki,$$d1944-$$0(FIN11)000043264$$9FENNI<KEEP>
+004871089 650 7 L $$amuistelmat$$2ysa$$9FENNI<KEEP>
+004871089 650 7 L $$akirjailijat$$2ysa$$9FENNI<KEEP>
+004871089 650 7 L $$akuvittajat$$2ysa$$9FENNI<KEEP>
+004871089 650 7 L $$alastenkirjailijat$$2ysa
+004871089 650 7 L $$akirjailijat$$xmuistelmat$$zSuomi$$y1900-luku$$2kitu
+004871089 650 7 L $$alastenkirjallisuus$$xkirjailijat$$zSuomi$$y1900-luku$$2kitu
+004871089 650 7 L $$akirjailijat$$xmuistelmat$$2ysa
+004871089 901   L $$aMU20080909$$5FENNI
+004871089 908   L $$afi
+004871089 908   L $$afin
