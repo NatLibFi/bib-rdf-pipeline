@@ -52,7 +52,6 @@ CONSTRUCT {
   ?work a schema:CreativeWork, bf:Work, ?workPeriodicalType ;
     schema:workExample ?inst, ?elecInst ;
     schema:translationOfWork ?origwork ;
-    schema:isPartOf ?series ;
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
