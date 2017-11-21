@@ -77,13 +77,22 @@ refdata/RDAMediaType.nt:
 refdata/%-work-keys.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-work-keys.nt/')
 	$(RIOT) $^ >$@
 
-%-work-transformations.nt: %-work-keys.nt
-	scripts/create-work-transformations.py <$^ >$@
+refdata/%-agent-keys.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-agent-keys.nt/')
+	$(RIOT) $^ >$@
+
+%-transformations.nt: %-keys.nt
+	scripts/create-merge-transformations.py <$^ >$@
 
 slices/%-merged.nt: slices/%-reconciled.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-work-transformations.nt
-	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge-works.rq --out=NT >$@
+	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge.rq --out=NT >$@
 
-merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged.nt/')
+slices/%-agent-keys.nt: slices/%-merged.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-agent-keys.rq --out=NT >$@
+
+slices/%-merged2.nt: slices/%-merged.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-agent-transformations.nt
+	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge.rq --out=NT >$@
+
+merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged2.nt/')
 	$(RIOT) $^ >$@
 
 %.hdt: %.nt
