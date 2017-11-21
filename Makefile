@@ -139,6 +139,10 @@ schema: $(patsubst %-in.alephseq,%-schema.nt,$(wildcard slices/*-in.alephseq))
 
 reconcile: $(patsubst %-in.alephseq,%-reconciled.nt,$(wildcard slices/*-in.alephseq))
 
+agent-keys: $(patsubst %-in.alephseq,%-agent-keys.nt,$(wildcard slices/*-in.alephseq))
+
+agent-transformations: $(patsubst input/%.alephseq,refdata/%-agent-transformations.nt,$(wildcard input/*.alephseq))
+
 merge: $(patsubst input/%.alephseq,merged/%-merged.nt,$(wildcard input/*.alephseq))
 
 consolidate: $(patsubst input/%.alephseq,output/%.nt,$(wildcard input/*.alephseq))
