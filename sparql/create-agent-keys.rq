@@ -1,0 +1,13 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX schema: <http://schema.org/>
+PREFIX me: <http://urn.fi/URN:NBN:fi:bib:me:>
+
+CONSTRUCT {
+  ?a dct:identifier ?key .
+} WHERE {
+  ?w schema:author|schema:contributor ?a .
+  ?a schema:name ?name .
+  BIND(STRAFTER(STR(?w), STR(me:)) AS ?workLocalName)
+  BIND(CONCAT(?workLocalName, '/', LCASE(?name)) AS ?key)
+  FILTER(STRSTARTS(STR(?a), STR(me:)))
+}
