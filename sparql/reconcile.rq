@@ -13,6 +13,7 @@ CONSTRUCT {
   ?s rdau:P60050 ?rdaMediaType .
   ?s ?p ?person .
   ?person schema:name ?personName .
+  ?person a schema:Person .
   ?s ?p ?organization .
   ?organization schema:name ?organizationName .
   ?organization a schema:Organization .

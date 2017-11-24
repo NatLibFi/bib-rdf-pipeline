@@ -93,6 +93,7 @@ setup () {
   make slices/kotkankasvisto-00641-reconciled.nt
   grep -q -F '<http://schema.org/author> <http://urn.fi/URN:NBN:fi:au:pn:000061725>' slices/kotkankasvisto-00641-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000061725> <http://schema.org/name> "Ulvinen, Arvi"' slices/kotkankasvisto-00641-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000061725> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/kotkankasvisto-00641-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
   run grep -F "http://urn.fi/URN:NBN:fi:bib:me:006419003#Agent100" slices/kotkankasvisto-00641-reconciled.nt
   [ $status -ne 0 ]
@@ -102,6 +103,7 @@ setup () {
   make slices/jatuli-00000-reconciled.nt
   grep -q -F '<http://schema.org/contributor> <http://urn.fi/URN:NBN:fi:au:pn:000047367>' slices/jatuli-00000-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000047367> <http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000047367> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/jatuli-00000-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
   run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000006753#Agent700-22" slices/jatuli-00000-reconciled.nt
   [ $status -ne 0 ]
@@ -111,6 +113,7 @@ setup () {
   make slices/ajattelemisenalku-00098-reconciled.nt
   grep -q -F '<http://schema.org/about> <http://urn.fi/URN:NBN:fi:au:pn:000043960>' slices/ajattelemisenalku-00098-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000043960> <http://schema.org/name> "Herakleitos"' slices/ajattelemisenalku-00098-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000043960> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/ajattelemisenalku-00098-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
   run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000981258#Agent600-27" slices/ajattelemisenalku-00098-reconciled.nt
   [ $status -ne 0 ]
