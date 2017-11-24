@@ -17,6 +17,7 @@ CONSTRUCT {
   ?s ?p ?organization .
   ?organization schema:name ?organizationName .
   ?organization a schema:Organization .
+  ?cw schema:isPartOf <http://urn.fi/URN:NBN:fi:bib:me:CFENNI> .
 } WHERE {
   {
     ?s ?p ?o .
@@ -139,5 +140,9 @@ CONSTRUCT {
     }
     BIND(COALESCE(?cnOrganization,?org) AS ?organization)
     BIND(COALESCE(?orgPrefLabel, ?orgName) as ?organizationName)
+  }
+  UNION
+  {
+    ?cw a schema:CreativeWork
   }
 }

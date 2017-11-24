@@ -181,3 +181,14 @@ setup () {
   make slices/kotona-00720-reconciled.nt
   grep -q '<http://rdaregistry.info/Elements/u/P60050> <http://rdaregistry.info/termList/RDAMediaType/1003>' slices/kotona-00720-reconciled.nt
 }
+
+@test "Reconcile: works should be part of collection" {
+  make slices/kotkankasvisto-00641-reconciled.nt
+  grep -q '<http://urn.fi/URN:NBN:fi:bib:me:W00641900300> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' slices/kotkankasvisto-00641-reconciled.nt
+  grep -q '<http://urn.fi/URN:NBN:fi:bib:me:W00641900301> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' slices/kotkankasvisto-00641-reconciled.nt
+}
+
+@test "Reconcile: instances should be part of collection" {
+  make slices/kotkankasvisto-00641-reconciled.nt
+  grep -q '<http://urn.fi/URN:NBN:fi:bib:me:I00641900300> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' slices/kotkankasvisto-00641-reconciled.nt
+}
