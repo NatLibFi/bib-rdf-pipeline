@@ -92,7 +92,7 @@ slices/%-agent-keys.nt: slices/%-merged.nt
 slices/%-merged2.nt: slices/%-merged.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-agent-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge.rq --out=NT >$@
 
-merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged2.nt/')
+merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged2.nt/') refdata/fennica-collection.ttl
 	$(RIOT) $^ >$@
 
 %.hdt: %.nt

@@ -41,3 +41,15 @@ setup () {
   count="$(grep -F '<http://schema.org/issn> "0357-7937"' merged/kotona-merged.nt | cut -d ' ' -f 1 | sort | uniq | wc -l)"
   [ "$count" -eq 1 ]
 }
+
+@test "Merge works: works are part of a collection" {
+  make merged/kotona-merged.nt
+  grep '<http://urn.fi/URN:NBN:fi:bib:me:W00097147200> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' merged/kotona-merged.nt
+  grep '<http://urn.fi/URN:NBN:fi:bib:me:CFENNI> <http://schema.org/name> "Fennica"' merged/kotona-merged.nt
+}
+
+@test "Merge works: instances are part of a collection" {
+  make merged/kotona-merged.nt
+  grep '<http://urn.fi/URN:NBN:fi:bib:me:I00097147200> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' merged/kotona-merged.nt
+  grep '<http://urn.fi/URN:NBN:fi:bib:me:CFENNI> <http://schema.org/name> "Fennica"' merged/kotona-merged.nt
+}

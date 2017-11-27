@@ -1,0 +1,10 @@
+@prefix schema: <http://schema.org/>.
+@prefix me: <http://urn.fi/URN:NBN:fi:bib:me:>.
+@prefix cn: <http://urn.fi/URN:NBN:fi:au:cn:>.
+
+me:CFENNI a schema:Collection ;
+  schema:name "Fennica" ;
+  schema:description "Finnish national bibliography" ;
+  schema:producer cn:146806A ;
+  schema:provider cn:146806A .
+  
