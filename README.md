@@ -12,15 +12,19 @@ The steps of the conversion are:
 2. Split the file into smaller batches
 3. Preprocess using unix tools such as grep and sed, to remove some local peculiarities
 4. Convert to MARCXML and enrich the MARC records, using Catmandu
-5. Run the Library of Congress marc2bibframe2 XQuery conversion from MARC to BIBFRAME RDF
+5. Run the Library of Congress marc2bibframe2 XSLT conversion from MARC to BIBFRAME RDF
+6. Convert the BIBFRAME RDF/XML data into N-Triples format and fix up some bad URIs
 6. Calculate work keys (e.g. author+title combination) used later for merging data about the same creative work
 7. Convert the BIBFRAME data into Schema.org RDF in N-Triples format
-8. Merge the Schema.org data about the same works
-9. Convert the raw Schema.org data to HDT format so the full data set can be queried with SPARQL from the command line
-10. Consolidate the data by e.g. rewriting URIs and moving subjects into the original work
-11. Convert the consolidated data to HDT
-12. ??? (TBD)
-13. Profit!
+8. Reconcile entities in the Schema.org data against external sources (e.g. YSA/YSO, Corporate names authority, RDA vocabularies)
+9. Merge the Schema.org data about the same works
+10. Calculate agent keys used for merging data about the same agent (person or organization)
+11. Merge the agents based on agent keys
+12. Convert the raw Schema.org data to HDT format so the full data set can be queried with SPARQL from the command line
+13. Consolidate the data by e.g. rewriting URIs and moving subjects into the original work
+14. Convert the consolidated data to HDT
+15. ??? (TBD)
+16. Profit!
 
 # Dependencies
 
