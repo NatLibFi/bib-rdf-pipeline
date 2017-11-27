@@ -9,5 +9,4 @@ CONSTRUCT {
   ?a schema:name ?name .
   BIND(STRAFTER(STR(?w), STR(me:)) AS ?workLocalName)
   BIND(CONCAT(?workLocalName, '/', LCASE(?name)) AS ?key)
-  FILTER(STRSTARTS(STR(?a), STR(me:)))
 }

@@ -33,7 +33,10 @@ def traverse_uris(uri):
 
 def uri_sort_key(uri):
     """return a sort key for the given URI, based on whether it represents the primary work in the record"""
-    priority = int(uri[-2:]) # last two digits are 00 for the primary work, 01+ for other works mentioned
+    if uri.startswith('http://urn.fi/URN:NBN:fi:bib:me:'):
+        priority = int(uri[-2:]) # last two digits are 00 for the primary work, 01+ for other works mentioned
+    else:
+        priority = -1 # higher priority for e.g. authorized agents
     return (priority, uri)
 
 def select_uri(uris):
