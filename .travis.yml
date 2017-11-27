@@ -23,7 +23,7 @@ before_install:
   - tar -xzf /tmp/apache-jena-3.1.1.tar.gz
   - export PATH=$PATH:$PWD/apache-jena-3.1.1/bin/
   # marc2bibframe2 dependency
-  - git clone --depth 1 --branch v1.2.0 https://github.com/lcnetdev/marc2bibframe2.git ../marc2bibframe2
+  - git clone --depth 1 --branch v1.3.1 https://github.com/lcnetdev/marc2bibframe2.git ../marc2bibframe2
   # hdt-cpp dependency
   # first we need serd...
   - mkdir -p $HOME/local
