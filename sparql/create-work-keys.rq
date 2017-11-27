@@ -70,8 +70,13 @@ CONSTRUCT {
   {
     ?w2 bf:hasSeries/bf:instanceOf ?w .
     ?w a bf:Work .
+    OPTIONAL {
+      ?w bf:contribution/bf:agent/rdfs:label ?agent .
+      BIND(REPLACE(LCASE(?agent),'[^\\p{L}\\p{N}\\s]','') AS ?agentkey)
+    }
     ?w bf:title/rdfs:label ?title .
-    BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?key)
+    BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?titlekey)
+    BIND(COALESCE(CONCAT(?agentkey, '/', ?titlekey), ?titlekey) AS ?key)
   }
   UNION
   # Series with ISSN

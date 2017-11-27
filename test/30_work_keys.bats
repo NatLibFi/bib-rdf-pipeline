@@ -145,6 +145,13 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Work keys: key for series with contributor includes contributor" {
+  make refdata/finlandsverige-work-keys.nt
+  grep -q -F '<http://purl.org/dc/terms/identifier> "henrik gabriel porthaninstituutti/julkaisuja"' refdata/finlandsverige-work-keys.nt
+  run grep -F '<http://purl.org/dc/terms/identifier> "julkaisuja"' refdata/finlandsverige-work-keys.nt
+  [ $status -ne 0 ]
+}
+
 @test "Work keys: key for series based on ISSN" {
   make refdata/kotona-work-keys.nt
   grep -q -F '<http://purl.org/dc/terms/identifier> "issn:0357-7937"' refdata/kotona-work-keys.nt
