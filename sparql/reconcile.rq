@@ -14,6 +14,8 @@ CONSTRUCT {
   ?s ?p ?person .
   ?person schema:name ?personName .
   ?person a schema:Person .
+  ?person schema:birthDate ?personBirthDate .
+  ?person schema:deathDate ?personDeathDate .
   ?s ?p ?organization .
   ?organization schema:name ?organizationName .
   ?organization a schema:Organization .
@@ -114,6 +116,12 @@ CONSTRUCT {
     ?s ?p ?pers .
     ?pers a schema:Person .
     ?pers schema:name ?personName .
+    OPTIONAL {
+      ?pers schema:birthDate ?personBirthDate .
+    }
+    OPTIONAL {
+      ?pers schema:deathDate ?personDeathDate .
+    }
     OPTIONAL {
       ?pers schema:identifier ?personId .
       ?personId schema:propertyID "FIN11" .

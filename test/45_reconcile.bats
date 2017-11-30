@@ -99,6 +99,13 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Reconcile: preserve birth/death years for authors" {
+  make slices/abckiria-00097-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000103346> <http://schema.org/name> "Agricola, Mikael"' slices/abckiria-00097-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000103346> <http://schema.org/birthDate> "noin 1510"' slices/abckiria-00097-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000103346> <http://schema.org/deathDate> "1557"' slices/abckiria-00097-reconciled.nt
+}
+
 @test "Reconcile: express contributors with ID using PN" {
   make slices/jatuli-00000-reconciled.nt
   grep -q -F '<http://schema.org/contributor> <http://urn.fi/URN:NBN:fi:au:pn:000047367>' slices/jatuli-00000-reconciled.nt

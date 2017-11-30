@@ -1,3 +1,63 @@
+000232668 FMT   L BK
+000232668 LDR   L 00000cam^a2201261^i^4500
+000232668 001   L 000232668
+000232668 005   L 20171121074144.0
+000232668 008   L 010626s2000^^^^fi^||||f|||||||||||bfin|^
+000232668 015   L $$afx682405$$2skl
+000232668 020   L $$a951-580-282-2$$qsidottu
+000232668 0248  L $$aA0627267
+000232668 035   L $$a(FI-MELINDA)000232668
+000232668 040   L $$aFI-NL
+000232668 0410  L $$afin
+000232668 042   L $$afinb
+000232668 080   L $$a929$$9FENNI<KEEP>
+000232668 084   L $$a99.1$$2ykl$$9FENNI<KEEP>
+000232668 084   L $$a32$$2ykl
+000232668 084   L $$aYKL:99.1$$2ykl
+000232668 084   L $$a99.1
+000232668 084   L $$a86.21$$2ykl
+000232668 084   L $$a86.215$$2ykl
+000232668 1001  L $$aRajala, Pertti,$$d1954-$$0(FIN11)000056362
+000232668 24510 L $$aSuomalaisia suurmiehiä /$$cPertti Rajala.
+000232668 260   L $$a[Helsinki] :$$bKehitysvammaliitto,$$c2000$$e(Vantaa :$$fK-print)
+000232668 300   L $$a160 s. :$$bkuvitettu ;$$c21 cm
+000232668 336   L $$ateksti$$btxt$$2rdacontent
+000232668 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000232668 338   L $$anide$$bnc$$2rdacarrier
+000232668 4901  L $$aSelkokirja
+000232668 4901  L $$aOpike-sarja
+000232668 500   L $$aSelkokirja.
+000232668 500   L $$aLisäpainokset: 2. p. 2009.
+000232668 520   L $$aTeksti kirjan takakannessa:.$$bAgricola, Lönnrot, Runeberg, Snellman, Kivi, Leino, Mannerheim: seitsemän suomalaista suurmiestä, joiden elämäntyö oli valtava. tämä kirja esittelee heidän elämäänsä ja elämäntyötään. Heitä kaikkia yhdistää yksi asia: jokaisen kunnaksi on nimetty liputuspäivä. Se on syy myös siihen, että juuri heidät on valittu tähän kirjaan monen suuren suomalaisen joukosta.
+000232668 60014 L $$aAgricola, Mikael,$$dnoin 1510-1557.$$0(FIN11)000103346$$9FENNI<KEEP>
+000232668 60014 L $$aLönnrot, Elias,$$d1802-1884.$$0(FIN11)000051570$$9FENNI<KEEP>
+000232668 60014 L $$aRuneberg, Johan Ludvig,$$d1804-1877.$$0(FIN11)000057305$$9FENNI<KEEP>
+000232668 60014 L $$aSnellman, Johan Vilhelm,$$d1806-1881.$$0(FIN11)000059409$$9FENNI<KEEP>
+000232668 60014 L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031$$9FENNI<KEEP>
+000232668 60014 L $$aLeino, Eino,$$d1878-1926.$$0(FIN11)000050499$$9FENNI<KEEP>
+000232668 60014 L $$aMannerheim, Carl Gustaf Emil,$$d1867-1951.$$0(FIN11)000067771$$9FENNI<KEEP>
+000232668 60014 L $$aSnellman, Juhana Vilhelm.
+000232668 650 7 L $$ahenkilöhistoria$$2ysa$$9FENNI<KEEP>
+000232668 650 7 L $$ahistoria$$zSuomi$$2ysa
+000232668 650 7 L $$akulttuurihistoria$$zSuomi$$2ysa
+000232668 650 7 L $$aselkokirjat$$2ysa
+000232668 650 7 L $$ahenkilöhistoria$$zSuomi$$2ysa
+000232668 650 7 L $$aselkokieli$$2ysa
+000232668 650 7 L $$ahistoria$$2ysa
+000232668 650 7 L $$akirjailijat$$2ysa
+000232668 650 7 L $$apoliitikot$$2ysa
+000232668 650 7 L $$akansanrunoudentutkijat$$2ysa
+000232668 650 7 L $$aelämäkerrat$$xsuomalaiset$$2ysa
+000232668 650 7 L $$ahenkilöhistoria$$xsuomalaiset$$2ysa
+000232668 650 7 L $$apersonhistoria$$2allars
+000232668 651 7 L $$aSuomi$$2ysa
+000232668 60014 L $$aAgricola, Mikael.
+000232668 60014 L $$aAgricola, Michael Olai,$$dnoin 1510-1557.
+000232668 650 7 L $$akirjailijat$$zSuomi$$y1800-luku$$2ysa
+000232668 655 7 L $$aselkokirjat$$2ysa
+000232668 655 7 L $$ahenkilöhistoriay$$2ysa
+000232668 830 0 L $$aSelkokirja.
+000232668 830 0 L $$aOpike-sarja.
 000977896 FMT   L BK
 000977896 LDR   L 00000cam^a2200805^i^4500
 000977896 001   L 000977896

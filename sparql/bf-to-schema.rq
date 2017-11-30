@@ -34,12 +34,16 @@ CONSTRUCT {
     schema:name ?publisherOrganizationLabel .
   ?creator a ?schemaCreatorType ;
     schema:name ?creatorLabel ;
+    schema:birthDate ?creatorBirthDate ;
+    schema:deathDate ?creatorDeathDate ;
     schema:identifier ?creatorId .
   ?creatorId a schema:PropertyValue ;
     schema:propertyID ?creatorIdentifierSource ;
     schema:value ?creatorIdentifierValue .
   ?contributor a ?schemaContributorType ;
     schema:name ?contributorLabel ;
+    schema:birthDate ?contributorBirthDate ;
+    schema:deathDate ?contributorDeathDate ;
     schema:identifier ?contributorId .
   ?contributorId a schema:PropertyValue ;
     schema:propertyID ?contributorIdentifierSource ;
@@ -72,11 +76,15 @@ CONSTRUCT {
     schema:author ?subjectWorkAgent ;
     schema:name ?subjectWorkName .
   ?subjectWorkAgent a schema:Person ;
-    schema:name ?subjectWorkAgentName .
+    schema:name ?subjectWorkAgentLabel ;
+    schema:birthDate ?subjectWorkAgentBirthDate ;
+    schema:deathDate ?subjectWorkAgentDeathDate .
   ?subjectOrg a schema:Organization ;
     schema:name ?subjectOrgName .
   ?subjectPerson a schema:Person ;
-    schema:name ?subjectPersonName ;
+    schema:name ?subjectPersonLabel ;
+    schema:birthDate ?subjectPersonBirthDate ;
+    schema:deathDate ?subjectPersonDeathDate ;
     schema:identifier ?subjectPersonId .
   ?subjectPersonId a schema:PropertyValue ;
     schema:propertyID ?subjectPersonIdentifierSource ;
@@ -195,7 +203,12 @@ WHERE {
     ?creation bf:agent ?creator .
     ?creator a ?bfCreatorType .
     ?creator rdfs:label ?creatorLabelRaw .
-    BIND(REPLACE(?creatorLabelRaw, '[ ,\\.]+$', '') AS ?creatorLabel)
+    BIND(REPLACE(?creatorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$1") AS ?creatorName)
+    BIND(REPLACE(?creatorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$4") AS ?creatorBirth)
+    BIND(IF(?creatorBirth != '', ?creatorBirth, ?unbound) as ?creatorBirthDate)
+    BIND(REPLACE(?creatorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$5") AS ?creatorDeath)
+    BIND(IF(?creatorDeath != '', ?creatorDeath, ?unbound) as ?creatorDeathDate)
+    BIND(REPLACE(?creatorName, '[ ,\\.]+$', '') AS ?creatorLabel)
     OPTIONAL {
       ?creator bf:identifiedBy ?creatorId .
       ?creatorId rdf:value ?creatorIdentifierValue .
@@ -212,7 +225,12 @@ WHERE {
       ?contribution bf:agent ?contributor .
       ?contributor a ?bfContributorType .
       ?contributor rdfs:label ?contributorLabelRaw .
-      BIND(REPLACE(?contributorLabelRaw, '[ ,\\.]+$', '') AS ?contributorLabel)
+      BIND(REPLACE(?contributorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$1") AS ?contributorName)
+      BIND(REPLACE(?contributorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$4") AS ?contributorBirth)
+      BIND(IF(?contributorBirth != '', ?contributorBirth, ?unbound) as ?contributorBirthDate)
+      BIND(REPLACE(?contributorLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$5") AS ?contributorDeath)
+      BIND(IF(?contributorDeath != '', ?contributorDeath, ?unbound) as ?contributorDeathDate)
+      BIND(REPLACE(?contributorName, '[ ,\\.]+$', '') AS ?contributorLabel)
       OPTIONAL {
         ?contributor bf:identifiedBy ?contributorId .
         ?contributorId rdf:value ?contributorIdentifierValue .
@@ -255,8 +273,13 @@ WHERE {
       ?subjectWork a bf:Work .
       ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
       ?subjectWorkAgent a bf:Person .
-      ?subjectWorkAgent rdfs:label ?subjectWorkAgentNameRaw .
-      BIND(REPLACE(?subjectWorkAgentNameRaw, '[ ,\\./]+$', '') AS ?subjectWorkAgentName)
+      ?subjectWorkAgent rdfs:label ?subjectWorkAgentLabelRaw .
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$1") AS ?subjectWorkAgentName)
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$4") AS ?subjectWorkAgentBirth)
+      BIND(IF(?subjectWorkAgentBirth != '', ?subjectWorkAgentBirth, ?unbound) as ?subjectWorkAgentBirthDate)
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$5") AS ?subjectWorkAgentDeath)
+      BIND(IF(?subjectWorkAgentDeath != '', ?subjectWorkAgentDeath, ?unbound) as ?subjectWorkAgentDeathDate)
+      BIND(REPLACE(?subjectWorkAgentName, '[ ,\\.]+$', '') AS ?subjectWorkAgentLabel)
       ?subjectWork rdfs:label ?subjectWorkNameRaw .
       BIND(REPLACE(?subjectWorkNameRaw, '[ ,\\./]+$', '') AS ?subjectWorkName)
     }
@@ -282,8 +305,13 @@ WHERE {
       # Person as subject
       ?work bf:subject ?subjectPerson .
       ?subjectPerson a bf:Person .
-      ?subjectPerson rdfs:label ?subjectPersonNameRaw .
-      BIND(REPLACE(?subjectPersonNameRaw, '[ ,\\.]+$', '') AS ?subjectPersonName)
+      ?subjectPerson rdfs:label ?subjectPersonLabelRaw .
+      BIND(REPLACE(?subjectPersonLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$1") AS ?subjectPersonName)
+      BIND(REPLACE(?subjectPersonLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$4") AS ?subjectPersonBirth)
+      BIND(IF(?subjectPersonBirth != '', ?subjectPersonBirth, ?unbound) as ?subjectPersonBirthDate)
+      BIND(REPLACE(?subjectPersonLabelRaw, "([^,]+(,[^,]+)?),?( ([^-]+)-([^,\\.]*),?\\.?)?", "$5") AS ?subjectPersonDeath)
+      BIND(IF(?subjectPersonDeath != '', ?subjectPersonDeath, ?unbound) as ?subjectPersonDeathDate)
+      BIND(REPLACE(?subjectPersonName, '[ ,\\.]+$', '') AS ?subjectPersonLabel)
       OPTIONAL {
         ?subjectPerson bf:identifiedBy ?subjectPersonId .
         ?subjectPersonId rdf:value ?subjectPersonIdentifierValue .

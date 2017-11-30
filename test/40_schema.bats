@@ -144,6 +144,13 @@ setup () {
   grep -q -F '<http://schema.org/name> "Hawking, Stephen"' slices/hawking-00694-schema.nt
 }
 
+@test "Schema.org RDF: avoid trailing periods in author names" {
+  make slices/ajattelemisenalku-00098-schema.nt
+  run grep -F '<http://schema.org/name> "Demokritos."' slices/ajattelemisenalku-00098-schema.nt
+  [ $status -ne 0 ]
+  grep -q -F '<http://schema.org/name> "Demokritos"' slices/ajattelemisenalku-00098-schema.nt
+}
+
 @test "Schema.org RDF: conversion of authors with ID" {
   make slices/kotkankasvisto-00641-schema.nt
   author="$(grep '<http://schema.org/author>' slices/kotkankasvisto-00641-schema.nt | cut -d ' ' -f 3)"
@@ -154,6 +161,33 @@ setup () {
   grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/kotkankasvisto-00641-schema.nt 
   grep -q -F "$id <http://schema.org/propertyID> \"FIN11\"" slices/kotkankasvisto-00641-schema.nt 
   grep -q -F "$id <http://schema.org/value> \"000061725\"" slices/kotkankasvisto-00641-schema.nt 
+}
+
+@test "Schema.org RDF: conversion of authors with birth and death year" {
+  make slices/sjubroder-00010-schema.nt
+  person="$(grep '<http://schema.org/name> "Kivi, Aleksis"' slices/sjubroder-00010-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"1834\"" slices/sjubroder-00010-schema.nt
+  grep -q -F "$person <http://schema.org/deathDate> \"1872\"" slices/sjubroder-00010-schema.nt
+  # make sure the form with the dates does not exist
+  run grep -F '<http://schema.org/name> "Kivi, Aleksis, 1834-1872"' slices/sjubroder-00010-schema.nt
+}
+
+@test "Schema.org RDF: conversion of authors with inexact birth year" {
+  make slices/abckiria-00097-schema.nt
+  person="$(grep '<http://schema.org/name> "Agricola, Mikael"' slices/abckiria-00097-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"noin 1510\"" slices/abckiria-00097-schema.nt
+  grep -q -F "$person <http://schema.org/deathDate> \"1557\"" slices/abckiria-00097-schema.nt
+}
+
+@test "Schema.org RDF: conversion of authors with only birth year" {
+  make slices/punataudista-00084-schema.nt
+  person="$(grep '<http://schema.org/name> "Laitinen, Johannes"' slices/punataudista-00084-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"1869\"" slices/punataudista-00084-schema.nt
+  # make sure the death date doesn't exist
+  run grep -F '<http://schema.org/deathDate>' slices/punataudista-00084-schema.nt
 }
 
 @test "Schema.org RDF: conversion of contributors" {
@@ -172,6 +206,14 @@ setup () {
   grep -q -F "$id <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/PropertyValue>" slices/jatuli-00000-schema.nt 
   grep -q -F "$id <http://schema.org/propertyID> \"FIN11\"" slices/jatuli-00000-schema.nt 
   grep -q -F "$id <http://schema.org/value> \"000047367\"" slices/jatuli-00000-schema.nt 
+}
+
+@test "Schema.org RDF: conversion of contributors with birth and death year" {
+  make slices/abckiria-00097-schema.nt
+  person="$(grep '<http://schema.org/name> "Penttilä, Aarni"' slices/abckiria-00097-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"1899\"" slices/abckiria-00097-schema.nt
+  grep -q -F "$person <http://schema.org/deathDate> \"1971\"" slices/abckiria-00097-schema.nt
 }
 
 @test "Schema.org RDF: conversion of contributors with roles" {
@@ -363,6 +405,14 @@ setup () {
   grep -q -F "$id <http://schema.org/value> \"000043960\"" slices/ajattelemisenalku-00098-schema.nt 
 }
 
+@test "Schema.org RDF: conversion of person subjects with birth/death year" {
+  make slices/abckiria-00023-schema.nt
+  person="$(grep '<http://schema.org/name> "Agricola, Mikael"' slices/abckiria-00023-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"noin 1510\"" slices/abckiria-00023-schema.nt
+  grep -q -F "$person <http://schema.org/deathDate> \"1557\"" slices/abckiria-00023-schema.nt
+}
+
 @test "Schema.org RDF: conversion of 600 \$t work subjects" {
   make slices/trauma-00583-schema.nt
   # find out the URI of a subject work
@@ -385,6 +435,14 @@ setup () {
   grep -q -F "$author <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>" slices/trauma-00583-schema.nt
   # check its name
   grep -q -F "$author <http://schema.org/name> \"Shakespeare, William\"" slices/trauma-00583-schema.nt
+}
+
+@test "Schema.org RDF: conversion of work subjects with person birth/death year" {
+  make slices/abckiria-00612-schema.nt
+  person="$(grep '<http://schema.org/name> "Agricola, Mikael"' slices/abckiria-00612-schema.nt| cut -d ' ' -f 1)"
+  [ -n "$person" ]
+  grep -q -F "$person <http://schema.org/birthDate> \"noin 1510\"" slices/abckiria-00612-schema.nt
+  grep -q -F "$person <http://schema.org/deathDate> \"1557\"" slices/abckiria-00612-schema.nt
 }
 
 @test "Schema.org RDF: conversion of 650 subjects" {
