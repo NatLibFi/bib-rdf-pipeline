@@ -85,6 +85,7 @@ CONSTRUCT {
     ?w bf:identifiedBy ?identifier .
     ?identifier a bf:Issn .
     ?identifier rdf:value ?issn .
+    FILTER(?issn != '')
     BIND(CONCAT("issn:", ?issn) AS ?key)
   }
 

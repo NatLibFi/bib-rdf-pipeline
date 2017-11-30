@@ -156,3 +156,10 @@ setup () {
   make refdata/kotona-work-keys.nt
   grep -q -F '<http://purl.org/dc/terms/identifier> "issn:0357-7937"' refdata/kotona-work-keys.nt
 }
+
+@test "Work keys: key for series based on ISSN is not empty" {
+  make refdata/poliisi-work-keys.nt
+  run grep -F '<http://purl.org/dc/terms/identifier> "issn:"' refdata/poliisi-work-keys.nt
+  [ $status -ne 0 ]
+}
+

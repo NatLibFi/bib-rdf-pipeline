@@ -1,0 +1,34 @@
+000254001 FMT   L BK
+000254001 LDR   L 00000cam^a2200673^i^4500
+000254001 001   L 000254001
+000254001 005   L 20170827054119.0
+000254001 008   L 021024s2001^^^^fi^||||||||||o000|||fin|^
+000254001 015   L $$afx714386$$2skl
+000254001 020   L $$a951-734-412-0$$qnidottu
+000254001 035   L $$a(FI-MELINDA)000254001
+000254001 040   L $$aFI-NL
+000254001 0410  L $$afin
+000254001 042   L $$afinb
+000254001 080   L $$a351/354$$9FENNI<KEEP>
+000254001 080   L $$a336$$9FENNI<KEEP>
+000254001 084   L $$a35.7$$2ykl$$9FENNI<KEEP>
+000254001 1101  L $$aSuomi.$$bSisäasiainministeriö.$$bPoliisiosasto.$$0(FIN11)000034267
+000254001 24510 L $$aPoliisin talousvastuu läänitasolla.
+000254001 260   L $$aHelsinki :$$bSisäasiainministeriö, poliisiosasto,$$c2001.
+000254001 300   L $$a18, [1] lehteä ;$$c30 cm
+000254001 336   L $$ateksti$$btxt$$2rdacontent
+000254001 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000254001 338   L $$anide$$bnc$$2rdacarrier
+000254001 4901  L $$aPoliisiosaston julkaisu,$$x1236-049X ;$$v2001, 7
+000254001 4901  L $$aPoliisiosaston julkaisu / Sisäasiainministeriö,$$x;$$v7/2001
+000254001 650 7 L $$apoliisi$$2ysa$$9FENNI<KEEP>
+000254001 650 7 L $$ataloudellinen vastuu$$2ysa$$9FENNI<KEEP>
+000254001 650 7 L $$amäärärahat$$2ysa$$9FENNI<KEEP>
+000254001 650 7 L $$atalousarviot$$2ysa$$9FENNI<KEEP>
+000254001 650 7 L $$ataloussuunnittelu$$2ysa$$9FENNI<KEEP>
+000254001 650 7 L $$atalous$$xvastuu$$2ysa
+000254001 650 7 L $$apolisen$$xekonomi$$xansvar$$2allars
+000254001 650 7 L $$aekonomi$$xansvar$$2allars
+000254001 653   L $$atalousvastuu
+000254001 830 0 L $$aPoliisiosaston julkaisu,$$x1236-049X ;$$v2001, 7.
+000254001 830 0 L $$aPoliisiosaston julkaisu / Sisäasiainministeriö,$$x;$$v7/2001.
