@@ -95,7 +95,7 @@ setup () {
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000061725> <http://schema.org/name> "Ulvinen, Arvi"' slices/kotkankasvisto-00641-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000061725> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/kotkankasvisto-00641-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
-  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:006419003#Agent100" slices/kotkankasvisto-00641-reconciled.nt
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:P00641900301" slices/kotkankasvisto-00641-reconciled.nt
   [ $status -ne 0 ]
 }
 
@@ -112,7 +112,7 @@ setup () {
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000047367> <http://schema.org/name> "Keränen, Lauri"' slices/jatuli-00000-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000047367> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/jatuli-00000-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
-  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000006753#Agent700-22" slices/jatuli-00000-reconciled.nt
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:P00000675302" slices/jatuli-00000-reconciled.nt
   [ $status -ne 0 ]
 }
 
@@ -122,7 +122,17 @@ setup () {
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000043960> <http://schema.org/name> "Herakleitos"' slices/ajattelemisenalku-00098-reconciled.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:au:pn:000043960> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person>' slices/ajattelemisenalku-00098-reconciled.nt
   # check that no agent URIs derived from the bib record ID are left
-  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:000981258#Agent600-27" slices/ajattelemisenalku-00098-reconciled.nt
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:P00098125805" slices/ajattelemisenalku-00098-reconciled.nt
+  [ $status -ne 0 ]
+}
+
+@test "Reconcile: express corporate subjects using CN" {
+  make slices/evaluation-00590-reconciled.nt
+  grep -q -F '<http://schema.org/about> <http://urn.fi/URN:NBN:fi:au:cn:146806A>' slices/evaluation-00590-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:146806A> <http://schema.org/name> "Kansalliskirjasto"' slices/evaluation-00590-reconciled.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:au:cn:146806A> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization>' slices/evaluation-00590-reconciled.nt
+  # check that no agent URIs derived from the bib record ID are left
+  run grep -F "http://urn.fi/URN:NBN:fi:bib:me:O00590886001" slices/evaluation-00590-reconciled.nt
   [ $status -ne 0 ]
 }
 

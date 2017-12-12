@@ -1,0 +1,39 @@
+005908860 FMT   L BK
+005908860 LDR   L 00000cam^a2200721^i^4500
+005908860 001   L 005908860
+005908860 005   L 20170924124740.0
+005908860 008   L 110503s2011^^^^fi^||||^^^^^^f00|^0|eng|^
+005908860 015   L $$afx969041$$2skl
+005908860 020   L $$a978-952-263-029-2$$qnidottu
+005908860 035   L $$a(FI-MELINDA)005908860
+005908860 040   L $$aFI-NL
+005908860 0410  L $$aeng
+005908860 042   L $$afinb
+005908860 072 7 L $$a81$$2kkaa
+005908860 080   L $$a02$$9FENNI<KEEP>
+005908860 24500 L $$aInternational evaluation of the National Library of Finland :$$breport of the evaluation panel.
+005908860 260   L $$aHelsinki :$$bMinistry of Education and Culture, Department for Education and Science Policy ;$$aKuopio :$$bKopijyvä [jakaja],$$c2011.
+005908860 300   L $$a35 s. :$$bkuvitettu ;$$c27 cm
+005908860 336   L $$ateksti$$btxt$$2rdacontent
+005908860 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+005908860 338   L $$anide$$bnc$$2rdacarrier
+005908860 4901  L $$aReports of the Ministry of Education and Culture, Finland,$$x1799-0343 ;$$v2011:14
+005908860 530   L $$aJulkaistu myös verkkoaineistona ISBN 978-952-263-030-8 (PDF)$$9FENNI<KEEP>
+005908860 61024 L $$aKansalliskirjasto.$$0(FIN11)000034269$$9FENNI<KEEP>
+005908860 650 7 L $$akirjastot$$2ysa$$9FENNI<KEEP>
+005908860 650 7 L $$akansalliskirjastot$$2ysa$$9FENNI<KEEP>
+005908860 650 7 L $$akansainvälinen arviointi$$2ysa$$9FENNI<KEEP>
+005908860 650 7 L $$aarviointi$$2ysa$$9FENNI<KEEP>
+005908860 650 7 L $$akehittäminen$$2ysa$$9FENNI<KEEP>
+005908860 650 7 L $$abibliotek$$2allars
+005908860 650 7 L $$anationalbibliotek$$2allars
+005908860 650 7 L $$ainternationell utvärdering$$2allars
+005908860 650 7 L $$autvärdering$$2allars
+005908860 650 7 L $$autveckling$$2allars
+005908860 7101  L $$aSuomi.$$bOpetus- ja kulttuuriministeriö.$$bKoulutus- ja tiedepolitiikan osasto.$$0(FIN11)000034526
+005908860 830 0 L $$aOpetus- ja kulttuuriministeriön julkaisuja,$$x1799-0343 ;$$v2011:14.
+005908860 85641 L $$uhttp://www.minedu.fi/export/sites/default/OPM/Julkaisut/2011/liitteet/okm14.pdf?lang=fi$$yLinkki verkkoaineistoon
+005908860 901   L $$aMM20111020$$5FENNI
+005908860 901   L $$aMU20110704$$5FENNI
+005908860 904   L $$ap$$5FENNI
+005908860 9101  L $$aMinistry of Education and Culture.$$bDepartment for Education and Science Policy$$yOpetus- ja kulttuuriministeriö. Koulutus- ja tiedepolitiikan osasto
