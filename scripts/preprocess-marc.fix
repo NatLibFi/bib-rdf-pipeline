@@ -39,3 +39,8 @@ marc_remove('3362')
 
 # Remove 337$2 subfield (it confuses the marc2bibframe conversion)
 marc_remove('3372')
+
+# Remove 490 fields if a 830 field is present
+if marc_has('830')
+  marc_remove('490')
+end

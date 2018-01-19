@@ -102,3 +102,14 @@ setup () {
   xmllint --format slices/part-uri-00683.mrcx | grep -q -F '<marc:subfield code="a">Pelto-Huikko, Aino</marc:subfield>'
   ! xmllint --format slices/part-uri-00683.mrcx | grep 'Kaunisto, TuijaPelto-Huikko, Aino'
 }
+
+@test "MARCXML: removes 490 fields if a 830 field is present" {
+  make slices/kotona-00508.mrcx
+  run bash -c "xmllint --format slices/kotona-00508.mrcx | grep 'tag=\"490\"'"
+  [ "$status" -ne 0 ]
+}
+
+@test "MARCXML: retains 490 fields if no 830 fields are present" {
+  make slices/sjubroder-00450.mrcx
+  xmllint --format slices/sjubroder-00450.mrcx | grep -q 'tag="490"'
+}
