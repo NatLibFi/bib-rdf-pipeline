@@ -53,4 +53,4 @@ for uri in keys_for_uri.keys():
             for uri2 in uris: # store in cache for all URIs in the merged set
                 uri_replacement[uri2] = replacement
     if uri in uri_replacement and uri_replacement[uri] != uri:
-        print "<%s> <http://schema.org/sameAs> <%s> ." % (uri, uri_replacement[uri])
+        print "<%s> <http://www.w3.org/2002/07/owl#sameAs> <%s> ." % (uri, uri_replacement[uri])

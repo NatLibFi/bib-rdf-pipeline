@@ -1,12 +1,12 @@
-PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 CONSTRUCT {
   ?news ?p ?newo .
 } WHERE {
   ?s ?p ?o .
-  FILTER(?p != schema:sameAs)
-  OPTIONAL { ?s schema:sameAs ?s2 }
-  OPTIONAL { ?o schema:sameAs ?o2 }
+  FILTER(?p != owl:sameAs)
+  OPTIONAL { ?s owl:sameAs ?s2 }
+  OPTIONAL { ?o owl:sameAs ?o2 }
   BIND(IF(BOUND(?s2),?s2,?s) AS ?news)
   BIND(IF(BOUND(?o2),?o2,?o) AS ?newo)
 }
