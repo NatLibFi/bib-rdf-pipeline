@@ -116,7 +116,8 @@ WHERE {
     {
       ?inst bf:identifiedBy ?isbn .
       ?isbn a bf:Isbn .
-      ?isbn rdf:value ?isbnVal .
+      ?isbn rdf:value ?isbnValRaw .
+      BIND(REPLACE(?isbnValRaw, '-', '') AS ?isbnVal)
     }
     UNION
     {

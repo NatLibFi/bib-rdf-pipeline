@@ -125,7 +125,7 @@ setup () {
 @test "Schema.org RDF: conversion of ISBNs" {
   make slices/ajanlyhythistoria-00009-schema.nt
   inst="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 3)"
-  grep -q "$inst <http://schema.org/isbn> \"951-0-19440-9\"" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q "$inst <http://schema.org/isbn> \"9510194409\"" slices/ajanlyhythistoria-00009-schema.nt
 }
 
 @test "Schema.org RDF: conversion of author (original work and translated work)" {
