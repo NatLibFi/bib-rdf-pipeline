@@ -29,12 +29,12 @@ setup () {
 
 @test "Work transformations: prefer URIs for main works" {
   make refdata/kotona-work-transformations.nt
-  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00508353600> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00097147201>' refdata/kotona-work-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00097147201> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00508353600>' refdata/kotona-work-transformations.nt
+  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00508353600> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00097147201>' refdata/kotona-work-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00097147201> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00508353600>' refdata/kotona-work-transformations.nt
 }
 
 @test "Work transformations: prefer 240-generated URIs for works over 600-generated URIs" {
   make refdata/trauma-work-transformations.nt
-  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00072746801> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00583822610>' refdata/trauma-work-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00583822610> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00072746801>' refdata/trauma-work-transformations.nt
+  grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00072746801> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00583822610>' refdata/trauma-work-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00583822610> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00072746801>' refdata/trauma-work-transformations.nt
 }

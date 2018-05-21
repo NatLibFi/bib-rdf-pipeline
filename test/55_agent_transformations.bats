@@ -21,11 +21,11 @@ setup () {
 
 @test "Agent transformations: prefer authorized persons" {
   make refdata/abckiria-agent-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00310205703> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:au:pn:000055166>' refdata/abckiria-agent-transformations.nt
-  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00612868401> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:au:pn:000103346>' refdata/abckiria-agent-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00310205703> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:au:pn:000055166>' refdata/abckiria-agent-transformations.nt
+  grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:P00612868401> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:au:pn:000103346>' refdata/abckiria-agent-transformations.nt
 
-  run grep -F '<http://urn.fi/URN:NBN:fi:au:pn:000055166> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:P00310205703>' refdata/abckiria-agent-transformations.nt
+  run grep -F '<http://urn.fi/URN:NBN:fi:au:pn:000055166> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:P00310205703>' refdata/abckiria-agent-transformations.nt
   [ "$status" -ne 0 ]
-  run grep -F '<http://urn.fi/URN:NBN:fi:au:pn:000103346> <http://schema.org/sameAs> <http://urn.fi/URN:NBN:fi:bib:me:P00612868401>' refdata/abckiria-agent-transformations.nt
+  run grep -F '<http://urn.fi/URN:NBN:fi:au:pn:000103346> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:P00612868401>' refdata/abckiria-agent-transformations.nt
   [ "$status" -ne 0 ]
 }
