@@ -209,3 +209,8 @@ setup () {
   make slices/kotkankasvisto-00641-reconciled.nt
   grep -q '<http://urn.fi/URN:NBN:fi:bib:me:I00641900300> <http://schema.org/isPartOf> <http://urn.fi/URN:NBN:fi:bib:me:CFENNI>' slices/kotkankasvisto-00641-reconciled.nt
 }
+
+@test "Reconcile: series with ISSNs should be linked to their issn.org identifier" {
+  make slices/series-00007-reconciled.nt
+  grep -q '<http://schema.org/sameAs> <https://issn.org/resource/issn/0788-2831>' slices/series-00007-reconciled.nt
+}

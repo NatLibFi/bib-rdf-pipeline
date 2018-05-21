@@ -20,6 +20,7 @@ CONSTRUCT {
   ?organization schema:name ?organizationName .
   ?organization a schema:Organization .
   ?cw schema:isPartOf <http://urn.fi/URN:NBN:fi:bib:me:CFENNI> .
+  ?seriesWithISSN schema:sameAs ?seriesISSNres .
 } WHERE {
   {
     ?s ?p ?o .
@@ -153,5 +154,10 @@ CONSTRUCT {
   UNION
   {
     ?cw a schema:CreativeWork
+  }
+  UNION
+  {
+    ?seriesWithISSN schema:issn ?seriesISSN .
+    BIND(IRI(CONCAT('https://issn.org/resource/issn/', ?seriesISSN)) AS ?seriesISSNres)
   }
 }
