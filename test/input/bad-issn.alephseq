@@ -1,0 +1,38 @@
+000045005 FMT   L BK
+000045005 LDR   L 00000cam^a2200865zi^4500
+000045005 001   L 000045005
+000045005 005   L 20180104182752.0
+000045005 008   L 880210s1987^^^^fi^|||||||||||||||||fin||
+000045005 015   L $$afx116583$$2skl
+000045005 020   L $$a951-9039-28-7$$qnidottu
+000045005 035   L $$a(FI-MELINDA)000045005
+000045005 040   L $$aFI-NL
+000045005 0410  L $$afin
+000045005 042   L $$afinb
+000045005 080   L $$a221
+000045005 080   L $$a224
+000045005 080   L $$a22$$21974/fin/fennica$$9FENNI<KEEP>
+000045005 084   L $$a22.1
+000045005 1001  L $$aPeltola, Olavi,$$d1929-$$0(FIN11)000055073
+000045005 24010 L $$aRaamattu.$$pVanha testamentti
+000045005 24510 L $$aOpiskelemme Vanhaa testamenttia.$$n2,$$pProfeettojen kirjat /$$cOlavi Peltola.
+000045005 260   L $$aKauniainen :$$bSuomen raamattuopiston kustannus,$$c1987$$e(Kurikka :$$fKurikka-paino)
+000045005 300   L $$a179 s. ;$$c21 cm
+000045005 336   L $$ateksti$$btxt$$2rdacontent
+000045005 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000045005 338   L $$anide$$bnc$$2rdacarrier
+000045005 4901  L $$aRaamattukirjasto,$$x0781-6 618 ;$$v6
+000045005 63004 L $$aRaamattu.
+000045005 63004 L $$aRaamattu.$$pVanha testamentti.$$9FENNI<KEEP>.
+000045005 6300  L $$aRaamattu.$$sVanha testamentti.
+000045005 650 7 L $$aRaamattu$$xVanha testamentti$$2ysa
+000045005 650 7 L $$aRaamattu$$2ysa
+000045005 650 7 L $$aoppikirjat$$2ysa
+000045005 650 7 L $$aprofeetat$$2ysa
+000045005 650 7 L $$araamatuntulkinta$$2ysa$$9FENNI<KEEP>
+000045005 650 7 L $$aBibeln$$xGamla testamentet$$2allars
+000045005 650 7 L $$aRaamattu
+000045005 650 7 L $$aVanha testamentti
+000045005 650 7 L $$aeksegetiikka
+000045005 7400  L $$aProfeettojan kirjat
+000045005 830 0 L $$aRaamattukirjasto,$$x0781-6 618 ;$$v6.
