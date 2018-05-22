@@ -214,3 +214,9 @@ setup () {
   make slices/kotkankasvisto-00641-reconciled.nt
   grep -q '<http://schema.org/sameAs> <https://issn.org/resource/issn/0788-6942>' slices/kotkankasvisto-00641-reconciled.nt
 }
+
+@test "Reconcile: invalid ISSNs should not be linked" {
+  make slices/bad-issn-00004-reconciled.nt
+  run grep '<http://schema.org/sameAs> <https://issn.org/resource/issn/' slices/bad-issn-00004-reconciled.nt
+  [ $status -ne 0 ]
+}

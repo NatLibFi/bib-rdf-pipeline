@@ -158,6 +158,7 @@ CONSTRUCT {
   UNION
   {
     ?seriesWithISSN schema:issn ?seriesISSN .
+    FILTER(REGEX(?seriesISSN, '\\d{4}-\\d{4}')) .
     BIND(IRI(CONCAT('https://issn.org/resource/issn/', ?seriesISSN)) AS ?seriesISSNres)
   }
 }
