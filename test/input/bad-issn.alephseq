@@ -36,3 +36,46 @@
 000045005 650 7 L $$aeksegetiikka
 000045005 7400  L $$aProfeettojan kirjat
 000045005 830 0 L $$aRaamattukirjasto,$$x0781-6 618 ;$$v6.
+000046711 FMT   L BK
+000046711 LDR   L 00000cam^a2200985zi^4500
+000046711 001   L 000046711
+000046711 005   L 20180516120834.0
+000046711 008   L 850716s1984^^^^fi^|||||||||||1|||||eng||
+000046711 015   L $$afx131106$$2skl
+000046711 020   L $$a951-95852-2-2$$qnidottu
+000046711 035   L $$a(FI-MELINDA)000046711
+000046711 040   L $$aFI-NL
+000046711 0410  L $$aeng
+000046711 042   L $$afinb
+000046711 080   L $$a66$$21974/fin/fennica$$9FENNI<KEEP>
+000046711 080   L $$a061.3
+000046711 080   L $$a159.934
+000046711 080   L $$a541.694
+000046711 080   L $$a543.4
+000046711 080   L $$a543.8/543.9
+000046711 080   L $$a543.9
+000046711 080   L $$a663
+000046711 080   L $$a663.1
+000046711 080   L $$a663.15
+000046711 080   L $$a663.15:543.8/543.9
+000046711 080   L $$a663.2
+000046711 080   L $$a663.3
+000046711 080   L $$a663.4
+000046711 080   L $$a663.5
+000046711 080   L $$a663.5:541.694:665.57
+000046711 080   L $$a665.57
+000046711 080   L $$a665.57:663.5:541.694
+000046711 1112  L $$aAlko Symposium on Flavour Research of Alcoholic Beverages$$d(1984 :$$cHelsinki).
+000046711 24510 L $$aFlavour research of alcoholic beverages :$$binstrumental and sensory analysis : proceedings of the Alko Symposium June 13-15, 1984, Helsinki, Finland /$$ced. by Lalli Nykänen and Pekka Lehtonen.
+000046711 260   L $$aHki :$$bFoundation for Biotechnical and Industrial Fermentation Research :$$bAkateeminen kirjakauppa, distr.,$$c1984$$f(Kauppakirjap.)
+000046711 300   L $$a335 s. :$$bkuvitettu ;$$c25 cm
+000046711 336   L $$ateksti$$btxt$$2rdacontent
+000046711 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000046711 338   L $$anide$$bnc$$2rdacarrier
+000046711 4901  L $$aFoundation for Biotechnical and Industrial Fermentation Research,$$x0780-6655 4v vol. 3
+000046711 650 7 L $$aalkoholiteollisuus$$2eks
+000046711 7001  L $$aNykänen, Lalli,$$d1928-$$0(FIN11)000053931
+000046711 7001  L $$aLehtonen, Pekka,$$d1952-$$0(FIN11)000075319
+000046711 7102  L $$aBiotekniikan ja käymisteollisuuden tutkimussäätiö.$$0(FIN11)000000287
+000046711 830 0 L $$aFoundation for Biotechnical and Industrial Fermentation Research,$$x0780-6655 4v vol. 3.
+000046711 9102  L $$aFoundation for Biotechnical and Industrial Fermentation Research$$yBiotekniikan ja käymisteollisuuden tutkimussäätiö
