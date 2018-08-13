@@ -1,0 +1,54 @@
+007336990 FMT   L BK
+007336990 LDR   L ^^^^^cam^a2200973zi^4500
+007336990 001   L 007336990
+007336990 005   L 20160105111132.0
+007336990 008   L 150818s1938^^^^fi^|||||||||||||||||fin||
+007336990 015   L $$af498577$$2skl
+007336990 035   L $$z(FI-MELINDA)007070756
+007336990 035   L $$z(FI-MELINDA)005336295
+007336990 035   L $$z(FI-MELINDA)005336294
+007336990 035   L $$z(FI-MELINDA)000820219
+007336990 035   L $$a(FI-MELINDA)007336990
+007336990 040   L $$aFI-NL
+007336990 0410  L $$afin
+007336990 042   L $$afinb
+007336990 080   L $$a908 Helsinki
+007336990 080   L $$a628.1$$x(480.1)
+007336990 080   L $$a628
+007336990 080   L $$a556
+007336990 080   L $$a502/504
+007336990 084   L $$a62$$2ykl
+007336990 1001  L $$aLilja, John L. W.,$$q(John Lennart Woldemar Lillja),$$d1879-1946,$$ekirjoittaja.
+007336990 24510 L $$aHelsingin kaupungin vesijohtolaitos 1876-1936 /$$cJohn L. W. Lilja.
+007336990 260   L $$aHelsinki :$$bHelsingin kaupungin vesijohtolaitos,$$c1938.
+007336990 300   L $$a318, [1] s., 29 kuvalehteä, karttaliite :$$bkuvitettu, karttoja
+007336990 336   L $$ateksti$$btxt$$2rdacontent
+007336990 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+007336990 338   L $$anide$$bnc$$2rdacarrier
+007336990 515   L $$a20304587.
+007336990 583   L $$aMERGED FROM (FI-MELINDA)005336295 + (FI-MELINDA)000820219$$c2015-08-18T02:12:15+03:00$$5MELINDA
+007336990 61014 L $$aHelsingin kaupunki.$$bVesijohtolaitos.
+007336990 61014 L $$aHelsingin kaupungin vesilaitos.
+007336990 650 7 L $$aympäristövaikutukset$$2ysa
+007336990 650 7 L $$aympäristöhistoria$$2ysa
+007336990 650 7 L $$aviemäröinti$$2ysa
+007336990 650 7 L $$avesilaitokset$$2ysa
+007336990 650 7 L $$avesilaitokset$$xhistoria$$zHelsinki$$2ysa
+007336990 650 7 L $$avesihuoltolaitokset$$2ysa
+007336990 650 7 L $$avesihuolto$$2ysa
+007336990 650 7 L $$avesiensuojelu$$2ysa
+007336990 650 7 L $$avedenkästtely$$2ysa
+007336990 650 7 L $$avedenkäsittely$$2ysa
+007336990 650 7 L $$avedenhankinta$$2ysa
+007336990 650 7 L $$akunnallistekniikka$$2ysa
+007336990 650 7 L $$akaupunkihistoria$$2ysa
+007336990 650 7 L $$akaupungit$$2ysa
+007336990 650 7 L $$akaupungistuminen$$2ysa
+007336990 650 7 L $$ajätevedenpuhdistamot$$2ysa
+007336990 650 7 L $$ahistoria$$2ysa
+007336990 650 7 L $$avattenverk$$xhistoria$$zHelsingfors$$2allars
+007336990 650 7 L $$avatten och avlopp$$xhistoria$$zHelsingfors$$2allars
+007336990 650 7 L $$avesilaitokset$$2eks
+007336990 650 7 L $$avesihuolto$$2eks
+007336990 650 7 L $$ataloushistoria$$2eks
+007336990 651 7 L $$aHelsinki$$2ysa

@@ -171,6 +171,7 @@ setup () {
   grep -q -F "$person <http://schema.org/deathDate> \"1872\"" slices/sjubroder-00010-schema.nt
   # make sure the form with the dates does not exist
   run grep -F '<http://schema.org/name> "Kivi, Aleksis, 1834-1872"' slices/sjubroder-00010-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of authors with inexact birth year" {
@@ -188,6 +189,22 @@ setup () {
   grep -q -F "$person <http://schema.org/birthDate> \"1869\"" slices/punataudista-00084-schema.nt
   # make sure the death date doesn't exist
   run grep -F '<http://schema.org/deathDate>' slices/punataudista-00084-schema.nt
+  [ $status -ne 0 ]
+}
+
+@test "Schema.org RDF: conversion of birth years for records containing 100 \$q subfield" {
+  make slices/vesijohtolaitos-00733-schema.nt
+  grep -q -F '<http://schema.org/birthDate> "1879"' slices/vesijohtolaitos-00733-schema.nt
+  # make sure the invalid birth date doesn't exist
+  run grep -F '<http://schema.org/birthDate> "(John Lennart Woldemar Lillja), 1879"' slices/vesijohtolaitos-00733-schema.nt
+  [ $status -ne 0 ]
+}
+
+@test "Schema.org RDF: conversion of birth years for records containing Cyrillic names" {
+  make slices/hulluntaivaassa-00490-schema.nt
+  # make sure the invalid birth date doesn't exist
+  run grep -F '<http://schema.org/birthDate> ""' slices/hulluntaivaassa-00490-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of contributors" {
@@ -214,6 +231,14 @@ setup () {
   [ -n "$person" ]
   grep -q -F "$person <http://schema.org/birthDate> \"1899\"" slices/abckiria-00097-schema.nt
   grep -q -F "$person <http://schema.org/deathDate> \"1971\"" slices/abckiria-00097-schema.nt
+}
+
+@test "Schema.org RDF: conversion of contributors with dashes in their name" {
+  make slices/sjubroder-00010-schema.nt
+  run grep -F '<http://schema.org/birthDate> "Carl"' slices/sjubroder-00010-schema.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/deathDate> "Adam"' slices/sjubroder-00010-schema.nt
+  [ $status -ne 0 ]
 }
 
 @test "Schema.org RDF: conversion of contributors with roles" {
