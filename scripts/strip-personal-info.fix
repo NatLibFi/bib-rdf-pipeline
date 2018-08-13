@@ -6,13 +6,8 @@ do marc_each()
     replace_all(name, ',$', '')
     marc_map('100d', years)
     parse_text(years, '(\d+)-(\d*)')
-    if greater_than(years.0, 1870)
-	if all_match(years.1, '\d+')
-            if greater_than(years.1, 1990)
-                marc_set('100a', $.name)
-                marc_remove('100d')
-            end
-        else
+    if greater_than(years.0, 1899)
+	unless all_match(years.1, '\d+')
             marc_set('100a', $.name)
             marc_remove('100d')
         end
@@ -22,13 +17,8 @@ do marc_each()
     replace_all(name, ',$', '')
     marc_map('600d', years)
     parse_text(years, '(\d+)-(\d*)')
-    if greater_than(years.0, 1870)
-	if all_match(years.1, '\d+')
-            if greater_than(years.1, 1990)
-                marc_set('600a', $.name)
-                marc_remove('600d')
-            end
-        else
+    if greater_than(years.0, 1899)
+	unless all_match(years.1, '\d+')
             marc_set('600a', $.name)
             marc_remove('600d')
         end
@@ -38,13 +28,8 @@ do marc_each()
     replace_all(name, ',$', '')
     marc_map('700d', years)
     parse_text(years, '(\d+)-(\d*)')
-    if greater_than(years.0, 1870)
-	if all_match(years.1, '\d+')
-            if greater_than(years.1, 1990)
-                marc_set('700a', $.name)
-                marc_remove('700d')
-            end
-        else
+    if greater_than(years.0, 1899)
+	unless all_match(years.1, '\d+')
             marc_set('700a', $.name)
             marc_remove('700d')
         end
