@@ -192,6 +192,19 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Schema.org RDF: conversion of authors with dashes in their name" {
+  make slices/ajanvirrassa-00004-schema.nt
+  grep -q -F '<http://schema.org/name> "Seilo, Anna-Liisa"' slices/ajanvirrassa-00004-schema.nt
+
+  # check for invalid name, birthDate and deathDate
+  run grep -F '<http://schema.org/name> "Seilo"' slices/ajanvirrassa-00004-schema.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/birthDate> "Anna"' slices/ajanvirrassa-00004-schema.nt
+  [ $status -ne 0 ]
+  run grep -F '<http://schema.org/deathDate> "Liisa"' slices/ajanvirrassa-00004-schema.nt
+  [ $status -ne 0 ]
+}
+
 @test "Schema.org RDF: conversion of birth years for records containing 100 \$q subfield" {
   make slices/vesijohtolaitos-00733-schema.nt
   grep -q -F '<http://schema.org/birthDate> "1879"' slices/vesijohtolaitos-00733-schema.nt

@@ -1,0 +1,36 @@
+000047635 FMT   L BK
+000047635 LDR   L 00000cam^a2200769zi^4500
+000047635 001   L 000047635
+000047635 005   L 20180104184609.0
+000047635 008   L 870714s1987^^^^fi^|||||||||||||||||fin||
+000047635 015   L $$afx137258$$2skl
+000047635 020   L $$a951-99811-0-1$$qsidottu
+000047635 035   L $$a(FI-MELINDA)000047635
+000047635 040   L $$aFI-NL
+000047635 0410  L $$afin
+000047635 042   L $$afinb
+000047635 080   L $$a336.7
+000047635 080   L $$a39$$21974/fin/fennica$$9FENNI<KEEP>
+000047635 080   L $$a336.722$$x(091)$$21974/fin/fennica$$9FENNI<KEEP>
+000047635 084   L $$a81.3$$2ykl$$9FENNI<KEEP>
+000047635 084   L $$a36.2209$$2ykl
+000047635 1001  L $$aSeilo, Anna-Liisa.
+000047635 24510 L $$aAjan virrassa :$$bParkanon säästöpankki 1887-1987 /$$c[teksti: Anna-Liisa Seilo] ; [kuv.: Säästöpankin arkisto ja R. S. Ala-Karvia].
+000047635 260   L $$a[Parkano] :$$bParkanon säästöpankki,$$c1987$$f(Parkanon kirjap.)
+000047635 300   L $$a[2], 88 s. :$$bkuvitettu ;$$c22 x 24 cm
+000047635 336   L $$ateksti$$btxt$$2rdacontent
+000047635 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000047635 338   L $$anide$$bnc$$2rdacarrier
+000047635 61024 L $$aParkanon säästöpankki.$$0(FIN11)000003429
+000047635 650 7 L $$asäästöpankit$$zParkano$$2ysa
+000047635 650 7 L $$akaskut$$zParkano$$2ysa
+000047635 650 7 L $$ahistoriikit$$2ysa
+000047635 650 7 L $$akaskut$$2ysa$$9FENNI<KEEP>
+000047635 650 7 L $$asäästöpankit$$2ysa$$9FENNI<KEEP>
+000047635 650 7 L $$ahistoriikit$$xpankit$$zParkano$$2ysa
+000047635 650 7 L $$asparbanker$$zParkano$$2allars
+000047635 651 7 L $$aParkano$$2allars
+000047635 651 7 L $$aParkano$$2ysa$$9FENNI<KEEP>
+000047635 7102  L $$aParkanon säästöpankki.$$0(FIN11)000003429
+000047635 903   L $$aa$$5FENNI
+000047635 908   L $$afin

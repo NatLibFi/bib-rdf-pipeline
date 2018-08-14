@@ -204,10 +204,10 @@ WHERE {
     ?creation bf:agent ?creator .
     ?creator a ?bfCreatorType .
     ?creator rdfs:label ?creatorLabelRaw .
-    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$1") AS ?creatorName)
-    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$3") AS ?creatorBirth)
+    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$1") AS ?creatorName)
+    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$3") AS ?creatorBirth)
     BIND(IF(STR(?creatorBirth) != '', ?creatorBirth, ?unbound) as ?creatorBirthDate)
-    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$4") AS ?creatorDeath)
+    BIND(REPLACE(?creatorLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$4") AS ?creatorDeath)
     BIND(IF(STR(?creatorDeath) != '', ?creatorDeath, ?unbound) as ?creatorDeathDate)
     BIND(REPLACE(?creatorName, '[ ,\\.]+$', '') AS ?creatorLabel)
     OPTIONAL {
