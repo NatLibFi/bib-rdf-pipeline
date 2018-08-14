@@ -275,10 +275,10 @@ WHERE {
       ?subjectWork bf:contribution/bf:agent ?subjectWorkAgent .
       ?subjectWorkAgent a bf:Person .
       ?subjectWorkAgent rdfs:label ?subjectWorkAgentLabelRaw .
-      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$1") AS ?subjectWorkAgentName)
-      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$3") AS ?subjectWorkAgentBirth)
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$1") AS ?subjectWorkAgentName)
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$3") AS ?subjectWorkAgentBirth)
       BIND(IF(STR(?subjectWorkAgentBirth) != '', ?subjectWorkAgentBirth, ?unbound) as ?subjectWorkAgentBirthDate)
-      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$4") AS ?subjectWorkAgentDeath)
+      BIND(REPLACE(?subjectWorkAgentLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$4") AS ?subjectWorkAgentDeath)
       BIND(IF(STR(?subjectWorkAgentDeath) != '', ?subjectWorkAgentDeath, ?unbound) as ?subjectWorkAgentDeathDate)
       BIND(REPLACE(?subjectWorkAgentName, '[ ,\\.]+$', '') AS ?subjectWorkAgentLabel)
       ?subjectWork rdfs:label ?subjectWorkNameRaw .
@@ -307,10 +307,10 @@ WHERE {
       ?work bf:subject ?subjectPerson .
       ?subjectPerson a bf:Person .
       ?subjectPerson rdfs:label ?subjectPersonLabelRaw .
-      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$1") AS ?subjectPersonName)
-      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$3") AS ?subjectPersonBirth)
+      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$1") AS ?subjectPersonName)
+      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$3") AS ?subjectPersonBirth)
       BIND(IF(STR(?subjectPersonBirth) != '', ?subjectPersonBirth, ?unbound) as ?subjectPersonBirthDate)
-      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]+)-([^,\\.]*))?,?\\.?$", "$4") AS ?subjectPersonDeath)
+      BIND(REPLACE(?subjectPersonLabelRaw, "^(.+?)(, ([^,-]*[0-9]+)-([^,\\.]*[0-9]+)?)?,?\\.?$", "$4") AS ?subjectPersonDeath)
       BIND(IF(STR(?subjectPersonDeath) != '', ?subjectPersonDeath, ?unbound) as ?subjectPersonDeathDate)
       BIND(REPLACE(?subjectPersonName, '[ ,\\.]+$', '') AS ?subjectPersonLabel)
       OPTIONAL {
