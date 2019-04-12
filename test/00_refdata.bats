@@ -26,7 +26,7 @@ setup () {
   make refdata/cn-labels.nt
   [ -s refdata/cn-labels.nt ]
   # make sure language tags have been stripped
-  run grep '"@' refdata/cn-labels.nt
+  run grep -P '"@\w+ \.' refdata/cn-labels.nt
   [ $status -ne 0 ]
 }
 
