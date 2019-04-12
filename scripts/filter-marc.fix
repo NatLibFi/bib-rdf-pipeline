@@ -1,0 +1,5 @@
+# Rules for filtering MARC records before distributing or conversion to RDF
+
+# Skip records that have encoding level 8 (prepublication level)
+reject marc_match('LDR/17', '8')
+
