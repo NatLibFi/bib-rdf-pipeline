@@ -1,5 +1,5 @@
 dist: trusty
-language: bash
+language: generic
 cache:
   directories:
     - $HOME/perl5
@@ -10,7 +10,6 @@ addons:
     packages:
     - libxml2-utils
     - xsltproc
-    - maven
 before_install:
   # Perl dependencies i.e. Catmandu
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
