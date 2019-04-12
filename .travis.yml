@@ -1,6 +1,4 @@
 dist: trusty
-sudo: false
-group: beta
 language: bash
 cache:
   directories:
@@ -12,6 +10,7 @@ addons:
     packages:
     - libxml2-utils
     - xsltproc
+    - maven
 before_install:
   # Perl dependencies i.e. Catmandu
   - curl -L https://cpanmin.us | perl - -l ~/perl5 App::cpanminus local::lib
