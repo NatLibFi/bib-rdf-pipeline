@@ -324,6 +324,12 @@ setup () {
   [ "${elec:0:1}" != "_" ]
 }
 
+@test "Schema.org RDF: not creating EBooks when holdings information (850) present" {
+  make slices/holding-00001-schema.nt
+  run grep "<http://schema.org/bookFormat> <http://schema.org/EBook>" slices/holding-00001-schema.nt
+  [ $status -ne 0 ]
+}
+
 @test "Schema.org RDF: conversion of series (main work case)" {
   make slices/forfattning-00006-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/forfattning-00006-schema.nt | head -n 1 | cut -d ' ' -f 1)"

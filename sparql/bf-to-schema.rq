@@ -156,6 +156,7 @@ WHERE {
     UNION
     {
       ?elec bf:itemOf ?inst .
+      ?elec bf:electronicLocator ?elecLoc .
       BIND(?inst AS ?elecInst) 
       OPTIONAL {
           # case 1: with a separate resource using bflc:locator
