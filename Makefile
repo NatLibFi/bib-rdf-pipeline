@@ -92,6 +92,9 @@ slices/%-agent-keys.nt: slices/%-merged.nt
 slices/%-merged2.nt: slices/%-merged.nt refdata/$$(shell echo $$(*)|sed -e 's/-[0-9X]\+//')-agent-transformations.nt
 	$(SPARQL) --data $< --data $(word 2,$^) --query sparql/merge.rq --out=NT >$@
 
+merged/%.mrcx: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-preprocessed.alephseq/')
+	cat $^ | $(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --pretty 1 --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix >$@
+
 merged/%-merged.nt: $$(shell ls slices/$$(*)-?????-in.alephseq | sed -e 's/-in.alephseq/-merged2.nt/') refdata/fennica-collection.ttl
 	$(RIOT) $^ >$@
 
@@ -119,11 +122,13 @@ clean:
 	rm -f slices/*.mrcx
 	rm -f slices/*.rdf
 	rm -f slices/*.nt slices/*.log
-	rm -f merged/*.nt
+	rm -f merged/*.nt merged/*.mrcx
 
 slice: $(patsubst input/%.alephseq,slices/%.md5,$(wildcard input/*.alephseq))
 
 preprocess: $(patsubst %-in.alephseq,%-preprocessed.alephseq,$(wildcard slices/*-in.alephseq))
+
+marcdist: $(patsubst input/%.alephseq,merged/%.mrcx,$(wildcard input/*.alephseq))
 
 mrcx: $(patsubst %-in.alephseq,%.mrcx,$(wildcard slices/*-in.alephseq))
 
