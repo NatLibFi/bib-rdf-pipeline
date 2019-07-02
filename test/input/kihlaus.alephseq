@@ -1,0 +1,391 @@
+000045236 FMT   L BK
+000045236 LDR   L 00000cam^a2200769zi^4500
+000045236 001   L 000045236
+000045236 005   L 20180104182933.0
+000045236 008   L 820419s1980^^^^fi^|||||||||||||||||eng||
+000045236 015   L $$afx118201$$2skl
+000045236 020   L $$a951-9102-14-0$$qnidottu
+000045236 035   L $$a(FI-MELINDA)000045236
+000045236 040   L $$aFI-NL
+000045236 0411  L $$aeng$$hfin
+000045236 042   L $$afinb
+000045236 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+000045236 084   L $$a83.5$$2ykl
+000045236 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+000045236 24010 L $$aKihlaus
+000045236 24510 L $$aEva /$$cby Aleksis Kivi ; transl. by R. P. Cowl.
+000045236 260   L $$aHki ;$$aDublin :$$bYritystieto :$$bBookserve,$$c1980$$e(Hki :$$fHeloffset)
+000045236 300   L $$a24, [1] s. :$$bmuotokuva ;$$c21 cm
+000045236 336   L $$ateksti$$btxt$$2rdacontent
+000045236 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000045236 338   L $$anide$$bnc$$2rdacarrier
+000045236 4901  L $$aPublications of the Finnish-Irish Society,$$x0359-0674 ;$$vno. 1
+000045236 4901  L $$aPublications of the Finnish-Irish Society,$$x0359-0674 ;$$v1
+000045236 500   L $$aA facsimile reprint from The Dublin Magazine, 1926.$$9FENNI<KEEP>
+000045236 500   L $$aIntroduction by Michael Wynne-Ellis.$$9FENNI<KEEP>
+000045236 650 7 L $$aenglanninkielinen kirjallisuus$$2ysa
+000045236 650 7 L $$akäännökset$$2ysa
+000045236 650 7 L $$anäytelmät$$2ysa
+000045236 7001  L $$aCowl, R. P.
+000045236 7001  L $$aWynne-Ellis, Michael.
+000045236 830 0 L $$aPublications of the Finnish-Irish Society,$$x0359-0674 ;$$vno. 1.
+000045236 830 0 L $$aPublications of the Finnish-Irish Society,$$x0359-0674 ;$$v1.
+000045236 903   L $$ab$$5FENNI
+000045236 904   L $$ap$$5FENNI
+000045236 908   L $$afi
+000561426 FMT   L BK
+000561426 LDR   L 00000cam^a2200577zi^4500
+000561426 001   L 000561426
+000561426 005   L 20180105061710.0
+000561426 008   L 970514s1916^^^^fi^|||||||||||||||d|swe||
+000561426 015   L $$af431676$$2skl
+000561426 035   L $$a(FI-MELINDA)000561426
+000561426 040   L $$aFI-NL
+000561426 0411  L $$aswe$$hfin
+000561426 042   L $$afinb
+000561426 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+000561426 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+000561426 24010 L $$aKihlaus
+000561426 24510 L $$aFörlofningen :$$blustspel i en akt /$$cAlexis Kivi ; öfvers. från finskan af Per Åke Laurén.
+000561426 260   L $$aHelsingfors :$$bSchildt,$$c1916.
+000561426 300   L $$a42 s.
+000561426 336   L $$ateksti$$btxt$$2rdacontent
+000561426 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000561426 338   L $$anide$$bnc$$2rdacarrier
+000561426 4901  L $$aSvensk teater i Finland ;$$v10
+000561426 5611  L $$aH Reenpää: Torsten Sievers[?] 1916. - [Heikki Reenpää].$$5HELKA
+000561426 650 7 L $$asuomenkielinen kirjallisuus$$xnäytelmäkirjallisuus$$xkäännökset$$xruotsin kieli$$y1860-luku$$2ysa
+000561426 650 7 L $$akäännöskirjallisuus$$xsuomen kieli$$xruotsin kieli$$2ysa
+000561426 7001  L $$aLaurén, Per Åke,$$d1879-1951.$$0(FIN11)000084742
+000561426 830 0 L $$aSvensk teater i Finland ;$$v10.
+000561426 904   L $$ap$$5FENNI
+000729619 FMT   L BK
+000729619 LDR   L 00000cam^a2200565^i^4500
+000729619 001   L 000729619
+000729619 005   L 20180106093553.0
+000729619 008   L 930101s1988^^^^fr^|||||||||||||||d|fre|^
+000729619 015   L $$af930512$$2skl
+000729619 020   L $$z2-7169-0220-9$$qnidottu
+000729619 020   L $$z2-7169-0220-9
+000729619 035   L $$a(FI-MELINDA)000729619
+000729619 040   L $$aFI-NL
+000729619 0411  L $$afre$$hfin
+000729619 042   L $$afinb
+000729619 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+000729619 084   L $$a83.61$$2ykl
+000729619 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+000729619 24010 L $$aKihlaus
+000729619 24514 L $$aLes cordonniers de la lande :$$bcomédie en cinq actes /$$cAleksis Kivi ; traduite du finnois par Lucie Thomas et Aimo Sakari.
+000729619 260   L $$a[Paris] :$$bPublications orientalistes de France,$$ccop. 1988.
+000729619 300   L $$a165, [1] s. ;$$c21 cm
+000729619 336   L $$ateksti$$btxt$$2rdacontent
+000729619 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+000729619 338   L $$anide$$bnc$$2rdacarrier
+000729619 4900  L $$aCollection littérature d'étranges pays
+000729619 4900  L $$aCollection littératures d'étranges pays
+000729619 563   L $$aNidottu.
+000729619 7001  L $$aThomas, Lucie.
+000729619 7001  L $$aSakari, Aimo,$$d1911-2001.$$0(FIN11)000057882
+000729619 903   L $$ac$$5FENNI
+000729619 908   L $$afi
+000729619 908   L $$afin
+001284805 FMT   L BK
+001284805 LDR   L 00000cam^a2200757zi^4500
+001284805 001   L 001284805
+001284805 005   L 20190208125036.0
+001284805 008   L 951023s1934^^^^fi^|||||||||||||||d|fin||
+001284805 015   L $$af491472$$2skl
+001284805 035   L $$a(FI-MELINDA)001284805
+001284805 040   L $$aFI-NL
+001284805 0410  L $$afin
+001284805 042   L $$afinb
+001284805 080   L $$a894.541$$x-22
+001284805 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+001284805 084   L $$a83.2$$2ykl
+001284805 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+001284805 24510 L $$aKihlaus :$$bkomedia 1:ssä näytöksessä /$$cAleksis Kivi.
+001284805 260   L $$aPorvoo :$$bWSOY,$$c1934.
+001284805 300   L $$a[2], 23, [2] s. ;$$c4:o
+001284805 336   L $$ateksti$$btxt$$2rdacontent
+001284805 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+001284805 338   L $$anide$$bnc$$2rdacarrier
+001284805 500   L $$aFacsimile käsikirjoituksesta. Painettu 600 numeroitua kappaletta.$$9FENNI<KEEP>
+001284805 500   L $$aFaksimile-painos käsikirjoituksesta.
+001284805 500   L $$aFaksimile käsikirjoituksesta. Painettu 600 numeroitua kappaletta.
+001284805 546   L $$aLaitoksesta 2 eri versiota: 1. Kolofonissa mainittu kustantaja sekä teksti: painoksen suuruus on 650 numeroitua kappaletta, joista tämä on ...; 2. Kolofonissa mainittu vain kustantaja.
+001284805 5611  L $$aH Reenpää: [Heikki Reenpää].$$5HELKA
+001284805 563   L $$aNidottu.
+001284805 650 7 L $$asuomenkielinen kirjallisuus$$xnäytelmäkirjallisuus$$xkomediat$$y1860-luku$$2ysa
+001284805 650 7 L $$anäytelmät$$2kaunokki
+001284805 650 7 L $$akomediat$$2kaunokki
+001284805 655 7 L $$akomediat$$2ysa
+001284805 655 7 L $$anäytelmät$$2ysa
+001284805 904   L $$ap$$5FENNI
+001284805 908   L $$afi
+002339884 FMT   L BK
+002339884 LDR   L 00000cam^a2200421zi^4500
+002339884 001   L 002339884
+002339884 005   L 20180109071136.0
+002339884 008   L 971230s1903^^^^fi^|||||||||||||||d|fin||
+002339884 015   L $$af413598$$2skl
+002339884 035   L $$a(FI-MELINDA)002339884
+002339884 040   L $$aFI-NL
+002339884 0410  L $$afin
+002339884 042   L $$afinb
+002339884 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+002339884 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+002339884 24510 L $$aKihlaus :$$bkomedia yhdessä näytöksessä /$$cAleksis Kivi.
+002339884 260   L $$aHelsinki :$$bSuomalaisen Kirjallisuuden Seura,$$c1903.
+002339884 300   L $$a24 s.
+002339884 336   L $$ateksti$$btxt$$2rdacontent
+002339884 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+002339884 338   L $$anide$$bnc$$2rdacarrier
+002339884 653   L $$anäytelmät
+002339884 904   L $$ap$$5FENNI
+002341631 FMT   L BK
+002341631 LDR   L 00000cam^a2200577zi^4500
+002341631 001   L 002341631
+002341631 005   L 20180109072642.0
+002341631 008   L 950613s1939^^^^fi^|||||||||||||||d|fin||
+002341631 015   L $$af519722$$2skl
+002341631 035   L $$z(FI-MELINDA)004369939
+002341631 035   L $$a(FI-MELINDA)002341631
+002341631 040   L $$aFI-NL
+002341631 0410  L $$afin
+002341631 042   L $$afinb
+002341631 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+002341631 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+002341631 24510 L $$aKihlaus :$$bkomedia /$$cAleksis Kivi.
+002341631 260   L $$aHelsinki :$$bSuomalaisen Kirjallisuuden Seura,$$c1939.
+002341631 300   L $$a24 s.
+002341631 336   L $$ateksti$$btxt$$2rdacontent
+002341631 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+002341631 338   L $$anide$$bnc$$2rdacarrier
+002341631 500   L $$aErip. Aleksis Kiven Koottujen teosten 2 osasta.$$9FENNI<KEEP>
+002341631 530   L $$aKäytettävissä filmikortteina Kansalliskirjastossa.$$9FENNI<KEEP>
+002341631 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+002341631 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+002341631 904   L $$ap$$5FENNI
+003183742 FMT   L BK
+003183742 LDR   L 00000cam^a2200529zi^4500
+003183742 001   L 003183742
+003183742 005   L 20171002165831.0
+003183742 008   L 930101s1955^^^^fi^|||||||||||||||d|fin||
+003183742 015   L $$af568474$$2skl
+003183742 035   L $$a(FI-MELINDA)003183742
+003183742 040   L $$aFI-NL
+003183742 0410  L $$afin
+003183742 042   L $$afinb
+003183742 080   L $$a894.541$$x-22
+003183742 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+003183742 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+003183742 24510 L $$aKihlaus :$$bkomedia 1:ssä näytöksessä /$$cAleksis Kivi.
+003183742 260   L $$aHelsinki :$$bAleksis Kiven seura,$$c1955.
+003183742 300   L $$a[2], 25, [2] s.
+003183742 336   L $$ateksti$$btxt$$2rdacontent
+003183742 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+003183742 338   L $$anide$$bnc$$2rdacarrier
+003183742 500   L $$aAlkuperäiskäsikirjoituksen faksimilepainos$$9FENNI<KEEP>
+003183742 5611  L $$aH Reenpää: Ex libris Aleksis Kiven seura. - Kaarlo Urpelainen. - [Heikki Reenpää].$$5HELKA
+003183742 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+003183742 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+003183742 650 7 L $$asuomenkielinen kirjallisuus$$xnäytelmäkirjallisuus$$xkomediat$$y1860-luku$$2ysa
+003268210 FMT   L BK
+003268210 LDR   L 00000cam^a2200577zi^4500
+003268210 001   L 003268210
+003268210 005   L 20171002165910.0
+003268210 008   L 960808s1919^^^^fi^|||||||||||||||d|fin||
+003268210 015   L $$af462865$$2skl
+003268210 035   L $$a(FI-MELINDA)003268210
+003268210 040   L $$aFI-NL
+003268210 0410  L $$afin
+003268210 042   L $$afinb
+003268210 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+003268210 084   L $$a83.2$$2ykl
+003268210 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+003268210 24510 L $$aKihlaus :$$bkomedia /$$cAleksis Kivi.
+003268210 260   L $$aHelsinki :$$bSuomalaisen Kirjallisuuden Seura ,$$c1919.
+003268210 300   L $$a24 s.
+003268210 336   L $$ateksti$$btxt$$2rdacontent
+003268210 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+003268210 338   L $$anide$$bnc$$2rdacarrier
+003268210 500   L $$aErip.: "Koottujen teosten" 2 osasta.$$9FENNI<KEEP>
+003268210 500   L $$aErip.: Kootut teokset 2 / Aleksis Kivi.
+003268210 500   L $$aLisäpainokset: Uusi p. 1922.
+003268210 500   L $$aErip. Aleksis Kiven Koottujen teosten II osasta.
+003268210 530   L $$aKäytettävissä filmikortteina Kansalliskirjastossa.$$9FENNI<KEEP>
+003268210 500   L $$aIlm. myös v. 1946.
+003268210 563   L $$aSidottu.
+003268210 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+003268210 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+003268210 904   L $$ap$$5FENNI
+003268211 FMT   L BK
+003268211 LDR   L 00000cam^a2200673zi^4500
+003268211 001   L 003268211
+003268211 005   L 20171002165918.0
+003268211 008   L 970515s1922^^^^fi^|||||||||||||||d|fin||
+003268211 015   L $$af436004$$2skl
+003268211 035   L $$a(FI-MELINDA)003268211
+003268211 040   L $$aFI-NL
+003268211 0410  L $$afin
+003268211 042   L $$afinb
+003268211 080   L $$a894.541$$x-22
+003268211 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+003268211 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+003268211 24510 L $$aKihlaus :$$bkomedia /$$ckirjoittanut Aleksis Kivi.
+003268211 260   L $$aHelsinki :$$bSuomalaisen Kirjallisuuden Seura,$$c1922.
+003268211 300   L $$a24 s.
+003268211 336   L $$ateksti$$btxt$$2rdacontent
+003268211 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+003268211 338   L $$anide$$bnc$$2rdacarrier
+003268211 500   L $$aErip.: "Koottujen teosten" 2 osasta.$$9FENNI<KEEP>
+003268211 500   L $$aLisäpainokset: Uusi p. 1928.
+003268211 500   L $$aErip.: Kootut teokset / Aleksis Kivi, 2. osasta.
+003268211 500   L $$aSivujako erilainen kuin v. 1919 painoksessa, josta puuttuu myös rivinumerointi.
+003268211 530   L $$aKäytettävissä filmikortteina Kansalliskirjastossa.$$9FENNI<KEEP>
+003268211 5611  L $$aH Reenpää: [Heikki Reenpää].$$5HELKA
+003268211 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+003268211 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+003268211 650 7 L $$asuomenkielinen kirjallisuus$$xnäytelmäkirjallisuus$$xkomediat$$y1860-luku$$2ysa
+003268211 650 7 L $$afinsk litteratur$$xskådespel$$2allars
+003268211 904   L $$ap$$5FENNI
+005469515 FMT   L BK
+005469515 LDR   L 00000cam^a2200565zi^4500
+005469515 001   L 005469515
+005469515 005   L 20171002165919.0
+005469515 008   L 970709s1909^^^^fi^|||||||||||||||d|fin||
+005469515 015   L $$af437741$$2skl
+005469515 035   L $$z(FI-MELINDA)005469516
+005469515 035   L $$a(FI-MELINDA)005469515
+005469515 040   L $$aFI-NL
+005469515 0410  L $$afin
+005469515 042   L $$afinb
+005469515 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+005469515 084   L $$a83.2$$2ykl
+005469515 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+005469515 24510 L $$aKihlaus :$$bkomedia yhdessä näytöksessä /$$cAleksis Kivi.
+005469515 260   L $$aHelsinki :$$bSuomalaisen Kirjallisuuden seura,$$c1909.
+005469515 300   L $$a21 s.
+005469515 336   L $$ateksti$$btxt$$2rdacontent
+005469515 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+005469515 338   L $$anide$$bnc$$2rdacarrier
+005469515 563   L $$aNidottu.
+005469515 653   L $$anäytelmät
+005469515 904   L $$ap$$5FENNI
+005469515 908   L $$afi
+006600699 FMT   L BK
+006600699 LDR   L 00000cam^a22003732i^4500
+006600699 001   L 006600699
+006600699 005   L 20180115010513.0
+006600699 008   L 970321s1916^^^^sw^|||||||||||||||d|swe||
+006600699 015   L $$af447241$$2skl
+006600699 035   L $$a(FI-MELINDA)006600699
+006600699 040   L $$aFI-NL
+006600699 0411  L $$aswe$$hfin
+006600699 042   L $$afinb
+006600699 080   L $$a894.541$$x-2$$21974/fin/fennica$$9FENNI<KEEP>
+006600699 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+006600699 24010 L $$aKihlaus
+006600699 24510 L $$aFörlofningen :$$blustspel i en akt /$$cAleksis Kivi ; öfvers. från finskan af Per Åke Laurén.
+006600699 260   L $$aStockholm :$$bBonnier,$$c1916.
+006600699 300   L $$a42 s.
+006600699 336   L $$ateksti$$btxt$$2rdacontent
+006600699 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+006600699 338   L $$anide$$bnc$$2rdacarrier
+006600699 500   L $$aVrt. Svensk teater i Finland, 10.$$9FENNI<KEEP>
+006600699 7001  L $$aLaurén, Per Åke,$$d1879-1951.$$0(FIN11)000084742
+006600699 903   L $$ac$$5FENNI
+006600699 904   L $$ap$$5FENNI
+011535246 FMT   L BK
+011535246 LDR   L 00000cam^a22005532i^4500
+011535246 001   L 011535246
+011535246 005   L 20171020183957.0
+011535246 008   L 171020s1946^^^^fi^|||||||||||||||d|fin||
+011535246 015   L $$af521446$$2skl
+011535246 035   L $$z(FI-MELINDA)000558224
+011535246 035   L $$z(FI-MELINDA)003268215
+011535246 040   L $$aFI-NL
+011535246 0410  L $$afin
+011535246 042   L $$afinb
+011535246 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+011535246 084   L $$a83.2$$2ykl
+011535246 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+011535246 24510 L $$aKihlaus :$$bkomedia /$$ckirj. Aleksis Kivi.
+011535246 260   L $$aHelsinki :$$bSuomalaisen kirjallisuuden seura,$$c1946.
+011535246 300   L $$a[2], 24 s.
+011535246 336   L $$ateksti$$btxt$$2rdacontent
+011535246 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+011535246 338   L $$anide$$bnc$$2rdacarrier
+011535246 563   L $$aNidottu.
+011535246 583   L $$aAUTOMATICALLY MERGED FROM (FI-MELINDA)003268215 + (FI-MELINDA)000558224$$c2017-10-20T18:39:56+03:00$$5MELINDA
+011535246 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+011535246 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+011535246 650 7 L $$akomediat$$2kaunokki
+011535246 650 7 L $$anäytelmät$$zSuomi$$y1866$$2kaunokki
+011535246 904   L $$ap$$5FENNI
+011535246 908   L $$afi
+011535256 FMT   L BK
+011535256 LDR   L 00000cam^a22008417i^4500
+011535256 001   L 011535256
+011535256 005   L 20181225172834.0
+011535256 008   L 171020s1944^^^^xx^||||^||||||||||d|fin||
+011535256 015   L $$af521447$$2skl
+011535256 035   L $$z(FI-MELINDA)001955286
+011535256 035   L $$z(FI-MELINDA)009268628
+011535256 035   L $$a(FI-MELINDA)011535256
+011535256 040   L $$aFI-NL
+011535256 0410  L $$afin
+011535256 042   L $$afinb
+011535256 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+011535256 080   L $$a894.541$$x-22
+011535256 084   L $$a83.2$$2ykl
+011535256 084   L $$a83.2
+011535256 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+011535256 24510 L $$aKihlaus :$$bkomedia 1:ssä näytöksessä /$$cAleksis Kivi; kuvittanut Erkki Tanttu
+011535256 260   L $$aHelsinki :$$bOtava,$$c1944
+011535256 300   L $$a31 s. ;$$bkuv ;.$$c25 cm
+011535256 336   L $$ateksti$$btxt$$2rdacontent
+011535256 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+011535256 338   L $$anide$$bnc$$2rdacarrier
+011535256 4901  L $$aOtavan joulukirjanen 1944
+011535256 500   L $$aOsa painoksesta kuuluu sarjaan.
+011535256 500   L $$aPalkittu Aleksis Kiven Seuran kuvituskilpailussa
+011535256 5611  L $$aH Reenpää: [Heikki Reenpää].$$5HELKA
+011535256 563   L $$aNidottu.
+011535256 583   L $$aAUTOMATICALLY MERGED FROM (FI-MELINDA)001955286 + (FI-MELINDA)009268628$$c2017-10-20T18:42:16+03:00$$5MELINDA
+011535256 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+011535256 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+011535256 650 7 L $$asuomenkielinen kirjallisuus$$xnäytelmäkirjallisuus$$xkomediat$$y1860-luku$$2ysa
+011535256 650 7 L $$akomediat$$2kaunokki
+011535256 650 7 L $$askådespel$$xfinska$$2bella
+011535256 7001  L $$aTanttu, Erkki.
+011535256 7101  L $$aTanttu, Erkki,$$ekuvittaja.
+011535256 830 0 L $$aOtavan joulukirjanen ;$$v1944.
+011535256 904   L $$ap$$5FENNI
+011535256 908   L $$afi
+011535257 FMT   L BK
+011535257 LDR   L 00000cam^a22005414i^4500
+011535257 001   L 011535257
+011535257 005   L 20190202111521.0
+011535257 008   L 171020s1956^^^^fi^||||||||||^||||d|fin||
+011535257 015   L $$af568473$$2skl
+011535257 035   L $$z(FI-MELINDA)002348400
+011535257 035   L $$z(FI-MELINDA)010045200
+011535257 035   L $$a(FI-MELINDA)011535257
+011535257 040   L $$aFI-NL
+011535257 0410  L $$afin
+011535257 042   L $$afinb
+011535257 080   L $$a894.541$$x-2$$9FENNI<KEEP>
+011535257 084   L $$a83.2$$2ykl
+011535257 1001  L $$aKivi, Aleksis,$$d1834-1872.$$0(FIN11)000068031
+011535257 24510 L $$aKihlaus :$$bkomedia /$$cAleksis Kivi.
+011535257 260   L $$aHelsinki :$$bSuomalaisen kirjallisuuden seura,$$c1956.
+011535257 300   L $$a24 sivua
+011535257 336   L $$ateksti$$btxt$$2rdacontent
+011535257 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+011535257 338   L $$anide$$bnc$$2rdacarrier
+011535257 583   L $$aAUTOMATICALLY MERGED FROM (FI-MELINDA)010045200 + (FI-MELINDA)002348400$$c2017-10-20T18:42:31+03:00$$5MELINDA
+011535257 650 7 L $$akaunokirjallisuus$$xsuomenkielinen kirjallisuus$$2ysa
+011535257 650 7 L $$akomediat$$2ysa
+011535257 650 7 L $$anäytelmät$$xsuomen kieli$$2ysa
+011535257 650 7 L $$anäytelmät$$2ysa

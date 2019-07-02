@@ -13,14 +13,30 @@ CONSTRUCT {
   {
     ?w a bf:Work .
 
-    ?w bf:title/rdfs:label ?title .
+    ?w bf:title ?titleResource .
+    {
+      # short title
+      # use a bflc:title40MatchKey if available
+      OPTIONAL { ?titleResource bflc:title40MatchKey ?title }
+      # otherwise, use bf:mainTitle
+      OPTIONAL { ?titleResource bf:mainTitle ?title }
+    } UNION {
+      # long title
+      ?titleResource rdfs:label ?title .
+    }
     BIND(?title AS ?fulltitle)
     
     # also try to add the translated title as an extra key, for the benefit of other
     # expression records which lack 240 information about the original work
     OPTIONAL {
       ?inst bf:instanceOf ?w .
-      ?inst rdfs:label ?translatedTitle .
+      {
+        # long title
+        ?inst rdfs:label ?translatedTitle .
+      } UNION {
+        # short title
+        ?inst bf:title/bf:mainTitle ?translatedTitle .
+      }
     }
 
     OPTIONAL {

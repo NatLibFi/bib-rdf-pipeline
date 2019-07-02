@@ -38,3 +38,9 @@ setup () {
   grep -v -F '<http://urn.fi/URN:NBN:fi:bib:me:W00072746801> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00583822610>' refdata/trauma-work-transformations.nt
   grep -q -F '<http://urn.fi/URN:NBN:fi:bib:me:W00583822610> <http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00072746801>' refdata/trauma-work-transformations.nt
 }
+
+@test "Work transformations: variants that differ only by 245\$b should be combined" {
+  make refdata/kihlaus-work-transformations.nt
+  count="$(grep -c -F '<http://www.w3.org/2002/07/owl#sameAs> <http://urn.fi/URN:NBN:fi:bib:me:W00128480500>' refdata/kihlaus-work-transformations.nt)"
+  [ "$count" -eq 13 ]
+}
