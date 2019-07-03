@@ -28,6 +28,9 @@ split-input/%.md5: input/%.alephseq
 slices/%.md5: split-input/%.md5
 	scripts/update-slices.sh $^ $@
 
+refdata/subst-260c.csv: refdata/fennica-dates.csv.gz
+	zcat $^ | scripts/extract-subst-260c.py >$@
+
 refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=CSV >$@
 
