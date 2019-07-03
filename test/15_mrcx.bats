@@ -105,3 +105,9 @@ setup () {
   make slices/sjubroder-00450.mrcx
   xmllint --format slices/sjubroder-00450.mrcx | grep -q 'tag="490"'
 }
+
+@test "MARCXML: cleans up bad 260c values" {
+  make slices/suoja-pirtti-00000.mrcx
+  run bash -c "xmllint --format slices/suoja-pirtti-00000.mrcx | grep -A 3 'tag=.260.' | grep 'code=.c.' | grep 'Merkur'"
+  [ "$status" -ne 0 ]
+}

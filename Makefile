@@ -55,8 +55,8 @@ refdata/RDAMediaType.nt:
 %-preprocessed.alephseq: %-in.alephseq
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py >$@
 
-%.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv
-	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/filter-marc.fix --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix <$< >$@
+%.mrcx: %-preprocessed.alephseq refdata/iso639-2-fi.csv refdata/subst-260c.csv
+	$(CATMANDU) convert MARC --type ALEPHSEQ to MARC --type XML --fix scripts/filter-marc.fix --fix scripts/strip-personal-info.fix --fix scripts/preprocess-marc.fix --fix scripts/substitute-marc.fix <$< >$@
 
 %-bf2.rdf: %.mrcx
 	$(XSLTPROC) --stringparam baseuri $(URIBASEFENNICA) $(MARC2BIBFRAME2)/xsl/marc2bibframe2.xsl $^ >$@

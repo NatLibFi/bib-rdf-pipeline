@@ -1,0 +1,11 @@
+# Apply cleanup substitutions from CSV files to MARC records
+
+marc_map('001',recid)
+marc_map('260c',orig260c)
+if exists(orig260c)
+	paste(substval,recid,orig260c,join_char:"/")
+	lookup(substval,'refdata/subst-260c.csv',delete:1)
+	if exists(substval)
+		marc_set('260c',$.substval)
+	end
+end
