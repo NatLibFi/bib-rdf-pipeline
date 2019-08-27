@@ -1,7 +1,7 @@
 000981258 FMT   L BK
-000981258 LDR   L 00000cam^a2201225^i^4500
+000981258 LDR   L 06619cam^a2201585^i^4500
 000981258 001   L 000981258
-000981258 005   L 20170906140911.0
+000981258 005   L 20190703190504.0
 000981258 008   L 080716s2008^^^^fi^|||||||||||||||||fin|^
 000981258 015   L $$afx888913$$2skl
 000981258 020   L $$a978-952-5764-00-0$$qnidottu
@@ -11,7 +11,7 @@
 000981258 0410  L $$afin
 000981258 042   L $$afinb
 000981258 072 7 L $$a02$$2kkaa
-000981258 080   L $$a1$$9FENNI<KEEP>
+000981258 080   L $$a1$$21974/fin/fennica$$9FENNI<KEEP>
 000981258 084   L $$a11.1$$2ykl$$9FENNI<KEEP>
 000981258 084   L $$a11.1
 000981258 1001  L $$aVarto, Juha,$$d1949-$$0(FIN11)000079982
@@ -26,35 +26,37 @@
 000981258 579   L $$aXLUETTELOITU$$bhelka
 000981258 60004 L $$aHomeros.$$9FENNI<KEEP>
 000981258 60004 L $$aParmenides.$$9FENNI<KEEP>
-000981258 60004 L $$aZenon,$$cElealainen.$$9FENNI<KEEP>
+000981258 60014 L $$aZenon,$$cElealainen.$$0(FIN11)000108251$$9FENNI<KEEP>
 000981258 60004 L $$aHerakleitos.$$0(FIN11)000043960$$9FENNI<KEEP>
 000981258 60004 L $$aEmpedokles.$$9FENNI<KEEP>
-000981258 60004 L $$aDemokritos.$$9FENNI<KEEP>
+000981258 60004 L $$aDemokritos.$$0(FIN11)000124924$$9FENNI<KEEP>
 000981258 60004 L $$aDemokrito.
-000981258 650 7 L $$afilosofia$$xantiikki$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$aajattelu$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$amaailmankuva$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$amyytit$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$aesisokraattinen filosofia$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$akosmologia$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$ametafysiikka$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$aparadoksit$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$aluonnonfilosofia$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$akirjallisuus$$xantiikki$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$aeepokset$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$afilosofit$$2ysa$$9FENNI<KEEP>
-000981258 650 7 L $$afilosofia$$xmaailmankuva$$2ysa
-000981258 650 7 L $$afilosofit$$zKreikka$$2ysa
-000981258 650 7 L $$aantiikki$$2ysa
-000981258 650 7 L $$akirjallisuus$$2ysa
-000981258 650 7 L $$afilosofia$$2ysa
-000981258 650 7 L $$afilosofia$$xantiikki$$zKreikka$$2ysa
-000981258 650 7 L $$aajattelu$$xantiikki$$2ysa
-000981258 650 7 L $$amaailmankuva$$xantiikki$$2ysa
-000981258 650 7 L $$amyytit$$xantiikki$$2ysa
-000981258 650 7 L $$afilosofit$$xantiikki$$zKreikka$$2ysa
-000981258 651 7 L $$aKreikka$$2ysa$$9FENNI<KEEP>
-000981258 7400  L $$aKreikkalaista eetosta etsimässä.
-000981258 901   L $$aMU20080716$$5FENNI
-000981258 901   L $$bSISKUV$$5FENNI$$c20160822134652.0
-000981258 908   L $$afin
+000981258 650 7 L $$aantiikin filosofia$$2yso/fin$$0http://www.yso.fi/onto/yso/p20343$$9FENNI<KEEP>
+000981258 650 7 L $$aajattelu$$2yso/fin$$0http://www.yso.fi/onto/yso/p6007$$9FENNI<KEEP>
+000981258 650 7 L $$amaailmankuva$$2yso/fin$$0http://www.yso.fi/onto/yso/p219$$9FENNI<KEEP>
+000981258 650 7 L $$amyytit$$2yso/fin$$0http://www.yso.fi/onto/yso/p1248$$9FENNI<KEEP>
+000981258 650 7 L $$aesisokraattinen filosofia$$2yso/fin$$0http://www.yso.fi/onto/yso/p17715$$9FENNI<KEEP>
+000981258 650 7 L $$akosmologia$$2yso/fin$$0http://www.yso.fi/onto/yso/p7160$$9FENNI<KEEP>
+000981258 650 7 L $$ametafysiikka$$2yso/fin$$0http://www.yso.fi/onto/yso/p1059$$9FENNI<KEEP>
+000981258 650 7 L $$aparadoksit$$2yso/fin$$0http://www.yso.fi/onto/yso/p13482$$9FENNI<KEEP>
+000981258 650 7 L $$aluonnonfilosofia$$2yso/fin$$0http://www.yso.fi/onto/yso/p14119$$9FENNI<KEEP>
+000981258 650 7 L $$akirjallisuus$$2yso/fin$$0http://www.yso.fi/onto/yso/p8113$$9FENNI<KEEP>
+000981258 650 7 L $$aantiikki$$2yso/fin$$0http://www.yso.fi/onto/yso/p3973$$9FENNI<KEEP>
+000981258 650 7 L $$aeepokset$$2yso/fin$$0http://www.yso.fi/onto/yso/p6478$$9FENNI<KEEP>
+000981258 650 7 L $$afilosofit$$2yso/fin$$0http://www.yso.fi/onto/yso/p19124$$9FENNI<KEEP>
+000981258 650 7 L $$afilosofia$$2yso/fin$$0http://www.yso.fi/onto/yso/p1056
+000981258 650 7 L $$aantikens filosofi$$2yso/swe$$0http://www.yso.fi/onto/yso/p20343
+000981258 650 7 L $$atänkande$$2yso/swe$$0http://www.yso.fi/onto/yso/p6007
+000981258 650 7 L $$avärldsbild$$2yso/swe$$0http://www.yso.fi/onto/yso/p219
+000981258 650 7 L $$amyter$$2yso/swe$$0http://www.yso.fi/onto/yso/p1248
+000981258 650 7 L $$aförsokratisk filosofi$$2yso/swe$$0http://www.yso.fi/onto/yso/p17715
+000981258 650 7 L $$akosmologi$$2yso/swe$$0http://www.yso.fi/onto/yso/p7160
+000981258 650 7 L $$ametafysik$$2yso/swe$$0http://www.yso.fi/onto/yso/p1059
+000981258 650 7 L $$aparadoxer$$2yso/swe$$0http://www.yso.fi/onto/yso/p13482
+000981258 650 7 L $$anaturfilosofi$$2yso/swe$$0http://www.yso.fi/onto/yso/p14119
+000981258 650 7 L $$alitteratur$$2yso/swe$$0http://www.yso.fi/onto/yso/p8113
+000981258 650 7 L $$aantiken$$2yso/swe$$0http://www.yso.fi/onto/yso/p3973
+000981258 650 7 L $$aepos$$2yso/swe$$0http://www.yso.fi/onto/yso/p6478
+000981258 650 7 L $$afilosofer$$2yso/swe$$0http://www.yso.fi/onto/yso/p19124
+000981258 650 7 L $$afilosofi$$2yso/swe$$0http://www.yso.fi/onto/yso/p1056
+000981258 651 7 L $$aKreikka$$2yso/fin$$0http://www.yso.fi/onto/yso/p105037$$9FENNI<KEEP>

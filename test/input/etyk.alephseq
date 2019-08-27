@@ -1,7 +1,7 @@
 000125405 FMT   L BK
-000125405 LDR   L ^^^^^cam^a2201189^i^4500
+000125405 LDR   L 05102cam^a2201249^i^4500
 000125405 001   L 000125405
-000125405 005   L 20151223092443.0
+000125405 005   L 20190703191157.0
 000125405 008   L 960430s1996^^^^fi^|||||||||||||||||fin|^
 000125405 015   L $$afx485129$$2skl
 000125405 020   L $$a951-25-0800-1$$qnidottu
@@ -12,7 +12,7 @@
 000125405 080   L $$a327.5$$x(4)
 000125405 080   L $$a355/359
 000125405 080   L $$a327$$x(4)
-000125405 080   L $$a327$$9FENNI<KEEP>
+000125405 080   L $$a327$$21974/fin/fennica$$9FENNI<KEEP>
 000125405 084   L $$a32.5$$2ykl$$9FENNI<KEEP>
 000125405 1001  L $$aSoininen, Mika.
 000125405 24510 L $$aEtykin konfliktinesto ja kriisinhallinta /$$cMika Soininen.
@@ -22,31 +22,34 @@
 000125405 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
 000125405 338   L $$anide$$bnc$$2rdacarrier
 000125405 4901  L $$aJulkaisusarja / Maanpuolustuskorkeakoulu, strategian laitos. 1, Strategian tutkimuksia,$$x1236-4959 ;$$vn:o 6
-000125405 61024 L $$aEuroopan turvallisuus- ja yhteistyöjärjestö.$$9FENNI<KEEP>
+000125405 61024 L $$aEuroopan turvallisuus- ja yhteistyöjärjestö.$$0(FIN11)000014039$$9FENNI<KEEP>
 000125405 61024 L $$aEuroopan turvallisuus- ja yhteistyökonferenssi.
 000125405 61124 L $$aEuroopan turvallisuus- ja yhteistyökonferenssi.$$9FENNI<KEEP>
-000125405 650 7 L $$akriisinhallinta$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$akonfliktit$$xhallinta$$zEurooppa$$2ysa
-000125405 650 7 L $$ahallinta$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$akonfliktit$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$akansainvälinen yhteistyö$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$arauhanturvaaminen$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$aturvallisuuspolitiikka$$zEurooppa$$2ysa
-000125405 650 7 L $$akriisit$$xhallinta$$zEurooppa$$2ysa
-000125405 650 7 L $$aturvallisuuspolitiikka$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$apoliittiset kriisit$$2ysa$$9FENNI<KEEP>
-000125405 650 7 L $$akansainvälinen yhteistyö$$xturvallisuuspolitiikka$$zEurooppa$$2ysa
-000125405 650 7 L $$akriisinhallinta$$zEurooppa$$2ysa
-000125405 650 7 L $$aUlkopolitiikka$$2ysa
-000125405 650 7 L $$apoliittiset kriisit$$xhallinta$$zEurooppa$$2ysa
-000125405 650 7 L $$asäkerhetspolitik$$zEuropa$$2allars
-000125405 650 7 L $$ainternationellt samarbete$$xsäkerhetspolitik$$zEuropa$$2allars
-000125405 650 7 L $$afredsbevarande$$2allars
+000125405 650 7 L $$akriisinhallinta$$2yso/fin$$0http://www.yso.fi/onto/yso/p504$$9FENNI<KEEP>
+000125405 650 7 L $$ahallinta$$2yso/fin$$0http://www.yso.fi/onto/yso/p506$$9FENNI<KEEP>
+000125405 650 7 L $$akonfliktit$$2yso/fin$$0http://www.yso.fi/onto/yso/p7946$$9FENNI<KEEP>
+000125405 650 7 L $$akansainvälinen yhteistyö$$2yso/fin$$0http://www.yso.fi/onto/yso/p1730$$9FENNI<KEEP>
+000125405 650 7 L $$arauhanturvaaminen$$2yso/fin$$0http://www.yso.fi/onto/yso/p507$$9FENNI<KEEP>
+000125405 650 7 L $$akriisit$$2yso/fin$$0http://www.yso.fi/onto/yso/p6173
+000125405 650 7 L $$aturvallisuuspolitiikka$$2yso/fin$$0http://www.yso.fi/onto/yso/p9566$$9FENNI<KEEP>
+000125405 650 7 L $$apoliittiset kriisit$$2yso/fin$$0http://www.yso.fi/onto/yso/p9900$$9FENNI<KEEP>
+000125405 650 7 L $$aulkopolitiikka$$2yso/fin$$0http://www.yso.fi/onto/yso/p12405
+000125405 650 7 L $$akrishantering$$2yso/swe$$0http://www.yso.fi/onto/yso/p504
+000125405 650 7 L $$astyre$$2yso/swe$$0http://www.yso.fi/onto/yso/p506
+000125405 650 7 L $$akonflikter$$2yso/swe$$0http://www.yso.fi/onto/yso/p7946
+000125405 650 7 L $$ainternationellt samarbete$$2yso/swe$$0http://www.yso.fi/onto/yso/p1730
+000125405 650 7 L $$afredsbevarande$$2yso/swe$$0http://www.yso.fi/onto/yso/p507
+000125405 650 7 L $$akriser$$2yso/swe$$0http://www.yso.fi/onto/yso/p6173
+000125405 650 7 L $$asäkerhetspolitik$$2yso/swe$$0http://www.yso.fi/onto/yso/p9566
+000125405 650 7 L $$apolitiska kriser$$2yso/swe$$0http://www.yso.fi/onto/yso/p9900
+000125405 650 7 L $$autrikespolitik$$2yso/swe$$0http://www.yso.fi/onto/yso/p12405
 000125405 650 7 L $$aEuroopan turvallisuus- ja yhteistyökokous$$xETYK$$2eks
 000125405 650 7 L $$akriisinhallinta$$2eks
-000125405 651 7 L $$aSuomi$$2ysa
-000125405 651 7 L $$aEurooppa$$2ysa$$9FENNI<KEEP>
+000125405 651 7 L $$aSuomi$$2yso/fin$$0http://www.yso.fi/onto/yso/p94426
+000125405 651 7 L $$aEurooppa$$2yso/fin$$0http://www.yso.fi/onto/yso/p94111$$9FENNI<KEEP>
+000125405 651 7 L $$aFinland$$2yso/swe$$0http://www.yso.fi/onto/yso/p94426
+000125405 651 7 L $$aEuropa$$2yso/swe$$0http://www.yso.fi/onto/yso/p94111
 000125405 653 0 L $$aForeign policy
 000125405 653 0 L $$aETYK
-000125405 653   L $$aSäkerhetspolitik$$aEuropa
+000125405 653 7 L $$asäkerhetspolitik$$aEuropa$$2allars
 000125405 830 0 L $$aJulkaisusarja / Maanpuolustuskorkeakoulu, strategian laitos.$$n1,$$pStrategian tutkimuksia,$$x1236-4959 ;$$vn:o 6.

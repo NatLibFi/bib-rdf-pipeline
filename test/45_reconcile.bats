@@ -67,12 +67,6 @@ setup () {
   grep -q -F '<http://schema.org/about> <http://www.yso.fi/onto/yso/p20343>' slices/ajattelemisenalku-00098-reconciled.nt
 }
 
-@test "Reconcile: converting to YSA/YSO URIs, not found in YSA case" {
-  make slices/ajattelemisenalku-00098-reconciled.nt
-  # "kirjallisuus -- antiikki" -> remains as literal
-  grep -q -F '<http://schema.org/about> "kirjallisuus -- antiikki"@fi' slices/ajattelemisenalku-00098-reconciled.nt
-}
-
 @test "Reconcile: converting to YSA/YSO URIs, cyrillic case" {
   make slices/hulluntaivaassa-00490-reconciled.nt
   # "проза--пер. с финск."@ru-cyrl -> removed, as it was an accident that it got through the replication (via 880)
