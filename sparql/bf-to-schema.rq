@@ -160,11 +160,12 @@ WHERE {
       BIND(?inst AS ?elecInst) 
       OPTIONAL {
           # case 1: with a separate resource using bflc:locator
-          ?elec bf:electronicLocator/bflc:locator ?elecUri .
+          ?elec bf:electronicLocator/bflc:target ?elecUri .
       }
       OPTIONAL {
           # case 2: plain URI
-          ?elec bf:electronicLocator ?elecUri .
+          ?elec bf:electronicLocator ?elecUriLiteral .
+          BIND(IRI(?elecUriLiteral) AS ?elecUri)
       }
     }
     UNION
