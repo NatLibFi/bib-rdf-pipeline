@@ -41,13 +41,13 @@ refdata/cn-labels.nt: sparql/extract-cn-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
 refdata/RDACarrierType.nt:
-	curl -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
 
 refdata/RDAContentType.nt:
-	curl -s http://rdaregistry.info/termList/RDAContentType.nt | sed -e 's|RDAContentType//|RDAContentType/|g' >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDAContentType.nt | sed -e 's|RDAContentType//|RDAContentType/|g' >$@
 
 refdata/RDAMediaType.nt:
-	curl -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
 
 %-preprocessed.alephseq: %-in.alephseq
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py >$@
