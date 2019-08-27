@@ -260,6 +260,14 @@ WHERE {
     }
     UNION
     {
+      ?work bf:identifiedBy ?issn .
+      ?issn a bf:Issn .
+      ?issn rdf:value ?issnVal .
+      BIND(schema:Periodical AS ?workPeriodicalType)
+      BIND(schema:Periodical AS ?instPeriodicalType)
+    }
+    UNION
+    {
       ?work bf:language ?language .
       FILTER NOT EXISTS { ?language bf:part "original" }
       OPTIONAL {
