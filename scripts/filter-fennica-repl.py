@@ -45,6 +45,7 @@ DROP = re.compile(r'\$\$9FENNI<DROP>')
 FENNI = re.compile(r'\$\$5(FENNI|FI-NL)')
 OTHERTAG = re.compile(r'\$\$9\w+<(KEEP|DROP)>(,\s*\w+<(KEEP|DROP)>)*')
 FENNICAID = re.compile(r'\$\$c(\d+)\$\$bfenni')
+LINKFIELD = re.compile(r'\$\$6(\d\d\d)')
 
 for line in sys.stdin:
     if DROP.search(line) is not None:
@@ -53,6 +54,13 @@ for line in sys.stdin:
     
     fld = line[10:13]
     
+    # for 880 fields, we need to identify the linked field it refers to
+    # and process it as if it were that field
+    if fld == '880':
+        match = LINKFIELD.search(line)
+        if match is not None:
+            fld = match.group(1)
+
     # Convert Fennica system ID from SID field to 035 field
     if fld == 'SID':
         match = FENNICAID.search(line)
