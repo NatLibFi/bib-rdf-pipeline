@@ -40,3 +40,14 @@ setup () {
   make slices/kotona-00097-preprocessed.alephseq
   grep -F '000971472 035   L $$a(FI-FENNI)848382' slices/kotona-00097-preprocessed.alephseq
 }
+
+@test "Preprocess MARC: keep 880 fields which link to a field we want to keep" {
+  make slices/hulluntaivaassa-00490-preprocessed.alephseq
+  grep -F ' 880   L $$6260' slices/hulluntaivaassa-00490-preprocessed.alephseq
+}
+
+@test "Preprocess MARC: drop 880 fields which link to a field we want to drop" {
+  make slices/hulluntaivaassa-00490-preprocessed.alephseq
+  run grep -F ' 880   L $$6650' slices/hulluntaivaassa-00490-preprocessed.alephseq
+  [ $status -ne 0 ]
+}

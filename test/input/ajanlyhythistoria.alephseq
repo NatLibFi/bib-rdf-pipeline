@@ -1,7 +1,7 @@
 000095841 FMT   L BK
-000095841 LDR   L ^^^^^cam^a2201105zi^4500
+000095841 LDR   L 05070cam^a2201321zi^4500
 000095841 001   L 000095841
-000095841 005   L 20151222214049.0
+000095841 005   L 20190703182640.0
 000095841 008   L 940307s1994^^^^fi^|||||||||||||||||fin||
 000095841 015   L $$afx353859$$2skl
 000095841 020   L $$a951-0-19440-9$$qsidottu
@@ -13,12 +13,13 @@
 000095841 080   L $$a524.8
 000095841 080   L $$a529
 000095841 080   L $$a530.1
-000095841 080   L $$a52$$9FENNI<KEEP>
-000095841 080   L $$a53$$9FENNI<KEEP>
+000095841 080   L $$a52$$21974/fin/fennica$$9FENNI<KEEP>
+000095841 080   L $$a53$$21974/fin/fennica$$9FENNI<KEEP>
 000095841 080   L $$a521
 000095841 084   L $$a52.2$$2ykl$$9FENNI<KEEP>
-000095841 1001  L $$aHawking, Stephen.
-000095841 24012 L $$aA brief history of time
+000095841 084   L $$a53.1$$2ykl
+000095841 1001  L $$aHawking, Stephen.$$0(FIN11)000043470
+000095841 24012 L $$aA brief history of time,$$lsuomi
 000095841 24510 L $$aAjan lyhyt historia :$$balkuräjähdyksestä mustiin aukkoihin /$$cStephen W. Hawking ; alkusanat: Carl Sagan ; piirrokset: Ron Miller ; suomentanut Risto Varteva.
 000095841 250   L $$a7. p.
 000095841 260   L $$aPorvoo ;$$aHelsinki ;$$aJuva :$$bWSOY,$$c1994.
@@ -30,22 +31,29 @@
 000095841 500   L $$aLisäpainokset: 2.-3. p. 1988. - 4.-5. p. 1989. - 6. p. 1990.
 000095841 500   L $$aLisäpainokset: 8. p. 1999.$$9FENNI<KEEP>
 000095841 500   L $$aPAINOS LOPPU.
-000095841 650 7 L $$aaika$$xhistoria$$2ysa
-000095841 650 7 L $$akosmologia$$2ysa
-000095841 650 7 L $$amaailmankaikkeus$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$akvarkit$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$asuhteellisuusteoria$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$amustat aukot$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$aalkuräjähdys$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$aaika$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$amaailmankaikkeuden synty$$2ysa$$9FENNI<KEEP>
-000095841 650 7 L $$akvarkar$$2allars
-000095841 650 7 L $$arelativitetsteori$$2allars
-000095841 650 7 L $$auniversums uppkomst$$2allars
-000095841 650 7 L $$atid$$2allars
-000095841 650 7 L $$asvarta hål$$2allars
+000095841 60014 L $$aEinstein, Albert,$$d1879-1955.
+000095841 60014 L $$aGalilei, Galileo.
+000095841 60014 L $$aNewton, Isaac.
+000095841 650 7 L $$ahistoria$$2yso/fin$$0http://www.yso.fi/onto/yso/p1780
+000095841 650 7 L $$akosmologia$$2yso/fin$$0http://www.yso.fi/onto/yso/p7160
+000095841 650 7 L $$amaailmankaikkeus$$2yso/fin$$0http://www.yso.fi/onto/yso/p4403$$9FENNI<KEEP>
+000095841 650 7 L $$akvarkit$$2yso/fin$$0http://www.yso.fi/onto/yso/p19627$$9FENNI<KEEP>
+000095841 650 7 L $$asuhteellisuusteoria$$2yso/fin$$0http://www.yso.fi/onto/yso/p9145$$9FENNI<KEEP>
+000095841 650 7 L $$amustat aukot$$2yso/fin$$0http://www.yso.fi/onto/yso/p18360$$9FENNI<KEEP>
+000095841 650 7 L $$aalkuräjähdys$$2yso/fin$$0http://www.yso.fi/onto/yso/p21501$$9FENNI<KEEP>
+000095841 650 7 L $$aaika$$2yso/fin$$0http://www.yso.fi/onto/yso/p21034$$9FENNI<KEEP>
+000095841 650 7 L $$amaailmankaikkeuden synty$$2yso/fin$$0http://www.yso.fi/onto/yso/p2872$$9FENNI<KEEP>
+000095841 650 7 L $$ahistoria$$2yso/swe$$0http://www.yso.fi/onto/yso/p1780
+000095841 650 7 L $$akosmologi$$2yso/swe$$0http://www.yso.fi/onto/yso/p7160
+000095841 650 7 L $$auniversum$$2yso/swe$$0http://www.yso.fi/onto/yso/p4403
+000095841 650 7 L $$akvarkar$$2yso/swe$$0http://www.yso.fi/onto/yso/p19627
+000095841 650 7 L $$arelativitetsteori$$2yso/swe$$0http://www.yso.fi/onto/yso/p9145
+000095841 650 7 L $$asvarta hål$$2yso/swe$$0http://www.yso.fi/onto/yso/p18360
+000095841 650 7 L $$abig bang$$2yso/swe$$0http://www.yso.fi/onto/yso/p21501
+000095841 650 7 L $$atid$$2yso/swe$$0http://www.yso.fi/onto/yso/p21034
+000095841 650 7 L $$auniversums uppkomst$$2yso/swe$$0http://www.yso.fi/onto/yso/p2872
 000095841 7001  L $$aSagan, Carl.
-000095841 7001  L $$aVarteva, Risto.
+000095841 7001  L $$aVarteva, Risto,$$d1942-2004.$$0(FIN11)000062228
 000095841 7400  L $$aAlkuräjähdyksestä mustiin aukkoihin.
 000095841 SID   L $$c458170$$bjykdo
 000095841 SID   L $$c339448$$boula
@@ -59,6 +67,8 @@
 000095841 SID   L $$c612634$$bhelka
 000095841 SID   L $$c113581$$btutca
 000095841 SID   L $$c(ANDL100008)359102$$bpiki
+000095841 SID   L $$c(ANDL100001)248568$$bvaski
+000095841 SID   L $$c(ANDL100007)277840$$beepos
 000095841 CAT   L $$aID-JUOLU$$b$$c20100608$$lFIN01$$h0403
 000095841 CAT   L $$aID-ALLI$$b$$c20120205$$lFIN01$$h2103
 000095841 CAT   L $$aID-ALLI$$b$$c20120206$$lFIN01$$h2300
@@ -75,6 +85,15 @@
 000095841 CAT   L $$aLOAD-FIX$$b30$$c20150620$$lFIN01$$h0244
 000095841 CAT   L $$aLOAD-FIX$$b30$$c20151222$$lFIN01$$h2140
 000095841 CAT   L $$aCONV-RDA$$b$$c20160319$$lFIN01$$h0813
+000095841 CAT   L $$aLOAD-VASKI$$b$$c20170118$$lFIN01$$h0024
+000095841 CAT   L $$aLOAD-ALINK$$b30$$c20170818$$lFIN01$$h0720
+000095841 CAT   L $$aLOAD-ALINK$$b30$$c20170829$$lFIN01$$h2002
+000095841 CAT   L $$aLOAD-FIX$$b30$$c20180104$$lFIN01$$h1940
+000095841 CAT   L $$aLOAD-EEPOS$$b20$$c20181023$$lFIN01$$h0515
+000095841 CAT   L $$aLOAD-FIX$$b30$$c20181212$$lFIN01$$h1434
+000095841 CAT   L $$aLOAD-YSO$$b00$$c20190703$$lFIN01$$h1826
+000095841 CAT   L $$aLOAD-YSO$$b00$$c20190705$$lFIN01$$h1331
+000095841 CAT   L $$aLOAD-ID$$b00$$c20190712$$lFIN01$$h1839
 000095841 9001  L $$aHawking, Stephen W.$$yHawking, Stephen
 000095841 901   L $$aMM20150129 (100, 900)$$5FENNI
 000095841 902   L $$ab$$5FENNI
@@ -90,3 +109,6 @@
 000095841 LOW   L $$aTUTCA
 000095841 LOW   L $$aVAARI
 000095841 LOW   L $$aVOLTE
+000095841 LOW   L $$aVASKI
+000095841 LOW   L $$aEEPOS
+000095841 LOW   L $$aFIKKA

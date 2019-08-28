@@ -37,20 +37,17 @@ refdata/iso639-2-fi.csv: sparql/extract-iso639-2-fi.rq
 refdata/iso639-1-2-mapping.nt: sparql/extract-iso639-1-2-mapping.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
-refdata/ysa-skos-labels.nt: sparql/extract-ysa-skos-labels.rq
-	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
-
 refdata/cn-labels.nt: sparql/extract-cn-labels.rq
 	$(RSPARQL) --service $(FINTOSPARQL) --query $^ --results=NT >$@
 
 refdata/RDACarrierType.nt:
-	curl -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDACarrierType.nt >$@
 
 refdata/RDAContentType.nt:
-	curl -s http://rdaregistry.info/termList/RDAContentType.nt | sed -e 's|RDAContentType//|RDAContentType/|g' >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDAContentType.nt | sed -e 's|RDAContentType//|RDAContentType/|g' >$@
 
 refdata/RDAMediaType.nt:
-	curl -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
+	curl -H 'Accept: text/html' -s http://rdaregistry.info/termList/RDAMediaType.nt >$@
 
 %-preprocessed.alephseq: %-in.alephseq
 	uniq $< | scripts/filter-duplicates.py | $(UCONV) -x Any-NFC -i | scripts/filter-fennica-repl.py >$@
@@ -70,8 +67,8 @@ refdata/RDAMediaType.nt:
 %-schema.nt: %-rewritten.nt
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT >$@ 
 
-%-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt refdata/ysa-skos-labels.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt refdata/cn-labels.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --namedGraph $(word 7,$^) --query sparql/reconcile.rq --out=NT >$@
+%-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt refdata/cn-labels.nt
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --query sparql/reconcile.rq --out=NT >$@
 	
 %-work-keys.nt: %-rewritten.nt
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --data $< --query sparql/create-work-keys.rq --out=NT >$@

@@ -17,11 +17,6 @@ setup () {
   [ -s refdata/iso639-1-2-mapping.nt ]
 }
 
-@test "Reference data: YSA labels and YSO mappings" {
-  make refdata/ysa-skos-labels.nt
-  [ -s refdata/ysa-skos-labels.nt ]
-}
-
 @test "Reference data: Corporate names (normalized)" {
   make refdata/cn-labels.nt
   [ -s refdata/cn-labels.nt ]

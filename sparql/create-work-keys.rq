@@ -20,7 +20,14 @@ CONSTRUCT {
     # expression records which lack 240 information about the original work
     OPTIONAL {
       ?inst bf:instanceOf ?w .
-      ?inst rdfs:label ?translatedTitle .
+      ?inst bf:title ?instTitle .
+      ?instTitle bf:mainTitle ?translatedMainTitle .
+      OPTIONAL {
+        ?instTitle bf:subtitle ?translatedSubTitle .
+      }
+      BIND(COALESCE(CONCAT(?translatedMainTitle, " ", ?translatedSubTitle),
+                    ?translatedMainTitle)
+           AS ?translatedTitle)
     }
 
     OPTIONAL {
@@ -68,13 +75,13 @@ CONSTRUCT {
   UNION
   # Series with title
   {
-    ?w2 bf:hasSeries/bf:instanceOf ?w .
+    ?w2 bf:hasSeries ?w .
     ?w a bf:Work .
     OPTIONAL {
       ?w bf:contribution/bf:agent/rdfs:label ?agent .
       BIND(REPLACE(LCASE(?agent),'[^\\p{L}\\p{N}\\s]','') AS ?agentkey)
     }
-    ?w bf:title/rdfs:label ?title .
+    ?w bf:title/bf:mainTitle ?title .
     BIND(REPLACE(LCASE(?title),'[^\\p{L}\\p{N}\\s]','') AS ?titlekey)
     BIND(COALESCE(CONCAT(?agentkey, '/', ?titlekey), ?titlekey) AS ?key)
   }

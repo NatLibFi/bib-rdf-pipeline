@@ -1,7 +1,7 @@
 004903276 FMT   L BK
-004903276 LDR   L 00000cam^a22007334i^4500
+004903276 LDR   L 04141cam^a22010094i^4500
 004903276 001   L 004903276
-004903276 005   L 20170821182005.0
+004903276 005   L 20190703222202.0
 004903276 008   L 050926s2005^^^^ru^|||||||||||||||f|rus||
 004903276 020   L $$a5-354-00928-6$$qnidottu
 004903276 0243  L $$a9785354009282
@@ -10,27 +10,37 @@
 004903276 0411  L $$arus$$hfin
 004903276 042   L $$afinb
 004903276 066   L $$c(N)Q
-004903276 080   L $$a894.541$$x-3$$9FENNI<KEEP>
+004903276 080   L $$a894.541$$x-3$$21974/fin/fennica$$9FENNI<KEEP>
 004903276 080   L $$a882$$x-3$$x=03.945.41
 004903276 1001  L $$aKonkka, Anita,$$d1941-$$0(FIN11)000048148
 004903276 24010 L $$aHullun taivaassa : kertomus
-004903276 24510 L $$6880-01$$aV sumasšedših nebesah :$$bpovest' /$$cAnita Konkka ; perevod s finskogo T. Džafarovoj-Viitala.
+004903276 24510 L $$6880-01$$aV sumasšedših nebesah :$$bpovest' /$$cAnita Konkka ; perevod s finskogo T. Džafarovoj-Viitala.
 004903276 260   L $$6880-02$$aMoskva :$$bURSS,$$c2005.
 004903276 300   L $$a117 s.
 004903276 336   L $$ateksti$$btxt$$2rdacontent
 004903276 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
 004903276 338   L $$anide$$bnc$$2rdacarrier
-004903276 650 7 L $$aromaanit$$xsuomen kieli$$xvenäjänkielinen käännös$$2ysa
-004903276 650 7 L $$akaunokirjallisuus$$xvenäjänkielinen kirjallisuus$$2ysa
-004903276 650 7 L $$avenäjänkielinen kirjallisuus$$xkaunokirjallisuus$$xrakkauskertomukset$$xkertomukset$$2ysa
-004903276 650 7 L $$avenäjänkielinen kirjallisuus$$xkaunokirjallisuus$$xrakkauskertomukset$$2ysa
-004903276 650 7 L $$akäännökset$$2ysa
+004903276 650 7 L $$asuomen kieli$$2yso/fin$$0http://www.yso.fi/onto/yso/p8856
+004903276 650 7 L $$avenäjänkielinen kirjallisuus$$2yso/fin$$0http://www.yso.fi/onto/yso/p16335
+004903276 650 7 L $$akaunokirjallisuus$$2yso/fin$$0http://www.yso.fi/onto/yso/p4
+004903276 650 7 L $$arakkauskertomukset$$2yso/fin$$0http://www.yso.fi/onto/yso/p19257
+004903276 650 7 L $$akertomukset$$2yso/fin$$0http://www.yso.fi/onto/yso/p24639
+004903276 650 7 L $$afinska$$2yso/swe$$0http://www.yso.fi/onto/yso/p8856
+004903276 650 7 L $$arysk litteratur$$2yso/swe$$0http://www.yso.fi/onto/yso/p16335
+004903276 650 7 L $$askönlitteratur$$2yso/swe$$0http://www.yso.fi/onto/yso/p4
+004903276 650 7 L $$akärleksberättelser$$2yso/swe$$0http://www.yso.fi/onto/yso/p19257
+004903276 650 7 L $$aberättelser$$2yso/swe$$0http://www.yso.fi/onto/yso/p24639
 004903276 653   L $$6880-03$$aproza$$aper. s finsk.
 004903276 653   L $$aromaanit$$asuomen kieli$$avenäjänkielinen käännös
-004903276 7001  L $$6880-04$$aDžafarova-Viitala, T.
+004903276 653 0 L $$avenäjänkielinen käännös
+004903276 655 7 L $$aromaanit$$2slm/fin$$0http://urn.fi/URN:NBN:fi:au:slm:s518
+004903276 655 7 L $$akaunokirjallisuus$$2slm/fin$$0http://urn.fi/URN:NBN:fi:au:slm:s975
+004903276 655 7 L $$akäännökset$$2slm/fin$$0http://urn.fi/URN:NBN:fi:au:slm:s1044
+004903276 655 7 L $$aromaner$$2slm/swe$$0http://urn.fi/URN:NBN:fi:au:slm:s518
+004903276 655 7 L $$askönlitteratur$$2slm/swe$$0http://urn.fi/URN:NBN:fi:au:slm:s975
+004903276 655 7 L $$aöversättningar$$2slm/swe$$0http://urn.fi/URN:NBN:fi:au:slm:s1044
+004903276 7001  L $$6880-04$$aDžafarova-Viitala, T.
 004903276 88010 L $$6245-01/(N$$aВ сумасшедших небесах :$$bповест�� /$$cАнита Конкка ; перевод с финского Т. Джафаровой-Виитала.
 004903276 880   L $$6260-02/(N$$aМосква :$$bУРСС,$$c2005
 004903276 880   L $$6650-03/(N$$aпроза$$xпер. с финск.
 004903276 8801  L $$6700-04/(N$$aДжафарова-Виитала, Т.
-004903276 901   L $$aMU20071009$$5FENNI
-004903276 903   L $$ac$$5FENNI
