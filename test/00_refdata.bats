@@ -46,3 +46,7 @@ setup () {
   [ -s refdata/RDAMediaType.nt ]
 }
 
+@test "Reference data: 260c date value substitutions" {
+  make refdata/subst-260c.csv
+  [ -s refdata/subst-260c.csv ]
+}
