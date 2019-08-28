@@ -182,19 +182,6 @@ WHERE {
       ?instanceId rdf:value ?instanceIdValue .
       ?instanceId bf:source/rdfs:label ?instanceIdSource .
     }
-    UNION
-    {
-      ?inst bf:hasSeries ?seriesInst .
-      ?seriesInst bf:instanceOf ?series .
-      ?series rdfs:label ?seriesTitle .
-      BIND(REPLACE(?seriesTitle, '[ ,;\\.]+$', '') AS ?seriesTitleValue)
-      OPTIONAL {
-        ?series bf:identifiedBy ?seriesIssn .
-        ?seriesIssn a bf:Issn .
-        ?seriesIssn rdf:value ?seriesIssnValueRaw .
-        BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
-      }
-    }
   }
 
   # ?creator is needed in many branches below, so it has to be bound
@@ -332,6 +319,18 @@ WHERE {
     UNION
     {
       ?work bf:content/rdfs:label ?contentCategory .
+    }
+    UNION
+    {
+      ?work bf:hasSeries ?series .
+      ?series rdfs:label ?seriesTitle .
+      BIND(REPLACE(?seriesTitle, '[ ,;\\.]+$', '') AS ?seriesTitleValue)
+      OPTIONAL {
+        ?series bf:identifiedBy ?seriesIssn .
+        ?seriesIssn a bf:Issn .
+        ?seriesIssn rdf:value ?seriesIssnValueRaw .
+        BIND(REPLACE(?seriesIssnValueRaw, '[ ;]+$', '') AS ?seriesIssnValue)
+      }
     }
   }
 }
