@@ -7,7 +7,7 @@ PREFIX pn: <http://urn.fi/URN:NBN:fi:au:pn:>
 CONSTRUCT {
   ?s ?p ?o .
   ?s schema:inLanguage ?languageCode .
-  ?s schema:about ?subjectUri, ?subjectString, ?ysoSubject .
+  ?s schema:about ?subjectUri, ?subjectString .
   ?s rdau:P60048 ?rdaCarrierType .
   ?s rdau:P60049 ?rdaContentType .
   ?s rdau:P60050 ?rdaMediaType .
@@ -47,34 +47,6 @@ CONSTRUCT {
     FILTER(isIRI(?subjectUri))
     FILTER NOT EXISTS { ?subjectUri a schema:Person }
     FILTER NOT EXISTS { ?subjectUri a schema:Organization }
-  }
-  UNION
-  {
-    ?s schema:about ?topicLabel .
-    FILTER(isLiteral(?topicLabel))
-    FILTER(LANG(?topicLabel) = '')
-    BIND(STRLANG(REPLACE(?topicLabel, '--', ' -- '), 'fi') AS ?topicLabelFi)
-    OPTIONAL {
-      GRAPH ?ysaGraph { 
-        ?ysac skos:prefLabel ?topicLabelFi .
-        OPTIONAL { ?ysac skos:exactMatch|skos:closeMatch ?ysoSubject }
-        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
-        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
-        # Make sure the YSO concept is really from YSO and not e.g. Allärs
-        FILTER(STRSTARTS(STR(?ysoSubject),'http://www.yso.fi/onto/yso/'))
-      }
-    }
-    OPTIONAL {
-      GRAPH ?ysaGraph { 
-        ?ysac skos:altLabel ?topicLabelFi .
-        OPTIONAL { ?ysac skos:exactMatch|skos:closeMatch ?ysoSubject }
-        # Make sure it's really a YSA concept and not e.g. RDA Carrier type
-        FILTER(STRSTARTS(STR(?ysac),'http://www.yso.fi/onto/ysa/'))
-        # Make sure the YSO concept is really from YSO and not e.g. Allärs
-        FILTER(STRSTARTS(STR(?ysoSubject),'http://www.yso.fi/onto/yso/'))
-      }
-    }
-    BIND(IF(!BOUND(?ysac), ?topicLabelFi, ?unbound) AS ?subjectString)
   }
   UNION
   {

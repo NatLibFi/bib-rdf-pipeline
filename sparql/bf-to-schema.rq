@@ -59,7 +59,7 @@ CONSTRUCT {
     schema:author ?creator ;
     schema:contributor ?contributor ;
     schema:inLanguage ?languageCode ;
-    schema:about ?topicLabel, ?subjectWork, ?subjectOrg, ?subjectPerson ;
+    schema:about ?topic, ?subjectWork, ?subjectOrg, ?subjectPerson ;
     rdau:P60049 ?contentCategory ;
     schema:name ?instName .
   ?origwork a schema:CreativeWork, bf:Work, ?origworkType ;
@@ -72,6 +72,7 @@ CONSTRUCT {
     schema:hasPart ?inst ;
     schema:name ?seriesTitleValue ;
     schema:issn ?seriesIssnValue .
+  ?topic schema:name ?topicLabel .
   ?subjectWork a schema:CreativeWork, bf:Work ;
     schema:author ?subjectWorkAgent ;
     schema:name ?subjectWorkName .

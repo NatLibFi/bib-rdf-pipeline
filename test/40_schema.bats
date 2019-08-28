@@ -493,7 +493,7 @@ setup () {
   make slices/ajanlyhythistoria-00009-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/ajanlyhythistoria-00009-schema.nt | cut -d ' ' -f 1)"
   # check that a particular subject is found
-  grep -q -F "$work <http://schema.org/about> \"suhteellisuusteoria\"" slices/ajanlyhythistoria-00009-schema.nt
+  grep -q -F "$work <http://schema.org/about> <http://www.yso.fi/onto/yso/p9145>" slices/ajanlyhythistoria-00009-schema.nt
   # check that the number of subjects is expected
   run grep -c -F "$work <http://schema.org/about>" slices/ajanlyhythistoria-00009-schema.nt
   [ "$output" -eq "7" ]
@@ -503,7 +503,7 @@ setup () {
   make slices/etyk-00012-schema.nt
   work="$(grep '<http://schema.org/workExample>' slices/etyk-00012-schema.nt | cut -d ' ' -f 1)"
   # check that a particular subject is found
-  grep -q -F "$work <http://schema.org/about> \"Eurooppa\"" slices/etyk-00012-schema.nt
+  grep -q -F "$work <http://schema.org/about> <http://www.yso.fi/onto/yso/p94111>" slices/etyk-00012-schema.nt
   # check that the number of subjects is expected
   run grep -c -F "$work <http://schema.org/about>" slices/etyk-00012-schema.nt
   [ "$output" -eq "10" ]
