@@ -1,0 +1,43 @@
+005951463 FMT   L BK
+005951463 LDR   L 03404cam^a2200721^i^4500
+005951463 001   L 005951463
+005951463 005   L 20190704054727.0
+005951463 008   L 111006s2011^^^^fi^||||^^^^^^^00|^0|fin|^
+005951463 015   L $$afx978702$$2skl
+005951463 020   L $$a978-952-9856-53-4$$qnidottu
+005951463 035   L $$a(FI-MELINDA)005951463
+005951463 040   L $$aFI-NL
+005951463 0410  L $$afin
+005951463 042   L $$afinb
+005951463 080   L $$a639.2/.6$$21974/fin/fennica$$9FENNI<KEEP>
+005951463 1001  L $$aPyyvaara, Päivi.$$0(FIN11)000117561
+005951463 24510 L $$aPirkkalan kalastusalue :$$breittivesien käyttö- ja hoitosuunnitelma 2011-2020 /$$c[työryhmä: Hannu Jokela ja Ami Solin ; suunnitelman laatija: Päivi Pyyvaara].
+005951463 260   L $$a[Tampere] :$$bPro Agria Pirkanmaa, Pirkanmaan kalatalouskeskus,$$c[2011]$$e(Tampere :$$fKopijyvä)
+005951463 300   L $$a51 s. :$$bkuvitettu, karttoja ;$$c30 cm
+005951463 336   L $$ateksti$$btxt$$2rdacontent
+005951463 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+005951463 338   L $$anide$$bnc$$2rdacarrier
+005951463 4901  L $$a[Pirkanmaan kalatalouskeskuksen tiedonantoja],$$x0789-9750
+005951463 530   L $$uJulkaistu myös verkkoaineistona.$$9FENNI<KEEP>
+005951463 650 7 L $$akalastus$$2yso/fin$$0http://www.yso.fi/onto/yso/p1686$$9FENNI<KEEP>
+005951463 650 7 L $$avesienhoito$$2yso/fin$$0http://www.yso.fi/onto/yso/p3161$$9FENNI<KEEP>
+005951463 650 7 L $$akalavedet$$2yso/fin$$0http://www.yso.fi/onto/yso/p348$$9FENNI<KEEP>
+005951463 650 7 L $$akalastusalueet$$2yso/fin$$0http://www.yso.fi/onto/yso/p346$$9FENNI<KEEP>
+005951463 650 7 L $$akalakannat$$2yso/fin$$0http://www.yso.fi/onto/yso/p8529$$9FENNI<KEEP>
+005951463 650 7 L $$akalakantojen hoito$$2yso/fin$$0http://www.yso.fi/onto/yso/p22184$$9FENNI<KEEP>
+005951463 650 7 L $$akalanistutus$$2yso/fin$$0http://www.yso.fi/onto/yso/p5097$$9FENNI<KEEP>
+005951463 650 7 L $$afiske$$2yso/swe$$0http://www.yso.fi/onto/yso/p1686
+005951463 650 7 L $$avattenvård$$2yso/swe$$0http://www.yso.fi/onto/yso/p3161
+005951463 650 7 L $$afiskevatten$$2yso/swe$$0http://www.yso.fi/onto/yso/p348
+005951463 650 7 L $$afiskeområden$$2yso/swe$$0http://www.yso.fi/onto/yso/p346
+005951463 650 7 L $$afiskbestånd$$2yso/swe$$0http://www.yso.fi/onto/yso/p8529
+005951463 650 7 L $$askötsel av fiskbestånd$$2yso/swe$$0http://www.yso.fi/onto/yso/p22184
+005951463 650 7 L $$afiskutplantering$$2yso/swe$$0http://www.yso.fi/onto/yso/p5097
+005951463 651 7 L $$aPirkanmaa$$2yso/fin$$0http://www.yso.fi/onto/yso/p94339$$9FENNI<KEEP>
+005951463 651 7 L $$aBirkaland$$2yso/swe$$0http://www.yso.fi/onto/yso/p94339
+005951463 7001  L $$aJokela, Hannu.
+005951463 7001  L $$aSolin, Ami.
+005951463 830 0 L $$aPirkanmaan kalatalouskeskuksen tiedonantoja,$$x0789-9750.
+005951463 85641 L $$uhttp://www.pirkkalankalastusalue.net/images/PIRKKALA_KA_KAHO_2011_2020.pdf$$yLinkki verkkoaineistoon
+005951463 901   L $$aMU20111124$$5FENNI
+005951463 904   L $$ap$$5FENNI

@@ -65,7 +65,7 @@ refdata/RDAMediaType.nt:
 	scripts/rewrite-uris.py $^ | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)
 
 %-schema.nt: %-rewritten.nt
-	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT >$@ 
+	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --query sparql/bf-to-schema.rq --out=NT | scripts/filter-bad-ntriples.py >$@ 2>$(patsubst %.nt,%.log,$@)>$@
 
 %-reconciled.nt: %-schema.nt refdata/iso639-1-2-mapping.nt refdata/RDACarrierType.nt refdata/RDAContentType.nt refdata/RDAMediaType.nt refdata/cn-labels.nt
 	JVM_ARGS=$(JVMARGS) $(SPARQL) --graph $< --namedGraph $(word 2,$^) --namedGraph $(word 3,$^) --namedGraph $(word 4,$^) --namedGraph $(word 5,$^) --namedGraph $(word 6,$^) --query sparql/reconcile.rq --out=NT >$@

@@ -573,3 +573,10 @@ setup () {
   run grep "$orig1 <http://schema.org/inLanguage> \"swe\"" slices/langpart-00000-schema.nt
   [ $status -ne 0 ]
 }
+
+@test "Schema.org RDF: skipping bad URIs" {
+  make slices/kalastusalue-00595-schema.nt
+  grep -q 'SYNTAX ERROR, skipping' slices/kalastusalue-00595-schema.log
+  run grep -F 'Julkaistu myös verkkoaineistona.>' slices/kalastusalue-00595-schema.nt
+  [ $status -ne 0 ]
+}
