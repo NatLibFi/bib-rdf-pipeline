@@ -1,0 +1,33 @@
+004432056 FMT   L BK
+004432056 LDR   L 02867cam^a2200757zi^4500
+004432056 001   L 004432056
+004432056 005   L 20190704064208.0
+004432056 008   L 900802s1989^^^^hu^|||||||||||||||p|hun||
+004432056 015   L $$afx188203$$2skl
+004432056 020   L $$a963-07-4869-X$$qnidottu
+004432056 035   L $$a(FI-MELINDA)004432056
+004432056 040   L $$aFI-NL
+004432056 0411  L $$ahun$$hfin
+004432056 042   L $$afinb
+004432056 080   L $$a894.541$$x-1$$9FENNI<KEEP>
+004432056 080   L $$a894.541$$x-1$$x=945.11
+004432056 084   L $$a82.21$$2ykl$$9FENNI<KEEP>
+004432056 1001  L $$aNummi, Lassi,$$d1928-2012.$$0(FIN11)000053753
+004432056 24510 L $$aLépj ki tükreidböl /$$cLassi Nummi ; [válogatta és az utószót írta Jávorszky Béla] ; [fordítta Csoóri Sándor, Jávorszky Béla, Szopori Nagy Lajos, Tornai József].
+004432056 260   L $$aBudapest :$$bEurópa,$$c1989.
+004432056 300   L $$a114 s. ;$$c18 cm
+004432056 336   L $$ateksti$$btxt$$2rdacontent
+004432056 337   L $$akäytettävissä ilman laitetta$$bn$$2rdamedia
+004432056 338   L $$anide$$bnc$$2rdacarrier
+004432056 4900  L $$aNapjaink költészete,$$x0133-4050
+004432056 500   L $$aKäännetty useista alkuteoksista.$$9FENNI<KEEP>
+004432056 650 7 L $$aunkarinkielinen kirjallisuus$$2yso/fin$$0http://www.yso.fi/onto/yso/p19592
+004432056 650 7 L $$aungersk litteratur$$2yso/swe$$0http://www.yso.fi/onto/yso/p19592
+004432056 655 7 L $$akaunokirjallisuus$$2slm/fin$$0http://urn.fi/URN:NBN:fi:au:slm:s975
+004432056 655 7 L $$askönlitteratur$$2slm/swe$$0http://urn.fi/URN:NBN:fi:au:slm:s975
+004432056 7001  L $$aJávorszky, Béla,$$d1940-$$0(FIN11)000046031
+004432056 7001  L $$aCsoóri, Sándor.
+004432056 7001  L $$aSzopori Nagy, Lajos.$$0(FIN11)000060187
+004432056 7001  L $$aTornai, József.
+004432056 9001  L $$aNagy, Lajos Szopori$$ySzopori Nagy, Lajos
+004432056 903   L $$ac$$5FENNI

@@ -109,6 +109,12 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Work keys: work cannot be a bnode" {
+  make slices/tukreidbol-00443-work-keys.nt
+  run grep '^_:' slices/tukreidbol-00443-work-keys.nt
+  [ $status -ne 0 ]
+}
+
 @test "Work keys: no recurring spaces" {
   make refdata/fanrik-manninen-work-keys.nt
   run grep '  ' refdata/fanrik-manninen-work-keys.nt
