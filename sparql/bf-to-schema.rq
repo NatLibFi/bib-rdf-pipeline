@@ -257,7 +257,7 @@ WHERE {
     UNION
     {
       ?work bf:language ?language .
-      FILTER NOT EXISTS { ?language bf:part "original" }
+      FILTER NOT EXISTS { ?language bf:part [] }
       OPTIONAL {
         ?language rdf:value ?languageValue .
       }
