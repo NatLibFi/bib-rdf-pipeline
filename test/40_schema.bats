@@ -574,6 +574,13 @@ setup () {
   [ $status -ne 0 ]
 }
 
+@test "Schema.org RDF: not including summary language" {
+  make slices/verkkoaineisto-00608-schema.nt
+  grep -q -F "<http://schema.org/inLanguage> \"eng\"" slices/verkkoaineisto-00608-schema.nt
+  run grep "<http://schema.org/inLanguage> \"fin\"" slices/verkkoaineisto-00608-schema.nt
+  [ $status -ne 0 ]
+}
+
 @test "Schema.org RDF: skipping bad URIs" {
   make slices/kalastusalue-00595-schema.nt
   grep -q 'SYNTAX ERROR, skipping' slices/kalastusalue-00595-schema.log
